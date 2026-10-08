@@ -69,32 +69,12 @@ Este documento contiene **la solución de ejemplo que realiza y explica el profe
 
 **Objetivo de la demo:** construir un reporte que describa las ventas, unidades y pedidos de Contoso en 2020; reconocer la categoría líder, observar los cambios mensuales y comprobar un resultado a partir de sus transacciones.
 
-**Qué hace el profesor:** presenta la pregunta, muestra cómo prepara los datos, construye los visuales y explica qué conclusión permite cada uno. Los apartados “Dice el profesor” ofrecen frases que puede usar durante la clase.
-
-**Qué observan los estudiantes:** cómo una pregunta determina los datos necesarios, cómo se verifica una cifra y cómo se convierte en un hallazgo. Después aplican el procedimiento a su caso asignado. Las cifras de esta solución corresponden exclusivamente a Contoso.
-
-**Resultados de referencia:** se calcularon directamente con los CSV originales el **8 de octubre de 2026**, conservando la precisión de los precios. Durante la demostración, el profesor comprueba que Power BI produzca esos mismos valores. Los importes se presentan con dos decimales y en **moneda base del generador**; no representan utilidad neta.
-
 **Ruta de trabajo:** se descargan `sales.csv` y `product.csv`, se combinan en Power Query y se carga una sola tabla llamada `Ventas`. Este enfoque mantiene sencillo el primer reporte. La preparación conserva una fila por línea de pedido.
 
 **Interfaz:** las instrucciones usan Power BI Desktop en español. Los paneles pueden llamarse **Datos/Campos** y **Crear objeto visual/Compilar objeto visual**, según la versión. Las transformaciones se hacen en Power Query y las medidas se crean después en Power BI Desktop. [F4] [F17]
 
 **Lectura del archivo:** abrir el `.md` en un visor Markdown; en VS Code, usar **Abrir vista previa** o `Ctrl + Shift + V` para utilizar el índice.
 
-<a id="guion-tiempo"></a>
-## Guion de clase de 25 minutos
-
-Para el bloque de demostración de 25 minutos, el profesor realiza previamente los pasos **2.1 a 2.11** y guarda la base preparada. Durante la clase muestra los pasos aplicados de Power Query y construye el reporte desde esa base. La guía conserva la preparación completa para poder reproducir el ejemplo.
-
-| Tiempo de la demo | Qué hace el profesor | Qué deja claro |
-| --- | --- | --- |
-| Minutos 0–3 | Presenta los pasos 1.1–1.4. | Problema, preguntas, período y éxito esperado. |
-| Minutos 3–8 | Muestra las consultas y los resultados de 2.3–2.10. | Una fila es una línea; la combinación conserva las ventas; los datos están preparados. |
-| Minutos 8–20 | Construye las medidas y visuales de 3.1–3.8. | Cada gráfico responde una pregunta y comparte el mismo filtro. |
-| Minutos 20–22 | Demuestra 3.9 con los pedidos 1000 y 1001. | La cifra se puede reconstruir manualmente. |
-| Minutos 22–25 | Presenta las respuestas y el relato de 4.1–4.3; muestra el cierre de 4.4–4.5. | Hallazgo, evidencia, acción y seguimiento. |
-
-Antes de la clase, el profesor ensaya la secuencia completa, comprueba la actualización y tiene a mano las fórmulas de esta guía para copiarlas durante la demo.
 
 **PACE:** *Plan, Analyze, Construct, Execute*. La adaptación del taller consiste en planear la necesidad; analizar y preparar los datos; construir y comprobar el reporte; ejecutar la comunicación y definir el seguimiento. [F1]
 
