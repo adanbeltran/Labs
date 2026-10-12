@@ -45,8 +45,9 @@ Abre tu terminal (PowerShell en Windows, o la terminal en macOS/Linux) y ejecuta
 
 ### <a name="paso-1-2"></a>1.2. Obtener la clave pública
 Ejecuta el siguiente comando para ver el contenido de tu clave pública y cópialo entero (comienza con `ssh-rsa`). Lo necesitarás en la Fase 2:
-* Windows: `cat ~/.ssh/id_rsa.pub`
-* Mac/Linux: `cat ~/.ssh/id_rsa.pub`
+*`cat ~/.ssh/id_rsa.pub`
+<img width="430" height="80" alt="image" src="https://github.com/user-attachments/assets/586aef91-7df8-4602-aed9-7b3e967c2664" />
+
 
 ---
 
