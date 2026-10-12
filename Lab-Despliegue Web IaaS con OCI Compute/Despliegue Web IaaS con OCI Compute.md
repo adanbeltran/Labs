@@ -39,7 +39,8 @@ Abre tu terminal (PowerShell en Windows, o la terminal en macOS/Linux) y ejecuta
 `ssh-keygen -t rsa -b 2048`
 * Presiona **Enter** para guardar la clave en la ruta por defecto.
 * Deja la contraseña (passphrase) en blanco para este ejercicio académico presionando **Enter** dos veces.
-  <img width="314" height="74" alt="image" src="https://github.com/user-attachments/assets/8c83d5b9-9723-4b6b-abfc-3f98f1ff5a5f" />
+
+<img width="395" height="215" alt="image" src="https://github.com/user-attachments/assets/e3a1bf5b-6aaf-468c-9bee-855787b9fff7" />
 
 
 ### <a name="paso-1-2"></a>1.2. Obtener la clave pública
