@@ -15,7 +15,7 @@
 
 ---
 
-## Fase 1: Preparación y Generación de Claves
+## Fase 1: Preparacion y Generacion de Claves
 
 El acceso seguro a los servidores en IaaS se realiza mediante criptografía asimétrica (Claves SSH).
 
@@ -32,7 +32,7 @@ Ejecuta el siguiente comando para ver el contenido de tu clave pública y cópia
 
 ---
 
-## Fase 2: Aprovisionamiento de la Máquina Virtual (IaaS)
+## Fase 2: Aprovisionamiento de la Maquina Virtual IaaS
 
 Vamos a aprovisionar nuestra infraestructura, prestando especial atención a elegir recursos gratuitos para no incurrir en costos.
 
@@ -60,7 +60,7 @@ Vamos a aprovisionar nuestra infraestructura, prestando especial atención a ele
 
 ---
 
-## Fase 3: Conexión SSH y Configuración del Sistema Operativo
+## Fase 3: Conexion SSH y Configuracion del Sistema Operativo
 
 ### 3.1. Obtener la IP Pública
 Espera a que el icono del servidor cambie a verde (**Running**). Copia la dirección **Public IP address**.
