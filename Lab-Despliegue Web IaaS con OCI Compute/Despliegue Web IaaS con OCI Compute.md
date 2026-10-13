@@ -2,6 +2,8 @@
 
 **Tiempo previsto:** 110 minutos, con la cuenta, el repositorio y la capacidad disponibles.
 
+**Cuenta de trabajo:** usa tu cuenta personal de OCI, ya activada en [Oracle Academy Cloud Program](https://academy.oracle.com/es/solutions-cloud-program.html) con **USD 300 de crédito inicial**. Crea todos los recursos de este taller en esa cuenta.
+
 Abre este archivo en Visual Studio Code y pulsa **Ctrl+Shift+V** en Windows o **Cmd+Shift+V** en macOS para seguir el taller en la vista previa. Usa el índice para ir a una fase o a un paso. Consulta [la ayuda de Markdown en VS Code](https://code.visualstudio.com/docs/languages/markdown) si necesitas abrir la vista previa.
 
 <a name="indice"></a>
@@ -9,7 +11,7 @@ Abre este archivo en Visual Studio Code y pulsa **Ctrl+Shift+V** en Windows o **
 ## Tabla de contenido
 
 - [Fase 1. Preparar el compartimento, la red y el usuario IAM](#fase-1)
-  - [Paso 1.1. Crear el compartimento](#paso-1-1)
+  - [Paso 1.1. Verificar la cuenta y crear el compartimento](#paso-1-1)
   - [Paso 1.2. Crear la red y habilitar la conexión SSH](#paso-1-2)
   - [Paso 1.3. Crear el grupo, la política y el usuario IAM](#paso-1-3)
   - [Paso 1.4. Iniciar sesión con el usuario del taller](#paso-1-4)
@@ -25,7 +27,7 @@ Abre este archivo en Visual Studio Code y pulsa **Ctrl+Shift+V** en Windows o **
   - [Paso 4.1. Conectarse mediante SSH](#paso-4-1)
   - [Paso 4.2. Instalar Nginx y abrir el acceso web del servidor](#paso-4-2)
 - [Fase 5. Publicar el código y habilitar el acceso público](#fase-5)
-  - [Paso 5.1. Descargar y publicar la página del docente](#paso-5-1)
+  - [Paso 5.1. Descargar y publicar la página del taller](#paso-5-1)
   - [Paso 5.2. Abrir el puerto 80 en OCI](#paso-5-2)
 - [Fase 6. Probar la página, revisar costos y cerrar la práctica](#fase-6)
   - [Paso 6.1. Validar la página desde el navegador](#paso-6-1)
@@ -42,20 +44,20 @@ Abre este archivo en Visual Studio Code y pulsa **Ctrl+Shift+V** en Windows o **
 
 <a name="paso-1-1"></a>
 
-### Paso 1.1. Crear el compartimento
+### Paso 1.1. Verificar la cuenta y crear el compartimento
 
-1. Solicita al docente tu identificador, el nombre de la cuenta OCI, su región principal y el enlace del repositorio público de la página. Usa un repositorio dedicado a archivos estáticos, con `index.html` en la raíz y sus archivos CSS y JavaScript; comprueba que no contenga claves ni archivos `.env`.
-2. Usa `est01` como ejemplo y sustitúyelo por tu identificador en todos los nombres. Confirma el turno y el cupo de Compute y almacenamiento. Consulta [los límites de Always Free](https://docs.oracle.com/en-us/iaas/Content/FreeTier/freetier_topic-Always_Free_Resources.htm); aplica los cupos a la cuenta completa, sin multiplicarlos por el número de usuarios.
-3. Abre [la consola de OCI](https://cloud.oracle.com/) y selecciona la región principal asignada. Realiza la fase 1 junto al docente, usando una sesión autorizada para administrar usuarios, políticas y recursos. En una cuenta compartida, permite que el docente inicie su sesión sin entregar su contraseña.
+1. Abre [la consola de OCI](https://cloud.oracle.com/) e inicia sesión con la cuenta administradora que activaste mediante Oracle Academy Cloud Program. Mantén esta sesión para crear el compartimento, la red, el grupo, la política y el nuevo usuario IAM.
+2. En la página de inicio, revisa el panel **Cost analysis** o **Subscription credits** y registra el crédito inicial de **USD 300**, el saldo disponible y la vigencia que muestre tu suscripción. Consulta [cómo revisar el saldo de créditos](https://docs.oracle.com/en-us/iaas/Content/GSG/Concepts/console_topic-AccountCenter-Billing.htm) para identificar el panel. Selecciona tu región principal en el menú superior.
+3. Elige un identificador, por ejemplo `est01`, y sustitúyelo en todos los nombres del taller. Ubica el enlace del repositorio entregado con el material de la práctica. Usa un repositorio público dedicado a archivos estáticos, con `index.html` en la raíz y sus archivos CSS y JavaScript; comprueba que no contenga claves ni archivos `.env`.
 4. Abre **Identity & Security > Compartments > Create Compartment**. Completa los campos y pulsa **Create Compartment**.
 
 | Campo | Valor |
 | --- | --- |
 | Name | `ecored-dev-est01` |
 | Description | `Practica web de est01` |
-| Parent compartment | La cuenta del curso, identificada como `root` |
+| Parent compartment | Tu propia cuenta OCI, identificada como `root` |
 
-5. Crea un archivo local `datos-taller.txt` en VS Code. Guarda el identificador, la cuenta, la región, el compartimento y el enlace del repositorio. No guardes contraseñas ni el contenido de la clave privada.
+5. Crea un archivo local `datos-taller.txt` en VS Code. Guarda el identificador, el nombre de tu cuenta, la región, el compartimento, el crédito inicial, el saldo disponible y el enlace del repositorio. No guardes contraseñas ni el contenido de la clave privada.
 
 Consulta [cómo crear un compartimento](https://docs.oracle.com/en-us/iaas/Content/Identity/compartments/To_create_a_compartment.htm) si el formulario muestra los campos en otra posición.
 
@@ -101,7 +103,7 @@ Consulta los formularios oficiales de [VCN](https://docs.oracle.com/en-us/iaas/C
 
 1. Abre **Identity & Security > Domains > Default > User management > Groups > Create group**. Si aparece un menú lateral, selecciona **Groups**. Escribe `DesarrolladoresWeb-est01`, agrega una descripción y deja sin marcar **User can request access**. Pulsa **Create**.
 2. Abre **Identity & Security > Policies**, selecciona el compartimento raíz de la cuenta y pulsa **Create Policy**. Escribe `Politica-Web-est01`, agrega una descripción y activa **Show manual editor**.
-3. Copia el bloque completo. Sustituye `est01` por tu identificador. Si el docente usa otro dominio, reemplaza `Default` por su nombre exacto. Conserva las comillas simples y pulsa **Create**.
+3. Copia el bloque completo. Sustituye `est01` por tu identificador. Si tu cuenta usa otro dominio, reemplaza `Default` por su nombre exacto. Conserva las comillas simples y pulsa **Create**.
 
 ```text
 Allow group 'Default'/'DesarrolladoresWeb-est01' to inspect compartments in tenancy
@@ -110,6 +112,8 @@ Allow group 'Default'/'DesarrolladoresWeb-est01' to manage volume-family in comp
 Allow group 'Default'/'DesarrolladoresWeb-est01' to manage virtual-network-family in compartment ecored-dev-est01
 Allow group 'Default'/'DesarrolladoresWeb-est01' to read app-catalog-listing in tenancy
 Allow group 'Default'/'DesarrolladoresWeb-est01' to use tag-namespaces in tenancy where target.tag-namespace.name='oracle-tags'
+Allow group 'Default'/'DesarrolladoresWeb-est01' to read usage-report in tenancy
+Allow group 'Default'/'DesarrolladoresWeb-est01' to use usage-budgets in tenancy
 ```
 
 4. Regresa a **Domains > Default > User management > Users > Create**. Escribe tu nombre, apellido y correo institucional. Desmarca **Use the email address as the username**, escribe `est01` en **Username** y selecciona únicamente `DesarrolladoresWeb-est01` como grupo. Pulsa **Create**.
@@ -121,10 +125,10 @@ Consulta las guías oficiales para [crear grupos](https://docs.oracle.com/en-us/
 
 ### Paso 1.4. Iniciar sesión con el usuario del taller
 
-1. Abre el correo de activación de OCI y establece tu contraseña personal. Si no llega, revisa correo no deseado y solicita al docente reenviar la activación. Completa la verificación adicional que solicite OCI.
-2. Cierra la sesión de administración. Abre [la consola de OCI](https://cloud.oracle.com/) en una ventana privada, escribe el nombre de la cuenta y selecciona el dominio registrado.
+1. Abre el correo de activación del nuevo usuario IAM creado en el [paso 1.3](#paso-1-3) y establece su contraseña. Si no llega, revisa correo no deseado y, desde tu sesión administradora, abre la ficha del nuevo usuario para reenviar la notificación de activación. Completa la verificación adicional que solicite OCI.
+2. Mantén abierta tu sesión administradora en la ventana actual. Abre [la consola de OCI](https://cloud.oracle.com/) en una ventana privada, escribe el nombre de tu cuenta y selecciona el dominio registrado.
 3. Inicia sesión con tu usuario IAM, selecciona tu región y abre **Compute > Instances**. En el filtro de compartimento elige `ecored-dev-est01`.
-4. Comprueba que puedas abrir **Create Instance** y cancela el formulario. Si falta un permiso, solicita al docente revisar la política del [paso 1.3](#paso-1-3); vuelve a iniciar sesión después de corregirla.
+4. Comprueba que puedas abrir **Create Instance** y cancela el formulario. Si falta un permiso, regresa a tu ventana con la sesión administradora y corrige la política del [paso 1.3](#paso-1-3). Cierra y vuelve a iniciar la sesión del usuario IAM después de corregirla. Usa este usuario para las fases 2 a 6.
 
 [Volver al índice](#indice) · [Continuar con la fase 2: claves SSH](#fase-2)
 
@@ -203,13 +207,13 @@ Consulta [el formulario oficial de creación de instancias](https://docs.oracle.
 
 ### Paso 3.2. Configurar el nombre y la ubicación
 
-Completa los campos siguientes. En **Placement**, selecciona el dominio con capacidad indicado por el docente. Mantén las opciones de seguridad predeterminadas que sean compatibles con la imagen y el tamaño elegidos.
+Completa los campos siguientes. En **Placement**, conserva inicialmente el dominio de disponibilidad que ofrece la consola. Mantén las opciones de seguridad predeterminadas que sean compatibles con la imagen y el tamaño elegidos.
 
 | Campo | Valor |
 | --- | --- |
 | Name | `servidor-web-est01` |
 | Create in compartment | `ecored-dev-est01` |
-| Availability domain | El dominio asignado por el docente |
+| Availability domain | Un dominio disponible en tu región principal |
 | Capacity type | **On-demand capacity** |
 
 <a name="paso-3-3"></a>
@@ -217,9 +221,9 @@ Completa los campos siguientes. En **Placement**, selecciona el dominio con capa
 ### Paso 3.3. Seleccionar el sistema y el tamaño
 
 1. En **Image and shape > Edit > Change Image**, selecciona la imagen de plataforma **Oracle Linux 9**.
-2. En **Change Shape**, selecciona **Virtual Machine** y busca **VM.Standard.E2.1.Micro** entre las unidades AMD o de generación anterior, según el selector. Comprueba **Always Free-eligible**, la región principal y el cupo disponible.
+2. En **Change Shape**, selecciona **Virtual Machine** y busca **VM.Standard.E2.1.Micro** entre las unidades AMD o de generación anterior, según el selector. Si está disponible, comprueba **Always Free-eligible** y selecciónala para esta práctica.
 3. Verifica **1 GB de memoria**. Consulta [las especificaciones de E2.1.Micro](https://docs.oracle.com/en-us/iaas/Content/FreeTier/freetier_topic-Always_Free_Resources.htm): esta unidad ofrece **1/8 de OCPU** como base; evita registrarla como un núcleo completo.
-4. Si la imagen y la unidad no son compatibles o falta capacidad, solicita al docente una combinación disponible y autorizada antes de continuar. Usa únicamente la alternativa con el cupo y el costo revisados.
+4. Si esa unidad no está disponible o no es compatible con la imagen, selecciona **AMD > VM.Standard.E4.Flex** o **VM.Standard.E5.Flex**, según la disponibilidad. Configura **1 OCPU y 2 GB de memoria**, conserva **Oracle Linux 9** y revisa el costo estimado antes de crearla. Usa esta alternativa con el crédito disponible de tu cuenta y registra la unidad elegida. Consulta [las unidades flexibles y sus tamaños](https://docs.oracle.com/en-us/iaas/Content/Compute/References/computeshapes.htm).
 
 <a name="paso-3-4"></a>
 
@@ -228,8 +232,8 @@ Completa los campos siguientes. En **Placement**, selecciona el dominio con capa
 1. En **Networking**, selecciona la VCN existente `vcn-est01` y la subred existente `subnet-publica-est01`. Usa `ecored-dev-est01` en los selectores de compartimento.
 2. Activa **Assign a public IPv4 address** y conserva la dirección privada automática. Deja sin habilitar **Network security groups** para usar la lista de seguridad de esta práctica.
 3. En **Add SSH keys**, selecciona **Paste public keys** y pega la línea pública obtenida en el [paso 2.2](#paso-2-2).
-4. En **Boot volume**, conserva el tamaño predeterminado de la imagen, comprueba que quepa en el almacenamiento asignado y deja sin configurar discos adicionales y copias de seguridad.
-5. Revisa el resumen y pulsa **Create**. Espera el estado **Running** y dos minutos adicionales para el arranque. Si la creación falla, revisa el mensaje antes de intentar crear otra instancia.
+4. En **Boot volume**, conserva el tamaño predeterminado de la imagen, revisa el almacenamiento y el costo estimado, y deja sin configurar discos adicionales y copias de seguridad.
+5. Revisa el resumen y pulsa **Create**. Espera el estado **Running** y dos minutos adicionales para el arranque. Si OCI informa falta de capacidad, cambia el dominio de disponibilidad dentro de la misma región o usa la alternativa del [paso 3.3](#paso-3-3). Revisa el mensaje antes de intentar crear otra instancia.
 6. Abre la instancia y guarda **Public IP address** en `datos-taller.txt` como `IP_SERVIDOR`. Usa esta dirección para SSH y para abrir la página.
 
 [Volver al índice](#indice) · [Continuar con la fase 4: conexión e instalación](#fase-4)
@@ -290,27 +294,27 @@ Consulta [la instalación y configuración oficial de Nginx](https://docs.oracle
 
 <a name="paso-5-1"></a>
 
-### Paso 5.1. Descargar y publicar la página del docente
+### Paso 5.1. Descargar y publicar la página del taller
 
-1. En la sesión del servidor, reemplaza `URL_DEL_REPOSITORIO` por la dirección HTTPS del repositorio público entregado por el docente. Usa la dirección de clonación, por ejemplo la que termina en `.git`, conservando las comillas. Ejecuta:
+1. En la sesión del servidor, reemplaza `URL_DEL_REPOSITORIO` por la dirección HTTPS del repositorio público incluido en el material del taller. Usa la dirección de clonación, por ejemplo la que termina en `.git`, conservando las comillas. Ejecuta:
 
 ```bash
-git clone --depth 1 "URL_DEL_REPOSITORIO" ~/sitio-docente
-ls -la ~/sitio-docente
-test -f ~/sitio-docente/index.html && echo "index.html encontrado"
+git clone --depth 1 "URL_DEL_REPOSITORIO" ~/sitio-taller
+ls -la ~/sitio-taller
+test -f ~/sitio-taller/index.html && echo "index.html encontrado"
 ```
 
-2. Comprueba `index.html encontrado` y que estén los archivos CSS y JavaScript referenciados por ese HTML. Si el HTML está dentro de otra carpeta, solicita al docente la ubicación correcta antes de publicar. Si ya existe `sitio-docente` de un intento anterior con el mismo repositorio, actualízalo con `git -C ~/sitio-docente pull --ff-only` en lugar de volver a clonarlo.
+2. Comprueba `index.html encontrado` y que estén los archivos CSS y JavaScript referenciados por ese HTML. Si no aparece el mensaje, abre el enlace del repositorio en el navegador y verifica que elegiste la versión de la página estática con `index.html` en la raíz. Corrige la dirección antes de continuar. Si ya existe `sitio-taller` de un intento anterior con el mismo repositorio, actualízalo con `git -C ~/sitio-taller pull --ff-only` en lugar de volver a clonarlo.
 3. Publica los archivos del último commit del repositorio y comprueba el resultado:
 
 ```bash
-git -C ~/sitio-docente archive --format=tar HEAD | sudo tar -x -C /usr/share/nginx/html
+git -C ~/sitio-taller archive --format=tar HEAD | sudo tar -x -C /usr/share/nginx/html
 sudo restorecon -Rv /usr/share/nginx/html
 sudo nginx -t
 curl -I http://localhost/index.html
 ```
 
-4. Comprueba que Nginx indique configuración válida y que `curl` devuelva `200 OK`. Abre `http://localhost/index.html` con `curl` si necesitas verificar que el HTML corresponde al código del docente.
+4. Comprueba que Nginx indique configuración válida y que `curl` devuelva `200 OK`. Abre `http://localhost/index.html` con `curl` si necesitas verificar que el HTML corresponde al código del taller.
 
 Consulta [el funcionamiento de `git archive`](https://git-scm.com/docs/git-archive) si necesitas revisar el comando que publica los archivos del commit sin copiar la carpeta `.git`.
 
@@ -351,7 +355,7 @@ Consulta [la guía oficial de listas de seguridad](https://docs.oracle.com/en-us
 ### Paso 6.1. Validar la página desde el navegador
 
 1. En el navegador de tu equipo abre `http://IP_SERVIDOR/index.html`, reemplazando `IP_SERVIDOR` por la dirección pública registrada. Usa `http` en esta práctica.
-2. Comprueba el contenido y el diseño del docente. Prueba el botón, el menú u otra interacción incluida en el JavaScript.
+2. Comprueba el contenido y el diseño de la página del taller. Prueba el botón, el menú u otra interacción incluida en el JavaScript.
 3. Abre las herramientas de desarrollo con **F12 > Network**, recarga y verifica estado **200** para el HTML y sus archivos CSS y JavaScript. Revisa **Console** y confirma que no haya errores asociados a esos archivos.
 4. Abre la misma dirección en una ventana privada o en un teléfono con datos móviles. Repite una interacción y guarda una captura con la dirección y la página.
 5. Si la página no abre, revisa **Running**, la IP pública y el [puerto 80 de OCI](#paso-5-2). Desde la sesión SSH ejecuta `systemctl is-active nginx` y `sudo firewall-cmd --list-services`; comprueba `active` y `http`. Si falla el servicio, vuelve al [paso 4.2](#paso-4-2). Si falta un archivo, revisa el [paso 5.1](#paso-5-1).
@@ -360,11 +364,11 @@ Consulta [la guía oficial de listas de seguridad](https://docs.oracle.com/en-us
 
 ### Paso 6.2. Revisar costos y configurar una alerta
 
-1. Realiza este paso junto al docente en una sesión con permisos de facturación. En una cuenta compartida, permite que él opere esa sesión; conserva tus permisos de práctica. Consulta [los permisos de Cost Analysis](https://docs.oracle.com/en-us/iaas/Content/Billing/Concepts/costanalysisoverview.htm) y [los permisos de Budgets](https://docs.oracle.com/en-us/iaas/Content/Billing/Concepts/budgetsoverview.htm) si OCI muestra falta de autorización.
+1. Realiza este paso con el usuario IAM creado por ti en el [paso 1.3](#paso-1-3). Si OCI muestra falta de autorización, regresa a tu sesión administradora y verifica que la política incluya las líneas `read usage-report` y `use usage-budgets` en `tenancy`; vuelve a iniciar la sesión IAM después de corregirlas. Consulta [los permisos de Cost Analysis](https://docs.oracle.com/en-us/iaas/Content/Billing/Concepts/costanalysisoverview.htm) y [los permisos de Budgets](https://docs.oracle.com/en-us/iaas/Content/Billing/Concepts/budgetsoverview.htm).
 2. Abre **Billing & Cost Management > Cost Management > Cost Analysis**. Selecciona el período, filtra por `ecored-dev-est01`, agrupa por **Service** y pulsa **Apply**. Registra el período y el resultado en `datos-taller.txt`. Si aún no hay datos, registra ese resultado y vuelve a consultar después: la información puede tardar hasta 48 horas en aparecer.
-3. Abre **Billing & Cost Management > Cost Management > Budgets > Create Budget**. Selecciona **Budget Scope: Compartment**, **Target Compartment: `ecored-dev-est01`**, **Name: `Presupuesto-Web-est01`** y **Schedule: Monthly**. En **Budget Amount**, usa el monto autorizado por el docente y comprueba la moneda de la cuenta. Usa `5` únicamente si ese monto está autorizado. Si el compartimento ya tiene un presupuesto, abre el existente.
-4. En la sección de alerta del formulario o, después de crear el presupuesto, en **Budget Alert Rules > Create Budget Alert Rule**, selecciona **Actual Spend**, **Percentage of Budget** y **Threshold %: 80**. Escribe el correo autorizado para recibir la alerta y guarda. Comprueba que la regla aparezca asociada al presupuesto.
-5. Registra el monto, la moneda y el umbral. Usa esta alerta para vigilar el gasto; no la tomes como un bloqueo de cobros ni como una orden automática para apagar la máquina. Continúa con el [paso 6.3](#paso-6-3) después de la revisión de la entrega.
+3. Abre **Billing & Cost Management > Cost Management > Budgets > Create Budget**. Selecciona **Budget Scope: Compartment**, **Target Compartment: `ecored-dev-est01`**, **Name: `Presupuesto-Web-est01`** y **Schedule: Monthly**. Escribe `5` en **Budget Amount** y registra la moneda que indique la consola. Si tu cuenta muestra USD, el presupuesto será de **USD 5 mensuales**. Si el compartimento ya tiene un presupuesto, abre el existente.
+4. En la sección de alerta del formulario o, después de crear el presupuesto, en **Budget Alert Rules > Create Budget Alert Rule**, selecciona **Actual Spend**, **Percentage of Budget** y **Threshold %: 80**. Escribe tu correo institucional para recibir la alerta y guarda. Comprueba que la regla aparezca asociada al presupuesto.
+5. Registra el monto, la moneda y el umbral. Usa esta alerta para vigilar el gasto; no la tomes como un bloqueo de cobros ni como una orden automática para apagar la máquina. Revisa también el saldo restante del crédito en tu sesión administradora y continúa con el [paso 6.3](#paso-6-3) después de guardar las evidencias.
 
 Consulta los formularios oficiales de [creación de presupuestos](https://docs.oracle.com/en-us/iaas/Content/Billing/Tasks/create-budget.htm) y [creación de alertas](https://docs.oracle.com/en-us/iaas/Content/Billing/Tasks/create-alert-rule.htm). Comprueba en [cómo funcionan los presupuestos de OCI](https://docs.oracle.com/en-us/iaas/Content/Billing/Concepts/budgetsoverview.htm) que se usan como límites de aviso.
 
@@ -372,12 +376,12 @@ Consulta los formularios oficiales de [creación de presupuestos](https://docs.o
 
 ### Paso 6.3. Eliminar la máquina y su disco
 
-1. Guarda `datos-taller.txt`, la captura y la dirección de la página. Entrega las evidencias por el medio indicado y espera la revisión del docente antes de eliminar los recursos.
+1. Guarda `datos-taller.txt`, la captura y la dirección de la página como evidencias del taller. Comprueba que la captura muestre la publicación funcionando antes de eliminar los recursos.
 2. En la sesión SSH ejecuta `exit` para volver a la terminal de tu equipo.
 3. Con tu usuario del taller, abre **Compute > Instances**, selecciona `ecored-dev-est01` y localiza `servidor-web-est01`. En el menú de acciones de esa instancia selecciona **Terminate**.
 4. Activa **Permanently delete the attached boot volume** y confirma la terminación. Espera **Terminated**. En **Storage > Block Storage > Boot Volumes**, selecciona tu compartimento y el mismo dominio; verifica que el disco de esta máquina esté eliminado o en **Terminated**.
-5. Si el docente indica retirar toda la red, elimina primero `subnet-publica-est01`, luego la regla de ruta hacia `igw-est01`, después `igw-est01` y finalmente `vcn-est01`. Comprueba en cada acción que el nombre y el compartimento correspondan a esta práctica.
-6. Cierra la sesión de OCI. Conserva las evidencias y el código del docente.
+5. Elimina primero `subnet-publica-est01`, luego la regla de ruta hacia `igw-est01`, después `igw-est01` y finalmente `vcn-est01`. Comprueba en cada acción que el nombre y el compartimento correspondan a esta práctica.
+6. Cierra las sesiones IAM y administradora de OCI. Conserva las evidencias y el código del taller.
 
 Consulta [cómo terminar una instancia y eliminar su disco de arranque](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/terminatinginstance.htm) antes de confirmar la acción.
 
