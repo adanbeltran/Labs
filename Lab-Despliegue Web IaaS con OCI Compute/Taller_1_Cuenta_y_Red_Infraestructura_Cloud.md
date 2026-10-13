@@ -38,11 +38,10 @@ Crearás un lugar para agrupar los recursos de la asignatura y un usuario para t
 
 Usarás la cuenta que ya activaste para crear la organización y los permisos. Registrar su nombre, región y saldo te permitirá volver a ingresar y controlar el crédito disponible.
 
-1. Abre este archivo en Visual Studio Code. Usa **Ctrl+Shift+V** en Windows o **Cmd+Shift+V** en macOS para ver el índice y seguir sus enlaces internos.
-2. En el navegador, escribe `cloud.oracle.com` e inicia sesión con tu cuenta administradora de Oracle Academy Cloud Program. Mantén abierta esta sesión durante el taller.
-3. En el selector de regiones de la barra superior, elige la región principal de tu cuenta, identificada como **Home region**. Usa esa misma región en los dos talleres.
-4. En la página de inicio, revisa el panel **Cost analysis** o **Subscription credits**. Anota el saldo restante; si ya usaste servicios, conserva el saldo real que muestre la cuenta.
-5. Crea en Visual Studio Code un archivo `datos-taller.txt`. Guarda el nombre de tu cuenta, la región principal y el saldo disponible. No escribas contraseñas en este archivo.
+1. En el navegador, escribe `cloud.oracle.com` e inicia sesión con tu cuenta administradora de Oracle Academy Cloud Program. Mantén abierta esta sesión durante el taller.
+2. En el selector de regiones de la barra superior, elige la región principal de tu cuenta, identificada como **Home region**. Usa esa misma región en los dos talleres.
+3. En la página de inicio, revisa el panel **Cost analysis** o **Subscription credits**. Anota el saldo restante; si ya usaste servicios, conserva el saldo real que muestre la cuenta.
+4. Crea en Visual Studio Code un archivo `datos-taller.txt`. Guarda el nombre de tu cuenta, la región principal y el saldo disponible. No escribas contraseñas en este archivo.
 
 <a name="paso-1-2"></a>
 
