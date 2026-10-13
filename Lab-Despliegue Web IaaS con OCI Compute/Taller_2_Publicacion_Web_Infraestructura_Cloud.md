@@ -55,15 +55,24 @@ Definirás el sistema operativo y los recursos de la máquina. Usarás un tamañ
 4. En **Change Shape**, selecciona **Virtual Machine > AMD (Advanced Micro Devices, fabricante de procesadores)** y la unidad `VM.Standard.E4.Flex` (Virtual Machine, máquina virtual). Si no está disponible, selecciona `VM.Standard.E5.Flex` (Virtual Machine, máquina virtual).
 5. Configura **1 OCPU (Oracle Compute Processing Unit, unidad de procesamiento de Oracle)** y **2 GB (gigabytes, unidad de capacidad de memoria) de memoria**. Pulsa **Select Shape** y revisa los valores y el costo estimado antes de continuar.
 
+<img width="757" height="482" alt="image" src="https://github.com/user-attachments/assets/508e6f2f-ae12-42e9-820a-972035922837" />
+
+<img width="855" height="687" alt="image" src="https://github.com/user-attachments/assets/1ada159f-dfbf-4366-890d-fabf5adf3a1d" />
+
+<img width="713" height="642" alt="image" src="https://github.com/user-attachments/assets/ef533f9e-4a05-4fe3-9cf3-51628a92f9b2" />
+
+
+
+
 <a name="paso-1-3"></a>
 
 ### Paso 1.3. Conectar la máquina a la red
 
-Ubicarás la máquina en la subred que ya preparaste. La dirección pública permitirá abrir la página y conectarte desde tu equipo; la dirección privada identificará la máquina dentro de su red.
-
 1. En **Networking**, selecciona la red existente `red-infraestructura` y la subred existente `subred-web`. Usa `Infraestructura_y_Cloud` en los selectores de compartimento.
 2. Activa **Assign a public IPv4 (Internet Protocol version 4, protocolo de Internet versión 4) address** y conserva la asignación automática de la dirección privada.
 3. Deja sin habilitar **Network security groups** para utilizar la lista de seguridad configurada al final del taller 1.
+<img width="408" height="422" alt="image" src="https://github.com/user-attachments/assets/612cf0d8-baa3-4745-96bc-927420e7626a" />
+
 
 <a name="paso-1-4"></a>
 
@@ -73,10 +82,16 @@ Guardarás el archivo privado que permitirá la conexión SSH (Secure Shell, con
 
 1. En **Add SSH (Secure Shell, conexión segura para administrar el servidor) keys**, selecciona **Generate a key pair for me**. Descarga **Save Private Key** y **Save Public Key**.
 2. En tu equipo, renombra el archivo privado como `llave-web.key`, sin agregar `.txt`. Conserva también el archivo público. Guarda la ruta del archivo privado en `datos-taller.txt`; no copies su contenido en ese archivo.
+
+<img width="700" height="517" alt="image" src="https://github.com/user-attachments/assets/32c5c395-f80e-4476-ae67-60e0cee6007b" />
+
 3. En **Boot volume**, conserva el tamaño predeterminado de la imagen y deja sin configurar discos adicionales y copias de seguridad.
 4. Revisa el resumen y pulsa **Create**. Espera el estado **Running** y dos minutos adicionales para el inicio del sistema.
 5. Si aparece falta de capacidad, vuelve a la creación y cambia el dominio de disponibilidad dentro de la misma región o usa la otra unidad del [paso 1.2](#paso-1-2).
 6. En la ficha del servidor, copia **Public IP (Internet Protocol, protocolo de Internet) Address** y guárdala en `datos-taller.txt` como dirección pública del servidor. No uses su dirección privada para las conexiones desde tu equipo.
+
+<img width="1507" height="345" alt="image" src="https://github.com/user-attachments/assets/4c7a8a22-7a68-4ec5-9961-1e7105d37c8b" />
+
 
 [Volver a la tabla de contenido](#indice) · [Continuar con la fase 2](#fase-2)
 
