@@ -67,11 +67,18 @@ Crearás el compartimento para reunir los recursos de **Infraestructura y Cloud*
 | Campo | Valor |
 | --- | --- |
 | Name | `Infraestructura_y_Cloud` |
-| Description | `Recursos de la asignatura Infraestructura y Cloud` |
+| Description | `Recursos de la asignatura Cloud Compunting` |
 | Parent compartment | Tu propia cuenta, identificada como `root` |
 
 3. Pulsa **Create Compartment** y comprueba que aparezca `Infraestructura_y_Cloud` en la lista.
 4. Guarda ese nombre exacto en `datos-taller.txt`. En los pasos siguientes, selecciona este compartimento cuando la consola solicite dónde crear un recurso.
+
+<img width="428" height="350" alt="image" src="https://github.com/user-attachments/assets/6318bded-5a75-4b98-9075-917b2a5cc0bd" />
+
+<img width="932" height="355" alt="image" src="https://github.com/user-attachments/assets/a9cebd46-cee9-4d41-a9f0-7fa0ebca1f5d" />
+
+<img width="536" height="215" alt="image" src="https://github.com/user-attachments/assets/47c999b3-534f-47e8-80d5-32322f5116e0" />
+
 
 <a name="paso-1-3"></a>
 
@@ -84,6 +91,17 @@ Crearás un grupo para asignar los permisos al usuario que registrarás después
 3. Pulsa **Create group**, escribe `GrupoInfraestructura` en **Name** y `Usuarios de la asignatura Infraestructura y Cloud` en **Description**.
 4. Deja sin marcar **User can request access** y pulsa **Create**.
 5. Guarda `GrupoInfraestructura` y el dominio `Default` en `datos-taller.txt`. Si tu cuenta tiene otro nombre de dominio, registra y usa ese nombre en los pasos siguientes.
+
+
+<img width="471" height="254" alt="image" src="https://github.com/user-attachments/assets/5cd46cf9-adea-4edb-845c-042bc9e0e20d" />
+
+<img width="500" height="266" alt="image" src="https://github.com/user-attachments/assets/ceff1f49-f52b-45cd-8838-12ba0498aeee" />
+
+<img width="373" height="430" alt="image" src="https://github.com/user-attachments/assets/424b627c-cb1e-4983-9161-e3d251d3a46f" />
+
+<img width="931" height="342" alt="image" src="https://github.com/user-attachments/assets/5c9b6c10-965c-4a49-8818-da1e5b37292f" />
+
+
 
 <a name="paso-1-4"></a>
 
