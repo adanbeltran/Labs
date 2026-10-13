@@ -193,6 +193,12 @@ Comprobarás que el nuevo usuario puede trabajar en el compartimento antes de cr
 5. Si aparece falta de permisos, regresa a la sesión administradora y revisa la política del [paso 1.4](#paso-1-4). Después de corregirla, cierra y vuelve a iniciar la sesión del usuario de práctica.
 6. Guarda `datos-taller.txt` y una captura de la lista de instancias donde se vea el compartimento seleccionado. Conserva el archivo para el taller 2.
 
+<img width="1876" height="437" alt="image" src="https://github.com/user-attachments/assets/0d06ee29-aef2-41ba-95a3-51e2bdf4d91f" />
+
+<img width="887" height="402" alt="image" src="https://github.com/user-attachments/assets/ad6441e5-c935-4d20-9023-85c165c70f92" />
+
+
+
 [Volver a la tabla de contenido](#indice) · [Continuar con la fase 2](#fase-2)
 
 ---
@@ -221,6 +227,9 @@ Crearás una VCN (Virtual Cloud Network, red virtual en la nube) para definir el
 3. Deja sin habilitar IPv6 (Internet Protocol version 6, protocolo de Internet versión 6) y conserva los demás valores predeterminados. Pulsa **Create VCN (Virtual Cloud Network, red virtual en la nube)**.
 4. Guarda el nombre `red-infraestructura` en `datos-taller.txt`.
 
+<img width="1891" height="768" alt="image" src="https://github.com/user-attachments/assets/879d1e44-eab0-4441-9907-c20549f34c01" />
+
+
 <a name="paso-2-2"></a>
 
 ### Paso 2.2. Crear la salida a Internet y su ruta
@@ -228,7 +237,7 @@ Crearás una VCN (Virtual Cloud Network, red virtual en la nube) para definir el
 Crearás un **Internet Gateway**, que conecta esta red con Internet. Después indicarás en la tabla de rutas que las conexiones hacia direcciones externas deben usar esa salida.
 
 1. Dentro de `red-infraestructura`, abre **Gateways > Internet gateways > Create Internet Gateway**.
-2. Escribe `salida-internet`, selecciona `Infraestructura_y_Cloud` y deja activado **Enable Internet Gateway**. Pulsa **Create Internet Gateway**.
+2. Escribe `salida-internet`, selecciona `Infraestructura_y_Cloud`. Pulsa **Create Internet Gateway**.
 3. Abre **Routing > Route tables > Default Route Table for red-infraestructura > Add Route Rules**.
 4. Completa y guarda la regla:
 
@@ -240,6 +249,21 @@ Crearás un **Internet Gateway**, que conecta esta red con Internet. Después in
 | Target | `salida-internet` |
 
 El destino `0.0.0.0/0` representa las direcciones externas a las que la máquina podrá enviar tráfico por esta salida.
+
+
+<img width="867" height="753" alt="image" src="https://github.com/user-attachments/assets/c037396c-ebd0-4d0b-9c52-8fed842d4faa" />
+<img width="1871" height="682" alt="image" src="https://github.com/user-attachments/assets/c52f750f-5112-4cb5-9af0-d26dc6d4e2c2" />
+<img width="790" height="610" alt="image" src="https://github.com/user-attachments/assets/6f34aba1-262f-42c0-ac66-3fdd7ab10264" />
+
+<img width="940" height="487" alt="image" src="https://github.com/user-attachments/assets/83901dae-84a4-48d0-91b0-bf6b06581fd9" />
+
+<img width="905" height="480" alt="image" src="https://github.com/user-attachments/assets/d705b5ac-3c93-456d-9a6a-9f15400a4e63" />
+
+<img width="1872" height="617" alt="image" src="https://github.com/user-attachments/assets/4a702a5d-b989-44df-974e-e41f36142379" />
+
+<img width="1596" height="492" alt="image" src="https://github.com/user-attachments/assets/dd4e4420-af7d-4037-954f-014905052125" />
+
+
 
 <a name="paso-2-3"></a>
 
