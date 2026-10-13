@@ -238,6 +238,14 @@ Crearás un **Internet Gateway**, que conecta esta red con Internet. Después in
 
 1. Dentro de `red-infraestructura`, abre **Gateways > Internet gateways > Create Internet Gateway**.
 2. Escribe `salida-internet`, selecciona `Infraestructura_y_Cloud`. Pulsa **Create Internet Gateway**.
+
+
+
+<img width="867" height="753" alt="image" src="https://github.com/user-attachments/assets/c037396c-ebd0-4d0b-9c52-8fed842d4faa" />
+<img width="1871" height="682" alt="image" src="https://github.com/user-attachments/assets/c52f750f-5112-4cb5-9af0-d26dc6d4e2c2" />
+<img width="790" height="610" alt="image" src="https://github.com/user-attachments/assets/6f34aba1-262f-42c0-ac66-3fdd7ab10264" />
+
+
 3. Abre **Routing > Route tables > Default Route Table for red-infraestructura > Add Route Rules**.
 4. Completa y guarda la regla:
 
@@ -249,12 +257,6 @@ Crearás un **Internet Gateway**, que conecta esta red con Internet. Después in
 | Target | `salida-internet` |
 
 El destino `0.0.0.0/0` representa las direcciones externas a las que la máquina podrá enviar tráfico por esta salida.
-
-
-<img width="867" height="753" alt="image" src="https://github.com/user-attachments/assets/c037396c-ebd0-4d0b-9c52-8fed842d4faa" />
-<img width="1871" height="682" alt="image" src="https://github.com/user-attachments/assets/c52f750f-5112-4cb5-9af0-d26dc6d4e2c2" />
-<img width="790" height="610" alt="image" src="https://github.com/user-attachments/assets/6f34aba1-262f-42c0-ac66-3fdd7ab10264" />
-
 <img width="940" height="487" alt="image" src="https://github.com/user-attachments/assets/83901dae-84a4-48d0-91b0-bf6b06581fd9" />
 
 <img width="905" height="480" alt="image" src="https://github.com/user-attachments/assets/d705b5ac-3c93-456d-9a6a-9f15400a4e63" />
