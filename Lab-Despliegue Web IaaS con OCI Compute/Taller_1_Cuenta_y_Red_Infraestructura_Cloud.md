@@ -150,6 +150,12 @@ Crearás un usuario IAM (Identity and Access Management, gestión de identidades
 5. Abre el usuario creado y comprueba que su grupo sea `GrupoInfraestructura`. Mantén este usuario fuera del grupo **Administrators** y de los roles de administrador del dominio.
 6. Guarda el nombre `estudiante-web` en `datos-taller.txt`.
 
+<img width="543" height="371" alt="image" src="https://github.com/user-attachments/assets/e889f0c9-cf2d-4ff5-9834-cd33453d73d4" />
+
+<img width="705" height="677" alt="image" src="https://github.com/user-attachments/assets/2c92f066-04ce-411c-adff-d40abee0d043" />
+
+
+
 <a name="paso-1-6"></a>
 
 ### Paso 1.6. Activar el nuevo usuario
@@ -159,6 +165,20 @@ Establecerás la contraseña del usuario que acabas de crear para poder iniciar 
 1. Abre el correo de bienvenida del nuevo usuario y utiliza la opción de activación indicada en el mensaje.
 2. Establece una contraseña personal y completa la verificación adicional que solicite la plataforma.
 3. Si el mensaje no llegó, revisa correo no deseado. Desde tu sesión administradora, vuelve a **Domains > Default > Users**, marca `estudiante-web` y selecciona **Actions** o **More actions > Resend invitation**. Confirma con **Send invitation** y revisa nuevamente tu correo.
+
+<img width="1357" height="787" alt="image" src="https://github.com/user-attachments/assets/e1ecf37f-658d-4b2b-bbe6-efad7949372d" />
+<img width="742" height="757" alt="image" src="https://github.com/user-attachments/assets/4dba57a2-d76c-434c-b99c-725b2ee28701" />
+<img width="802" height="686" alt="image" src="https://github.com/user-attachments/assets/a652162b-4bae-44e6-a617-3f74de075711" />
+<img width="636" height="752" alt="image" src="https://github.com/user-attachments/assets/1f989c1b-e21c-49a9-bf8b-5ba12992f072" />
+
+<img width="738" height="806" alt="image" src="https://github.com/user-attachments/assets/fbe5dc47-ea2b-495a-9072-85e74a75f2dd" />
+<img width="767" height="637" alt="image" src="https://github.com/user-attachments/assets/f18f5fd3-dad9-4bb2-91fa-f3d4c5c39842" />
+<img width="1880" height="793" alt="image" src="https://github.com/user-attachments/assets/21a51390-adf2-4b99-999e-a21b00971313" />
+
+
+
+
+
 
 <a name="paso-1-7"></a>
 
