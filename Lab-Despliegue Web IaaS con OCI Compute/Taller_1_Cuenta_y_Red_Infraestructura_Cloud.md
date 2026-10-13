@@ -93,8 +93,6 @@ Crearás un grupo para asignar los permisos al usuario que registrarás después
 5. Guarda `GrupoInfraestructura` y el dominio `Default` en `datos-taller.txt`. Si tu cuenta tiene otro nombre de dominio, registra y usa ese nombre en los pasos siguientes.
 
 
-<img width="471" height="254" alt="image" src="https://github.com/user-attachments/assets/5cd46cf9-adea-4edb-845c-042bc9e0e20d" />
-
 <img width="500" height="266" alt="image" src="https://github.com/user-attachments/assets/ceff1f49-f52b-45cd-8838-12ba0498aeee" />
 
 <img width="373" height="430" alt="image" src="https://github.com/user-attachments/assets/424b627c-cb1e-4983-9161-e3d251d3a46f" />
