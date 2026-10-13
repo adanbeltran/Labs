@@ -268,24 +268,40 @@ El destino `0.0.0.0/0` representa las direcciones externas a las que la máquina
 
 
 <a name="paso-2-3"></a>
-
 ### Paso 2.3. Crear la subred pública
 
-Crearás una subred, es decir, una parte de la red donde se ubicará la máquina. Será pública para que el servidor pueda tener una dirección accesible desde Internet.
+Crearás `subred-web` dentro de `red-infraestructura`. La subred define el rango de direcciones internas y la configuración de red que utilizará la máquina. Elegirás acceso público para poder asignarle una dirección pública y abrir la página desde Internet.
 
-1. Regresa a `red-infraestructura` y abre **Subnets > Create Subnet**.
-2. Completa los campos siguientes y conserva los demás valores predeterminados:
+1. Regresa a `red-infraestructura`, abre **Subnets** y pulsa **Create Subnet**. Comprueba que estés creando la subred dentro de la red del taller.
+2. Completa **Name** con `subred-web` y **Create in Compartment** con `Infraestructura_y_Cloud`. Estos valores identifican la subred y la organizan junto con los demás recursos de la asignatura.
+3. En **Subnet Type**, selecciona **Regional (Recommended)**. Así podrás conectar máquinas de cualquiera de los dominios de disponibilidad de la región.
+4. En **CIDR (Classless Inter-Domain Routing, enrutamiento entre dominios sin clases) blocks and prefixes**, completa:
 
 | Campo | Valor |
 | --- | --- |
-| Name / Compartment | `subred-web` / `Infraestructura_y_Cloud` |
-| Subnet Type | **Regional** |
+| IP (Internet Protocol, protocolo de Internet) Type | **IPv4 (Internet Protocol version 4, protocolo de Internet versión 4) CIDR (Classless Inter-Domain Routing, enrutamiento entre dominios sin clases) Block** |
 | IPv4 (Internet Protocol version 4, protocolo de Internet versión 4) CIDR (Classless Inter-Domain Routing, enrutamiento entre dominios sin clases) Block | `10.0.0.0/24` |
-| Subnet Access | **Public Subnet** |
-| Route Table | **Default Route Table for red-infraestructura** |
-| Security Lists | **Default Security List for red-infraestructura** |
 
-3. Pulsa **Create Subnet** y guarda `subred-web` en `datos-taller.txt`.
+<img width="761" height="560" alt="image" src="https://github.com/user-attachments/assets/21272054-dcef-4d38-b77a-63e28e907006" />
+<img width="1032" height="505" alt="image" src="https://github.com/user-attachments/assets/48487a82-58d9-4e77-bcb3-b494bf2089aa" />
+
+5. En **Route Table compartment**, selecciona `Infraestructura_y_Cloud`; en **Route Table**, elige **Default Route Table for red-infraestructura**. Esta tabla contiene la ruta hacia `salida-internet` que creaste en el paso anterior.
+6. En **Subnet Access**, selecciona **Public Subnet**. Esta opción permite asignar una dirección pública a la máquina; el acceso desde Internet también depende de la ruta y de las reglas que configurarás en el [paso 2.4](#paso-2-4).
+7. Mantén marcada **Use DNS (Domain Name System, sistema de nombres de dominio) hostnames in this Subnet**. En **DNS (Domain Name System, sistema de nombres de dominio) Label**, escribe `web`. Esto habilita nombres internos para los equipos. Conserva el nombre de dominio que la consola genera automáticamente.
+8. En **DHCP (Dynamic Host Configuration Protocol, protocolo de configuración dinámica de equipos) Options compartment**, selecciona `Infraestructura_y_Cloud`. En **DHCP (Dynamic Host Configuration Protocol, protocolo de configuración dinámica de equipos) Options**, elige **Default DHCP (Dynamic Host Configuration Protocol, protocolo de configuración dinámica de equipos) Options for red-infraestructura**. Así las máquinas recibirán la configuración de red predeterminada.
+9. En **Security Lists**, selecciona `Infraestructura_y_Cloud` en **Security List compartment** y **Default Security List for red-infraestructura** en **Security List**. 
+10. Deja **Resource logging** desactivado y no agregues etiquetas manuales en **Tags**. El registro de actividad de red y las etiquetas adicionales no son necesarios para publicar la página de esta práctica.
+11. Desplázate al final del formulario, revisa los valores y pulsa **Create Subnet** para guardar la subred.
+12. Comprueba que `subred-web` aparezca en la lista. Abre sus detalles y verifica el acceso público, el rango `10.0.0.0/24`, la tabla de rutas y la lista de seguridad seleccionadas.
+13. Guarda `subred-web` en `datos-taller.txt` para utilizarla al crear la máquina en el taller 2.
+
+<img width="1856" height="598" alt="image" src="https://github.com/user-attachments/assets/387e7eb1-80c3-43f3-9fd0-fab2edf24bda" />
+
+<img width="958" height="486" alt="image" src="https://github.com/user-attachments/assets/35bd7e33-05d2-4a47-8910-58e90493943e" />
+
+<img width="717" height="670" alt="image" src="https://github.com/user-attachments/assets/f7d70096-843e-4377-9a74-a051a26fa54d" />
+
+
 
 <a name="paso-2-4"></a>
 
@@ -304,5 +320,13 @@ Configurarás la lista de seguridad, que controla las conexiones permitidas a la
 3. En ambas reglas, usa **Source Type: CIDR (Classless Inter-Domain Routing, enrutamiento entre dominios sin clases)** y deja **Stateless** desmarcado para que se reconozcan las respuestas de las conexiones. Guarda con **Add Ingress Rules** cuando hayas creado una regla.
 4. En **Egress Rules**, comprueba una regla con **Destination CIDR (Classless Inter-Domain Routing, enrutamiento entre dominios sin clases): `0.0.0.0/0`**, **IP (Internet Protocol, protocolo de Internet) Protocol: All Protocols** y **Stateless** desmarcado. Si no existe, créala con esos valores. Mantén las demás reglas predeterminadas.
 5. Abre `subred-web` y verifica que use la tabla de rutas y la lista de seguridad de esta fase.
+
+<img width="946" height="472" alt="image" src="https://github.com/user-attachments/assets/4deebe76-1b27-4350-86d3-2ed35f28a9b9" />
+
+<
+<img width="1591" height="677" alt="image" src="https://github.com/user-attachments/assets/58921d6d-e92a-44d5-a080-2f4070519aaf" />
+
+
+
 
 [Volver a la tabla de contenido](#indice)
