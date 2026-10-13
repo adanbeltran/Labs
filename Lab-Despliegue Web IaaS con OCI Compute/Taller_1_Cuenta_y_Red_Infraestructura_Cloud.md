@@ -43,6 +43,18 @@ Usarás la cuenta que ya activaste para crear la organización y los permisos. R
 3. En la página de inicio, revisa el panel **Cost analysis** o **Subscription credits**. Anota el saldo restante; si ya usaste servicios, conserva el saldo real que muestre la cuenta.
 4. Crea en Visual Studio Code un archivo `datos-taller.txt`. Guarda el nombre de tu cuenta, la región principal y el saldo disponible. No escribas contraseñas en este archivo.
 
+<img width="295" height="248" alt="image" src="https://github.com/user-attachments/assets/c61451ed-b280-4eba-b3ab-893ca535f38d" />
+
+<img width="582" height="383" alt="image" src="https://github.com/user-attachments/assets/286da5de-c14b-462e-a090-d61bcdf3c8b0" />
+
+<img width="509" height="293" alt="image" src="https://github.com/user-attachments/assets/2c53413c-0af5-4f7a-85bb-44aa7f33499f" />
+
+<img width="943" height="338" alt="image" src="https://github.com/user-attachments/assets/a7d77daf-2abe-4bbd-91d6-9d4182f7d926" />
+
+
+
+
+
 <a name="paso-1-2"></a>
 
 ### Paso 1.2. Crear el compartimento de la asignatura
