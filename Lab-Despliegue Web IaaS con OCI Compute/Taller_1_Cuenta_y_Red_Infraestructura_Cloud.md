@@ -125,6 +125,18 @@ Allow group 'Default'/'GrupoInfraestructura' to use usage-budgets in tenancy
 4. Pulsa **Create**. Comprueba que la política se guarde sin errores. Si la consola rechaza una línea, verifica el nombre del dominio, del grupo y del compartimento antes de volver a guardarla.
 5. Registra `PermisosInfraestructura` en `datos-taller.txt`.
 
+<img width="468" height="633" alt="image" src="https://github.com/user-attachments/assets/5788a7d5-e6be-4ed4-8d53-b36bdd80d059" />
+
+<img width="591" height="616" alt="image" src="https://github.com/user-attachments/assets/90bef9fd-b459-40a5-9b80-eb7b1344193b" />
+
+<img width="636" height="727" alt="image" src="https://github.com/user-attachments/assets/babdcebf-96d3-4693-8732-520f17d4f5e8" />
+
+<img width="905" height="373" alt="image" src="https://github.com/user-attachments/assets/f1a06e2f-22bd-4e75-849f-1c9ebd2aaa1e" />
+
+
+
+
+
 <a name="paso-1-5"></a>
 
 ### Paso 1.5. Crear el usuario de práctica
