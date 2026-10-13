@@ -39,10 +39,9 @@ Crearás la máquina virtual que almacenará y entregará la página. Elegirás 
 
 Trabajarás con el usuario del taller 1 para que los recursos se creen con los permisos definidos para la asignatura. Seleccionar el mismo compartimento y la misma región evita perder de vista los recursos entre las diferentes pantallas.
 
-1. Abre este archivo en la vista previa de Visual Studio Code: **Ctrl+Shift+V** en Windows o **Cmd+Shift+V** en macOS.
-2. Abre una ventana privada del navegador, escribe `cloud.oracle.com` e inicia sesión con el nombre de tu cuenta, tu dominio y `estudiante-web`.
-3. Selecciona la región registrada en `datos-taller.txt`. Usa `Infraestructura_y_Cloud` en los filtros de compartimento de este taller.
-4. Conserva disponible tu sesión administradora en la otra ventana para corregir tu política si aparece falta de permisos. En ese caso, revisa en **Identity & Security > Policies > PermisosInfraestructura** los nombres del grupo y del compartimento, y vuelve a iniciar la sesión del usuario de práctica.
+1. Abre una ventana privada del navegador, escribe `cloud.oracle.com` e inicia sesión con el nombre de tu cuenta, tu dominio y `estudiante-web`.
+2. Selecciona la región registrada en `datos-taller.txt`. Usa `Infraestructura_y_Cloud` en los filtros de compartimento de este taller.
+3. Conserva disponible tu sesión administradora en la otra ventana para corregir tu política si aparece falta de permisos. En ese caso, revisa en **Identity & Security > Policies > PermisosInfraestructura** los nombres del grupo y del compartimento, y vuelve a iniciar la sesión del usuario de práctica.
 
 <a name="paso-1-2"></a>
 
