@@ -216,13 +216,14 @@ Descargarás una copia del repositorio para colocar la página en el servidor. E
 2. Ejecuta el bloque en la sesión del servidor:
 
 ```bash
-git clone --depth 1 "DIRECCION_DEL_REPOSITORIO" ~/pagina-taller
-ls -la ~/pagina-taller
-test -f ~/pagina-taller/index.html && echo "index.html encontrado"
+git clone --depth 1 "https://github.com/adanbeltran/ecored-estatica" ~/pagina-taller
 ```
+<img width="997" height="147" alt="image" src="https://github.com/user-attachments/assets/05a4bbbc-b8eb-4516-bb71-3de3677593b3" />
+```bash
+ls -la ~/pagina-taller
+```
+<img width="501" height="187" alt="image" src="https://github.com/user-attachments/assets/ff4387bc-0c5f-4771-b87b-9a44f80c1621" />
 
-3. Comprueba el mensaje `index.html encontrado` y la presencia de los archivos de diseño e interactividad. Si no aparece el mensaje, verifica que la dirección corresponda a la página estática entregada para el taller y que `index.html` esté en su carpeta principal antes de continuar.
-4. Si ya existe `pagina-taller` de un intento anterior con ese mismo repositorio, actualiza esa copia con `git -C ~/pagina-taller pull --ff-only` en lugar de volver a clonarla.
 
 <a name="paso-2-3"></a>
 
@@ -234,27 +235,45 @@ Colocarás la versión guardada en Git dentro de la carpeta que Nginx entrega al
 
 ```bash
 git -C ~/pagina-taller archive --format=tar HEAD | sudo tar -x -C /usr/share/nginx/html
+```
+<img width="987" height="48" alt="image" src="https://github.com/user-attachments/assets/e9fcf543-98b6-475c-b8a8-bd40eb9464e2" />
+
+```bash
 sudo restorecon -Rv /usr/share/nginx/html
 sudo nginx -t
 ```
+<img width="611" height="112" alt="image" src="https://github.com/user-attachments/assets/927551b8-04fe-4a1d-a6bd-f0c1952e8ca7" />
+
 
 2. Comprueba que la configuración sea válida. Ejecuta el bloque siguiente para permitir HTTP (HyperText Transfer Protocol, protocolo de transferencia de hipertexto) en el servidor. Las primeras dos órdenes habilitan el servicio web en su firewall; la última solicita la página desde la propia máquina.
 
 ```bash
 sudo firewall-cmd --permanent --add-service=http
+```
+```bash
 sudo firewall-cmd --reload
+```
+```bash
 curl -I http://localhost/index.html
 ```
 
 3. Comprueba `success` en las órdenes del firewall y una respuesta con código `200 OK` en la última orden. Mantén abierta la sesión para las comprobaciones siguientes.
 
+<img width="678" height="340" alt="image" src="https://github.com/user-attachments/assets/337d6b76-d1ee-49b8-b1fa-73fe05d92f10" />
+
+
 <a name="paso-2-4"></a>
 
 ### Paso 2.4. Probar la página desde el navegador
 
+
 Verificarás el acceso desde fuera del servidor, el diseño y las interacciones. Esta prueba comprueba que los archivos se publicaron y que las conexiones desde Internet están permitidas.
 
 1. En el navegador de tu equipo, escribe `http://DIRECCION_PUBLICA/index.html`, sustituyendo `DIRECCION_PUBLICA` por la dirección real. Usa `http` en esta práctica.
+<img width="460" height="77" alt="image" src="https://github.com/user-attachments/assets/50a77a99-76ff-4eb7-8d30-ddcd30c492a1" />
+
+<img width="1522" height="896" alt="image" src="https://github.com/user-attachments/assets/a2fa6707-0e3c-45b6-b066-d2198e079240" />
+
 2. Comprueba que aparezca la página suministrada y prueba uno de sus botones, menús o filtros.
 3. Abre las herramientas de desarrollo con **F12 > Network**, recarga y revisa que la página y sus archivos de diseño e interactividad respondan con estado **200**. En **Console**, comprueba que no haya errores de esos archivos.
 4. Abre la misma dirección en una ventana privada o en un teléfono con datos móviles. Repite una interacción y guarda una captura de la dirección y del resultado.
@@ -278,7 +297,13 @@ Consultarás el consumo del compartimento, configurarás un aviso de presupuesto
 Revisarás el gasto asociado a la asignatura y crearás una alerta para recibir un aviso en tu correo. El presupuesto es una referencia de seguimiento: no detiene la máquina ni bloquea automáticamente el consumo.
 
 1. Con el usuario `estudiante-web`, abre **Billing & Cost Management > Cost Management > Cost Analysis**.
+
+<img width="1207" height="793" alt="image" src="https://github.com/user-attachments/assets/51052601-f3e5-41a3-b82d-8c471a08c4a0" />
+
 2. Selecciona el período, filtra por `Infraestructura_y_Cloud`, agrupa por **Service** y pulsa **Apply**. Guarda una captura o registra el resultado en `datos-taller.txt`. Si no hay datos, registra ese resultado; la información puede tardar hasta 48 horas en aparecer.
+
+<img width="1297" height="596" alt="image" src="https://github.com/user-attachments/assets/54326d20-b009-425b-978a-e314c31f62a2" />
+
 3. Abre **Billing & Cost Management > Cost Management > Budgets > Create Budget** y completa:
 
 | Campo | Valor |
@@ -289,10 +314,13 @@ Revisarás el gasto asociado a la asignatura y crearás una alerta para recibir 
 | Schedule | **Monthly** |
 | Budget Amount | `5`; registra la moneda que indique la consola |
 
+<img width="726" height="570" alt="image" src="https://github.com/user-attachments/assets/aac5a32a-a5fe-4101-a797-97c18f9e9309" />
+
 4. Si la cuenta muestra USD (United States Dollar, dólar estadounidense), el monto corresponde a **5 dólares estadounidenses mensuales**. Si ya existe un presupuesto para este compartimento, abre ese presupuesto en lugar de crear otro.
 5. En la sección de alerta del formulario o en **Budget Alert Rules > Create Budget Alert Rule**, selecciona **Actual Spend**, **Percentage of Budget** y **Threshold %: 80**. Escribe tu correo institucional en **Email Recipients** y guarda. Comprueba que la regla quede asociada al presupuesto.
 6. Si faltan permisos, verifica desde tu sesión administradora que `PermisosInfraestructura` contenga las líneas `read usage-report` y `use usage-budgets` en `tenancy`. Vuelve a iniciar la sesión del usuario de práctica después de corregirlas.
 7. Revisa en tu sesión administradora el saldo restante del crédito y guárdalo en `datos-taller.txt` junto con el monto y el umbral del presupuesto.
+<img width="695" height="498" alt="image" src="https://github.com/user-attachments/assets/6128c9d9-1ca0-494a-9d2c-ee6293ab4bfb" />
 
 <a name="paso-3-2"></a>
 
@@ -308,14 +336,16 @@ Guardarás la prueba de publicación y eliminarás la máquina con su disco. Ter
 
 <a name="paso-3-3"></a>
 
-### Paso 3.3. Eliminar la red de la práctica
+### Paso 3.3. Apagar la maquina virtual
 
-Retirarás la subred, la salida y la red que creaste para este servidor. Lo harás en orden porque un recurso no puede eliminarse mientras otro lo siga utilizando.
+1. Ingresa a Compute -Instance y tomas los ... en  `servidor-web` y tomas la opcion Stop. 
 
-1. Comprueba que `servidor-web` haya terminado. Abre **Networking > Virtual cloud networks > red-infraestructura > Subnets** y elimina `subred-web`.
-2. En la tabla de rutas predeterminada de `red-infraestructura`, elimina la regla que apunta a `salida-internet`.
-3. Abre **Gateways > Internet gateways** y elimina `salida-internet`.
-4. Vuelve a la lista de redes, selecciona `red-infraestructura` y pulsa **Delete**. Comprueba que la eliminación corresponda a esta red de práctica y confirma. Si aparece una dependencia, revisa el recurso indicado y elimina primero esa dependencia de esta práctica.
-5. Conserva el compartimento, el grupo, el usuario y el presupuesto para las siguientes actividades de la asignatura. Cierra tus sesiones del usuario de práctica y de administración.
+<img width="1852" height="538" alt="image" src="https://github.com/user-attachments/assets/a766dc2d-54e0-457f-8c8f-9bc85c097739" />
+
+
+2. Comprueba que `servidor-web` haya terminado. 
+
+<img width="1587" height="193" alt="image" src="https://github.com/user-attachments/assets/c7072e9c-4f08-4f33-ac13-f788fcc46b55" />
+
 
 [Volver a la tabla de contenido](#indice)
