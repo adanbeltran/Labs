@@ -163,7 +163,10 @@ Esta configuración protege la llave privada y evita que SSH (Secure Shell, cone
 ```bash
 ssh -i ~/llave-web.key opc@DIRECCION_PUBLICA
 ```
-<img width="895" height="237" alt="image" src="https://github.com/user-attachments/assets/12552b97-41c5-4837-b231-5ee56152286d" />
+
+
+<img width="791" height="148" alt="image" src="https://github.com/user-attachments/assets/bc6d06a3-1bf8-45c2-9f0f-a09617587330" />
+
 
 
 7. En la primera conexión, escribe `yes` cuando se solicite confirmar y pulsa **Enter**. Ahora la terminal debe mostrar una sesión en `servidor-web`. Ejecuta:
@@ -172,15 +175,27 @@ ssh -i ~/llave-web.key opc@DIRECCION_PUBLICA
 whoami
 ```
 
+<img width="350" height="87" alt="image" src="https://github.com/user-attachments/assets/0048cf2b-044d-46cf-939d-639b90169bc8" />
+
+
 Comprueba que responda `opc`. Ese es el usuario del sistema de la máquina creada con Oracle Linux 9. Mantén abierta esta conexión para ejecutar las órdenes siguientes dentro del servidor.
 
 8. Ejecuta este bloque **dentro de `servidor-web`**. La primera orden instala Nginx y Git; la segunda inicia Nginx y lo deja preparado para iniciarse cuando reinicie el servidor; la tercera comprueba su estado:
 
 ```bash
 sudo dnf install -y nginx git
+```
+<img width="1866" height="502" alt="image" src="https://github.com/user-attachments/assets/8c02cebf-4755-40cb-826e-a74bc449464f" />
+
+```bash
 sudo systemctl enable --now nginx
+```
+<img width="1041" height="63" alt="image" src="https://github.com/user-attachments/assets/e0dd8576-6d24-458f-a0d5-4bc47494d82a" />
+
+```bash
 systemctl is-active nginx
 ```
+<img width="445" height="70" alt="image" src="https://github.com/user-attachments/assets/8f99a57d-a261-4180-9858-d6a2ace7f851" />
 
 9. Comprueba que la última orden muestre `active`. Continúa con el [paso 2.2](#paso-2-2) desde esta misma conexión: descargarás el repositorio dentro de `servidor-web`.
 
