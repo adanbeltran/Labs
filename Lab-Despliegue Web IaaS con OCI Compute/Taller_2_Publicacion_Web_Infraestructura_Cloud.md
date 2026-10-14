@@ -110,14 +110,24 @@ Te conectarás a la máquina, instalarás Nginx y descargarás los archivos del 
 Usarás Cloud Shell, la terminal integrada en OCI (Oracle Cloud Infrastructure, infraestructura de nube de Oracle), para conectarte a `servidor-web` mediante SSH (Secure Shell, conexión segura para administrar el servidor). Después instalarás Nginx para entregar la página y Git para descargar su código. Cloud Shell y `servidor-web` son equipos diferentes: ejecutarás la instalación después de entrar al servidor.
 
 1. En **Compute > Instances**, selecciona el compartimento `Infraestructura_y_Cloud` y abre `servidor-web`. Comprueba el estado **Running** y copia su **Public IP (Internet Protocol, protocolo de Internet) Address**. Esta dirección permitirá la conexión desde Cloud Shell.
-2. En la barra superior de la consola, abre el icono de terminal o **Developer tools > Cloud Shell**. Espera a que aparezca la línea de comandos. Conserva la región donde creaste `servidor-web`.
-3. En el selector de red de Cloud Shell, comprueba que se use **Public Network**, la red pública. Si aparece **Service Network**, cámbiala a **Public Network**: la red de servicios permite acceder a servicios de Oracle, pero no a la dirección pública de tu servidor. Si la opción pública no aparece o deniega el acceso, desde tu sesión administradora añade a `PermisosInfraestructura` la línea siguiente y reinicia Cloud Shell desde **Actions > Restart**. Este permiso es adicional al que ya permite abrir la terminal:
+<img width="1525" height="420" alt="image" src="https://github.com/user-attachments/assets/642a78dd-3a8f-4b85-ba34-b67d372572cf" />
 
-```text
-Allow group 'Default'/'GrupoInfraestructura' to use cloud-shell-public-network in tenancy
-```
+
+2. En la barra superior de la consola, abre el icono de terminal o **Developer tools > Cloud Shell**. Espera a que aparezca la línea de comandos. Conserva la región donde creaste `servidor-web`.
+<img width="457" height="172" alt="image" src="https://github.com/user-attachments/assets/86db4005-e512-4aa9-90ba-1024efbc4642" />
+
+3. En el selector de red de Cloud Shell, comprueba que se use **Public Network**, la red pública. Si aparece **Service Network**, cámbiala a **Public Network**: la red de servicios permite acceder a servicios de Oracle, pero no a la dirección pública de tu servidor. 
+
+<img width="698" height="373" alt="image" src="https://github.com/user-attachments/assets/178da6fe-857a-41dc-9b0e-e4b9e538ef56" />
+
 
 4. En el menú de Cloud Shell, selecciona **Upload**. Carga en tu carpeta personal el archivo privado `llave-web.key` guardado en el [paso 1.4](#paso-1-4) y espera la confirmación de carga. Ese archivo permitirá demostrar que tienes el acceso configurado para esta máquina.
+
+<img width="292" height="260" alt="image" src="https://github.com/user-attachments/assets/fa6c84b7-7e78-49ae-a1cb-3a62582cd069" />
+
+<img width="616" height="442" alt="image" src="https://github.com/user-attachments/assets/9b6efa1d-3312-4bd5-844c-0c248a59a374" />
+
+
 5. Ejecuta estas órdenes en **Cloud Shell**. La primera comprueba que el archivo esté en tu carpeta personal; la segunda permite que solamente tu usuario lo lea y modifique, requisito para utilizarlo en la conexión:
 
 ```bash
@@ -125,11 +135,33 @@ ls -l ~/llave-web.key
 chmod 600 ~/llave-web.key
 ```
 
+**¿Qué hace cada orden?**
+
+- `ls -l ~/llave-web.key`: comprueba que el archivo exista y muestra sus permisos, propietario, tamaño y fecha de modificación. No muestra el contenido de la llave.
+- `chmod 600 ~/llave-web.key`: cambia los permisos para que solamente el propietario pueda leer y modificar el archivo.
+
+El símbolo `~` representa la carpeta personal de tu usuario en Cloud Shell.
+
+**¿Qué significa `600`?**
+
+| Posición | Valor | Permisos |
+|---|---|---|
+| Propietario del archivo | `6` | Leer y escribir: `4` de lectura + `2` de escritura. |
+| Grupo del archivo | `0` | Sin permisos. |
+| Otros usuarios | `0` | Sin permisos. |
+
+Esta configuración protege la llave privada y evita que SSH (Secure Shell, conexión segura para administrar el servidor) la rechace por tener permisos demasiado abiertos.
+
+<img width="853" height="127" alt="image" src="https://github.com/user-attachments/assets/860bd47c-8b4d-48ec-8fe5-92d92ad64367" />
+
+
 6. Sustituye `DIRECCION_PUBLICA` por la dirección que copiaste en el punto 1 y ejecuta en **Cloud Shell**:
 
 ```bash
 ssh -i ~/llave-web.key opc@DIRECCION_PUBLICA
 ```
+<img width="895" height="237" alt="image" src="https://github.com/user-attachments/assets/12552b97-41c5-4837-b231-5ee56152286d" />
+
 
 7. En la primera conexión, escribe `yes` cuando se solicite confirmar y pulsa **Enter**. Ahora la terminal debe mostrar una sesión en `servidor-web`. Ejecuta:
 
