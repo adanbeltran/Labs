@@ -120,6 +120,8 @@ Allow group 'Default'/'GrupoInfraestructura' to read app-catalog-listing in tena
 Allow group 'Default'/'GrupoInfraestructura' to use tag-namespaces in tenancy where target.tag-namespace.name='oracle-tags'
 Allow group 'Default'/'GrupoInfraestructura' to read usage-report in tenancy
 Allow group 'Default'/'GrupoInfraestructura' to use usage-budgets in tenancy
+Allow group 'Default'/'GrupoInfraestructura' to use cloud-shell in tenancy
+Allow group 'Default'/'GrupoInfraestructura' to use cloud-shell-public-network in tenancy
 ```
 
 4. Pulsa **Create**. Comprueba que la política se guarde sin errores. Si la consola rechaza una línea, verifica el nombre del dominio, del grupo y del compartimento antes de volver a guardarla.
