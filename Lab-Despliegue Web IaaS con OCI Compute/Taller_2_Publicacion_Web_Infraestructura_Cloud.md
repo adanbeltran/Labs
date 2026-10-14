@@ -59,6 +59,9 @@ Definirás el sistema operativo y los recursos de la máquina. Usarás un tamañ
 
 <img width="855" height="687" alt="image" src="https://github.com/user-attachments/assets/1ada159f-dfbf-4366-890d-fabf5adf3a1d" />
 
+<img width="810" height="595" alt="image" src="https://github.com/user-attachments/assets/db5189b1-6f18-4b0a-8209-e3bb78ee737f" />
+
+
 <img width="713" height="642" alt="image" src="https://github.com/user-attachments/assets/ef533f9e-4a05-4fe3-9cf3-51628a92f9b2" />
 
 
