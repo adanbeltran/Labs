@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Fase 2 · Redes OCI | Ciudad digital y simulador</title>
+  <style>
+    :root{--navy:#14283f;--blue:#1269a0;--teal:#087e7f;--red:#b8423a;--amber:#b26d12;--bg:#f4f7fa;--ink:#24374a;--border:#d7e1e8}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:var(--ink);line-height:1.55}
+    header{background:linear-gradient(110deg,#11283f,#185879);color:white;padding:32px max(5vw,20px)}
+    header h1{font-size:clamp(1.65rem,3vw,2.7rem);margin:0 0 10px}
+    header p{max-width:850px;margin:0;color:#d5e8f3}
+    nav{background:white;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;padding:10px max(5vw,20px);display:flex;gap:10px;flex-wrap:wrap;box-shadow:0 2px 7px #152b3a0a}
+    nav a{font-size:.87rem;color:#1a5f86;text-decoration:none;padding:6px 9px;border-radius:7px}
+    nav a:hover{background:#edf5fa}
+    main{max-width:1250px;margin:auto;padding:25px 18px 65px}
+    .section{margin:25px 0 35px}
+    h2{font-size:1.55rem;margin:0 0 9px;color:#173a55}
+    h3{margin:0 0 9px;font-size:1.05rem}
+    .lead{color:#516477;max-width:900px}
+    .panel,.card{background:white;border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:0 4px 12px #122e4206}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:13px}
+    .duo{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
+    .pill{display:inline-block;background:#e5f3fa;color:#175779;font-size:.77rem;padding:3px 9px;border-radius:15px;font-weight:700}
+    .analogy{font-size:2.6rem;line-height:1.2}
+    p{margin:6px 0 10px}
+    .small{font-size:.86rem;color:#5d7182}
+    .note{border-left:4px solid #167c97;background:#ebf5fa;padding:12px 15px;border-radius:5px}
+    .warn{border-left-color:#b66d21;background:#fff7e9}
+    .img-container{text-align:center;margin:20px 0;background:#fff;padding:10px;border-radius:10px;border:1px solid var(--border)}
+    .img-container img{max-width:100%;height:auto;border-radius:8px;max-height:400px;object-fit:contain}
+    .img-caption{font-size:0.85rem;color:#666;margin-top:8px}
+    .diagram{overflow:auto;background:#fbfdff;border:1px solid var(--border);border-radius:14px;padding:8px}
+    .diagram svg{width:100%;min-width:760px;display:block}
+    .shape{cursor:pointer}
+    .shape:hover rect,.shape:hover polygon{stroke:#ed9a34;stroke-width:3}
+    .path{stroke:#8ea8b8;stroke-width:5;fill:none;stroke-linecap:round;stroke-dasharray:9 8}
+    .moving{fill:#f39b27;stroke:white;stroke-width:3;filter:drop-shadow(0 1px 2px #0005);visibility:hidden}
+    .controls{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+    .btn{border:1px solid #96bacb;border-radius:8px;padding:9px 14px;background:white;color:#134966;cursor:pointer;font:inherit;font-weight:650}
+    .btn.primary{background:#156a8f;color:white;border-color:#156a8f}
+    .btn:disabled{opacity:.5;cursor:default}
+    .btn:hover:not(:disabled){filter:brightness(.96)}
+    input,select{padding:10px 11px;border:1px solid #aebfca;border-radius:8px;font:inherit;min-width:0;width:100%;background:white}
+    label{font-size:.88rem;font-weight:700;display:block;margin-bottom:5px}
+    .fields{display:grid;grid-template-columns:repeat(4,minmax(140px,1fr));gap:12px}
+    .status{padding:13px 15px;border:1px solid #c5d8e3;background:#edf5fa;border-radius:9px}
+    .status.ok{background:#eaf8ef;border-color:#92c8a8}
+    .status.bad{background:#fff0ed;border-color:#e3a49d}
+    .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:15px 0}
+    .step{font-size:.76rem;text-align:center;padding:8px;border-radius:7px;background:#edf1f3;border:1px solid #d8e0e6}
+    .step.current{background:#d8edff;border-color:#4a9fd0;font-weight:700}
+    .step.good{background:#daf3e4;border-color:#70bc92}
+    .step.bad{background:#ffe2de;border-color:#cf756c}
+    .log{height:205px;overflow-y:auto;background:#152739;border-radius:10px;color:#d7f0fc;padding:13px;font:12.5px/1.55 ui-monospace,Consolas,monospace;white-space:pre-wrap}
+    .rule{border:1px solid #d8e2e9;border-radius:9px;padding:11px;margin-bottom:8px;background:#fbfcfe}
+    .toggle{display:flex;align-items:center;gap:8px}
+    .toggle input{width:auto}
+    .tag{font-size:.75rem;padding:3px 7px;background:#e2f2f6;border-radius:5px;color:#115b76}
+    table{border-collapse:collapse;width:100%;font-size:.86rem}
+    td,th{border-bottom:1px solid #e0e7eb;padding:9px;text-align:left;vertical-align:top}
+    th{background:#eef4f7}
+    .scenario{border:1px solid #c5d9e5;background:#f7fbff;border-radius:8px;text-align:left;padding:10px;cursor:pointer;font:inherit}
+    .scenario:hover{border-color:#448eb4}
+    details{border:1px solid #d5e0e7;border-radius:9px;background:white;margin:9px 0;padding:12px}
+    summary{cursor:pointer;font-weight:700;color:#205574}
+    .ref{font-size:.83rem;color:#536a7b}
+    footer{padding:20px;background:#12283c;color:#d6e5ed;text-align:center}
+    @media(max-width:850px){.duo{grid-template-columns:1fr}.fields{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:500px){.fields{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}}
+  </style>
+</head>
+<body>
+  <header>
+    <span class="pill">INFRAESTRUCTURA TI Y CLOUD COMPUTING · TALLER 1 · FASE 2</span>
+    <h1>¿Cómo encuentra Internet a nuestro servidor?</h1>
+    <p>Una guía interactiva que conecta los conceptos del centro de datos físico con la abstracción SDN de Oracle Cloud, diseñada para experimentar con el flujo de red bidireccional.</p>
+  </header>
+  <nav>
+    <a href="#fisica-virtual">1 · De lo Físico a lo Virtual</a>
+    <a href="#ciudad">2 · La ciudad digital</a>
+    <a href="#red">3 · Arquitectura OCI</a>
+    <a href="#conceptos">4 · IP y CIDR</a>
+    <a href="#simular">5 · Simulador Interactivo</a>
+    <a href="#fallos">6 · Diagnóstico</a>
+  </nav>
+  <main>
+
+    <section class="section" id="fisica-virtual">
+      <h2>1. De lo Físico a lo Virtual: Comprendiendo el Flujo de Red</h2>
+      <p class="lead">Antes de configurar OCI, es vital entender que la nube es <strong>Redes Definidas por Software (SDN)</strong>. Los dispositivos de hardware tradicionales que usábamos en los centros de datos ahora se representan como funciones lógicas.</p>
+
+      <div class="duo">
+        <div class="panel">
+          <h3>Arquitectura Física (On-Premises)</h3>
+          <p>En el mundo tradicional, la conectividad bidireccional a internet requiere hardware:</p>
+          <ul>
+            <li><strong>Enrutador/Firewall:</strong> Dispositivo perimetral que recibe la conexión del ISP, traduce direcciones (NAT) y aplica reglas físicas de seguridad.</li>
+            <li><strong>Switches Físicos:</strong> Equipos que agrupan y segmentan el tráfico local (VLANs).</li>
+            <li><strong>Servidor de Hardware:</strong> Una máquina con una Tarjeta de Red Física (NIC) conectada por cable al switch.</li>
+          </ul>
+          <div class="img-container">
+            <!-- Imagen cargada directamente desde internet -->
+            <img src="https://www.oreilly.com/api/v2/epubs/urn:orm:book:9781788397605/files/assets/5d88777f-0d94-43a9-b434-4ce96ce28558.png" alt="Topología de Red Física">
+            <div class="img-caption">Esquema físico: Servidores, cableado, switches y routers de hardware.</div>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Arquitectura Virtual (Oracle Cloud - OCI)</h3>
+          <p>En la nube, el hardware desaparece de tu vista. Al crear recursos en el Taller 1, estás definiendo esta topología lógica:</p>
+          <ul>
+            <li><strong>Internet Gateway (IGW):</strong> Reemplaza al enrutador de borde. Gestiona la conexión bidireccional y el NAT.</li>
+            <li><strong>VCN y Subredes:</strong> Reemplazan los switches físicos. La VCN es la red global, las Subredes segmentan el dominio de difusión.</li>
+            <li><strong>Route Table & Security List:</strong> Reemplazan al Firewall. Se aplican a nivel de subred.</li>
+            <li><strong>VNIC:</strong> La tarjeta de red virtual. Es el único punto por donde la Máquina Virtual (VM) puede hablar con la VCN.</li>
+          </ul>
+          <div class="img-container">
+            <!-- Descarga la imagen virtual del chat y guárdala con este nombre en la misma carpeta -->
+            <img src="red_virtual_oci.jpg" alt="Topología de Red Virtual en OCI">
+            <div class="img-caption">Esquema virtual: VCN, Internet Gateway, Subredes, VNIC y Security Lists.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ciudad">
+      <h2>2. Redes explicadas como una ciudad</h2>
+      <p class="lead">Para fijar los conceptos de OCI (Paso 2.1 a 2.4), usemos la analogía de una ciudad:</p>
+      <div class="grid">
+        <div class="card"><div class="analogy">🏙️</div><h3>VCN = ciudad privada</h3><p>Una ciudad delimitada (ej. <code>red-infraestructura</code>).</p><span class="tag">10.0.0.0/16</span></div>
+        <div class="card"><div class="analogy">🏘️</div><h3>Subred = barrio</h3><p>Una zona que agrupa máquinas con las mismas reglas (ej. <code>subred-web</code>).</p><span class="tag">10.0.0.0/24</span></div>
+        <div class="card"><div class="analogy">🔌</div><h3>VNIC = el contador/enchufe</h3><p>La tarjeta que une la casa (VM) a la red del barrio (Subred).</p><span class="tag">IP Privada / IP Pública</span></div>
+        <div class="card"><div class="analogy">🗺️</div><h3>Route table = señales de tránsito</h3><p>Indica por dónde enviar el tráfico que sale de la VCN.</p><span class="tag">0.0.0.0/0 → IGW</span></div>
+        <div class="card"><div class="analogy">🌉</div><h3>Internet Gateway = aduana de la ciudad</h3><p>Permite salir/entrar de la ciudad pública (Internet).</p><span class="tag">salida-internet</span></div>
+        <div class="card"><div class="analogy">🛂</div><h3>Security List = control de acceso</h3><p>Verifica en el barrio qué tipo de tráfico es autorizado.</p><span class="tag">Ingress: 80/22 | Egress: All</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="red">
+      <h2>3. Mapa visual de la red exacta del taller</h2>
+      <p class="lead">Selecciona los componentes del diagrama interactivo. Los nombres, CIDR, rutas y reglas de entrada corresponden a los valores reales configurados en OCI para la asignatura.</p>
+      <div class="diagram">
+        <svg viewBox="0 0 1150 440" role="img" aria-label="Diagrama de navegador a través de Internet y gateway hacia VCN, subred y máquina virtual">
+          <defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#8ea8b8"/></marker></defs>
+          <rect x="8" y="12" width="195" height="390" rx="20" fill="#e9f3fc" stroke="#c0d9eb"/>
+          <text x="105" y="37" text-anchor="middle" font-size="17" font-weight="bold" fill="#174c72">🏡 Red del usuario</text>
+          <rect x="27" y="125" width="155" height="136" rx="13" fill="white" stroke="#8cacc4"/>
+          <text x="105" y="165" text-anchor="middle" font-size="29">💻</text>
+          <text x="105" y="196" text-anchor="middle" font-size="17" font-weight="bold">Navegador</text>
+          <text x="105" y="220" text-anchor="middle" font-size="13">Ej. 198.51.100.25</text>
+          <text x="105" y="240" text-anchor="middle" font-size="12">puerto origen efímero</text>
+          <rect x="230" y="125" width="168" height="136" rx="15" fill="#f6f3e9" stroke="#ddc98e"/>
+          <text x="314" y="165" text-anchor="middle" font-size="29">🌐</text>
+          <text x="314" y="193" text-anchor="middle" font-size="17" font-weight="bold">Internet</text>
+          <text x="314" y="216" text-anchor="middle" font-size="13">IP de destino: 137.131.182.113</text>
+          <rect x="417" y="55" width="715" height="340" rx="20" fill="#eaf7f2" stroke="#81b5a2" stroke-width="2"/>
+          <text x="440" y="87" font-size="21" font-weight="bold" fill="#176a54">🏙️ VCN: red-infraestructura · 10.0.0.0/16</text>
+          <g class="shape" data-explain="Internet Gateway: salida-internet. Es el enlace de la VCN a Internet; realiza la traducción NAT entre la IP privada de la VNIC y la IP pública asociada.">
+            <rect x="437" y="129" width="140" height="129" rx="12" fill="white" stroke="#5f9b8a"/>
+            <text x="507" y="161" text-anchor="middle" font-size="30">🌉</text>
+            <text x="507" y="188" text-anchor="middle" font-size="15" font-weight="bold">Internet</text>
+            <text x="507" y="207" text-anchor="middle" font-size="15" font-weight="bold">Gateway</text>
+            <text x="507" y="229" text-anchor="middle" font-size="12">salida-internet</text>
+          </g>
+          <rect x="601" y="108" width="505" height="263" rx="16" fill="#f2f5ff" stroke="#8e9dc8" stroke-width="2"/>
+          <text x="619" y="135" font-size="17" font-weight="bold" fill="#455f94">🏘️ subred-web · 10.0.0.0/24 · pública</text>
+          <g class="shape" data-explain="Security List por defecto: Controla el acceso a nivel de subred. Ingress TCP/22 y TCP/80 permitidos desde 0.0.0.0/0. Egress a 0.0.0.0/0 para todos los protocolos. Las reglas son stateful (el tráfico de respuesta fluye automáticamente).">
+            <rect x="619" y="165" width="156" height="150" rx="10" fill="white" stroke="#889bc1"/>
+            <text x="697" y="201" text-anchor="middle" font-size="30">🛂</text>
+            <text x="697" y="229" text-anchor="middle" font-size="15" font-weight="bold">Security List</text>
+            <text x="697" y="249" text-anchor="middle" font-size="13">ingress: TCP 22, 80</text>
+            <text x="697" y="271" text-anchor="middle" font-size="13">egress: All Protocols</text>
+          </g>
+          <g class="shape" data-explain="VNIC (Virtual Network Interface Card) y VM servidor-web. La VNIC es la tarjeta de red virtual que conecta la VM a la subred-web. Tiene asignada la IP privada 10.0.0.116 y la pública 137.131.182.113.">
+            <rect x="806" y="164" width="272" height="151" rx="10" fill="white" stroke="#889bc1"/>
+            <text x="942" y="196" text-anchor="middle" font-size="27">🖥️</text>
+            <text x="942" y="222" text-anchor="middle" font-size="17" font-weight="bold">servidor-web (VM)</text>
+            <text x="942" y="247" text-anchor="middle" font-size="13">VNIC IP Privada: 10.0.0.116</text>
+            <text x="942" y="269" text-anchor="middle" font-size="13">VNIC IP Pública: 137.131.182.113</text>
+            <text x="942" y="291" text-anchor="middle" font-size="12">Servicio HTTP en puerto 80</text>
+          </g>
+          <path class="path" d="M182 193 L230 193 M398 193 L437 193 M577 193 L619 193 M775 193 L806 193" marker-end="url(#arr)"/>
+          <text x="490" y="340" text-anchor="middle" font-size="12">Route Table: 0.0.0.0/0 → salida-internet</text>
+        </svg>
+      </div>
+      <div class="status" id="mapExplain" aria-live="polite">Haz clic sobre Internet Gateway, Security List o servidor-web (VM) para ver su función técnica detallada.</div>
+      <div class="grid" style="margin-top:12px">
+        <div class="card"><strong>Paso 2.1</strong><p>Crear VCN <code>red-infraestructura</code> con bloque CIDR <code>10.0.0.0/16</code>.</p></div>
+        <div class="card"><strong>Paso 2.2</strong><p>Crear IGW <code>salida-internet</code> y regla de enrutamiento <code>0.0.0.0/0 → IGW</code>.</p></div>
+        <div class="card"><strong>Paso 2.3</strong><p>Crear <code>subred-web</code> (pública) con bloque CIDR <code>10.0.0.0/24</code>.</p></div>
+        <div class="card"><strong>Paso 2.4</strong><p>Configurar Security List: Ingress TCP 22/80 desde 0.0.0.0/0; Egress All.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="conceptos">
+      <h2>4. Direcciones IP, CIDR y puertos</h2>
+      <div class="duo">
+        <div class="panel">
+          <h3>¿Cuántas direcciones representa un CIDR?</h3>
+          <p>Piensa en una avenida: el prefijo indica qué parte identifica el barrio; los bits restantes permiten identificar direcciones dentro de él.</p>
+          <label for="cidr">Selecciona el prefijo</label>
+          <select id="cidr">
+            <option value="16">10.0.0.0/16 · VCN del taller</option>
+            <option value="24" selected>10.0.0.0/24 · Subred del taller</option>
+            <option value="28">10.0.0.0/28 · Comparación</option>
+          </select>
+          <div id="cidrOut" class="status" style="margin-top:12px"></div>
+          <p class="small">En OCI, la subred reserva tres IP: dirección de red, primer host para el gateway virtual de la subred y última dirección de broadcast. Estas IPs no se pueden asignar a una VNIC.</p>
+        </div>
+        <div class="panel">
+          <h3>Una IP puede tener muchas puertas</h3>
+          <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:8px;text-align:center">
+            <div class="card" style="padding:10px"><div class="analogy">🚪</div><strong>:22</strong><p class="small">SSH</p></div>
+            <div class="card" style="padding:10px"><div class="analogy">🚪</div><strong>:80</strong><p class="small">HTTP</p></div>
+            <div class="card" style="padding:10px"><div class="analogy">🔒</div><strong>:443</strong><p class="small">HTTPS</p></div>
+          </div>
+          <p><strong>Ejemplo:</strong> <code>137.131.182.113:80</code> identifica la IP pública asignada a la VNIC y el servicio web HTTP esperando conexiones.</p>
+          <p class="note">El CIDR <code>0.0.0.0/0</code> abarca todas las direcciones IPv4 de Internet. En una regla ingress indica cualquier origen externo; en una ruta por defecto (0.0.0.0/0 -> IGW) indica cómo enviar tráfico no local.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="simular">
+      <h2>5. Laboratorio: Simulador Interactivo de Flujo Bidireccional</h2>
+      <p class="lead">Experimenta enviando paquetes desde el exterior hacia el servidor OCI y observa las reglas en acción. Cambia la IP de destino, puertos o desactiva componentes para comprender las <strong>excepciones</strong> de red.</p>
+      
+      <div class="duo">
+        <div class="panel">
+          <div class="fields">
+            <div><label for="src">IP Origen (Tu casa)</label><input id="src" value="190.158.20.50" spellcheck="false"></div>
+            <div><label for="dst">IP Destino (Servidor)</label><input id="dst" value="137.131.182.113" spellcheck="false"></div>
+            <div><label for="proto">Protocolo</label>
+              <select id="proto">
+                <option value="TCP">TCP</option>
+                <option value="UDP">UDP</option>
+                <option value="ICMP">ICMP</option>
+              </select>
+            </div>
+            <div><label for="port">Puerto destino</label><input id="port" type="number" min="1" max="65535" value="80"></div>
+          </div>
+          <div class="controls">
+            <button class="btn primary" id="run">▶ Trazar Flujo</button>
+            <button class="btn" id="next">⏭ Siguiente paso</button>
+            <button class="btn" id="auto">⏯ Trazar Animado</button>
+            <button class="btn" id="reset">↺ Restaurar Valores OCI</button>
+          </div>
+          <div id="progress" class="steps"></div>
+          <div id="outcome" class="status" aria-live="polite">Configura los parámetros y traza el flujo.</div>
+          <div style="margin-top:12px"><strong>Consola de Diagnóstico (Bitácora de red)</strong>
+            <div id="log" class="log" aria-live="polite">[SIMULADOR] Laboratorio listo. Valores predeterminados del Taller 1 cargados.</div>
+          </div>
+        </div>
+        
+        <div class="panel">
+          <h3>Configuración Simulada de OCI</h3>
+          <p class="small">Modifica estas opciones para provocar fallos (Timeout, Refused, Dropped).</p>
+          <div class="rule">
+            <strong>Security List Ingress</strong>
+            <label class="toggle"><input id="r80" type="checkbox" checked> Permitir TCP/80 (Web)</label>
+            <label class="toggle"><input id="r22" type="checkbox" checked> Permitir TCP/22 (SSH)</label>
+          </div>
+          <div class="rule">
+            <strong>Infraestructura VCN</strong>
+            <label class="toggle"><input id="gateway" type="checkbox" checked> Internet Gateway existe</label>
+            <label class="toggle"><input id="route" type="checkbox" checked> Route Table apunta 0.0.0.0/0 a IGW</label>
+            <label class="toggle"><input id="publicIP" type="checkbox" checked> VNIC tiene IP Pública (137.131.182.113)</label>
+          </div>
+          <div class="rule">
+            <strong>Sistema Operativo del Servidor</strong>
+            <label class="toggle"><input id="listening" type="checkbox" checked> Demonio (Nginx/SSH) está ejecutándose</label>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:22px">Pruebas Rápidas de Diagnóstico</h3>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">
+        <button class="scenario" data-s="web">✅ Acceso Nginx (Puerto 80)</button>
+        <button class="scenario" data-s="https">🚫 Intento HTTPS (Puerto 443)</button>
+        <button class="scenario" data-s="private">🏠 Error: Atacar IP Privada (10.0.0.116)</button>
+        <button class="scenario" data-s="noroute">🚧 Error: Borrar Route Table</button>
+        <button class="scenario" data-s="closed">🚪 Error: Nginx Apagado</button>
+      </div>
+
+      <div class="panel" style="margin-top:16px">
+        <h3>Flujo del Paquete Bidireccional</h3>
+        <p id="animatedLabel" class="small">El simulador recorre: Cliente local -> Internet -> IGW -> Security List -> VNIC -> Servidor, y su ruta de retorno.</p>
+        <div class="diagram">
+          <svg id="flow" viewBox="0 0 1050 200" aria-label="Animación del flujo de red">
+            <defs>
+              <marker id="flowArrow" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+                <path d="M0 0 L6 3 L0 6" fill="#9ab2c0"/>
+              </marker>
+            </defs>
+            <path id="forward" d="M90 95 L960 95" stroke="#9ab2c0" stroke-width="6" fill="none" stroke-dasharray="9 8" marker-end="url(#flowArrow)"/>
+            <path id="backward" d="M960 135 L90 135" stroke="#9ab2c0" stroke-width="5" fill="none" stroke-dasharray="9 8"/>
+            <g font-size="32" text-anchor="middle">
+              <text x="90" y="65">💻</text>
+              <text x="300" y="65">🌐</text>
+              <text x="520" y="65">🌉</text>
+              <text x="740" y="65">🛂</text>
+              <text x="960" y="65">🖥️</text>
+            </g>
+            <g font-size="14" text-anchor="middle" fill="#29445b">
+              <text x="90" y="166">Origen (Local)</text>
+              <text x="300" y="166">Internet Público</text>
+              <text x="520" y="166">IGW OCI</text>
+              <text x="740" y="166">Security List</text>
+              <text x="960" y="166">VNIC (Servidor)</text>
+            </g>
+            <circle id="packet" cx="90" cy="95" r="14" fill="#f1a340" stroke="white" stroke-width="3" visibility="hidden"/>
+            <text id="packetText" x="90" y="98" text-anchor="middle" font-size="10" font-weight="bold" fill="#142b3c" visibility="hidden">REQ</text>
+          </svg>
+        </div>
+      </div>

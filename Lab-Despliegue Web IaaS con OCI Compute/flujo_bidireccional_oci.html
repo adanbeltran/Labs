@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flujo Bidireccional OCI - Arquitectura de Red</title>
+    <!-- Tailwind CSS para el diseño rápido y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        
+        /* Contenedor principal con scroll horizontal en pantallas pequeñas para evitar que se aplaste */
+        .diagram-wrapper { min-width: 1300px; height: 650px; }
+
+        /* Efectos de pulso para el paquete de datos */
+        .packet-ingress-glow {
+            box-shadow: 0 0 15px 6px rgba(34, 197, 94, 0.6); /* Verde para entrada */
+        }
+        .packet-egress-glow {
+            box-shadow: 0 0 15px 6px rgba(168, 85, 247, 0.6); /* Morado para salida */
+        }
+
+        /* Nodos y animaciones de resalte */
+        .node-card {
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%); /* Centrado exacto en sus coordenadas absolutas */
+        }
+        .node-active {
+            transform: translate(-50%, -50%) scale(1.05);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3), 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: #3b82f6 !important;
+        }
+
+        /* Capas (Z-Index) */
+        .layer-bg { z-index: 10; }
+        .layer-svg { z-index: 20; }
+        .layer-nodes { z-index: 30; }
+        .layer-packet { z-index: 40; pointer-events: none; }
+        .layer-controls { z-index: 50; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center py-8 px-4">
+
+    <!-- Header y Controles -->
+    <div class="max-w-6xl w-full mb-8 text-center layer-controls">
+        <h1 class="text-3xl font-extrabold text-slate-800 mb-2">Arquitectura de Red OCI - Flujo Bidireccional</h1>
+        <p class="text-slate-600 mb-6 font-medium">Tráfico Ingress y Egress entre Internet y el Servidor Web (Nginx)</p>
+        
+        <div class="flex justify-center items-center space-x-4 bg-white p-4 rounded-xl shadow-sm border border-slate-200 inline-flex">
+            <button id="btn-play" onclick="playPause()" class="flex items-center px-5 py-2.5 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+                <svg id="icon-play" class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <svg id="icon-pause" class="w-5 h-5 mr-2 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span id="text-play">Iniciar Tráfico</span>
+            </button>
+            <button onclick="resetAnimation()" class="flex items-center px-5 py-2.5 bg-slate-100 text-slate-700 font-semibold rounded-lg hover:bg-slate-200 border border-slate-300 transition-colors">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                Reiniciar
+            </button>
+            <div class="border-l border-slate-300 pl-4 ml-2 text-sm font-mono text-slate-500">
+                Estado: <span id="status-text" class="font-bold text-slate-700">Listo</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenedor del Diagrama -->
+    <div class="w-full max-w-[1400px] overflow-x-auto bg-white border border-slate-300 rounded-2xl shadow-lg relative">
+        <div class="diagram-wrapper relative w-full">
+            
+            <!-- Lienzo SVG para la línea de conexión -->
+            <svg id="svg-canvas" class="absolute inset-0 w-full h-full layer-svg pointer-events-none">
+                <path id="base-path" fill="none" stroke="#CBD5E1" stroke-width="4" stroke-dasharray="8 8"></path>
+            </svg>
+
+            <!-- ================= CAPAS DE RED (CONTENEDORES) ================= -->
+            
+            <!-- VCN: red-infraestructura -->
+            <div class="absolute layer-bg border-2 border-blue-400 bg-blue-50/30 rounded-xl" style="left: 28%; right: 2%; top: 15%; bottom: 15%;">
+                <div class="absolute -top-4 left-8 bg-blue-100 border border-blue-300 px-3 py-1 rounded-md text-sm font-bold text-blue-800 shadow-sm flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    VCN: red-infraestructura <span class="font-mono text-xs ml-2 font-normal text-blue-600">10.0.0.0/16</span>
+                </div>
+                
+                <!-- Subred Pública: subred-web -->
+                <div class="absolute layer-bg border-2 border-indigo-400 bg-indigo-50/50 rounded-xl" style="left: 42%; right: 4%; top: 10%; bottom: 10%;">
+                    <div class="absolute -top-4 left-16 bg-indigo-100 border border-indigo-300 px-3 py-1 rounded-md text-sm font-bold text-indigo-800 shadow-sm flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
+                        Subred Pública: subred-web
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= NODOS FÍSICOS/LÓGICOS ================= -->
+            <!-- Cada nodo está posicionado con absolute left-% y top-50% asegurando una línea horizontal perfecta sin cruces -->
+
+            <!-- 1. Navegador -->
+            <div id="node-browser" class="absolute layer-nodes node-card bg-white border border-slate-300 p-4 rounded-xl shadow-md text-center w-36" style="left: 8%; top: 50%;">
+                <svg class="w-10 h-10 mx-auto text-slate-700 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                <div class="text-sm font-bold text-slate-800">Usuario Web</div>
+                <div class="text-[10px] text-slate-500 bg-slate-100 mt-1 rounded font-mono">IP Externa</div>
+            </div>
+
+            <!-- 2. Internet -->
+            <div id="node-internet" class="absolute layer-nodes node-card bg-white border-2 border-slate-300 p-4 rounded-[2rem] shadow-md text-center w-32" style="left: 20%; top: 50%;">
+                <svg class="w-10 h-10 mx-auto text-cyan-500 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <div class="text-sm font-bold text-slate-700">Internet</div>
+            </div>
+
+            <!-- 3. Internet Gateway -->
+            <div id="node-igw" class="absolute layer-nodes node-card bg-white border-2 border-blue-500 p-3 rounded-xl shadow-md text-center w-40" style="left: 33%; top: 50%;">
+                <svg class="w-8 h-8 mx-auto text-blue-600 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                <div class="text-[11px] font-bold text-blue-800 uppercase tracking-wide">Internet Gateway</div>
+                <div class="text-[10px] text-blue-700 font-mono mt-1 bg-blue-50 py-1 rounded">salida-internet</div>
+            </div>
+
+            <!-- 4. Route Table -->
+            <div id="node-rt" class="absolute layer-nodes node-card bg-white border-2 border-emerald-500 p-3 rounded-xl shadow-md text-center w-48" style="left: 46%; top: 50%;">
+                <svg class="w-7 h-7 mx-auto text-emerald-600 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+                <div class="text-[11px] font-bold text-emerald-800 leading-tight">Default Route Table<br>for red-infraestructura</div>
+                <div class="text-[10px] text-emerald-900 font-mono mt-2 bg-emerald-100 py-1.5 px-2 rounded text-left border border-emerald-200">
+                    <div><span class="font-bold text-emerald-700">Dst:</span> 0.0.0.0/0</div>
+                    <div class="truncate"><span class="font-bold text-emerald-700">Tgt:</span> salida-internet</div>
+                </div>
+            </div>
+
+            <!-- 5. Security List (Centrado en el borde izquierdo de la subred para mostrar que es perimetral) -->
+            <div id="node-sl" class="absolute layer-nodes node-card bg-white border-2 border-orange-500 p-3 rounded-xl shadow-md text-center w-52" style="left: 58%; top: 50%;">
+                <svg class="w-7 h-7 mx-auto text-orange-500 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                <div class="text-[11px] font-bold text-orange-800 leading-tight">Default Security List</div>
+                <div class="text-[9px] text-orange-900 font-mono mt-2 bg-orange-50 p-1.5 rounded text-left border border-orange-200">
+                    <div class="font-bold border-b border-orange-200 mb-1 text-orange-700">Ingress (Entrada):</div>
+                    <div class="text-green-600 flex items-center"><svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> TCP 80 (HTTP)</div>
+                    <div class="text-green-600 flex items-center"><svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> TCP 22 (SSH)</div>
+                    <div class="font-bold border-b border-orange-200 mt-1.5 mb-1 text-orange-700">Egress (Salida):</div>
+                    <div class="text-green-600 flex items-center"><svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> All Protocols (0.0.0.0/0)</div>
+                </div>
+            </div>
+
+            <!-- 6. VNIC -->
+            <div id="node-vnic" class="absolute layer-nodes node-card bg-slate-800 border-2 border-slate-600 p-2.5 rounded-lg shadow-md text-center w-40" style="left: 74%; top: 50%;">
+                <div class="flex items-center justify-center space-x-1 mb-1.5">
+                    <svg class="w-5 h-5 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    <span class="text-xs font-bold text-white">Primary VNIC</span>
+                </div>
+                <div class="text-[10px] font-mono text-left bg-slate-900 text-slate-300 p-1.5 rounded">
+                    <div><span class="text-slate-500">Pub:</span> 137.131.182.113</div>
+                    <div class="mt-0.5"><span class="text-slate-500">Priv:</span> 10.0.0.116</div>
+                </div>
+            </div>
+
+            <!-- 7. Máquina Virtual (VM) -->
+            <div id="node-vm" class="absolute layer-nodes node-card bg-white border-2 border-indigo-600 p-4 rounded-xl shadow-xl text-center w-44" style="left: 89%; top: 50%;">
+                <div class="absolute -top-3 right-3 bg-green-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-sm">Running</div>
+                <svg class="w-12 h-12 mx-auto text-indigo-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path></svg>
+                <div class="text-sm font-bold text-slate-800">servidor-web</div>
+                <div class="text-xs text-indigo-600 font-semibold mt-0.5">Nginx Web Server</div>
+            </div>
+
+            <!-- ================= PAQUETE ANIMADO ================= -->
+            <div id="packet-container" class="absolute layer-packet hidden flex-col items-center justify-center transform -translate-x-1/2 -translate-y-1/2" style="top:0; left:0;">
+                <div id="packet-label" class="mb-1 text-[11px] font-bold bg-white text-slate-800 px-2 py-0.5 rounded shadow border border-slate-200 whitespace-nowrap">
+                    HTTP GET
+                </div>
+                <div id="packet-dot" class="w-5 h-5 bg-green-500 rounded-full packet-ingress-glow border-2 border-white"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Script de Animación Lógica y Geometría -->
+    <script>
+        // Array ordenado lógicamente para la ruta
+        const nodes = ['node-browser', 'node-internet', 'node-igw', 'node-rt', 'node-sl', 'node-vnic', 'node-vm'];
+        
+        let reqAnimFrameId = null;
+        let lastTime = 0;
+        
+        // Estado de la animación
+        const state = {
+            status: 'IDLE', // IDLE, PLAYING_INGRESS, PAUSED_INGRESS, PROCESSING, PLAYING_EGRESS, PAUSED_EGRESS, DONE
+            progress: 0, // 0.0 to 1.0 (ida), 1.0 to 0.0 (vuelta)
+            duration: 5000 // 5 segundos por trayecto para que sea fácil de visualizar
+        };
+
+        const ui = {
+            btnPlay: document.getElementById('btn-play'),
+            iconPlay: document.getElementById('icon-play'),
+            iconPause: document.getElementById('icon-pause'),
+            textPlay: document.getElementById('text-play'),
+            statusText: document.getElementById('status-text'),
+            packetContainer: document.getElementById('packet-container'),
+            packetLabel: document.getElementById('packet-label'),
+            packetDot: document.getElementById('packet-dot'),
+            path: document.getElementById('base-path')
+        };
+
+        // Dibuja la línea SVG conectando los centros
+        function drawLine() {
+            let pathData = '';
+            nodes.forEach((id, idx) => {
+                const el = document.getElementById(id);
+                // Como usamos left: X% y transform translate, el left exacto del rectangulo coincide con su centro
+                // Calculamos coordenadas relativas al canvas SVG
+                const wrapper = document.querySelector('.diagram-wrapper').getBoundingClientRect();
+                const rect = el.getBoundingClientRect();
+                const centerX = rect.left + rect.width/2 - wrapper.left;
+                const centerY = rect.top + rect.height/2 - wrapper.top;
+
+                if (idx === 0) pathData += `M ${centerX} ${centerY} `;
+                else pathData += `L ${centerX} ${centerY} `;
+            });
+            ui.path.setAttribute('d', pathData);
+        }
+
+        window.addEventListener('resize', drawLine);
+        window.addEventListener('DOMContentLoaded', () => { setTimeout(drawLine, 100); });
+
+        // Controlador Play / Pause
+        function playPause() {
+            if (state.status === 'IDLE' || state.status === 'DONE') {
+                // Iniciar Ingress
+                state.progress = 0;
+                state.status = 'PLAYING_INGRESS';
+                setupPacketUI('INGRESS');
+                ui.packetContainer.classList.remove('hidden');
+                updateUIPlayState(true, 'Enviando Petición (Ingress)...');
+                lastTime = performance.now();
+                reqAnimFrameId = requestAnimationFrame(animationLoop);
+            } 
+            else if (state.status.startsWith('PLAYING')) {
+                // Pausar
+                state.status = state.status.replace('PLAYING', 'PAUSED');
+                updateUIPlayState(false, 'Pausado');
+                cancelAnimationFrame(reqAnimFrameId);
+            } 
+            else if (state.status.startsWith('PAUSED')) {
+                // Reanudar
+                state.status = state.status.replace('PAUSED', 'PLAYING');
+                updateUIPlayState(true, state.status.includes('INGRESS') ? 'Enviando Petición...' : 'Enviando Respuesta...');
+                lastTime = performance.now();
+                reqAnimFrameId = requestAnimationFrame(animationLoop);
+            }
+        }
+
+        // Controlador Reset
+        function resetAnimation() {
+            cancelAnimationFrame(reqAnimFrameId);
+            state.status = 'IDLE';
+            state.progress = 0;
+            ui.packetContainer.classList.add('hidden');
+            updateUIPlayState(false, 'Listo');
+            ui.textPlay.innerText = 'Iniciar Tráfico';
+            resetNodeStyles();
+        }
+
+        function updateUIPlayState(isPlaying, statusMsg) {
+            if (isPlaying) {
+                ui.iconPlay.classList.add('hidden');
+                ui.iconPause.classList.remove('hidden');
+                ui.textPlay.innerText = 'Pausar';
+            } else {
+                ui.iconPause.classList.add('hidden');
+                ui.iconPlay.classList.remove('hidden');
+                ui.textPlay.innerText = state.status === 'DONE' ? 'Reiniciar' : 'Reanudar';
+            }
+            ui.statusText.innerText = statusMsg;
+            if (state.status === 'DONE') {
+                ui.statusText.classList.remove('text-slate-700', 'text-blue-600', 'text-green-600');
+                ui.statusText.classList.add('text-green-600');
+            } else {
+                ui.statusText.classList.remove('text-green-600');
+                ui.statusText.classList.add('text-blue-600');
+            }
+        }
+
+        function setupPacketUI(direction) {
+            if (direction === 'INGRESS') {
+                ui.packetLabel.innerText = 'HTTP GET (Puerto 80)';
+                ui.packetLabel.className = 'mb-1 text-[11px] font-bold bg-white text-green-700 border-green-400 px-2 py-0.5 rounded shadow border whitespace-nowrap';
+                ui.packetDot.className = 'w-5 h-5 bg-green-500 rounded-full packet-ingress-glow border-2 border-white';
+            } else {
+                ui.packetLabel.innerText = 'HTTP 200 OK (Respuesta)';
+                ui.packetLabel.className = 'mb-1 text-[11px] font-bold bg-white text-purple-700 border-purple-400 px-2 py-0.5 rounded shadow border whitespace-nowrap';
+                ui.packetDot.className = 'w-5 h-5 bg-purple-500 rounded-full packet-egress-glow border-2 border-white';
+            }
+        }
+
+        function resetNodeStyles() {
+            nodes.forEach(id => document.getElementById(id).classList.remove('node-active'));
+        }
+
+        function highlightNearestNode(progress) {
+            resetNodeStyles();
+            // Aprox calculation based on total nodes
+            const totalSegments = nodes.length - 1;
+            const currentIdx = Math.round(progress * totalSegments);
+            if (currentIdx >= 0 && currentIdx < nodes.length) {
+                document.getElementById(nodes[currentIdx]).classList.add('node-active');
+            }
+        }
+
+        // Bucle Principal de Animación
+        function animationLoop(time) {
+            const delta = time - lastTime;
+            lastTime = time;
+
+            const pathLength = ui.path.getTotalLength();
+
+            if (state.status === 'PLAYING_INGRESS') {
+                state.progress += delta / state.duration;
+                if (state.progress >= 1.0) {
+                    state.progress = 1.0;
+                    state.status = 'PROCESSING';
+                    ui.statusText.innerText = 'Nginx Procesando Petición...';
+                    
+                    // Pausa de 1.5s en el servidor
+                    setTimeout(() => {
+                        if(state.status === 'PROCESSING') {
+                            state.status = 'PLAYING_EGRESS';
+                            setupPacketUI('EGRESS');
+                            ui.statusText.innerText = 'Enviando Respuesta (Egress)...';
+                            lastTime = performance.now();
+                            reqAnimFrameId = requestAnimationFrame(animationLoop);
+                        }
+                    }, 1500);
+                }
+            } 
+            else if (state.status === 'PLAYING_EGRESS') {
+                state.progress -= delta / state.duration; // Retrocede
+                if (state.progress <= 0.0) {
+                    state.progress = 0.0;
+                    state.status = 'DONE';
+                    updateUIPlayState(false, 'Transacción Completada ✅');
+                    resetNodeStyles();
+                    ui.packetContainer.classList.add('hidden');
+                    return; // Termina el loop
+                }
+            }
+
+            if (state.status.startsWith('PLAYING')) {
+                // Actualizar posición del paquete geométricamente
+                const point = ui.path.getPointAtLength(state.progress * pathLength);
+                ui.packetContainer.style.transform = `translate(calc(${point.x}px - 50%), calc(${point.y}px - 50%))`;
+                highlightNearestNode(state.progress);
+            }
+
+            if (state.status !== 'PROCESSING') {
+                reqAnimFrameId = requestAnimationFrame(animationLoop);
+            }
+        }
+    </script>
+</body>
+</html>
