@@ -305,7 +305,11 @@ Las rutas de menú corresponden a Power BI Desktop en español. Los nombres **Da
 
 **Explicación:** Transformar datos permite preparar las fuentes antes de cargarlas al reporte. Una vista de una sola columna indica un problema de delimitador. [F6]
 
-<img width="1073" height="798" alt="image" src="https://github.com/user-attachments/assets/94fe9246-7635-49ed-8deb-96615116b0ed" />
+<img width="910" height="453" alt="image" src="https://github.com/user-attachments/assets/4b547906-fee0-4add-b420-54fdbcb02800" />
+
+<img width="153" height="173" alt="image" src="https://github.com/user-attachments/assets/4e03a0b9-4db4-4738-b359-f6bcd90c9f56" />
+
+<img width="634" height="443" alt="image" src="https://github.com/user-attachments/assets/ceda71a1-2e00-48f5-a75c-19d9df7ef2d2" />
 
 
 **Resultado:** dos consultas de origen con sus campos separados y encabezados identificados.
