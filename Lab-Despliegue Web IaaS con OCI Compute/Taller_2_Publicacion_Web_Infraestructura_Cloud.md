@@ -105,33 +105,56 @@ Te conectarás a la máquina, instalarás Nginx y descargarás los archivos del 
 
 <a name="paso-2-1"></a>
 
-### Paso 2.1. Conectarse e instalar Nginx
+### Paso 2.1. Conectarse desde Cloud Shell e instalar Nginx
 
-Usarás SSH (Secure Shell, conexión segura para administrar el servidor) para administrar la máquina desde la terminal de Visual Studio Code. Instalarás Nginx para atender las solicitudes de la página y Git para descargar el código de la práctica.
+Usarás Cloud Shell, la terminal integrada en OCI (Oracle Cloud Infrastructure, infraestructura de nube de Oracle), para conectarte a `servidor-web` mediante SSH (Secure Shell, conexión segura para administrar el servidor). Después instalarás Nginx para entregar la página y Git para descargar su código. Cloud Shell y `servidor-web` son equipos diferentes: ejecutarás la instalación después de entrar al servidor.
 
-1. Abre **Terminal > New Terminal** en Visual Studio Code. En Windows selecciona **PowerShell**; en macOS utiliza la terminal integrada disponible.
-2. Ejecuta `ssh -V`. Si Windows no reconoce la orden, abre **Configuración > Sistema > Características opcionales > Ver características**, busca **Cliente OpenSSH (Open Secure Shell, programa para establecer una conexión segura)**, selecciónalo e instálalo. En versiones que muestran otro menú, busca **Características opcionales** desde Inicio. Reabre la terminal después de instalarlo.
-3. Ubica `llave-web.key` en tu equipo. En Windows, usa **Copiar como ruta de acceso** desde el explorador de archivos. En macOS, sustituye `RUTA_DE_LA_LLAVE` por su ruta real y ejecuta antes de conectarte:
-
-```text
-chmod 600 "RUTA_DE_LA_LLAVE"
-```
-
-4. Reemplaza `"RUTA_DE_LA_LLAVE"` por la ruta copiada, dejando una sola pareja de comillas, y sustituye `DIRECCION_PUBLICA` por la dirección del servidor. Ejecuta:
+1. En **Compute > Instances**, selecciona el compartimento `Infraestructura_y_Cloud` y abre `servidor-web`. Comprueba el estado **Running** y copia su **Public IP (Internet Protocol, protocolo de Internet) Address**. Esta dirección permitirá la conexión desde Cloud Shell.
+2. En la barra superior de la consola, abre el icono de terminal o **Developer tools > Cloud Shell**. Espera a que aparezca la línea de comandos. Conserva la región donde creaste `servidor-web`.
+3. En el selector de red de Cloud Shell, comprueba que se use **Public Network**, la red pública. Si aparece **Service Network**, cámbiala a **Public Network**: la red de servicios permite acceder a servicios de Oracle, pero no a la dirección pública de tu servidor. Si la opción pública no aparece o deniega el acceso, desde tu sesión administradora añade a `PermisosInfraestructura` la línea siguiente y reinicia Cloud Shell desde **Actions > Restart**. Este permiso es adicional al que ya permite abrir la terminal:
 
 ```text
-ssh -i "RUTA_DE_LA_LLAVE" opc@DIRECCION_PUBLICA
+Allow group 'Default'/'GrupoInfraestructura' to use cloud-shell-public-network in tenancy
 ```
 
-5. En la primera conexión, escribe `yes` cuando se solicite confirmar. Comprueba que la nueva línea de comandos corresponda al usuario `opc` del servidor.
-6. Si aparece **Connection timed out**, revisa **Running**, la dirección pública, la regla del puerto 22 y la ruta hacia `salida-internet`. Si aparece **Permission denied (publickey)**, comprueba que elegiste la llave privada de esta máquina.
-7. Dentro de la sesión del servidor, ejecuta el bloque. La primera orden instala los programas, la segunda inicia Nginx y lo deja activo tras reiniciar, y la tercera comprueba su estado. Verifica que aparezca `active`.
+4. En el menú de Cloud Shell, selecciona **Upload**. Carga en tu carpeta personal el archivo privado `llave-web.key` guardado en el [paso 1.4](#paso-1-4) y espera la confirmación de carga. Ese archivo permitirá demostrar que tienes el acceso configurado para esta máquina.
+5. Ejecuta estas órdenes en **Cloud Shell**. La primera comprueba que el archivo esté en tu carpeta personal; la segunda permite que solamente tu usuario lo lea y modifique, requisito para utilizarlo en la conexión:
+
+```bash
+ls -l ~/llave-web.key
+chmod 600 ~/llave-web.key
+```
+
+6. Sustituye `DIRECCION_PUBLICA` por la dirección que copiaste en el punto 1 y ejecuta en **Cloud Shell**:
+
+```bash
+ssh -i ~/llave-web.key opc@DIRECCION_PUBLICA
+```
+
+7. En la primera conexión, escribe `yes` cuando se solicite confirmar y pulsa **Enter**. Ahora la terminal debe mostrar una sesión en `servidor-web`. Ejecuta:
+
+```bash
+whoami
+```
+
+Comprueba que responda `opc`. Ese es el usuario del sistema de la máquina creada con Oracle Linux 9. Mantén abierta esta conexión para ejecutar las órdenes siguientes dentro del servidor.
+
+8. Ejecuta este bloque **dentro de `servidor-web`**. La primera orden instala Nginx y Git; la segunda inicia Nginx y lo deja preparado para iniciarse cuando reinicie el servidor; la tercera comprueba su estado:
 
 ```bash
 sudo dnf install -y nginx git
 sudo systemctl enable --now nginx
 systemctl is-active nginx
 ```
+
+9. Comprueba que la última orden muestre `active`. Continúa con el [paso 2.2](#paso-2-2) desde esta misma conexión: descargarás el repositorio dentro de `servidor-web`.
+
+Si aparece un error, corrige el punto indicado antes de continuar:
+
+- **No such file or directory** o **Identity file ... not accessible**: comprueba el nombre `llave-web.key` y que la carga del archivo haya finalizado en tu carpeta personal de Cloud Shell.
+- **Permission denied (publickey)**: comprueba que utilizaste `opc` y la llave privada del par configurado al crear esta máquina.
+- **Connection timed out**: verifica la red pública de Cloud Shell, la dirección pública, el estado **Running**, la regla de entrada del puerto 22 en la lista de seguridad de `red-infraestructura` y la ruta hacia `salida-internet`.
+
 
 <a name="paso-2-2"></a>
 
