@@ -51,55 +51,51 @@ La coincidencia del total general, por sí sola, no demuestra que cada categorí
 **Criterio para avanzar:** comparar siempre el mismo paquete, período, selección y fórmula. Los conteos deben coincidir exactamente y los importes deben coincidir a dos decimales, conservando la precisión original durante el cálculo. Si hay una diferencia, localizar su causa, corregirla y repetir la comparación antes de presentar el hallazgo. Así se evita comunicar cifras incorrectas con una apariencia de exactitud.
 
 <a id="indice"></a>
-## Tabla de contenido
+## Tabla de contenido por fases PACE
+
+PACE corresponde a *Plan, Analyze, Construct, Execute*. La secuencia del taller se organiza en las cuatro fases siguientes. [2]
+
+| Fase / apartado | Contenido |
+| --- | --- |
+| **[Fase 1. Planear](#fase-1)** | **Necesidad, preguntas y alcance.** |
+| [1.1](#seccion-1-1) | [Definir el problema y el alcance](#seccion-1-1) |
+| [1.2](#seccion-1-2) | [Relacionar cada pregunta con sus campos y visuales](#seccion-1-2) |
+| **[Fase 2. Analizar](#fase-2)** | **Datos preparados y relacionados.** |
+| [2.1](#seccion-2-1) | [Descargar y reconocer los datos](#seccion-2-1) |
+| [2.2](#seccion-2-2) | [Configurar los datos antes de importarlos](#seccion-2-2) |
+| [2.3](#seccion-2-3) | [Importar los CSV y conservar los campos](#seccion-2-3) |
+| [2.4](#seccion-2-4) | [Resolver separadores, tipos y precisión](#seccion-2-4) |
+| [2.5](#seccion-2-5) | [Crear las dos columnas calculadas](#seccion-2-5) |
+| [2.6](#seccion-2-6) | [Comprobar calidad y cargar las tablas](#seccion-2-6) |
+| [2.7](#seccion-2-7) | [Conservar y verificar la relación automática](#seccion-2-7) |
+| **[Fase 3. Construir](#fase-3)** | **Indicadores y visuales comprobados.** |
+| [3.1](#seccion-3-1) | [Crear las medidas y revisar el total sin filtros](#seccion-3-1) |
+| [3.2](#seccion-3-2) | [Definir la paleta y la distribución del tablero](#seccion-3-2) |
+| [3.3](#seccion-3-3) | [Preparar las páginas y los filtros](#seccion-3-3) |
+| [3.4](#seccion-3-4) | [Resolver Q1 con tres tarjetas](#seccion-3-4) |
+| [3.5](#seccion-3-5) | [Resolver Q2 con barras horizontales](#seccion-3-5) |
+| [3.6](#seccion-3-6) | [Resolver Q3 con una tabla comparativa](#seccion-3-6) |
+| [3.7](#seccion-3-7) | [Resolver Q4 con una línea mensual](#seccion-3-7) |
+| [3.8](#seccion-3-8) | [Comprobar la relación y las interacciones](#seccion-3-8) |
+| [3.9](#seccion-3-9) | [Crear Comprobacion y reconstruir dos pedidos](#seccion-3-9) |
+| **[Fase 4. Ejecutar y explicar](#fase-4)** | **Hallazgos y siguiente acción.** |
+| [4.1](#seccion-4-1) | [Consolidar las respuestas](#seccion-4-1) |
+| [4.2](#seccion-4-2) | [Seguir un orden de presentación con storytelling](#seccion-4-2) |
+| [4.3](#seccion-4-3) | [Presentar el relato resuelto](#seccion-4-3) |
+| [4.4](#seccion-4-4) | [Cerrar con una acción y guardar](#seccion-4-4) |
+
+**Consulta complementaria**
 
 - [Ruta de construcción y validación](#roadmap).
 - [Totales de control y criterios de validación](#controles).
-
-**[Fase 1. Planear](#fase-1)**
-
-- [1.1. Definir el problema y el alcance](#seccion-1-1)
-- [1.2. Relacionar cada pregunta con sus campos y visuales](#seccion-1-2)
-
-**[Fase 2. Analizar](#fase-2)**
-
-- [2.1. Descargar y reconocer los datos](#seccion-2-1)
-- [2.2. Configurar los datos antes de importarlos](#seccion-2-2)
-- [2.3. Importar los CSV y conservar los campos](#seccion-2-3)
-- [2.4. Resolver separadores, tipos y precisión](#seccion-2-4)
-- [2.5. Crear las dos columnas calculadas](#seccion-2-5)
-- [2.6. Comprobar calidad y cargar las tablas](#seccion-2-6)
-- [2.7. Conservar y verificar la relación automática](#seccion-2-7)
-
-**[Fase 3. Construir](#fase-3)**
-
-- [3.1. Crear las medidas y revisar el total sin filtros](#seccion-3-1)
-- [3.2. Definir la paleta y la distribución del tablero](#seccion-3-2)
-- [3.3. Preparar las páginas y los filtros](#seccion-3-3)
-- [3.4. Resolver Q1 con tres tarjetas](#seccion-3-4)
-- [3.5. Resolver Q2 con barras horizontales](#seccion-3-5)
-- [3.6. Resolver Q3 con una tabla comparativa](#seccion-3-6)
-- [3.7. Resolver Q4 con una línea mensual](#seccion-3-7)
-- [3.8. Comprobar la relación y las interacciones](#seccion-3-8)
-- [3.9. Crear Comprobacion y reconstruir dos pedidos](#seccion-3-9)
-
-**[Fase 4. Ejecutar y explicar](#fase-4)**
-
-- [4.1. Consolidar las respuestas](#seccion-4-1)
-- [4.2. Seguir un orden de presentación con storytelling](#seccion-4-2)
-- [4.3. Presentar el relato resuelto](#seccion-4-3)
-- [4.4. Cerrar con una acción y guardar](#seccion-4-4)
-
-**Consulta**
-
 - [Dificultades frecuentes](#dificultades).
 - [Encabezados completos de los CSV](#encabezados).
 - [Fuentes](#fuentes).
 
-PACE corresponde a *Plan, Analyze, Construct, Execute*. Este taller adapta la última fase a comunicar resultados y acordar una acción. [2]
-
 <a id="fase-1"></a>
 ## Fase 1. Planear
+
+Esta fase inicia el trabajo a partir de la necesidad de la dirección comercial planteada en el caso. Define qué se quiere conocer, para quién, con qué alcance y mediante cuáles preguntas. Esta planeación orienta la fase siguiente, **Analizar**, donde se revisará si los datos disponibles permiten responder esas preguntas y se preparará la información necesaria.
 
 <a id="seccion-1-1"></a>
 ### 1.1. Definir el problema y el alcance
@@ -129,6 +125,8 @@ PACE corresponde a *Plan, Analyze, Construct, Execute*. Este taller adapta la ú
 
 <a id="fase-2"></a>
 ## Fase 2. Analizar
+
+A partir de las preguntas y el alcance definidos en **Planear**, esta fase examina y prepara los datos de ventas y productos. Se configuran la importación y los tipos, se revisa la calidad y se valida la relación entre las tablas. El resultado permite pasar a **Construir** con una base coherente para calcular indicadores y contrastarlos con los totales de control.
 
 <a id="seccion-2-1"></a>
 ### 2.1. Descargar y reconocer los datos
@@ -278,6 +276,8 @@ Trabajar con una sola tabla puede simplificar una introducción centrada en visu
 
 <a id="fase-3"></a>
 ## Fase 3. Construir
+
+Con las tablas preparadas y relacionadas en **Analizar**, esta fase transforma los datos en medidas y visuales que responden las preguntas de negocio. Se aplica el diseño del tablero y se comprueban cálculos, filtros y resultados frente a las referencias. Los hallazgos verificados se llevan a **Ejecutar y explicar**, donde se organizarán para su presentación y uso.
 
 <a id="seccion-3-1"></a>
 ### 3.1. Crear las medidas y revisar el total sin filtros
@@ -469,6 +469,8 @@ Las tarjetas deben coincidir. La selección contiene tres líneas, cuatro unidad
 
 <a id="fase-4"></a>
 ## Fase 4. Ejecutar y explicar
+
+Esta fase retoma los indicadores y visuales verificados en **Construir** para responder las preguntas y presentar un relato sustentado. Se ordena la evidencia, se explican los límites del análisis y se propone una acción comercial. Con ello se cierra el taller; las nuevas preguntas que surjan de esa acción pueden iniciar otro ciclo de **Planear**, ahora con un objetivo de análisis más específico.
 
 <a id="seccion-4-1"></a>
 ### 4.1. Consolidar las respuestas
