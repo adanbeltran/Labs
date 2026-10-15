@@ -28,6 +28,9 @@ Estas referencias se recalcularon sobre los CSV del taller el **15 de octubre de
 
 <img width="557" height="332" alt="image" src="https://github.com/user-attachments/assets/d3bcb2bb-d552-4aae-9691-262c19b30cdf" />
 
+<img width="119" height="59" alt="image" src="https://github.com/user-attachments/assets/56f8d221-28eb-45dd-a7fe-46898908628b" />
+
+
 <img width="131" height="77" alt="image" src="https://github.com/user-attachments/assets/1afb760b-193e-4bf4-a8c7-86dc7fde3baa" />
 
 
