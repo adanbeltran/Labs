@@ -26,6 +26,8 @@ Estas referencias se recalcularon sobre los CSV del taller el **15 de octubre de
 | 2020, todas las categorías. | 11.267 | 35.234 | 4.806 | 11.066.206,89 |
 | Pedidos 1000 y 1001 completos, de 2015. | 3 | 4 | 2 | 867,50 |
 
+<img width="557" height="332" alt="image" src="https://github.com/user-attachments/assets/d3bcb2bb-d552-4aae-9691-262c19b30cdf" />
+
 `product.csv` contiene **2.517 productos**, con `ProductKey` único. El historial de ventas abarca del **01/01/2015 al 20/04/2024**. Las cifras de esta guía se muestran con **punto de miles y coma decimal**; la apariencia puede variar según la configuración regional.
 
 **Por qué validar los totales de control**
@@ -38,6 +40,7 @@ Un total de control es una referencia calculada de forma independiente sobre los
 | Aparecen 11.267 pedidos de 2020 en lugar de 4.806. | Se están contando líneas; el indicador debe contar valores distintos de `OrderKey`. |
 | El total completo coincide, pero el resultado de 2020 no. | Conversión de fechas, período seleccionado y filtros de página, informe o visual. |
 | El total anual coincide, pero las categorías muestran cifras incorrectas. | Relación por `ProductKey`, procedencia de `CategoryName` e interacciones. |
+
 
 La coincidencia del total general, por sí sola, no demuestra que cada categoría o mes esté bien calculado: dos errores podrían compensarse. Por eso la solución también contrasta los resultados por categoría y mes, prueba una selección y reconstruye dos pedidos.
 
