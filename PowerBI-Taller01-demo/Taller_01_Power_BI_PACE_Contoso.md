@@ -28,6 +28,9 @@ Estas referencias se recalcularon sobre los CSV del taller el **15 de octubre de
 
 <img width="557" height="332" alt="image" src="https://github.com/user-attachments/assets/d3bcb2bb-d552-4aae-9691-262c19b30cdf" />
 
+<img width="131" height="77" alt="image" src="https://github.com/user-attachments/assets/1afb760b-193e-4bf4-a8c7-86dc7fde3baa" />
+
+
 `product.csv` contiene **2.517 productos**, con `ProductKey` único. El historial de ventas abarca del **01/01/2015 al 20/04/2024**. Las cifras de esta guía se muestran con **punto de miles y coma decimal**; la apariencia puede variar según la configuración regional.
 
 **Por qué validar los totales de control**
