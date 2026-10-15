@@ -1,596 +1,383 @@
-# Taller resuelto. Mi primer reporte comercial con Contoso en Power BI
-**Metodología PACE · Análisis descriptivo**
+# Taller resuelto 01. Reporte comercial de Contoso en Power BI
+
+**Metodología PACE. Análisis descriptivo de ventas de 2020.**
+
+Contoso es una empresa ficticia. Su dirección comercial necesita conocer el volumen vendido, la categoría líder y los cambios mensuales. La solución utiliza `sales.csv` y `product.csv` del paquete `csv-100k.7z`, conserva sus nombres de campo y mantiene las dos tablas relacionadas por `ProductKey`.
+
+<a id="roadmap"></a>
+## Ruta de construcción y validación
+
+La construcción sigue esta secuencia e incorpora comprobaciones durante la preparación, el cálculo y la presentación.
+
+| Orden | Actividad y apartados | Resultado que se obtiene | Qué se comprueba |
+| --- | --- | --- | --- |
+| 1 | **Planear:** [1.1](#seccion-1-1) y [1.2](#seccion-1-2). | Problema, período, preguntas, campos y visuales previstos. | Cada pregunta tiene información disponible y un propósito comercial. |
+| 2 | **Preparar e importar:** [2.1](#seccion-2-1) a [2.4](#seccion-2-4). | Dos consultas con encabezados originales, tipos correctos y precios bien interpretados. | El delimitador separa las columnas y la configuración regional interpreta correctamente los números y las fechas. |
+| 3 | **Calcular y revisar la fuente:** [2.5](#seccion-2-5) y [2.6](#seccion-2-6). | Importe por línea, mes de análisis y tablas preparadas. | Se conservan las filas; las claves, los vacíos y los valores esenciales cumplen los controles. |
+| 4 | **Relacionar:** [2.7](#seccion-2-7). | `product` y `sales` conectadas por `ProductKey`. | Relación activa, cardinalidad uno a varios y filtro de productos hacia ventas. |
+| 5 | **Definir indicadores:** [3.1](#seccion-3-1). | Medidas de ventas, unidades y pedidos distintos. | Los totales sin filtros coinciden con las referencias iniciales al mostrarlos en las tarjetas. |
+| 6 | **Diseñar y responder:** [3.2](#seccion-3-2) a [3.7](#seccion-3-7). | Paleta, filtros, tarjetas, barras, tabla y línea mensual. | Todos los visuales comparten el alcance de 2020 y sus resultados coinciden con las referencias por categoría y mes. |
+| 7 | **Probar y reconstruir:** [3.8](#seccion-3-8) y [3.9](#seccion-3-9). | Filtros comprobados y dos pedidos reconstruidos manualmente. | La selección de Computers y el cálculo manual coinciden con las medidas. |
+| 8 | **Explicar y cerrar:** [4.1](#seccion-4-1) a [4.4](#seccion-4-4). | Respuestas, relato con evidencia y siguiente acción. | Las cifras comunicadas corresponden a los filtros visibles y las diferencias de cálculo están resueltas. |
+
+Los [totales de control](#controles) acompañan esta ruta: sirven para comprobar la preparación, los cálculos y el alcance antes de presentar conclusiones.
+
+<a id="controles"></a>
+## Totales de control para comenzar
+
+Estas referencias se recalcularon sobre los CSV del taller el **15 de octubre de 2026**. Se contrastan al construir las medidas y aplicar los filtros. Los importes corresponden a `Quantity × NetPrice`, en moneda base del generador. [1] [5]
+
+| Selección | Líneas de venta | Unidades | Pedidos distintos | Ventas, dos decimales |
+| --- | ---: | ---: | ---: | ---: |
+| Archivo completo, sin filtros. | 199.873 | 628.370 | 83.130 | 203.723.865,76 |
+| 2020, todas las categorías. | 11.267 | 35.234 | 4.806 | 11.066.206,89 |
+| Pedidos 1000 y 1001 completos, de 2015. | 3 | 4 | 2 | 867,50 |
+
+`product.csv` contiene **2.517 productos**, con `ProductKey` único. El historial de ventas abarca del **01/01/2015 al 20/04/2024**. Las cifras de esta guía se muestran con **punto de miles y coma decimal**; la apariencia puede variar según la configuración regional.
+
+**Por qué validar los totales de control**
+
+Un total de control es una referencia calculada de forma independiente sobre los mismos datos y con la misma definición. En este taller procede de los CSV originales. Comparar las medidas del reporte con esa referencia permite detectar errores antes de trasladarlos a gráficos y conclusiones. La referencia se usa para contrastar el cálculo; no se escribe como un valor fijo en las tarjetas.
+
+| Resultado de la comparación | Qué conviene revisar |
+| --- | --- |
+| Unidades y pedidos coinciden, pero ventas no. | Interpretación decimal de `NetPrice`, uso del precio correcto y redondeos anticipados. |
+| Aparecen 11.267 pedidos de 2020 en lugar de 4.806. | Se están contando líneas; el indicador debe contar valores distintos de `OrderKey`. |
+| El total completo coincide, pero el resultado de 2020 no. | Conversión de fechas, período seleccionado y filtros de página, informe o visual. |
+| El total anual coincide, pero las categorías muestran cifras incorrectas. | Relación por `ProductKey`, procedencia de `CategoryName` e interacciones. |
+
+La coincidencia del total general, por sí sola, no demuestra que cada categoría o mes esté bien calculado: dos errores podrían compensarse. Por eso la solución también contrasta los resultados por categoría y mes, prueba una selección y reconstruye dos pedidos.
+
+**Criterio para avanzar:** comparar siempre el mismo paquete, período, selección y fórmula. Los conteos deben coincidir exactamente y los importes deben coincidir a dos decimales, conservando la precisión original durante el cálculo. Si hay una diferencia, localizar su causa, corregirla y repetir la comparación antes de presentar el hallazgo. Así se evita comunicar cifras incorrectas con una apariencia de exactitud.
 
 <a id="indice"></a>
-## Índice de fases y pasos
+## Tabla de contenido
 
-| Fase | Pregunta orientadora | Producto de la fase |
-| --- | --- | --- |
-| [1. P: Planear](#fase-1) | ¿Qué necesita conocer el negocio? | Problema, preguntas, alcance y criterios de éxito. |
-| [2. A: Analizar](#fase-2) | ¿Qué contienen los datos y qué calidad tienen? | Tabla preparada y controles resueltos. |
-| [3. C: Construir](#fase-3) | ¿Cómo representar y comprobar las respuestas? | Medidas, gráficos, filtros y verificación manual. |
-| [4. E: Ejecutar y comunicar](#fase-4) | ¿Qué hallazgo se comunica y qué sigue? | Respuestas, storytelling y seguimiento. |
+- [Ruta de construcción y validación](#roadmap).
+- [Totales de control y criterios de validación](#controles).
 
-**Fase 1. Planear**
+**[Fase 1. Planear](#fase-1)**
 
-- [1.1. Problema de negocio y decisión apoyada](#paso-1-1)
-- [1.2. Preguntas de negocio e información necesaria](#paso-1-2)
-- [1.3. Alcance del análisis](#paso-1-3)
-- [1.4. Ficha de planeación y criterios de éxito](#paso-1-4)
+- [1.1. Definir el problema y el alcance](#seccion-1-1)
+- [1.2. Relacionar cada pregunta con sus campos y visuales](#seccion-1-2)
 
-**Fase 2. Analizar**
+**[Fase 2. Analizar](#fase-2)**
 
-- [2.1. Entorno de trabajo y organización de archivos](#paso-2-1)
-- [2.2. Descarga y extracción de Contoso V2](#paso-2-2)
-- [2.3. Granularidad: líneas, unidades y pedidos](#paso-2-3)
-- [2.4. Archivos y campos que responden las preguntas](#paso-2-4)
-- [2.5. Importación de los CSV en Power Query](#paso-2-5)
-- [2.6. Tipos de datos, fechas, precios y textos](#paso-2-6)
-- [2.7. Combinación de ventas con productos](#paso-2-7)
-- [2.8. Nombres finales e importe por línea](#paso-2-8)
-- [2.9. Año y mes de análisis](#paso-2-9)
-- [2.10. Controles de calidad resueltos](#paso-2-10)
-- [2.11. Tabla final del reporte](#paso-2-11)
+- [2.1. Descargar y reconocer los datos](#seccion-2-1)
+- [2.2. Configurar los datos antes de importarlos](#seccion-2-2)
+- [2.3. Importar los CSV y conservar los campos](#seccion-2-3)
+- [2.4. Resolver separadores, tipos y precisión](#seccion-2-4)
+- [2.5. Crear las dos columnas calculadas](#seccion-2-5)
+- [2.6. Comprobar calidad y cargar las tablas](#seccion-2-6)
+- [2.7. Conservar y verificar la relación automática](#seccion-2-7)
 
-**Fase 3. Construir**
+**[Fase 3. Construir](#fase-3)**
 
-- [3.1. Elección de gráficos y organización del reporte](#paso-3-1)
-- [3.2. Medidas de ventas, unidades y pedidos](#paso-3-2)
-- [3.3. Tarjetas de resumen](#paso-3-3)
-- [3.4. Tabla por categoría y comparación de indicadores](#paso-3-4)
-- [3.5. Gráfico de barras: categoría con más ventas](#paso-3-5)
-- [3.6. Gráfico de líneas: evolución mensual](#paso-3-6)
-- [3.7. Filtros del período y de categoría](#paso-3-7)
-- [3.8. Interacciones y resultados por selección](#paso-3-8)
-- [3.9. Comprobación manual resuelta](#paso-3-9)
+- [3.1. Crear las medidas y revisar el total sin filtros](#seccion-3-1)
+- [3.2. Definir la paleta y la distribución del tablero](#seccion-3-2)
+- [3.3. Preparar las páginas y los filtros](#seccion-3-3)
+- [3.4. Resolver Q1 con tres tarjetas](#seccion-3-4)
+- [3.5. Resolver Q2 con barras horizontales](#seccion-3-5)
+- [3.6. Resolver Q3 con una tabla comparativa](#seccion-3-6)
+- [3.7. Resolver Q4 con una línea mensual](#seccion-3-7)
+- [3.8. Comprobar la relación y las interacciones](#seccion-3-8)
+- [3.9. Crear Comprobacion y reconstruir dos pedidos](#seccion-3-9)
 
-**Fase 4. Ejecutar y comunicar**
+**[Fase 4. Ejecutar y explicar](#fase-4)**
 
-- [4.1. Respuestas resueltas a las preguntas de negocio](#paso-4-1)
-- [4.2. Storytelling del hallazgo](#paso-4-2)
-- [4.3. Acción propuesta y seguimiento](#paso-4-3)
-- [4.4. Documentación y reproducción de la solución](#paso-4-4)
-- [4.5. Resultado integral del taller](#paso-4-5)
+- [4.1. Consolidar las respuestas](#seccion-4-1)
+- [4.2. Seguir un orden de presentación con storytelling](#seccion-4-2)
+- [4.3. Presentar el relato resuelto](#seccion-4-3)
+- [4.4. Cerrar con una acción y guardar](#seccion-4-4)
 
 **Consulta**
 
-- [Caso, objetivo y fuente de datos](#caso).
-- [Valores de control del archivo completo](#valores-control).
-- [Solución de dificultades frecuentes](#dificultades).
-- [Fuentes oficiales y documentación](#fuentes).
+- [Dificultades frecuentes](#dificultades).
+- [Encabezados completos de los CSV](#encabezados).
+- [Fuentes](#fuentes).
 
----
-
-<a id="caso"></a>
-## Caso, objetivo y fuente de datos
-
-**Caso:** la dirección comercial de Contoso necesita describir su actividad comercial, reconocer la categoría que más aporta a las ventas y observar los cambios mensuales.
-
-**Objetivo del taller:** responder cuatro preguntas de negocio mediante un reporte de Power BI, comprobar un resultado con sus transacciones y comunicar un hallazgo sustentado.
-
-**Fuente:** Contoso V2, paquete `csv-100k.7z` de la publicación **Ready to use data (2024)** de SQLBI. El conjunto representa una empresa ficticia. Todo el desarrollo corresponde a Contoso. [F2]
-
-**Solución presentada:** reporte descriptivo de 2020, con tres indicadores, comparación por categoría, evolución mensual, filtros y una comprobación manual. Las cifras se calcularon directamente sobre los CSV originales el **8 de octubre de 2026**, conservando la precisión de los precios. La configuración en Power BI explica cómo reproducir estos resultados.
-
-**Base monetaria:** importe de cada línea calculado como `Quantity × NetPrice`, presentado en moneda base del generador. Ventas e indicadores de rentabilidad tienen significados distintos; este importe describe el valor vendido. [F3]
-
-**Preparación:** `sales.csv` y `product.csv` se combinan en Power Query para obtener una sola tabla final, `Ventas`, con una fila por línea de pedido.
-
-**Metodología PACE:** *Plan, Analyze, Construct, Execute*. En este caso se organiza así: definir la necesidad de negocio; comprender y preparar los datos; construir y comprobar el reporte; comunicar el hallazgo y establecer el seguimiento. [F1]
-
-Las rutas de menú corresponden a Power BI Desktop en español. Los nombres **Datos/Campos** y **Crear objeto visual/Compilar objeto visual** pueden variar entre versiones. [F4] [F17]
-
----
+PACE corresponde a *Plan, Analyze, Construct, Execute*. Este taller adapta la última fase a comunicar resultados y acordar una acción. [2]
 
 <a id="fase-1"></a>
-## Fase 1. P: Planear
+## Fase 1. Planear
 
-**Propósito:** definir la necesidad de información y las condiciones de una respuesta útil.
-
-**Producto:** planeación resuelta del caso. La exploración de archivos, los conteos y los cálculos corresponden a las fases siguientes.
-
-<a id="paso-1-1"></a>
-### Paso 1.1. Problema de negocio y decisión apoyada
-
-**Propósito:** relacionar el reporte con una necesidad comercial concreta.
-
-**Desarrollo resuelto:**
+<a id="seccion-1-1"></a>
+### 1.1. Definir el problema y el alcance
 
 | Elemento | Definición del caso |
 | --- | --- |
-| Situación | La dirección comercial necesita una visión organizada de las ventas de Contoso por categoría y mes. |
-| Problema | Requiere conocer el volumen comercial y reconocer categorías y cambios mensuales que merezcan revisión. |
 | Destinatario | Dirección comercial de Contoso. |
-| Decisión apoyada | Priorizar una categoría y un cambio mensual para un análisis posterior. |
-| Objetivo | Describir ventas, unidades y pedidos de 2020 y comunicar un hallazgo sustentado. |
+| Necesidad | Describir la actividad y priorizar una revisión comercial posterior. |
+| Objetivo | Comparar ventas, unidades y pedidos por categoría y mes. |
+| Período | 01/01/2020–31/12/2020, todas las categorías. |
+| Producto | Reporte con dos páginas: `Resumen comercial` y `Comprobacion`. |
+| Criterio de éxito | Responder las cuatro preguntas, coincidir con los controles y comunicar un hallazgo sustentado. |
 
-**Explicación:** el problema define la necesidad de información; la decisión explica para qué se utilizará. El reporte permite priorizar una revisión comercial. Una decisión sobre compras o promociones necesitaría también información sobre inventario, costos y acciones comerciales.
+<a id="seccion-1-2"></a>
+### 1.2. Relacionar cada pregunta con sus campos y visuales
 
-**Resultado:** el análisis tiene destinatario, objetivo y propósito de uso definidos.
+| Código y pregunta | Campos originales necesarios | Visual previsto |
+| --- | --- | --- |
+| Q1. ¿Cuáles fueron las ventas, unidades y pedidos de 2020? | `sales[OrderDate]`, `sales[Quantity]`, `sales[NetPrice]`, `sales[OrderKey]`. | Tres tarjetas: ventas, unidades y pedidos distintos. |
+| Q2. ¿Qué categoría tuvo mayores ventas? | `product[CategoryName]`, `sales[ProductKey]`, `sales[Quantity]`, `sales[NetPrice]`, `sales[OrderDate]`. | Barras horizontales ordenadas por ventas. |
+| Q3. ¿La categoría líder en ventas también lideró en unidades? | `product[CategoryName]`, `sales[ProductKey]`, `sales[Quantity]`, `sales[NetPrice]`, `sales[OrderDate]`; `sales[OrderKey]` para mostrar pedidos. | Tabla por categoría con ventas y unidades en columnas separadas. |
+| Q4. ¿Cómo cambiaron las ventas mensuales? | `sales[OrderDate]`, `sales[Quantity]`, `sales[NetPrice]`. | Línea mensual, con mes y año en el eje temporal. |
 
-[Volver al índice](#indice)
-
-<a id="paso-1-2"></a>
-### Paso 1.2. Preguntas de negocio e información necesaria
-
-**Propósito:** definir qué debe responder el reporte y qué información requiere cada respuesta.
-
-**Preguntas del caso:**
-
-| Código | Pregunta de negocio | Información necesaria | Respuesta requerida |
-| --- | --- | --- | --- |
-| Q1 | ¿Cuál fue el volumen comercial de Contoso en 2020: ventas, unidades y pedidos? | Fecha, identificador de pedido, cantidad y precio neto. | Tres totales del período. |
-| Q2 | ¿Qué categoría registró el mayor importe de ventas? | Categoría de cada producto y valor vendido. | Nombre de la categoría e importe. |
-| Q3 | ¿La categoría con más unidades coincide con la de mayor importe? | Categoría, cantidades e importes vendidos. | Comparación de las clasificaciones. |
-| Q4 | ¿Cómo cambiaron las ventas mes a mes durante 2020? | Fecha y valor vendido, agrupables por mes y año. | Evolución mensual y variación destacada. |
-
-**Explicación:** cada pregunta determina la información necesaria. En Analizar se identifican los archivos y campos disponibles; en Construir se calculan los indicadores y se escogen los gráficos.
-
-**Resultado:** quedan establecidas Q1–Q4, que se responden en el [paso 4.1](#paso-4-1).
+`ImporteVenta` e `InicioMes` se crearán en 2.5. Las medidas y la asignación exacta de campos a cada visual se desarrollan en la fase 3.
 
 [Volver al índice](#indice)
-
-<a id="paso-1-3"></a>
-### Paso 1.3. Alcance del análisis
-
-**Propósito:** establecer el período, la cobertura y los límites del análisis.
-
-**Alcance definido:**
-
-| Elemento | Definición |
-| --- | --- |
-| Empresa | Contoso, caso ficticio del conjunto de datos. |
-| Fuente | Contoso V2, publicación 2024, paquete CSV 100K. |
-| Período propuesto | Del 1 de enero al 31 de diciembre de 2020. Su cobertura se revisa en Analizar. |
-| Categorías | Todas las categorías, con posibilidad de filtrar una. |
-| Nivel analítico | Descriptivo: ventas, unidades, pedidos y variación mensual. |
-| Decisión apoyada | Seleccionar aspectos que requieren una revisión comercial posterior. |
-
-**Explicación:** declarar el alcance permite interpretar las cifras en su contexto. Un resultado de una categoría o de un mes representa esa selección específica. Una explicación causal requiere evidencia adicional.
-
-**Resultado:** fuente, período, cobertura comercial y nivel del análisis están delimitados.
-
-[Volver al índice](#indice)
-
-<a id="paso-1-4"></a>
-### Paso 1.4. Ficha de planeación y criterios de éxito
-
-**Propósito:** establecer qué características debe tener la solución.
-
-**Ficha de planeación resuelta:**
-
-| Elemento | Solución |
-| --- | --- |
-| Problema | Describir el volumen comercial y reconocer categorías y cambios mensuales que merezcan revisión. |
-| Destinatario | Dirección comercial de Contoso. |
-| Objetivo | Responder Q1–Q4 para 2020 con un reporte descriptivo y un hallazgo sustentado. |
-| Información necesaria | Fecha, pedido, producto, categoría, cantidad y precio neto. |
-| Alcance | Contoso V2, 2020, todas las categorías y filtros de exploración. |
-| Decisión apoyada | Priorizar una revisión comercial posterior. |
-| Diseño del reporte | Páginas `Resumen comercial`, `Comprobacion` y `PACE y hallazgos`. |
-
-**Criterios de éxito:**
-
-| Criterio | Evidencia definida |
-| --- | --- |
-| Las preguntas tienen respuestas. | Totales, comparación por categoría y serie mensual. |
-| Los datos están preparados correctamente. | Tipos, claves, combinación y cobertura revisados. |
-| Los indicadores se pueden comprobar. | Cálculo manual de dos pedidos y contraste con sus indicadores. |
-| El alcance es visible. | Fecha y categoría seleccionadas en el reporte. |
-| El hallazgo está sustentado. | Cifra, período, contexto, interpretación y acción propuesta. |
-| La solución se puede reproducir. | Fuente, transformaciones, medidas y filtros documentados. |
-
-**Explicación:** estos criterios definen la calidad de la solución. Las siguientes fases producen las evidencias correspondientes.
-
-**Resultado:** la planeación está completa y permite iniciar la revisión de los datos.
-
-[Volver al índice](#indice)
-
----
 
 <a id="fase-2"></a>
-## Fase 2. A: Analizar
+## Fase 2. Analizar
 
-**Propósito:** comprender la estructura de Contoso, revisar su calidad y preparar la información del reporte.
+<a id="seccion-2-1"></a>
+### 2.1. Descargar y reconocer los datos
 
-**Producto:** una tabla `Ventas` de 11 columnas, con una fila por línea de pedido, y controles de calidad resueltos.
+1. Descargar [csv-100k.7z](https://raw.githubusercontent.com/adanbeltran/Labs/main/PowerBI-Taller01-demo/csv-100k.7z), de la publicación 2024 de Contoso V2 de SQLBI. [1]
+2. Extraerlo en una carpeta estable, por ejemplo `Taller_01_PowerBI/Contoso`, con una herramienta compatible con `.7z`.
+3. Localizar `sales.csv` y `product.csv`.
 
-<a id="paso-2-1"></a>
-### Paso 2.1. Entorno de trabajo y organización de archivos
+En `sales.csv`, cada fila representa una **línea de pedido**. `OrderKey` identifica el pedido, `LineNumber` identifica la línea y `Quantity` indica sus unidades. Un pedido puede ocupar varias filas. `product.csv` describe los productos.
 
-**Propósito:** organizar las fuentes y el proyecto para conservar una preparación reproducible.
+<a id="seccion-2-2"></a>
+### 2.2. Configurar los datos antes de importarlos
 
-**Entorno de referencia:**
+Abrir un archivo nuevo de Power BI Desktop y entrar en **Archivo → Opciones y configuración → Opciones → Archivo actual → Configuración regional**.
 
-1. **Aplicación:** Power BI Desktop en Windows, disponible en la [fuente oficial](https://learn.microsoft.com/es-es/power-bi/fundamentals/desktop-get-the-desktop). [F5]
-2. **Carpeta de trabajo:** `Taller_01_PowerBI`.
-3. **Fuentes:** subcarpeta `Contoso`, con los CSV originales.
-4. **Reporte:** subcarpeta `Reportes`, destinada al archivo `Taller_01_Contoso_PACE.pbix`.
-5. **Transformaciones:** conservadas en Power Query, manteniendo los archivos originales.
-
-**Explicación:** Power Query guarda la secuencia de preparación. Conservar las fuentes en una ubicación estable permite repetirla al actualizar.
-
-**Resultado:** datos de origen y reporte tienen ubicaciones diferenciadas y una ruta de trabajo definida.
-
-[Volver al índice](#indice)
-
-<a id="paso-2-2"></a>
-### Paso 2.2. Descarga y extracción de Contoso V2
-
-**Propósito:** utilizar el mismo paquete del que se obtuvieron las cifras de la solución.
-
-**Descarga y extracción:**
-
-1. **Publicación:** [Ready to use data (2024), Contoso V2](https://github.com/sql-bi/Contoso-Data-Generator-V2-Data/releases/tag/ready-to-use-data-2024).
-2. **Archivo en Assets:** `csv-100k.7z`, disponible también mediante el [enlace directo](https://github.com/sql-bi/Contoso-Data-Generator-V2-Data/releases/download/ready-to-use-data-2024/csv-100k.7z).
-3. **Ubicación:** carpeta `Contoso`.
-4. **Extracción:** herramienta compatible con `.7z`, como [7-Zip](https://www.7-zip.org/).
-5. **Archivos utilizados:** `sales.csv` y `product.csv`.
-
-**Explicación:** el paquete utiliza compresión `.7z`. La denominación 100K corresponde al tamaño aproximado de pedidos. La tabla de ventas contiene **199.873 líneas**, porque un pedido puede incluir varios productos. [F2]
-
-**Resultado:** las dos fuentes de la solución están identificadas dentro del paquete original.
-
-[Volver al índice](#indice)
-
-<a id="paso-2-3"></a>
-### Paso 2.3. Granularidad: líneas, unidades y pedidos
-
-**Propósito:** reconocer qué representa cada fila antes de sumar o contar.
-
-| Concepto | Significado | Campo |
+| Opción | Selección para este taller | Qué controla |
 | --- | --- | --- |
-| Línea | Un producto incluido en un pedido. | `OrderKey` y `LineNumber`. |
-| Unidades | Cantidad de artículos en la línea. | `Quantity`. |
-| Pedido | Compra que puede tener varias líneas. | `OrderKey`. |
-| Precio neto | Precio unitario después del descuento generado. | `NetPrice`. |
+| Configuración regional para la importación. | **Inglés (Estados Unidos)**. | Interpretación de los textos del CSV al convertirlos a números y fechas. [19] |
+| Configuración regional predeterminada de la cadena de formato para fechas y números, cuando esté disponible. | **Español (Colombia)**. | Presentación de números y fechas en los visuales. No cambia el valor importado. [20] |
+| Unidades de visualización predeterminadas en “none”, cuando esté disponible. | Activar para mostrar cifras completas. | Evita abreviaturas automáticas como K o M donde no se hayan fijado unidades explícitas. [20] |
 
-**Ejemplo real resuelto: pedidos 1000 y 1001, del 1 de enero de 2015:**
+Aceptar y continuar con la importación. La opción de **importación** y la de **formato visible** tienen funciones distintas: se puede leer el punto decimal del origen y presentar después una coma decimal.
 
-| Pedido | Línea | ProductKey | Unidades | Precio neto | Importe de la línea |
-| --- | --- | --- | ---: | ---: | ---: |
-| 1000 | 0 | 48 | 1 | 98,967 | 98,967 |
-| 1000 | 1 | 460 | 1 | 659,780 | 659,780 |
-| 1001 | 0 | 1730 | 2 | 54,376 | 108,752 |
+<a id="seccion-2-3"></a>
+### 2.3. Importar los CSV y conservar los campos
 
-**Cálculos resueltos:**
+1. Seleccionar **Inicio → Obtener datos → Texto/CSV** y abrir `sales.csv`.
+2. Elegir delimitador **coma** y, si aparece la opción, **no detectar tipos de datos**. Seleccionar **Transformar datos**. [3]
+3. En Power Query, nombrar la consulta `sales`. Seleccionar con **Ctrl** sus seis campos de la tabla siguiente y usar **Quitar otras columnas**.
+4. Desde **Inicio → Nuevo origen → Texto/CSV**, importar `product.csv`, nombrar la consulta `product` y conservar sus tres campos indicados.
 
-- Líneas: **3**.
-- Unidades: `1 + 1 + 2 = 4`.
-- Pedidos distintos: **2**, identificados como 1000 y 1001.
-- Ventas: `98,967 + 659,780 + (2 × 54,376) = 867,499`, que se presenta como **867,50**.
+Si aparecen `Column1`, `Column2`, etc., aplicar **Usar la primera fila como encabezado**. Si todo aparece en una columna, corregir el delimitador.
 
-**Explicación:** el pedido 1000 aparece en dos filas porque contiene dos líneas. Para contar compras se cuentan identificadores distintos. Este ejemplo de 2015 se utiliza para verificar el cálculo; las preguntas comerciales se responden para 2020. [F9]
+**Diccionario de los campos utilizados:**
 
-**Resultado:** quedan diferenciados filas, unidades y pedidos. La guía usa coma decimal; el CSV original utiliza punto decimal.
-
-[Volver al índice](#indice)
-
-<a id="paso-2-4"></a>
-### Paso 2.4. Archivos y campos que responden las preguntas
-
-**Propósito:** relacionar las necesidades de información con los campos disponibles.
-
-**Correspondencia resuelta:**
-
-| Pregunta | Campos de `sales.csv` | Campos de `product.csv` | Tratamiento |
+| Consulta | Campo exacto del CSV | Significado | Tipo que se asigna |
 | --- | --- | --- | --- |
-| Q1. Volumen comercial. | `OrderDate`, `OrderKey`, `Quantity`, `NetPrice`. | — | Filtrar fecha, sumar importes y cantidades, contar pedidos distintos. |
-| Q2. Mayor importe por categoría. | `OrderDate`, `ProductKey`, `Quantity`, `NetPrice`. | `ProductKey`, `CategoryName`. | Añadir categoría y comparar las ventas de 2020. |
-| Q3. Unidades frente a ventas. | `OrderDate`, `ProductKey`, `Quantity`, `NetPrice`. | `ProductKey`, `CategoryName`. | Comparar cantidades e importes por categoría. |
-| Q4. Variación mensual. | `OrderDate`, `Quantity`, `NetPrice`. | — | Agrupar las ventas por mes y año. |
+| `sales` | `OrderKey` | Identificador del pedido. | Texto |
+| `sales` | `LineNumber` | Número de línea dentro del pedido. | Número entero |
+| `sales` | `OrderDate` | Fecha del pedido. | Fecha |
+| `sales` | `ProductKey` | Identificador del producto vendido. | Número entero |
+| `sales` | `Quantity` | Unidades vendidas en la línea. | Número entero |
+| `sales` | `NetPrice` | Precio neto **unitario**, después del descuento. | Número decimal |
+| `product` | `ProductKey` | Identificador único del producto. | Número entero |
+| `product` | `ProductName` | Nombre del producto. | Texto |
+| `product` | `CategoryName` | Nombre de la categoría. | Texto |
 
-`ProductName` identifica el producto en la comprobación. `ProductKey` es la clave común entre ventas y productos.
+**Conservar los nombres originales.** `ProductKey` debe tener el mismo tipo en ambas consultas. Para las claves, usar **No resumir** cuando se utilicen como identificadores en los visuales.
 
-**Explicación:** `sales.csv` ya contiene las líneas de venta. Los archivos `orders.csv` y `orderrows.csv` representan pedidos y líneas de la misma fuente, por lo que incorporarlos como ventas adicionales duplicaría la actividad. [F2]
+<a id="seccion-2-4"></a>
+### 2.4. Resolver separadores, tipos y precisión
 
-**Resultado:** todas las preguntas tienen información disponible y una preparación definida.
+**Conversión utilizada en la solución:**
 
-[Volver al índice](#indice)
+1. Asignar los tipos del diccionario mediante el icono de cada columna.
+2. En `sales[NetPrice]`, aplicar **Cambiar tipo → Usar configuración regional → Número decimal → Inglés (Estados Unidos)**. Dejar esta conversión explícita facilita reproducirla en otros equipos. [4]
+3. Convertir `OrderDate` a **Fecha**. Comprobar que `2015-01-01` representa el **1 de enero de 2015**.
+4. En `product`, seleccionar `ProductName` y `CategoryName` y aplicar **Transformar → Formato → Recortar**. Esto elimina el espacio final de `Cameras and camcorders `.
 
-<a id="paso-2-5"></a>
-### Paso 2.5. Importación de los CSV en Power Query
+Si existe un paso automático **Tipo cambiado** que ya interpretó mal el número, eliminarlo y volver a convertir **desde el texto original**. Cambiar solo el formato de un valor incorrecto no recupera el dato.
 
-**Propósito:** disponer de las fuentes dentro de Power Query.
+**Opciones para manejar los separadores:**
 
-**Secuencia de importación en Power BI:**
-
-1. **Inicio → Obtener datos → Texto/CSV:** archivo `sales.csv`.
-2. **Delimitador:** coma; cada campo ocupa su propia columna.
-3. **Detección de tipos:** “No detectar tipos de datos”, cuando la opción esté disponible; después, **Transformar datos**.
-4. **Nombre de consulta:** `OrigenVentas`.
-5. **Inicio → Nuevo origen → Texto/CSV:** archivo `product.csv`, con el mismo delimitador.
-6. **Nombre de consulta:** `OrigenProductos`.
-7. **Encabezados:** los nombres originales de los campos. Si la vista muestra `Column1`, `Column2`, corresponde aplicar **Usar la primera fila como encabezado**.
-
-**Explicación:** Transformar datos permite preparar las fuentes antes de cargarlas al reporte. Una vista de una sola columna indica un problema de delimitador. [F6]
-
-<img width="910" height="453" alt="image" src="https://github.com/user-attachments/assets/4b547906-fee0-4add-b420-54fdbcb02800" />
-
-<img width="153" height="173" alt="image" src="https://github.com/user-attachments/assets/4e03a0b9-4db4-4738-b359-f6bcd90c9f56" />
-
-<img width="634" height="443" alt="image" src="https://github.com/user-attachments/assets/ceda71a1-2e00-48f5-a75c-19d9df7ef2d2" />
-
-
-**Resultado:** dos consultas de origen con sus campos separados y encabezados identificados.
-
-[Volver al índice](#indice)
-
-<a id="paso-2-6"></a>
-### Paso 2.6. Tipos de datos, fechas, precios y textos
-
-**Propósito:** interpretar correctamente identificadores, fechas, números y textos.
-
-**Tipos definidos para la solución:**
-
-| Consulta | Campos | Tipo |
+| Opción | Cuándo sirve | Efecto y cuidado |
 | --- | --- | --- |
-| OrigenVentas | `OrderKey` | Texto. |
-| OrigenVentas | `LineNumber`, `ProductKey`, `Quantity` | Número entero. |
-| OrigenVentas | `OrderDate` | Fecha. |
-| OrigenVentas | `NetPrice` | Número decimal. |
-| OrigenProductos | `ProductKey` | Número entero. |
-| OrigenProductos | `ProductName`, `CategoryName` | Texto. |
+| Configuración regional de importación antes de cargar, como en 2.2. | El origen utiliza una convención común. | Define la interpretación general; no reemplaza pasos de conversión con otra región explícita. [19] |
+| Usar configuración regional por columna, como en este apartado. | Hay fuentes con convenciones distintas o se quiere una conversión reproducible. | Interpreta el texto según la región elegida. En este CSV, `NetPrice` requiere punto decimal. [4] |
+| Formato regional del informe y formato de la medida. | El número ya está bien importado y se quiere cambiar su apariencia. | Puede mostrar `1.234,56` en lugar de `1,234.56`; no corrige cálculos ni valores mal interpretados. [20] |
+| Configuración regional de Windows. | Se necesita cambiar la convención general del equipo. | Puede afectar otras aplicaciones y nuevos archivos. Para un único CSV, es preferible fijar la región del archivo o de la columna. [19] |
+| Reemplazar punto por coma en una columna de texto. | Alternativa limitada a un formato conocido y sin separadores de miles. | Después hay que convertir con una región compatible. Puede corromper valores que mezclen ambos símbolos; no reemplazar símbolos en todo el CSV, porque la coma también delimita columnas. |
 
-**Transformaciones:**
+**Cómo un error puede alterar el resultado:**
 
-1. `NetPrice`: **Cambiar tipo → Usar configuración regional → Número decimal → Inglés (Estados Unidos)**, porque el CSV utiliza punto decimal. [F7]
-2. `OrderDate`: conversión a fecha desde el formato año-mes-día; `2015-01-01` corresponde al **01/01/2015**.
-3. `ProductName` y `CategoryName`: **Transformar → Formato → Recortar**.
+- El texto `98.967` equivale a **98,967**. Si una transformación elimina el punto y lo convierte en `98967` (noventa y ocho mil novecientos sesenta y siete), ese precio queda multiplicado por 1.000. Según el texto y la región, también pueden aparecer errores de conversión.
+- Un error en `NetPrice` puede dejar correctos los conteos de pedidos y unidades, pero producir ventas y comparaciones equivocadas.
+- Dar formato de dos decimales cambia la apariencia. **Redondear el precio antes de multiplicar cambia el cálculo.** En los pedidos 1000 y 1001, redondear previamente los precios a dos decimales produce **867,51**, frente al resultado correcto **867,50**.
 
-**Explicación:** el valor `98.967` del archivo equivale a **98,967** en notación española. Conservar esa precisión permite calcular correctamente el importe. Recortar elimina el espacio final del nombre original `Cameras and camcorders `, que queda como `Cameras and camcorders`.
+`NetPrice` contiene hasta seis decimales en este paquete. Mantener **Número decimal**. **Número decimal fijo** admite cuatro decimales y puede alterar los resultados de esta fuente. [4]
 
-**Resultado:** campos con los tipos de referencia y categorías sin espacios al inicio o al final. Un paso automático de conversión con errores debe corregirse desde el texto original.
+**Separadores de fórmulas DAX:** se configuran aparte, en **Archivo → Opciones y configuración → Opciones → Global → Configuración regional → Separadores DAX**. Los predeterminados usan punto decimal y coma entre argumentos; los localizados siguen Windows. Esto afecta la escritura de fórmulas, no la lectura del CSV. Las tres medidas de este taller tienen un solo argumento y no requieren cambiar su separador. [19]
 
-[Volver al índice](#indice)
+Por ejemplo, `DIVIDE(1, 2)` utiliza coma entre argumentos; en una configuración localizada con punto y coma se escribe `DIVIDE(1; 2)`. Ambas expresiones representan la misma operación.
 
-<a id="paso-2-7"></a>
-### Paso 2.7. Combinación de ventas con productos
+<a id="seccion-2-5"></a>
+### 2.5. Crear las dos columnas calculadas
 
-**Propósito:** incorporar los atributos del producto conservando una fila por línea de venta.
+En la consulta `sales`, seleccionar **Agregar columna → Columna personalizada** para cada definición. [7]
 
-**Control previo resuelto:** `product.csv` contiene **2.517 productos y 2.517 claves distintas**. El control agrupado por `ProductKey`, con recuento de filas mayor que 1, devuelve **0 claves repetidas**.
-
-**Configuración de la combinación:**
-
-1. **Consulta principal:** `OrigenVentas`.
-2. **Ruta:** Inicio → Combinar consultas → Combinar consultas como nuevas.
-3. **Segunda consulta:** `OrigenProductos`.
-4. **Campo común:** `ProductKey`, de tipo entero en ambas.
-5. **Tipo de unión:** externa izquierda, todas las filas de ventas y sus coincidencias de producto. [F8]
-6. **Coincidencia:** exacta, sin coincidencia aproximada.
-7. **Consulta resultante:** `Ventas`.
-8. **Expansión:** `ProductName` y `CategoryName`, con el prefijo del nombre de columna desactivado.
-
-**Explicación:** cada clave de producto tiene una sola coincidencia. La combinación añade atributos y conserva las líneas. Varias coincidencias para una clave multiplicarían los registros al expandir.
-
-**Resultado resuelto:** **199.873 líneas antes y después de la combinación**, y **0 ventas sin coincidencia de producto**.
-
-[Volver al índice](#indice)
-
-<a id="paso-2-8"></a>
-### Paso 2.8. Nombres finales e importe por línea
-
-**Propósito:** disponer de campos claros y del importe correspondiente a cada línea.
-
-**Nombres finales de las columnas:**
-
-| Campo original | Nombre final |
-| --- | --- |
-| `OrderDate` | `Fecha` |
-| `OrderKey` | `Pedido` |
-| `LineNumber` | `Linea` |
-| `ProductKey` | `ProductKey` |
-| `ProductName` | `Producto` |
-| `CategoryName` | `Categoria` |
-| `Quantity` | `Unidades` |
-| `NetPrice` | `PrecioUnitario` |
-
-**Columna de importe:** Agregar columna → Columna personalizada; nombre `ImporteVenta`, tipo número decimal. [F14]
-
-```powerquery
-[Unidades] * [PrecioUnitario]
-```
-
-**Ejemplo resuelto:** para el pedido 1001, `2 × 54,376 = 108,752`.
-
-**Explicación:** `NetPrice` contiene el precio neto de la línea, después del descuento generado. La definición conserva la moneda base del generador y utiliza ese precio, con su precisión original. Los precios y la incorporación separada de los campos de cambio se contrastaron con el código del generador. [F3]
-
-**Resultado:** una columna `ImporteVenta` lista para agregarse por período y categoría.
-
-[Volver al índice](#indice)
-
-<a id="paso-2-9"></a>
-### Paso 2.9. Año y mes de análisis
-
-**Propósito:** comparar meses conservando el año al que pertenecen.
-
-**Columnas personalizadas en Power Query:**
-
-| Columna nueva | Fórmula | Tipo |
+| Columna nueva | Fórmula de Power Query | Tipo posterior |
 | --- | --- | --- |
-| `Anio` | `Date.Year([Fecha])` | Número entero. |
-| `InicioMes` | `Date.StartOfMonth([Fecha])` | Fecha. |
+| `ImporteVenta` | `[Quantity] * [NetPrice]` | Número decimal |
+| `InicioMes` | `Date.StartOfMonth([OrderDate])` | Fecha |
 
-**Ejemplo de transformación resuelto:** `15/11/2020` produce `Anio = 2020` e `InicioMes = 01/11/2020`. [F23]
+`ImporteVenta` calcula el importe de la línea. `InicioMes` transforma, por ejemplo, `15/11/2020` en `01/11/2020`, conservando mes y año para ordenar el gráfico. [8]
 
-**Explicación:** un campo con el nombre “noviembre” juntaría ese mes de distintos años. `InicioMes` mantiene mes y año y permite ordenar la evolución cronológicamente.
+El cálculo utiliza `sales[NetPrice]`, precio neto unitario. `sales[UnitPrice]` es el precio antes del descuento y `product[Price]` es el precio del catálogo del generador. No son intercambiables. Los importes de esta guía se presentan en moneda base del generador, sin etiquetarlos como COP o como moneda local del cliente. [5]
 
-**Resultado:** el año facilita revisar la cobertura y `InicioMes` proporciona el eje temporal del gráfico de líneas.
+<a id="seccion-2-6"></a>
+### 2.6. Comprobar calidad y cargar las tablas
 
-[Volver al índice](#indice)
+| Control | Resultado verificado |
+| --- | ---: |
+| Filas de `sales` / filas de `product`. | 199.873 / 2.517 |
+| Claves `ProductKey` repetidas en `product`. | 0 |
+| Combinaciones `OrderKey` + `LineNumber` repetidas en `sales`. | 0 |
+| Vacíos en los seis campos seleccionados de `sales`. | 0 |
+| Ventas cuyo `ProductKey` no existe en `product`. | 0 |
+| Nombres de producto o categoría vacíos en las ventas. | 0 |
+| Valores de `Quantity` o `NetPrice` menores o iguales a cero. | 0 |
 
-<a id="paso-2-10"></a>
-### Paso 2.10. Controles de calidad resueltos
+Para revisar vacíos y errores, activar **Ver → Calidad de columna** y cambiar el perfilado al **conjunto de datos completo**. [9] Para contar filas o buscar duplicados, crear **Referencias** auxiliares: usar **Contar filas**, o **Agrupar por → Recuento de filas** y filtrar recuentos mayores que 1. En líneas, agrupar por `OrderKey` y `LineNumber`. [10]
 
-**Propósito:** comprobar que la preparación conserva el nivel de detalle y datos válidos para el análisis.
+Mantener **Habilitar carga** en `sales` y `product`, desactivarla en las consultas auxiliares y seleccionar **Cerrar y aplicar**.
 
-**Procedimientos de control:**
+**Estructura final:** `sales` conserva sus seis campos originales y añade `ImporteVenta` e `InicioMes`: **8 columnas**. `product` conserva `ProductKey`, `ProductName` y `CategoryName`: **3 columnas**.
 
-1. **Perfilado:** Ver → Calidad, Distribución y Perfil de columna, con alcance **conjunto de datos completo**. [F15]
-2. **Número de líneas:** referencias de `OrigenVentas` y `Ventas`, con Transformar → Contar filas.
-3. **Duplicados de productos:** agrupación por `ProductKey`, recuento de filas y filtro mayor que 1.
-4. **Duplicados de líneas:** referencia de `Ventas`, Agrupar por → Avanzado, campos `Pedido` y `Linea`, recuento de filas y filtro mayor que 1. [F16]
-5. **Valores esenciales:** revisión de vacíos, coincidencias de producto, cantidades y precios.
-6. **Cobertura:** revisión del rango de fechas y de los meses con registros de 2020.
+<a id="seccion-2-7"></a>
+### 2.7. Conservar y verificar la relación automática
 
-**Controles resueltos sobre la fuente:**
+Power BI puede detectar la relación al cargar las tablas. Si la crea correctamente, **se conserva**; no es necesario combinar consultas ni crear otra relación. La detección automática no garantiza que siempre se cree la relación esperada. [17]
 
-| Control | Resultado |
+1. Abrir la vista **Modelo** y revisar la línea entre `product` y `sales`.
+2. Abrir sus propiedades y comprobar esta configuración:
+
+| Propiedad | Configuración requerida |
 | --- | --- |
-| Líneas antes de combinar. | 199.873. |
-| Líneas después de expandir productos. | 199.873. |
-| Productos / claves distintas. | 2.517 / 2.517. |
-| Claves de producto repetidas. | 0. |
-| Combinaciones repetidas de Pedido + Linea. | 0. |
-| Vacíos en fecha, pedido, línea, clave de producto, cantidad o precio neto. | 0. |
-| Ventas sin producto coincidente; nombres o categorías vacíos. | 0. |
-| Cantidades cero o negativas. | 0. |
-| Precios netos cero o negativos. | 0. |
-| Rango de fechas del archivo. | 01/01/2015 a 20/04/2024. |
-| Meses de 2020 con registros. | 12. |
-| Líneas de 2020. | 11.267. |
+| Tabla y columna del lado uno. | `product[ProductKey]`. |
+| Tabla y columna del lado varios. | `sales[ProductKey]`. |
+| Cardinalidad. | Uno a varios (`1:*`); o varios a uno (`*:1`) si el diálogo presenta `sales` primero. |
+| Relación activa. | Sí. |
+| Dirección de filtro cruzado. | Única, desde `product` hacia `sales`. |
 
-**Explicación:** repetir un pedido en distintas filas puede ser válido; repetir la combinación de pedido y línea requiere revisión. Estos resultados confirman que la combinación conserva los datos y que el período propuesto está disponible.
+3. Si la línea no existe, usar **Administrar relaciones → Nuevo** y configurar esos mismos campos y propiedades.
+4. Si Power BI propone varios a varios, revisar duplicados y tipos de `ProductKey`; no aceptar esa cardinalidad para resolver el aviso.
 
-**Resultado:** la fuente supera los controles definidos para esta solución.
+**Por qué relacionar en lugar de combinar en este caso:**
 
-[Volver al índice](#indice)
+| Relación entre tablas, utilizada aquí | Combinación en Power Query, alternativa |
+| --- | --- |
+| Conserva los productos separados de las líneas de venta. | Añade nombre y categoría a cada línea al expandir la combinación. |
+| La categoría filtra las ventas mediante `ProductKey`. | Los visuales utilizan los atributos de la tabla resultante. |
+| Distingue atributos descriptivos de datos que se agregan. | Permite trabajar con una sola tabla en una introducción centrada en visuales. |
 
-<a id="paso-2-11"></a>
-### Paso 2.11. Tabla final del reporte
-
-**Propósito:** cargar una estructura sencilla para construir el reporte.
-
-**Configuración final de Power Query:**
-
-1. **Consulta con carga habilitada:** `Ventas`.
-2. **Columnas:** `Fecha`, `Pedido`, `Linea`, `ProductKey`, `Producto`, `Categoria`, `Unidades`, `PrecioUnitario`, `ImporteVenta`, `Anio` e `InicioMes`.
-3. **Consultas sin carga:** `OrigenVentas`, `OrigenProductos` y consultas de control. Permanecen disponibles como parte de la preparación.
-4. **Aplicación al modelo:** Inicio → Cerrar y aplicar.
-5. **Nombre del proyecto de referencia:** `Taller_01_Contoso_PACE.pbix`, en `Reportes`.
-
-**Explicación:** las consultas auxiliares preparan la información; la tabla final concentra los datos utilizados por los visuales.
-
-**Resultado:** modelo de una sola tabla, con **11 columnas y 199.873 líneas de venta**, listo para responder las preguntas.
+Trabajar con una sola tabla puede simplificar una introducción centrada en visuales, pero no hay una necesidad técnica de combinar estos dos archivos. Aquí se mantiene `product` como dimensión y `sales` como tabla de hechos, en línea con la orientación de Microsoft. Combinar sigue siendo útil para enriquecer una tabla cuando el diseño lo requiere; una unión izquierda debe conservar el detalle y controlar claves repetidas. [18] [6]
 
 [Volver al índice](#indice)
-
----
 
 <a id="fase-3"></a>
-## Fase 3. C: Construir
+## Fase 3. Construir
 
-**Propósito:** convertir los datos preparados en indicadores y visuales que respondan las preguntas de negocio.
+<a id="seccion-3-1"></a>
+### 3.1. Crear las medidas y revisar el total sin filtros
 
-**Producto:** reporte con tres páginas, tres medidas, visuales adecuados y comprobación manual.
+Seleccionar `sales` y usar **Modelado → Nueva medida** para cada definición. [11]
 
-Las cifras comerciales de esta fase corresponden a **2020 y todas las categorías**, excepto la prueba de interacción de Computers y la muestra de comprobación identificadas en sus respectivos pasos.
+```dax
+Ventas Totales = SUM('sales'[ImporteVenta])
+```
 
-<a id="paso-3-1"></a>
-### Paso 3.1. Elección de gráficos y organización del reporte
+```dax
+Unidades Totales = SUM('sales'[Quantity])
+```
 
-**Propósito:** elegir la representación que facilite responder cada pregunta.
+```dax
+Pedidos = DISTINCTCOUNT('sales'[OrderKey])
+```
 
-**Elección resuelta:**
+Dar a `Ventas Totales` formato numérico con dos decimales y separador de miles; a las otras medidas, cero decimales. **No modificar la precisión de `NetPrice`** para conseguir ese formato.
 
-| Pregunta | Datos o medidas | Visual elegido | Justificación |
-| --- | --- | --- | --- |
-| Q1. Volumen comercial. | Ventas, unidades y pedidos distintos del período. | Tres tarjetas. | Facilitan la lectura de los totales. |
-| Q2. Mayor importe por categoría. | Categoria y ventas. | Barras horizontales ordenadas. | Comparan magnitudes y permiten leer nombres largos. |
-| Q3. Liderazgo en unidades y ventas. | Categoria, ventas, unidades y pedidos. | Tabla por categoría. | Permite comparar cifras exactas y cambiar la clasificación. |
-| Q4. Cambios mensuales. | InicioMes y ventas. | Línea mensual. | Conserva la secuencia temporal y hace visibles las variaciones. |
-| Comprobación del cálculo. | Pedido, Linea, Unidades, PrecioUnitario e ImporteVenta. | Tabla de detalle y tarjetas. | Permite reconstruir una selección de transacciones. |
+`SUM` agrega importes y cantidades. `DISTINCTCOUNT` cuenta pedidos diferentes; contar filas daría líneas. [12] Al crear las tarjetas de 3.4, contrastar primero los totales **sin filtros** con la primera fila de los controles iniciales.
 
-**Organización del reporte:**
+<a id="seccion-3-2"></a>
+### 3.2. Definir la paleta y la distribución del tablero
 
-| Página | Contenido |
+Esta paleta es una propuesta para el caso. Se aplica de forma consistente y con pocos colores de énfasis.
+
+| Uso | Color | Código hexadecimal |
+| --- | --- | --- |
+| Fondo de página. | Gris muy claro. | `#F4F7FB` |
+| Fondo de tarjetas y gráficos. | Blanco. | `#FFFFFF` |
+| Títulos y texto principal. | Azul oscuro. | `#172B4D` |
+| Serie de ventas mensuales. | Azul. | `#1F5A85` |
+| Categoría destacada: Computers. | Verde azulado. | `#007F7A` |
+| Resto de categorías y texto secundario. | Gris azulado. | `#5F6F84` |
+| Anotación sobre la caída de marzo. | Ámbar oscuro. | `#B45309` |
+
+1. Abrir **Personalizar tema** desde los comandos de temas de la cinta **Diseño**. En interfaces anteriores, revisar **Vista → Temas → Personalizar tema actual**. Definir colores y una fuente común, como Segoe UI. [21]
+2. Aplicar fondos claros, texto oscuro, títulos consistentes y espacios entre visuales. Como referencia de diseño, usar título de página de 22–24 puntos, cifras de tarjetas de 28–32 y etiquetas de al menos 11–12; comprobar su lectura al proyectar.
+3. Usar barras grises y destacar Computers en verde azulado, acompañado de su nombre y cifra. Mantener la línea mensual azul y añadir una anotación ámbar para marzo. No asignar un color distinto a cada categoría ni usar solo el color para comunicar el hallazgo. [22]
+
+| Zona de `Resumen comercial` | Contenido y orden de lectura |
 | --- | --- |
-| `Resumen comercial` | Filtros y tarjetas en la zona superior; barras y línea en la zona central; tabla por categoría en la zona inferior. |
-| `Comprobacion` | Detalle de los pedidos seleccionados, indicadores y cálculo manual. |
-| `PACE y hallazgos` | Planeación, respuestas, storytelling y documentación del caso. |
+| Encabezado. | Título, período y fuente breve. |
+| Franja superior. | Segmentaciones y tres tarjetas. |
+| Zona central izquierda. | Ranking de ventas por categoría, Q2. |
+| Zona central derecha. | Evolución mensual, Q4. |
+| Franja inferior. | Tabla comparativa de ventas y unidades, Q3. |
 
-Las páginas se organizan desde la vista **Informe**, mediante sus pestañas y el botón **+**. [F17]
+El tablero orienta la mirada; la exposición oral seguirá el orden narrativo de 4.2. El relato completo se presenta oralmente o en el documento, sin llenar el tablero de párrafos.
 
-**Explicación:** la pregunta determina el tipo de comparación. La tabla mantiene ventas y unidades en columnas separadas, porque son magnitudes diferentes. Las barras comparan categorías y la línea muestra cambios en el tiempo. [F11] [F12] [F13]
+<a id="seccion-3-3"></a>
+### 3.3. Preparar las páginas y los filtros
 
-**Resultado:** cada pregunta tiene un visual justificado y una ubicación definida.
+1. Nombrar la primera página `Resumen comercial`.
+2. Agregar una segmentación con `sales[OrderDate]`, **sin jerarquía**, en modo **Entre**. Durante la comprobación inicial dejar todo el historial; después establecer **01/01/2020–31/12/2020**.
+3. Agregar una segmentación de `product[CategoryName]`, en lista o desplegable, con todas las categorías incluidas. [13]
 
-[Volver al índice](#indice)
+El filtro de fecha corresponde a esta página. No convertirlo en filtro de todo el informe ni sincronizarlo con `Comprobacion`, cuya muestra es de 2015.
 
-<a id="paso-3-2"></a>
-### Paso 3.2. Medidas de ventas, unidades y pedidos
+<a id="seccion-3-4"></a>
+### 3.4. Resolver Q1 con tres tarjetas
 
-**Propósito:** definir indicadores que respondan al contexto de los filtros.
+| Pregunta | Visual | Campo en Valores | Resultado de 2020 |
+| --- | --- | --- | ---: |
+| ¿Cuánto se vendió? | Tarjeta. | `[Ventas Totales]`, medida de `sales`. | 11.066.206,89 |
+| ¿Cuántas unidades? | Tarjeta. | `[Unidades Totales]`, medida de `sales`. | 35.234 |
+| ¿Cuántos pedidos? | Tarjeta. | `[Pedidos]`, medida de `sales`. | 4.806 |
 
-**Ubicación:** tabla `Ventas`, opción **Modelado → Nueva medida**. Cada definición corresponde a una medida independiente. [F18]
+Crear las tres tarjetas. Con todo el historial deben coincidir con los controles iniciales; al aplicar 2020 deben mostrar los valores de esta tabla.
 
-```dax
-Ventas Totales = SUM('Ventas'[ImporteVenta])
-```
+Usar títulos “Ventas en moneda base”, “Unidades” y “Pedidos distintos”. Establecer **Unidades de visualización → Ninguno** en cada tarjeta si el ajuste general no se aplica. La ruta depende de la tarjeta: **Formato → Visual → Valores del destacador → Valores**, o **Valor destacado**. [14]
 
-```dax
-Unidades Totales = SUM('Ventas'[Unidades])
-```
+<a id="seccion-3-5"></a>
+### 3.5. Resolver Q2 con barras horizontales
 
-```dax
-Pedidos = DISTINCTCOUNT('Ventas'[Pedido])
-```
+| Elemento | Asignación exacta |
+| --- | --- |
+| Visual. | Barras agrupadas horizontales. |
+| Eje Y. | `product[CategoryName]`. |
+| Eje X. | `[Ventas Totales]`. |
+| Orden. | Ventas de mayor a menor. |
+| Presentación. | Eje monetario desde cero, etiquetas legibles y Computers destacado. |
+| Título. | “Computers lidera las ventas de 2020”. |
 
-**Formato:** ventas con dos decimales; unidades y pedidos como enteros con separador de miles.
+**Respuesta:** Computers, con **5.041.111,59**. La segunda categoría es Cell phones, con **1.861.564,14**. Si se cambia el período, ajustar el título para que siga correspondiendo a la selección.
 
-**Explicación:** `SUM` agrega cantidades e importes; `DISTINCTCOUNT` cuenta identificadores diferentes. Así se evita confundir líneas de venta con pedidos. [F9] [F19]
+<a id="seccion-3-6"></a>
+### 3.6. Resolver Q3 con una tabla comparativa
 
-**Resultados resueltos:**
+| Elemento | Asignación exacta |
+| --- | --- |
+| Visual. | Tabla. |
+| Columnas. | `product[CategoryName]`, `[Ventas Totales]`, `[Unidades Totales]`, `[Pedidos]`. |
+| Orden inicial. | Descendente por ventas. Después, ordenar por unidades para comparar posiciones. |
+| Totales. | Mantener el cálculo predeterminado de las medidas. |
 
-| Contexto | Ventas, moneda base | Unidades | Pedidos distintos |
-| --- | ---: | ---: | ---: |
-| Archivo completo, sin filtros. | 203.723.865,76 | 628.370 | 83.130 |
-| 2020, todas las categorías. | **11.066.206,89** | **35.234** | **4.806** |
+**Tabla resuelta por categoría para 2020:**
 
-**Resultado:** tres medidas explícitas para todos los visuales del reporte.
-
-[Volver al índice](#indice)
-
-<a id="paso-3-3"></a>
-### Paso 3.3. Tarjetas de resumen
-
-**Propósito:** responder Q1 con los totales del período.
-
-**Configuración en `Resumen comercial`:**
-
-| Visual | Campo en Valores | Título | Formato |
-| --- | --- | --- | --- |
-| Tarjeta. | `Ventas Totales`. | Ventas de Contoso (moneda base). | Dos decimales; unidades de visualización: Ninguno. |
-| Tarjeta. | `Unidades Totales`. | Unidades. | Sin decimales; unidades de visualización: Ninguno. |
-| Tarjeta. | `Pedidos`. | Pedidos distintos. | Sin decimales; unidades de visualización: Ninguno. |
-
-Las tres tarjetas se presentan alineadas en la zona superior. [F10]
-
-**Solución de Q1, con el filtro 2020:**
-
-| Indicador | Resultado |
-| --- | ---: |
-| Ventas, moneda base | **11.066.206,89** |
-| Unidades | **35.234** |
-| Pedidos distintos | **4.806** |
-
-**Explicación:** las tarjetas responden cuánto se vendió, cuántos artículos se vendieron y cuántas compras hubo. Las **11.267 líneas de 2020** representan el detalle de esas compras.
-
-**Resultado:** los tres indicadores comerciales del período quedan identificados y legibles.
-
-[Volver al índice](#indice)
-
-<a id="paso-3-4"></a>
-### Paso 3.4. Tabla por categoría y comparación de indicadores
-
-**Propósito:** comparar indicadores por categoría y responder Q3.
-
-**Configuración del visual:** Tabla con `Categoria`, `Ventas Totales`, `Unidades Totales` y `Pedidos`; totales activados y clasificación descendente por ventas. El orden por unidades permite contrastar las posiciones. [F11]
-
-**Tabla resuelta para 2020:**
-
-| Categoría | Ventas, moneda base | Unidades | Pedidos distintos de la categoría |
+| CategoryName | Ventas Totales | Unidades Totales | Pedidos |
 | --- | ---: | ---: | ---: |
 | Computers | 5.041.111,59 | 8.364 | 2.094 |
 | Cell phones | 1.861.564,14 | 6.945 | 1.822 |
@@ -602,392 +389,200 @@ Las tres tarjetas se presentan alineadas en la zona superior. [F10]
 | Games and Toys | 138.494,09 | 4.976 | 1.370 |
 | **Total general** | **11.066.206,89** | **35.234** | **4.806** |
 
-**Respuesta de Q3:** **sí**, Computers lidera tanto en importe vendido como en unidades: **5.041.111,59** y **8.364 unidades**.
+**Lectura:** Computers lidera en ventas y unidades. Music, Movies and Audio Books es tercera en unidades y sexta en ventas; una clasificación por volumen físico no equivale a otra por importe.
 
-Music, Movies and Audio Books ocupa el **tercer lugar en unidades**, con **5.147**, y el **sexto en ventas**, con **672.661,83**. La clasificación de todas las categorías cambia según el indicador elegido.
+El total general de pedidos es un conteo distinto. Un pedido puede contener varias categorías, por lo que **4.806 no debe sustituirse por la suma de los conteos de cada categoría**. [12]
 
-**Explicación:** más unidades no siempre implican mayor importe, porque los precios y la composición de productos pueden diferir. Además, un pedido puede incluir productos de distintas categorías; el total general de **4.806 pedidos** es un conteo distinto, no la suma de los conteos de cada categoría.
+<a id="seccion-3-7"></a>
+### 3.7. Resolver Q4 con una línea mensual
 
-**Precisión monetaria:** los valores originales se suman antes de redondear. La suma de las ocho cifras visibles, ya redondeadas, es 11.066.206,90; el total calculado con la precisión original es **11.066.206,89**.
-
-**Resultado:** el liderazgo y las diferencias de clasificación tienen cifras exactas de respaldo.
-
-[Volver al índice](#indice)
-
-<a id="paso-3-5"></a>
-### Paso 3.5. Gráfico de barras: categoría con más ventas
-
-**Propósito:** identificar visualmente la categoría con mayor importe de ventas.
-
-**Configuración del gráfico:**
-
-| Elemento | Configuración |
+| Elemento | Asignación exacta |
 | --- | --- |
-| Tipo | Barras agrupadas, orientación horizontal. |
-| Eje Y | `Categoria`. |
-| Eje X | `Ventas Totales`. |
-| Orden | Ventas de mayor a menor. |
-| Etiquetas | Etiquetas de datos activadas. |
-| Eje monetario | Inicio en cero. |
-| Título | ¿Qué categoría tiene el mayor importe de ventas? |
+| Visual. | Gráfico de líneas. |
+| Eje X. | `sales[InicioMes]`, directamente y sin jerarquía. |
+| Eje Y. | `[Ventas Totales]`. |
+| Orden. | Cronológico ascendente; mostrar mes y año. |
+| Presentación. | Línea azul, marcadores y una anotación: “Marzo: −58,46 % frente a febrero”. |
+| Título. | “Evolución mensual de las ventas de 2020”. |
 
-**Respuesta de Q2:** **Computers**, con **5.041.111,59**. La segunda categoría es **Cell phones**, con **1.861.564,14**.
-
-**Explicación:** las barras permiten comparar longitudes y reconocer el mayor valor. Su orientación facilita leer los nombres completos de las categorías. El orden coincide con la tabla del paso anterior. [F12]
-
-**Resultado:** la barra de Computers identifica el liderazgo en ventas de 2020.
-
-[Volver al índice](#indice)
-
-<a id="paso-3-6"></a>
-### Paso 3.6. Gráfico de líneas: evolución mensual
-
-**Propósito:** describir la evolución mensual y responder Q4.
-
-**Configuración del gráfico:** Línea con `InicioMes` directamente en el eje X, sin jerarquía de fecha, y `Ventas Totales` en el eje Y. Orden cronológico ascendente, etiquetas de mes y año, y título **¿Cómo cambian las ventas mensuales de Contoso?**. [F13]
+La línea conserva la secuencia temporal. Evitar un eje que ordene alfabéticamente nombres de meses o mezcle años. [15]
 
 **Serie mensual resuelta:**
 
-| Mes | Ventas, moneda base |
+| InicioMes | Ventas Totales |
 | --- | ---: |
-| Enero de 2020 | 2.124.215,68 |
-| Febrero de 2020 | 2.658.349,04 |
-| Marzo de 2020 | 1.104.361,28 |
-| Abril de 2020 | 502.924,03 |
-| Mayo de 2020 | 1.160.430,61 |
-| Junio de 2020 | 808.351,16 |
-| Julio de 2020 | 593.685,68 |
-| Agosto de 2020 | 524.873,87 |
-| Septiembre de 2020 | 320.093,34 |
-| Octubre de 2020 | 388.181,27 |
-| Noviembre de 2020 | 341.405,95 |
-| Diciembre de 2020 | 539.334,97 |
+| 01/01/2020 | 2.124.215,68 |
+| 01/02/2020 | 2.658.349,04 |
+| 01/03/2020 | 1.104.361,28 |
+| 01/04/2020 | 502.924,03 |
+| 01/05/2020 | 1.160.430,61 |
+| 01/06/2020 | 808.351,16 |
+| 01/07/2020 | 593.685,68 |
+| 01/08/2020 | 524.873,87 |
+| 01/09/2020 | 320.093,34 |
+| 01/10/2020 | 388.181,27 |
+| 01/11/2020 | 341.405,95 |
+| 01/12/2020 | 539.334,97 |
 | **Total 2020** | **11.066.206,89** |
 
-**Respuesta de Q4:** febrero registra el máximo, **2.658.349,04**; septiembre registra el mínimo, **320.093,34**. Entre febrero y marzo las ventas disminuyen **58,46 %**, hasta **1.104.361,28**.
+Febrero registra el máximo y septiembre el mínimo. El cambio de febrero a marzo se cuantifica en la fase 4.
 
-**Cálculo resuelto de la variación:**
+**Redondeo de presentación:** sumar categorías ya redondeadas da 11.066.206,90; sumar meses ya redondeados da 11.066.206,88. El total con los valores originales es **11.066.206,89**. No redondear líneas para forzar la suma de cifras visibles.
 
-```text
-Variación = ((Ventas de marzo − Ventas de febrero) ÷ Ventas de febrero) × 100
-          = ((1.104.361,281484 − 2.658.349,037698) ÷ 2.658.349,037698) × 100
-          = −58,46 %
-```
+<a id="seccion-3-8"></a>
+### 3.8. Comprobar la relación y las interacciones
 
-La operación utiliza los importes originales y puede reproducirse con una calculadora a partir de los resultados del reporte.
+Con 2020 activo, seleccionar **Computers** en la segmentación de `product[CategoryName]`:
 
-**Explicación:** la línea mantiene el orden del tiempo y hace visible la caída. El descenso es un resultado observado; su causa requiere evidencia adicional.
-
-**Precisión monetaria:** sumar los doce valores mensuales ya redondeados da 11.066.206,88. El total de **11.066.206,89** se obtiene sumando con la precisión original y redondeando al final.
-
-**Resultado:** doce puntos mensuales en orden, con un máximo, un mínimo y una variación cuantificada.
-
-[Volver al índice](#indice)
-
-<a id="paso-3-7"></a>
-### Paso 3.7. Filtros del período y de categoría
-
-**Propósito:** mantener visible y consistente el alcance del análisis.
-
-**Configuración de segmentaciones en `Resumen comercial`:**
-
-| Segmentación | Campo | Configuración | Selección de la solución |
-| --- | --- | --- | --- |
-| Período. | `Fecha`, directamente. | Modo Entre. | 01/01/2020–31/12/2020. |
-| Categoría. | `Categoria`. | Lista o desplegable. | Todas las categorías incluidas. |
-
-**Alcance de los filtros:** aplicados a la página `Resumen comercial`, sin restricciones adicionales de visual o informe. La segmentación de fecha no está sincronizada con `Comprobacion`, cuya muestra corresponde a 2015. [F21]
-
-**Resultado resuelto de la selección:** **11.066.206,89** en ventas, **35.234 unidades**, **4.806 pedidos**, ocho categorías y doce meses.
-
-**Explicación:** los filtros indican qué datos se están leyendo. El historial se conserva en la tabla y la selección de 2020 se realiza en el reporte.
-
-**Resultado:** los visuales comerciales comparten período y cobertura de categorías.
-
-[Volver al índice](#indice)
-
-<a id="paso-3-8"></a>
-### Paso 3.8. Interacciones y resultados por selección
-
-**Propósito:** comprobar que una selección afecta los indicadores y visuales correspondientes.
-
-**Prueba resuelta:** período 2020; selección de Computers en la segmentación de categoría y posterior recuperación de todas las categorías.
-
-| Selección | Ventas, moneda base | Unidades | Pedidos distintos |
+| Selección | Ventas Totales | Unidades Totales | Pedidos |
 | --- | ---: | ---: | ---: |
-| 2020, Computers. | **5.041.111,59** | **8.364** | **2.094** |
-| 2020, todas las categorías. | **11.066.206,89** | **35.234** | **4.806** |
+| Computers. | 5.041.111,59 | 8.364 | 2.094 |
+| Todas las categorías. | 11.066.206,89 | 35.234 | 4.806 |
 
-**Configuración de interacción:** Formato → Editar interacciones, opción **Filtrar** desde las segmentaciones hacia las tarjetas, la tabla, las barras y la línea. [F22]
+La selección debe filtrar los indicadores y los gráficos mediante la relación. Si se repite el total general en cada categoría, revisar primero la relación activa por `ProductKey`. Si falla solo un visual, revisar **Formato → Editar interacciones → Filtrar**. [16] Borrar la selección de categoría antes de presentar el resultado general.
 
-**Explicación:** al seleccionar Computers se cuentan los pedidos con líneas de esa categoría. Todas las categorías recupera el contexto general del año. Un filtro propio del visual o una interacción desactivada produciría una lectura diferente.
+<a id="seccion-3-9"></a>
+### 3.9. Crear `Comprobacion` y reconstruir dos pedidos
 
-**Resultado:** la selección de Computers tiene un resultado definido y las cifras generales se recuperan al incluir todas las categorías.
+1. Agregar la página `Comprobacion`.
+2. Crear una tabla con `sales[OrderKey]`, `sales[LineNumber]`, `sales[OrderDate]`, `product[CategoryName]`, `sales[Quantity]`, `sales[NetPrice]` y `sales[ImporteVenta]`.
+3. Usar **No resumir** donde esté disponible y mostrar precio e importe con al menos tres decimales.
+4. Añadir las tres tarjetas y una segmentación de `sales[OrderKey]` con selección múltiple. Elegir **1000 y 1001**, sin otros filtros.
 
-[Volver al índice](#indice)
+**Detalle real de la selección, del 1 de enero de 2015:**
 
-<a id="paso-3-9"></a>
-### Paso 3.9. Comprobación manual resuelta
-
-**Propósito:** reconstruir un indicador a partir de sus transacciones.
-
-**Configuración de `Comprobacion`:** tabla con `Pedido`, `Linea`, `Fecha`, `Categoria`, `Unidades`, `PrecioUnitario` e `ImporteVenta`, con opción **No resumir** donde esté disponible. El detalle conserva pedido y línea; precio e importe se muestran con al menos tres decimales. La página incluye tarjetas con las tres medidas y una segmentación por `Pedido` con selección múltiple.
-
-**Selección:** pedidos **1000 y 1001** completos, del **01/01/2015**, sin restricciones adicionales de categoría ni el filtro comercial de 2020.
-
-**Detalle resuelto:**
-
-| Pedido | Línea | Categoría | Unidades | Precio unitario | Importe |
+| OrderKey | LineNumber | CategoryName | Quantity | NetPrice | ImporteVenta |
 | --- | --- | --- | ---: | ---: | ---: |
 | 1000 | 0 | Audio | 1 | 98,967 | 98,967 |
 | 1000 | 1 | Computers | 1 | 659,780 | 659,780 |
 | 1001 | 0 | Games and Toys | 2 | 54,376 | 108,752 |
 
-**Cálculo manual resuelto:**
+**Comprobación manual resuelta:**
 
-```text
-Ventas = (1 × 98,967) + (1 × 659,780) + (2 × 54,376)
-       = 867,499 → 867,50 con dos decimales
-Unidades = 1 + 1 + 2 = 4
-Pedidos distintos = {1000, 1001} = 2
-```
+- Ventas: `(1 × 98,967) + (1 × 659,780) + (2 × 54,376) = 867,499`, mostrado como **867,50**.
+- Unidades: `1 + 1 + 2 = 4`.
+- Pedidos distintos: **2**.
 
-**Comparación de resultados:**
-
-| Indicador | Cálculo manual | Valor de referencia para las tarjetas | Diferencia |
-| --- | ---: | ---: | ---: |
-| Ventas, dos decimales. | 867,50 | 867,50 | 0,00 |
-| Unidades. | 4 | 4 | 0 |
-| Pedidos distintos. | 2 | 2 | 0 |
-
-**Explicación:** las tres líneas permiten reconstruir el resultado. La cantidad de unidades y el conteo de pedidos responden a conceptos diferentes. El precio mantiene su precisión y el total se redondea al presentarlo.
-
-**Resultado:** **867,50** en ventas, **4 unidades** y **2 pedidos**, comprobados directamente con las filas originales. La muestra verifica el método; el análisis comercial mantiene el alcance de 2020.
+Las tarjetas deben coincidir. La selección contiene tres líneas, cuatro unidades y dos pedidos. Este ejemplo también permite revisar que el precio conserve su precisión.
 
 [Volver al índice](#indice)
-
----
 
 <a id="fase-4"></a>
-## Fase 4. E: Ejecutar y comunicar
+## Fase 4. Ejecutar y explicar
 
-**Propósito:** comunicar las respuestas, distinguir evidencia e interpretación y definir un seguimiento.
+<a id="seccion-4-1"></a>
+### 4.1. Consolidar las respuestas
 
-**Producto:** respuestas finales, storytelling resuelto y documentación de la solución.
+Restaurar **2020 y todas las categorías** en `Resumen comercial`.
 
-<a id="paso-4-1"></a>
-### Paso 4.1. Respuestas resueltas a las preguntas de negocio
-
-**Propósito:** transformar los visuales en respuestas de negocio completas.
-
-**Contexto comercial:** Contoso V2, **01/01/2020–31/12/2020**, todas las categorías, moneda base.
-
-| Pregunta | Respuesta resuelta | Evidencia |
-| --- | --- | --- |
-| Q1. Volumen comercial. | Ventas de **11.066.206,89**, **35.234 unidades** y **4.806 pedidos distintos**. | Tres tarjetas. |
-| Q2. Categoría con mayor importe. | **Computers**, con **5.041.111,59**, equivalente al **45,55 %** de las ventas de 2020. | Barras y tabla. |
-| Q3. Coincidencia del liderazgo. | **Sí**. Computers lidera en unidades y ventas, con **8.364 unidades** y **5.041.111,59**. El resto de posiciones puede cambiar entre indicadores. | Tabla ordenada por ventas y luego por unidades. |
-| Q4. Evolución mensual. | Máximo en febrero: **2.658.349,04**; mínimo en septiembre: **320.093,34**. Entre febrero y marzo hay una caída del **58,46 %**, hasta **1.104.361,28**. | Línea y valores mensuales. |
-
-**Participación de Computers, cálculo resuelto:**
-
-```text
-Participación = (Ventas de Computers en 2020 ÷ Ventas totales de 2020) × 100
-              = (5.041.111,58625 ÷ 11.066.206,893045) × 100
-              = 45,55 %
-```
-
-**Explicación:** el numerador y el denominador pertenecen al mismo período. El denominador incluye todas las categorías; un total filtrado solamente en Computers no representaría el total comercial de 2020.
-
-**Comprobación complementaria:** los pedidos 1000 y 1001, del 01/01/2015, producen **867,50**, **4 unidades** y **2 pedidos**, según el [paso 3.9](#paso-3-9).
-
-**Resultado:** cada pregunta tiene cifra, período, alcance y visual de respaldo.
-
-[Volver al índice](#indice)
-
-<a id="paso-4-2"></a>
-### Paso 4.2. Storytelling del hallazgo
-
-**Propósito:** comunicar una idea central respaldada por cifras y contexto.
-
-**Título del hallazgo:** Computers lidera las ventas de 2020; la caída de marzo merece revisión.
-
-**Storytelling resuelto:**
-
-> En Contoso, durante 2020 y considerando todas las categorías, las ventas fueron 11.066.206,89 en moneda base, con 35.234 unidades y 4.806 pedidos distintos. Computers lideró la actividad comercial: registró 5.041.111,59, equivalentes al 45,55 % de las ventas del año, y 8.364 unidades. La evolución mensual mostró un máximo de 2.658.349,04 en febrero y una caída del 58,46 % en marzo, hasta 1.104.361,28. Estos resultados permiten priorizar la revisión de Computers y del cambio entre febrero y marzo. La siguiente acción propuesta es revisar el detalle de productos y contrastar el cambio con las acciones comerciales y la disponibilidad de inventario. El análisis describe una empresa ficticia; los datos examinados no demuestran las causas de la caída ni permiten concluir sobre utilidad neta.
-
-**Estructura del relato:**
-
-| Parte | Contenido del caso |
+| Pregunta | Respuesta resuelta |
 | --- | --- |
-| Contexto | Contoso, 2020, todas las categorías, moneda base. |
-| Hallazgo principal | Computers lidera y aporta el 45,55 % de las ventas. |
-| Evidencia complementaria | Caída del 58,46 % entre febrero y marzo. |
-| Interpretación | La categoría líder y el cambio mensual requieren una revisión más detallada. |
-| Acción propuesta | Revisar productos y contrastar acciones comerciales e inventario. |
-| Límite | La descripción no demuestra una causa ni mide utilidad neta. |
+| Q1. Ventas, unidades y pedidos. | **11.066.206,89** en moneda base, **35.234 unidades** y **4.806 pedidos**. |
+| Q2. Categoría con mayores ventas. | **Computers**, con **5.041.111,59**, el **45,55 %** del total anual. |
+| Q3. Coincidencia del liderazgo. | **Sí**. Computers también lidera en unidades, con **8.364**. |
+| Q4. Evolución mensual. | Máximo en **febrero: 2.658.349,04**. Mínimo en **septiembre: 320.093,34**. De febrero a marzo, caída de **58,46 %**. |
 
-**Explicación:** el dato corresponde a lo observado y calculado; la interpretación relaciona su importancia con el problema comercial. La acción define el siguiente análisis. Las tres partes deben poder distinguirse.
+Comprobaciones con precisión original:
 
-**Resultado:** un relato completo y sustentado en el reporte de 2020.
+- Participación de Computers: `(5.041.111,58625 ÷ 11.066.206,893045) × 100 = 45,55 %`.
+- Variación febrero-marzo: `((1.104.361,281484 − 2.658.349,037698) ÷ 2.658.349,037698) × 100 = −58,46 %`.
 
-[Volver al índice](#indice)
+<a id="seccion-4-2"></a>
+### 4.2. Seguir un orden de presentación con storytelling
 
-<a id="paso-4-3"></a>
-### Paso 4.3. Acción propuesta y seguimiento
+El orden narrativo propone **contexto breve, mensaje principal, evidencia y acción**. Se presenta el hallazgo antes de recorrer sus pruebas; los detalles de importación quedan para preguntas técnicas.
 
-**Propósito:** conectar el hallazgo con un siguiente paso concreto.
+| Orden | Qué se presenta | Visual o apoyo | Qué se dice y para qué |
+| --- | --- | --- | --- |
+| 1 | Contexto y pregunta comercial. | Título y filtro de fecha. | “Analizamos Contoso en 2020 para reconocer el volumen, la categoría líder y los cambios mensuales”. Delimita el alcance. |
+| 2 | Mensaje principal. | Encabezado breve o exposición oral. | “Computers aporta el 45,55 % de las ventas; la caída de marzo requiere revisión”. Orienta la lectura. |
+| 3 | Tamaño de la actividad, Q1. | Tres tarjetas. | Presentar ventas, unidades y pedidos. Da magnitud al caso. |
+| 4 | Evidencia del liderazgo, Q2 y Q3. | Barras y luego tabla. | Mostrar Computers y contrastar ventas con unidades. Explica qué se está comparando. |
+| 5 | Cambio temporal, Q4. | Línea y anotación de marzo. | Mostrar febrero, marzo y la variación de −58,46 %. Expone el cambio que merece análisis. |
+| 6 | Interpretación, límite y siguiente acción. | Cierre oral y anotación breve. | Revisar contribuciones por producto y categoría, y contrastar inventario y acciones comerciales. Los datos no demuestran causas. |
 
-**Seguimiento resuelto como propuesta del caso:**
+No atribuir la caída a Computers por el solo hecho de liderar el año. Esa contribución debe analizarse por separado. La página `Comprobacion` respalda la validez del cálculo y se muestra después del relato si se solicita el detalle.
 
-| Elemento | Definición |
+<a id="seccion-4-3"></a>
+### 4.3. Presentar el relato resuelto
+
+> Analizamos las ventas de Contoso en 2020 para identificar su volumen comercial y los cambios que merecen revisión. Computers fue la categoría líder: aportó el 45,55 % de las ventas. En el año se vendieron 11.066.206,89 en moneda base, con 35.234 unidades y 4.806 pedidos. El ranking confirma que Computers también lideró en unidades. La evolución mensual muestra otro hallazgo: después del máximo de febrero, las ventas cayeron un 58,46 % en marzo. Proponemos identificar qué productos y categorías contribuyeron a esa variación y contrastar el resultado con información comercial e inventario. El caso utiliza datos ficticios y no demuestra la causa de la caída.
+
+Este relato y los títulos con cifras corresponden a **2020, todas las categorías**. Si cambia la selección durante la demostración, restaurarla antes de retomar el relato o ajustar lo que se comunica.
+
+<a id="seccion-4-4"></a>
+### 4.4. Cerrar con una acción y guardar
+
+| Elemento | Propuesta del caso |
 | --- | --- |
-| Prioridad | Revisar la composición de ventas de Computers y el cambio general entre febrero y marzo de 2020. |
-| Próximo análisis con Contoso | Desglosar ventas y unidades por producto y mes, manteniendo las definiciones del reporte. |
-| Información adicional | Registros de acciones comerciales y disponibilidad de inventario; costos si se pretende estudiar rentabilidad. |
-| Responsable propuesto | Analista comercial, con revisión de la dirección comercial. |
-| Momento propuesto | Próxima reunión mensual de revisión comercial del caso. |
-| Evidencia de seguimiento | Comparación por producto, categoría y mes, con cobertura temporal equivalente. |
-| Criterio de cierre | Identificar qué productos contribuyen al cambio y qué evidencia adicional respalda una decisión. |
+| Acción. | Descomponer la diferencia febrero-marzo por producto y categoría. |
+| Responsable propuesto. | Analista comercial, con revisión de la dirección comercial. |
+| Información adicional. | Disponibilidad de inventario y acciones comerciales del período. |
+| Próxima revisión. | Reunión mensual del caso, con resultados comparables y limitaciones explícitas. |
 
-**Explicación:** el análisis actual señala dónde profundizar. La propuesta de seguimiento, el responsable y la reunión forman parte del ejercicio; no son hechos registrados en los archivos de ventas.
-
-**Resultado:** la comunicación incluye una acción definida, evidencia requerida y criterio de seguimiento.
-
-[Volver al índice](#indice)
-
-<a id="paso-4-4"></a>
-### Paso 4.4. Documentación y reproducción de la solución
-
-**Propósito:** documentar las condiciones necesarias para reproducir las respuestas.
-
-**Registro de la solución:**
-
-| Elemento | Definición utilizada |
-| --- | --- |
-| Fuente | SQLBI, Contoso V2, Ready to use data (2024), `csv-100k.7z`. |
-| Archivos | `sales.csv` y `product.csv`. |
-| Fecha de cálculo de las referencias | 08/10/2026. |
-| Granularidad | Una fila por Pedido + Linea. |
-| Combinación | Externa izquierda por ProductKey, con nombre y categoría de producto. |
-| Importe de línea | Quantity × NetPrice, con precisión original. |
-| Medidas | SUM de importe; SUM de unidades; DISTINCTCOUNT de pedido. |
-| Filtro comercial | 01/01/2020–31/12/2020, todas las categorías. |
-| Filtro de comprobación | Pedidos 1000 y 1001 completos, 01/01/2015. |
-| Páginas del diseño | Resumen comercial; Comprobacion; PACE y hallazgos. |
-
-**Condiciones de reproducción en Power BI:** mismo paquete, tipos y transformaciones; acceso a los CSV desde sus rutas de origen; medidas explícitas y filtros documentados. La opción **Inicio → Actualizar** vuelve a ejecutar la preparación. Una ruta distinta se corrige en **Configuración de origen de datos → Cambiar origen** o en el paso **Origen** de Power Query.
-
-**Valores que permiten contrastar la reproducción:**
-
-| Selección | Ventas | Unidades | Pedidos |
-| --- | ---: | ---: | ---: |
-| 2020, todas las categorías. | 11.066.206,89 | 35.234 | 4.806 |
-| Pedidos 1000 y 1001 completos. | 867,50 | 4 | 2 |
-
-**Explicación:** documentar la fuente, los cálculos y los filtros permite reconstruir cada respuesta y localizar la causa de una diferencia.
-
-**Resultado:** la solución tiene definiciones y valores de control suficientes para su reproducción.
-
-[Volver al índice](#indice)
-
-<a id="paso-4-5"></a>
-### Paso 4.5. Resultado integral del taller
-
-**Propósito:** relacionar los resultados finales con los criterios de éxito de Planear.
-
-**Solución integral:**
-
-| Criterio | Evidencia del taller resuelto |
-| --- | --- |
-| Preguntas de negocio definidas. | Problema, destinatario, alcance y Q1–Q4 del caso. |
-| Datos preparados y revisados. | Tabla de 11 columnas; 199.873 líneas; claves y combinación conservadas. |
-| Indicadores comerciales. | **11.066.206,89** en ventas, **35.234 unidades**, **4.806 pedidos en 2020**. |
-| Elección de visuales justificada. | Tarjetas para totales; barras para categorías; tabla para cifras exactas; línea para evolución. |
-| Filtros coherentes. | Selecciones de 2020 y Computers con valores de referencia definidos. |
-| Comprobación independiente. | Dos pedidos reales: **867,50**, **4 unidades** y **2 pedidos**, reconstruidos manualmente. |
-| Storytelling sustentado. | Liderazgo de Computers, cambio de marzo, interpretación y acción propuesta. |
-| Reproducción documentada. | Fuente, transformaciones, medidas, filtros y cifras de control. |
-
-**Explicación:** las respuestas atienden el problema comercial definido en Planear. Los controles de preparación y la cuenta manual sustentan las cifras utilizadas en los gráficos y el relato.
-
-**Resultado:** el caso conecta la necesidad comercial con datos concretos, visuales adecuados y un hallazgo que puede verificarse.
-
-[Volver al índice](#indice)
-
----
-
-<a id="valores-control"></a>
-## Valores de control del archivo completo
-
-Valores recalculados sobre el paquete **`csv-100k.7z`, publicación 2024**, el **8 de octubre de 2026**. [F2]
-
-| Control | Archivo completo, sin filtros | 2020, todas las categorías |
-| --- | ---: | ---: |
-| Líneas de venta | 199.873 | 11.267 |
-| Unidades | 628.370 | 35.234 |
-| Pedidos distintos | 83.130 | 4.806 |
-| Ventas en moneda base, dos decimales | 203.723.865,76 | 11.066.206,89 |
-
-- Fecha mínima: **01/01/2015**. Fecha máxima: **20/04/2024**.
-- Importe exacto del archivo completo: **203.723.865,758428**.
-- Importe exacto de 2020: **11.066.206,893045**.
-- Cálculo de importe: `Quantity × NetPrice`, por línea.
-
-La comparación sin filtros revisa la fuente completa; el filtro 2020 corresponde a las respuestas comerciales. Otras versiones del paquete pueden producir cifras distintas. El archivo termina el 20 de abril de 2024, por lo que las comparaciones temporales deben considerar esa cobertura.
+Guardar `Taller_01_Contoso_PACE.pbix` con las dos tablas relacionadas, las tres medidas, las dos páginas y los filtros de presentación restaurados. Conservar los CSV en su ubicación de origen.
 
 [Volver al índice](#indice)
 
 <a id="dificultades"></a>
-## Solución de dificultades frecuentes
+## Dificultades frecuentes
 
-| Situación | Causa a revisar | Solución |
-| --- | --- | --- |
-| Todo el CSV aparece en una columna. | Delimitador. | Coma en la importación o en el paso Origen. |
-| Encabezados Column1, Column2. | Encabezados sin promover. | Usar la primera fila como encabezado. |
-| Precios distintos de los valores originales. | Interpretación del punto decimal. | Conversión desde el texto con Inglés (Estados Unidos). |
-| Fechas incorrectas. | Tipo o interpretación regional. | Conversión de OrderDate desde año-mes-día y contraste con 2015-01-01. |
-| Aumento de filas al expandir productos. | Claves de producto repetidas. | Control de unicidad de ProductKey y revisión de la combinación. |
-| Espacios al final de categorías. | Texto de origen. | Transformar → Formato → Recortar. |
-| 11.267 aparece como número de pedidos de 2020. | Conteo de filas. | DISTINCTCOUNT de Pedido; resultado: 4.806. |
-| Meses de distintos años agrupados. | Nombre de mes sin año. | InicioMes directamente y orden cronológico. |
-| Tarjetas con valores abreviados. | Unidades de visualización automáticas. | Unidades de visualización: Ninguno. |
-| Un visual conserva cifras al cambiar una categoría. | Interacción o filtro propio. | Opción Filtrar en Editar interacciones y revisión de filtros. |
-| Muestra de 2015 vacía. | Filtro 2020 de todo el informe o sincronización. | Filtro comercial limitado a Resumen comercial. |
-| Diferencia con el cálculo manual. | Filtros, líneas incompletas o redondeo. | Mismos pedidos completos, precisión original y mismo alcance. |
-| Total de pedidos menor que la suma por categorías. | Pedidos con varias categorías. | Conteo distinto en el contexto general. |
-| Diferencia de 0,01 al sumar cifras visibles. | Redondeo de presentación. | Suma de valores originales y redondeo del total al final. |
-| Actualización sin acceso a los CSV. | Ruta de origen. | Corrección del origen de datos. |
+| Situación | Corrección |
+| --- | --- |
+| Todo el CSV aparece en una columna. | Establecer delimitador coma. |
+| `NetPrice` cambia de valor o genera errores. | Eliminar la conversión equivocada y convertir el texto original con Inglés (Estados Unidos). |
+| Cambia el separador visible pero las ventas siguen mal. | El formato no corrige el valor importado. Revisar Power Query. |
+| No aparece `CategoryName` dentro de `sales`. | Es correcto: se usa `product[CategoryName]` mediante la relación. |
+| Cada categoría muestra el mismo importe total. | Revisar relación activa, campos `ProductKey` y dirección del filtro. |
+| Se propone una relación varios a varios. | Revisar unicidad de `product[ProductKey]` y tipos de ambas claves. |
+| Aparecen 11.267 pedidos en 2020. | Se contaron líneas. Usar `DISTINCTCOUNT('sales'[OrderKey])`; son 4.806 pedidos. |
+| Tarjetas abreviadas con K o M. | Unidades de visualización: Ninguno. |
+| Meses mezclados o desordenados. | Usar `sales[InicioMes]` directamente y ordenar cronológicamente. |
+| `Comprobacion` queda vacía. | Quitar el filtro 2020 de nivel informe y evitar sincronizarlo con esa página. |
+| El relato no coincide con los visuales. | Restaurar 2020 y todas las categorías o actualizar el relato. |
 
-[Volver al índice](#indice)
+<a id="encabezados"></a>
+## Encabezados completos de los CSV
+
+Nombres y orden exactos del paquete revisado. El taller conserva únicamente los campos del diccionario de 2.3.
+
+**`sales.csv`, 13 campos:**
+
+`OrderKey`, `LineNumber`, `OrderDate`, `DeliveryDate`, `CustomerKey`, `StoreKey`, `ProductKey`, `Quantity`, `UnitPrice`, `NetPrice`, `UnitCost`, `CurrencyCode`, `ExchangeRate`.
+
+**`product.csv`, 14 campos:**
+
+`ProductKey`, `ProductCode`, `ProductName`, `Manufacturer`, `Brand`, `Color`, `WeightUnit`, `Weight`, `Cost`, `Price`, `CategoryKey`, `CategoryName`, `SubCategoryKey`, `SubCategoryName`.
+
+`ImporteVenta` e `InicioMes` son columnas de Power Query en `sales`. `Ventas Totales`, `Unidades Totales` y `Pedidos` son medidas DAX alojadas en `sales`. `ProductName` y `CategoryName` permanecen en `product`.
 
 <a id="fuentes"></a>
-## Fuentes oficiales y documentación
+## Fuentes
 
-Consulta realizada el **8 de octubre de 2026**. Las cifras proceden de los CSV originales de Contoso. El problema de negocio, la elección didáctica de visuales y el seguimiento propuesto forman parte del caso resuelto.
+Consulta: **15 de octubre de 2026**. Los resultados se calcularon directamente desde los CSV. La paleta, el orden narrativo y la acción propuesta son decisiones didácticas del caso.
 
-- **[F1]** Google Career Certificates. [Foundations of Data Science: flujo PACE](https://www.coursera.org/learn/foundations-of-data-science).
-- **[F2]** SQLBI. [Contoso V2: publicación de datos 2024](https://github.com/sql-bi/Contoso-Data-Generator-V2-Data/releases/tag/ready-to-use-data-2024) y [documentación del generador](https://docs.sqlbi.com/contoso-data-generator/).
-- **[F3]** SQLBI. [Código del generador, Engine.cs](https://github.com/sql-bi/Contoso-Data-Generator-V2/blob/main/DatabaseGenerator/Engine.cs). Consultado para verificar la generación del precio neto y la incorporación separada de la tasa de cambio.
-- **[F4]** Microsoft Learn. [Obtención de datos en Power BI Desktop](https://learn.microsoft.com/es-es/power-bi/connect-data/desktop-data-sources).
-- **[F5]** Microsoft Learn. [Descarga de Power BI Desktop](https://learn.microsoft.com/es-es/power-bi/fundamentals/desktop-get-the-desktop).
-- **[F6]** Microsoft Learn. [Conector de texto y CSV](https://learn.microsoft.com/es-es/power-query/connectors/text-csv).
-- **[F7]** Microsoft Learn. [Tipos de datos y configuración regional](https://learn.microsoft.com/es-es/power-query/data-types).
-- **[F8]** Microsoft Learn. [Combinación externa izquierda](https://learn.microsoft.com/es-es/power-query/merge-queries-left-outer).
-- **[F9]** Microsoft Learn. [Función DISTINCTCOUNT](https://learn.microsoft.com/es-es/dax/distinctcount-function-dax).
-- **[F10]** Microsoft Learn. [Visual de tarjeta](https://learn.microsoft.com/es-es/power-bi/visuals/power-bi-visualization-card).
-- **[F11]** Microsoft Learn. [Visualizaciones de tabla](https://learn.microsoft.com/es-es/power-bi/visuals/power-bi-visualization-tables).
-- **[F12]** Microsoft Learn. [Visualizaciones para comparar categorías y mostrar tendencias](https://learn.microsoft.com/es-es/power-bi/visuals/power-bi-visualizations-overview).
-- **[F13]** Microsoft Learn. [Gráficos de líneas](https://learn.microsoft.com/es-es/power-bi/visuals/power-bi-line-chart).
-- **[F14]** Microsoft Learn. [Agregar una columna personalizada](https://learn.microsoft.com/es-es/power-query/add-custom-column).
-- **[F15]** Microsoft Learn. [Herramientas de perfilado de datos](https://learn.microsoft.com/es-es/power-query/data-profiling-tools).
-- **[F16]** Microsoft Learn. [Agrupar y resumir filas](https://learn.microsoft.com/es-es/power-query/group-by).
-- **[F17]** Microsoft Learn. [Vista de informe en Power BI Desktop](https://learn.microsoft.com/es-es/power-bi/create-reports/desktop-report-view).
-- **[F18]** Microsoft Learn. [Medidas en Power BI Desktop](https://learn.microsoft.com/es-es/power-bi/transform-model/desktop-measures).
-- **[F19]** Microsoft Learn. [Función SUM](https://learn.microsoft.com/es-es/dax/sum-function-dax).
-- **[F21]** Microsoft Learn. [Segmentaciones de datos](https://learn.microsoft.com/es-es/power-bi/visuals/power-bi-visualization-slicers).
-- **[F22]** Microsoft Learn. [Interacciones entre objetos visuales](https://learn.microsoft.com/es-es/power-bi/create-reports/service-reports-visual-interactions).
-- **[F23]** Microsoft Learn. [Date.Year](https://learn.microsoft.com/es-es/powerquery-m/date-year) y [Date.StartOfMonth](https://learn.microsoft.com/es-es/powerquery-m/date-startofmonth).
+1. [Repositorio del taller y paquete utilizado](https://github.com/adanbeltran/Labs/tree/main/PowerBI-Taller01-demo). Fuente del conjunto: [SQLBI, Contoso V2, publicación 2024](https://github.com/sql-bi/Contoso-Data-Generator-V2-Data/releases/tag/ready-to-use-data-2024).
+2. Google Career Certificates. [Foundations of Data Science: flujo PACE](https://www.coursera.org/learn/foundations-of-data-science).
+3. Microsoft Learn. [Conector Texto/CSV](https://learn.microsoft.com/es-es/power-query/connectors/text-csv).
+4. Microsoft Learn. [Tipos de datos y configuración regional](https://learn.microsoft.com/es-es/power-query/data-types).
+5. SQLBI. [Código del generador: precios y construcción de las líneas de venta](https://github.com/sql-bi/Contoso-Data-Generator-V2/blob/main/DatabaseGenerator/Engine.cs).
+6. Microsoft Learn. [Combinación externa izquierda](https://learn.microsoft.com/es-es/power-query/merge-queries-left-outer).
+7. Microsoft Learn. [Agregar una columna personalizada](https://learn.microsoft.com/es-es/power-query/add-custom-column).
+8. Microsoft Learn. [Date.StartOfMonth](https://learn.microsoft.com/es-es/powerquery-m/date-startofmonth).
+9. Microsoft Learn. [Herramientas de perfilado de datos](https://learn.microsoft.com/es-es/power-query/data-profiling-tools).
+10. Microsoft Learn. [Agrupar filas](https://learn.microsoft.com/es-es/power-query/group-by).
+11. Microsoft Learn. [Medidas en Power BI Desktop](https://learn.microsoft.com/es-es/power-bi/transform-model/desktop-measures).
+12. Microsoft Learn. [SUM](https://learn.microsoft.com/es-es/dax/sum-function-dax) y [DISTINCTCOUNT](https://learn.microsoft.com/es-es/dax/distinctcount-function-dax).
+13. Microsoft Learn. [Segmentaciones de datos](https://learn.microsoft.com/es-es/power-bi/visuals/power-bi-visualization-slicers).
+14. Microsoft Learn. [Formato de tarjetas](https://learn.microsoft.com/es-es/power-bi/visuals/power-bi-visualization-card) y [unidades de visualización](https://learn.microsoft.com/es-es/power-bi/create-reports/desktop-custom-format-strings).
+15. Microsoft Learn. [Gráficos de líneas](https://learn.microsoft.com/es-es/power-bi/visuals/power-bi-line-chart).
+16. Microsoft Learn. [Interacciones entre visuales](https://learn.microsoft.com/es-es/power-bi/create-reports/service-reports-visual-interactions).
+
+17. Microsoft Learn. [Crear, detectar y administrar relaciones](https://learn.microsoft.com/es-es/power-bi/transform-model/desktop-create-and-manage-relationships).
+18. Microsoft Learn. [Tablas de hechos, dimensiones y esquema de estrella](https://learn.microsoft.com/es-es/power-bi/guidance/star-schema).
+19. Microsoft Learn. [Configuración regional de importación y separadores DAX](https://learn.microsoft.com/es-es/power-bi/fundamentals/supported-languages-countries-regions).
+20. Microsoft Learn. [Configuración regional del formato de fechas y números del informe](https://learn.microsoft.com/es-es/power-bi/create-reports/power-bi-default-format-string-locale).
+21. Microsoft Learn. [Personalizar el tema del informe](https://learn.microsoft.com/es-es/power-bi/create-reports/desktop-report-themes).
+22. Microsoft Learn. [Accesibilidad, color y legibilidad de los informes](https://learn.microsoft.com/es-es/power-bi/create-reports/desktop-accessibility-creating-reports).
 
 [Volver al índice](#indice)
-
