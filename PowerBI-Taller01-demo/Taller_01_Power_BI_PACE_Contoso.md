@@ -7,20 +7,13 @@ Contoso es una empresa ficticia. Su dirección comercial necesita conocer el vol
 <a id="roadmap"></a>
 ## Ruta de construcción y validación
 
-La construcción sigue esta secuencia e incorpora comprobaciones durante la preparación, el cálculo y la presentación.
+El trabajo comienza en la **[fase 1. Planear](#fase-1)**, donde se [define el problema y el alcance del análisis (1.1)](#seccion-1-1) y se [relaciona cada pregunta de negocio con los campos y visuales necesarios (1.2)](#seccion-1-2). Así queda establecido qué se necesita responder, para quién y durante qué período. Estas decisiones orientan la preparación de los datos en la siguiente fase.
 
-| Orden | Actividad y apartados | Resultado que se obtiene | Qué se comprueba |
-| --- | --- | --- | --- |
-| 1 | **Planear:** [1.1](#seccion-1-1) y [1.2](#seccion-1-2). | Problema, período, preguntas, campos y visuales previstos. | Cada pregunta tiene información disponible y un propósito comercial. |
-| 2 | **Preparar e importar:** [2.1](#seccion-2-1) a [2.4](#seccion-2-4). | Dos consultas con encabezados originales, tipos correctos y precios bien interpretados. | El delimitador separa las columnas y la configuración regional interpreta correctamente los números y las fechas. |
-| 3 | **Calcular y revisar la fuente:** [2.5](#seccion-2-5) y [2.6](#seccion-2-6). | Importe por línea, mes de análisis y tablas preparadas. | Se conservan las filas; las claves, los vacíos y los valores esenciales cumplen los controles. |
-| 4 | **Relacionar:** [2.7](#seccion-2-7). | `product` y `sales` conectadas por `ProductKey`. | Relación activa, cardinalidad uno a varios y filtro de productos hacia ventas. |
-| 5 | **Definir indicadores:** [3.1](#seccion-3-1). | Medidas de ventas, unidades y pedidos distintos. | Los totales sin filtros coinciden con las referencias iniciales al mostrarlos en las tarjetas. |
-| 6 | **Diseñar y responder:** [3.2](#seccion-3-2) a [3.7](#seccion-3-7). | Paleta, filtros, tarjetas, barras, tabla y línea mensual. | Todos los visuales comparten el alcance de 2020 y sus resultados coinciden con las referencias por categoría y mes. |
-| 7 | **Probar y reconstruir:** [3.8](#seccion-3-8) y [3.9](#seccion-3-9). | Filtros comprobados y dos pedidos reconstruidos manualmente. | La selección de Computers y el cálculo manual coinciden con las medidas. |
-| 8 | **Explicar y cerrar:** [4.1](#seccion-4-1) a [4.4](#seccion-4-4). | Respuestas, relato con evidencia y siguiente acción. | Las cifras comunicadas corresponden a los filtros visibles y las diferencias de cálculo están resueltas. |
+Con ese propósito definido, la **[fase 2. Analizar](#fase-2)** comienza al [descargar y reconocer los datos (2.1)](#seccion-2-1). Antes de cargarlos, se [configura su interpretación regional (2.2)](#seccion-2-2); después se [importan los CSV y se conservan los campos necesarios (2.3)](#seccion-2-3). La preparación continúa al [revisar separadores, tipos y precisión (2.4)](#seccion-2-4) y [crear el importe por línea y el mes de análisis (2.5)](#seccion-2-5). Una vez [comprobada la calidad y cargadas las tablas (2.6)](#seccion-2-6), se [verifica su relación por ProductKey (2.7)](#seccion-2-7). El resultado es una base preparada para calcular indicadores sin trasladar errores de importación a las cifras del reporte.
 
-Los [totales de control](#controles) acompañan esta ruta: sirven para comprobar la preparación, los cálculos y el alcance antes de presentar conclusiones.
+A partir de esa base, la **[fase 3. Construir](#fase-3)** transforma los datos en respuestas. Primero se [crean las medidas y se revisa el total sin filtros (3.1)](#seccion-3-1), se [define la paleta y la distribución del tablero (3.2)](#seccion-3-2) y se [preparan las páginas y los filtros (3.3)](#seccion-3-3). Después, el volumen comercial se muestra en [tres tarjetas para Q1 (3.4)](#seccion-3-4), el liderazgo por categoría en [barras para Q2 (3.5)](#seccion-3-5), la comparación de ventas y unidades en [una tabla para Q3 (3.6)](#seccion-3-6) y la evolución temporal en [una línea mensual para Q4 (3.7)](#seccion-3-7). La construcción se comprueba al [probar la relación y las interacciones (3.8)](#seccion-3-8) y [reconstruir manualmente dos pedidos (3.9)](#seccion-3-9). Los resultados se contrastan con los [totales de control](#controles) antes de llevarlos a la presentación.
+
+Con los resultados verificados, la **[fase 4. Ejecutar y explicar](#fase-4)** comienza al [consolidar las respuestas (4.1)](#seccion-4-1). La evidencia se organiza siguiendo [un orden de presentación con storytelling (4.2)](#seccion-4-2) y se comunica mediante [el relato del hallazgo (4.3)](#seccion-4-3), manteniendo las cifras vinculadas al período y a los filtros visibles. Finalmente, se [propone una acción y se guarda la solución (4.4)](#seccion-4-4). El recorrido conecta así la necesidad comercial inicial con una respuesta sustentada y deja planteadas las preguntas que pueden orientar un nuevo ciclo de análisis.
 
 <a id="controles"></a>
 ## Totales de control para comenzar
