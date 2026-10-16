@@ -192,8 +192,10 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
       <p>Ir a Inicio → Obtener datos → Texto/CSV.</p>
     </td>
     <td align="center">
-      <img src="imagenes/paso01.png" width="400" alt="Obtener datos">
-    </td>
+
+      <img width="400" alt="Obtener datos" src="https://github.com/user-attachments/assets/21d05af1-248f-4095-898e-15f9e56b9484" />
+
+     </td>
   </tr>
   <tr>
     <td>
