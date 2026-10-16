@@ -181,41 +181,13 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 10. Si ve `Column1`, `Column2`, etc., usar **Transformar → Usar la primera fila como encabezados**. Si todo queda en una columna, corregir el delimitador en la configuración del paso **Origen**.
 
 
-<table>
-  <tr>
-    <th width="50%">Acción en Power BI</th>
-    <th width="50%">Captura de pantalla</th>
-  </tr>
-  <tr>
-    <td>
-      <b>1. Seleccionar Obtener datos</b>
-      <p>Ir a Inicio → Obtener datos → Texto/CSV.</p>
-    </td>
-    <td align="center">
+| Acción en Power BI | Captura de pantalla |
+|:---|:---:|
+| **1. Seleccionar Obtener datos**. Ir a Inicio → Obtener datos → Texto/CSV. | ![Obtener datos](<img width="1383" height="921" alt="image" src="https://github.com/user-attachments/assets/f000ec3e-725d-4090-80d2-c2ecec6bf46a" />
+ |
+| **2. Seleccionar archivo**. Buscar y seleccionar `sales.csv`. | ![Seleccionar CSV](imagenes/paso02.png) |
+| **3. Transformar datos**. Seleccionar el botón **Transformar datos**. | ![Power Query](imagenes/paso03.png) |
 
-      <img src="https://github.com/user-attachments/assets/21d05af1-248f-4095-898e-15f9e56b9484" width="400" alt="Obtener datos"  >
-</td>
-     td>
-  </tr>
-  <tr>
-    <td>
-      <b>2. Seleccionar archivo</b>
-      <p>Buscar y seleccionar sales.csv.</p>
-    </td>
-    <td align="center">
-      <img src="imagenes/paso02.png" width="400" alt="Seleccionar CSV">
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <b>3. Transformar datos</b>
-      <p>Seleccionar el botón Transformar datos.</p>
-    </td>
-    <td align="center">
-      <img src="imagenes/paso03.png" width="400" alt="Power Query">
-    </td>
-  </tr>
-</table>
 
 
 
