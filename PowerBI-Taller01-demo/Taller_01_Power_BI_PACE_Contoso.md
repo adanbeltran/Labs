@@ -163,6 +163,9 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 
 **Resultado esperado:** los números de origen con punto decimal podrán convertirse correctamente. **Verificación:** todavía no se han importado datos.
 
+<img width="1585" height="1006" alt="image" src="https://github.com/user-attachments/assets/7b18bcd3-0ef3-4d16-8cba-162229f93835" />
+
+
 <a id="paso-3-3"></a>
 ### 3.3. Importar ambos CSV y conservar los campos
 
