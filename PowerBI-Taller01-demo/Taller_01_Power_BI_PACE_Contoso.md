@@ -193,9 +193,9 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
     </td>
     <td align="center">
 
-      <img width="400" alt="Obtener datos" src="https://github.com/user-attachments/assets/21d05af1-248f-4095-898e-15f9e56b9484" />
-
-     </td>
+      <img src="https://github.com/user-attachments/assets/21d05af1-248f-4095-898e-15f9e56b9484" width="400" alt="Obtener datos"  >
+</td>
+     td>
   </tr>
   <tr>
     <td>
