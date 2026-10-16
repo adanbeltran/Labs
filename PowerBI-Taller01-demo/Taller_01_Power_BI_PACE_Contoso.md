@@ -183,7 +183,7 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 
 | Acción en Power BI | Captura de pantalla |
 |:---|:---:|
-| **1. Seleccionar Obtener datos**. Ir a Inicio → Obtener datos → Texto/CSV. | ![Obtener datos](<img width="1383" height="921" alt="image" src="https://github.com/user-attachments/assets/f000ec3e-725d-4090-80d2-c2ecec6bf46a" />
+| **1. Seleccionar Obtener datos**. Ir a Inicio → Obtener datos → Texto/CSV. | ![Obtener datos](<img width="1383" height="921" alt="image" src="https://github.com/user-attachments/assets/f000ec3e-725d-4090-80d2-c2ecec6bf46a") />
  |
 | **2. Seleccionar archivo**. Buscar y seleccionar `sales.csv`. | ![Seleccionar CSV](imagenes/paso02.png) |
 | **3. Transformar datos**. Seleccionar el botón **Transformar datos**. | ![Power Query](imagenes/paso03.png) |
