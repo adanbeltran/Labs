@@ -180,6 +180,44 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 9. Con **Ctrl**, seleccionar únicamente `ProductKey`, `ProductName` y `CategoryName`, y ejecutar **Quitar otras columnas**.
 10. Si ve `Column1`, `Column2`, etc., usar **Transformar → Usar la primera fila como encabezados**. Si todo queda en una columna, corregir el delimitador en la configuración del paso **Origen**.
 
+
+<table>
+  <tr>
+    <th width="50%">Acción en Power BI</th>
+    <th width="50%">Captura de pantalla</th>
+  </tr>
+  <tr>
+    <td>
+      <b>1. Seleccionar Obtener datos</b>
+      <p>Ir a Inicio → Obtener datos → Texto/CSV.</p>
+    </td>
+    <td align="center">
+      <img src="imagenes/paso01.png" width="400" alt="Obtener datos">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>2. Seleccionar archivo</b>
+      <p>Buscar y seleccionar sales.csv.</p>
+    </td>
+    <td align="center">
+      <img src="imagenes/paso02.png" width="400" alt="Seleccionar CSV">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>3. Transformar datos</b>
+      <p>Seleccionar el botón Transformar datos.</p>
+    </td>
+    <td align="center">
+      <img src="imagenes/paso03.png" width="400" alt="Power Query">
+    </td>
+  </tr>
+</table>
+
+
+
+
 | Consulta | Campos que deben quedar | Cantidad |
 | --- | --- | ---: |
 | `sales` | `OrderKey`, `LineNumber`, `OrderDate`, `ProductKey`, `Quantity`, `NetPrice` | 6 |
