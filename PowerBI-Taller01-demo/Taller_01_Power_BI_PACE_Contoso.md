@@ -177,53 +177,19 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 
 **Repetir el proceso con el archivo de products.csv**
 
+**Resultado esperado:** los dos archivos cargados**
+<img width="1806" height="813" alt="image" src="https://github.com/user-attachments/assets/9bb4ba05-db4c-4cb9-b958-84230d7cef2c" />
 
 
-
-| Consulta | Campos que deben quedar | Cantidad |
-| --- | --- | ---: |
-| `sales` | `OrderKey`, `LineNumber`, `OrderDate`, `ProductKey`, `Quantity`, `NetPrice` | 6 |
-| `product` | `ProductKey`, `ProductName`, `CategoryName` | 3 |
-
-**Resultado esperado:** dos consultas separadas con esos encabezados. **Verificación:** no pulsar **Cerrar y aplicar** aún.
 
 <a id="paso-3-4"></a>
-### 3.4. Asignar tipos y proteger la precisión
+### 3.4. Crear columnas calculadas en Power Query
+| Acción en Power BI | Captura de pantalla |
+|:---|:---:|
+| **1. Seleccionar la vista de tabla y seleccionar `sales.csv` | <img width="1890" height="771" alt="image" src="https://github.com/user-attachments/assets/bf020ae3-e5d9-4770-8e6e-60704111f842" /> |
+| **2. Seleccionar Nueva Columna** | <img width="1837" height="416" alt="image" src="https://github.com/user-attachments/assets/69f07f68-df39-4f17-93be-bcabcedb2f8a" /> |
+| **3. escribir ```ImporteVenta = [Quantity] * [NetPrice]```  Pulsar **Confirmar* |<img width="1447" height="360" alt="image" src="https://github.com/user-attachments/assets/1a5da758-859f-4b46-b624-11a4d3611a5c" /> |
 
-| Consulta y campo | Tipo obligatorio |
-| --- | --- |
-| `sales[OrderKey]` | Texto |
-| `sales[LineNumber]` | Número entero |
-| `sales[OrderDate]` | Fecha |
-| `sales[ProductKey]` | Número entero |
-| `sales[Quantity]` | Número entero |
-| `sales[NetPrice]` | Número decimal |
-| `product[ProductKey]` | Número entero |
-| `product[ProductName]` | Texto |
-| `product[CategoryName]` | Texto |
-
-1. En `sales`, seleccionar cada columna y usar el **icono de tipo de datos** del encabezado para aplicar el tipo de la tabla.
-2. Para `NetPrice`, revisar **Pasos aplicados**: si Power Query ya convirtió mal el dato por una configuración regional, eliminar el paso automático **Tipo cambiado** antes de convertir desde el texto original.
-3. Seleccionar `NetPrice` → **clic derecho → Cambiar tipo → Usar configuración regional**; elegir **Número decimal** y **Inglés (Estados Unidos)**.
-4. Cambiar `OrderDate` a **Fecha**. Si aparece error, volver al valor de texto y convertir usando una configuración regional compatible. Confirmar que `2015-01-01` significa **1 de enero de 2015**.
-5. En `product`, asignar los tres tipos de la tabla. Seleccionar con **Ctrl** `ProductName` y `CategoryName` → **Transformar → Formato → Recortar** para quitar espacios al inicio o al final.
-6. Revisar que `ProductKey` sea **Número entero** en las dos consultas y que el precio de prueba `98.967` no haya sido transformado en `98967`.
-
-**Resultado esperado:** sin errores de conversión; valores originales preservados. **Verificación:** no cambiar `NetPrice` a **Número decimal fijo** ni redondearlo, pues contiene hasta seis decimales en el origen.
-
-**Nota sobre separadores:** cambiar el formato de números en la página no repara una importación equivocada. Los separadores de argumentos DAX, cuando sean necesarios, se ajustan por configuración regional de DAX y no afectan a los CSV.
-
-<a id="paso-3-5"></a>
-### 3.5. Crear columnas calculadas en Power Query
-
-1. Seleccionar la consulta `sales`.
-2. Abrir **Agregar columna → Columna personalizada**.
-3. En **Nuevo nombre de columna**, escribir `ImporteVenta`.
-4. En la fórmula escribir exactamente:
-
-```powerquery
-[Quantity] * [NetPrice]
-```
 
 5. Pulsar **Aceptar** y cambiar el tipo de la columna nueva a **Número decimal**.
 6. Repetir **Agregar columna → Columna personalizada**.
