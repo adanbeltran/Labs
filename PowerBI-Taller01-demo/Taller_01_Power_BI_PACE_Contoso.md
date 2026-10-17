@@ -180,7 +180,7 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 <div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> se localizan dos CSV originales en una carpeta conocida. Al cambiar de computador, las rutas absolutas de las fuentes pueden requerir actualización desde Power Query.</p></div>
     </td>
     <td width="75%" align="center" valign="top">
-      <p><em>Captura 3.1.1 pendiente. Pegar aquí la imagen de este paso.</em></p>
+      <p><img width="1625" height="925" alt="image" src="https://github.com/user-attachments/assets/dbce2484-2d59-4108-821a-53b0fb7df823" /></p>
 <p><em>Captura 3.1.1b pendiente. Pegar aquí la imagen de este paso.</em></p>
     </td>
   </tr>
