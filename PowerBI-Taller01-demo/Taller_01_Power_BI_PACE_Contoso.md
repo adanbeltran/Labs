@@ -16,41 +16,49 @@ Contoso es una empresa ficticia. La dirección comercial necesita conocer el imp
 **Regla metodológica:** las fases 1 y 2 son exclusivamente de lectura, discusión y razonamiento. La descarga de los archivos y todas las operaciones sobre Power BI comienzan en la fase 3. La fase 4 utiliza la solución construida para presentar los resultados; no introduce cálculos improvisados.
 
 <a id="indice"></a>
-## Índice con navegación por fases y pasos
+## Índice hipervinculado por fases y pasos
 
-| Paso | Tema | Modalidad |
-| --- | --- | --- |
-| [Fase 1. Planear](#fase-1) | Necesidad y preguntas | Comprensión |
-| [1.1](#paso-1-1) | Contexto y alcance | Comprensión |
-| [1.2](#paso-1-2) | Preguntas, campos y visuales | Comprensión |
-| [Fase 2. Analizar](#fase-2) | Significado y calidad de los datos | Comprensión |
-| [2.1](#paso-2-1) | Datos y granularidad | Comprensión |
-| [2.2](#paso-2-2) | Relaciones entre tablas | Comprensión |
-| [2.3](#paso-2-3) | Precisión, separadores y medidas | Comprensión |
-| [2.4](#paso-2-4) | Totales de control | Comprensión |
-| [Fase 3. Construir](#fase-3) | Trabajo guiado en Power BI | Práctica |
-| [3.1](#paso-3-1) | Obtener y extraer los archivos | Preparación |
-| [3.2](#paso-3-2) | Configurar Power BI | Práctica |
-| [3.3](#paso-3-3) | Importar y seleccionar columnas | Práctica |
-| [3.4](#paso-3-4) | Asignar tipos y respetar precisión | Práctica |
-| [3.5](#paso-3-5) | Crear columnas de Power Query | Práctica |
-| [3.6](#paso-3-6) | Validar calidad de origen | Práctica |
-| [3.7](#paso-3-7) | Relacionar tablas | Práctica |
-| [3.8](#paso-3-8) | Crear medidas DAX | Práctica |
-| [3.9](#paso-3-9) | Crear página, diseño y filtros | Práctica |
-| [3.10](#paso-3-10) | Q1: tres tarjetas | Práctica |
-| [3.11](#paso-3-11) | Q2: barras por categoría | Práctica |
-| [3.12](#paso-3-12) | Q3: tabla comparativa | Práctica |
-| [3.13](#paso-3-13) | Q4: línea mensual | Práctica |
-| [3.14](#paso-3-14) | Probar interacciones | Práctica |
-| [3.15](#paso-3-15) | Página de comprobación de pedidos | Práctica |
-| [Fase 4. Ejecutar y explicar](#fase-4) | Presentación y cierre | Práctica + interpretación |
-| [4.1](#paso-4-1) | Restaurar filtros y comprobar | Práctica |
-| [4.2](#paso-4-2) | Presentar con storytelling | Práctica + interpretación |
-| [4.3](#paso-4-3) | Interpretar y proponer acción | Interpretación |
-| [4.4](#paso-4-4) | Guardar entrega | Práctica |
-| [Dificultades frecuentes](#dificultades) | Solución de errores | Consulta |
-| [Fuentes](#fuentes) | Referencias oficiales | Consulta |
+| Paso | Actividad | Modalidad |
+|:---|:---|:---|
+| [Fase 1. Planear](#fase-1) | 1. Planear | Comprensión |
+| [1.1 Contexto y alcance](#paso-1-1) | Contexto y alcance | Comprensión |
+| [1.2 Preguntas y visuales](#paso-1-2) | Preguntas y visuales | Comprensión |
+| [Fase 2. Analizar](#fase-2) | 2. Analizar | Comprensión |
+| [2.1 Granularidad](#paso-2-1) | Granularidad | Comprensión |
+| [2.2 Relaciones](#paso-2-2) | Relaciones | Comprensión |
+| [2.3 Precisión](#paso-2-3) | Precisión | Comprensión |
+| [2.4 Totales de control](#paso-2-4) | Totales de control | Comprensión |
+| [Fase 3. Construir](#fase-3) | 3. Construir | Power BI |
+| [3.1 Configuración inicial](#paso-3-1) | Configuración inicial | Power BI |
+| [3.1.1 Descargar y organizar archivos](#paso-3-1-1) | Descargar y organizar archivos | Power BI |
+| [3.1.2 Localizar Obtener datos](#paso-3-1-2) | Localizar Obtener datos | Power BI |
+| [3.1.3 Configuración regional](#paso-3-1-3) | Configuración regional | Power BI |
+| [3.2 Calidad de datos – Power Query](#paso-3-2) | Calidad de datos – Power Query | Power BI |
+| [3.2.1 Importar CSV](#paso-3-2-1) | Importar CSV | Power BI |
+| [3.2.2 Tipos de datos](#paso-3-2-2) | Tipos de datos | Power BI |
+| [3.2.3 Perfil de calidad](#paso-3-2-3) | Perfil de calidad | Power BI |
+| [3.2.4 Conteos y duplicados](#paso-3-2-4) | Conteos y duplicados | Power BI |
+| [3.2.5 Columnas M](#paso-3-2-5) | Columnas M | Power BI |
+| [3.2.6 Cerrar y aplicar](#paso-3-2-6) | Cerrar y aplicar | Power BI |
+| [3.3 Modelo de datos](#paso-3-3) | Modelo de datos | Power BI |
+| [3.3.1 Relación ProductKey](#paso-3-3-1) | Relación ProductKey | Power BI |
+| [3.3.2 M vs DAX](#paso-3-3-2) | M vs DAX | Power BI |
+| [3.3.3 Medidas DAX](#paso-3-3-3) | Medidas DAX | Power BI |
+| [3.3.4 Totales de control](#paso-3-3-4) | Totales de control | Power BI |
+| [3.4 Visualizaciones](#paso-3-4) | Visualizaciones | Power BI |
+| [3.4.1 Diseño de página](#paso-3-4-1) | Diseño de página | Power BI |
+| [3.4.2 Segmentaciones](#paso-3-4-2) | Segmentaciones | Power BI |
+| [3.4.3 Tarjetas](#paso-3-4-3) | Tarjetas | Power BI |
+| [3.4.4 Barras](#paso-3-4-4) | Barras | Power BI |
+| [3.4.5 Tabla comparativa](#paso-3-4-5) | Tabla comparativa | Power BI |
+| [3.4.6 Línea mensual](#paso-3-4-6) | Línea mensual | Power BI |
+| [3.4.7 Interacciones](#paso-3-4-7) | Interacciones | Power BI |
+| [3.4.8 Comprobación de pedidos](#paso-3-4-8) | Comprobación de pedidos | Power BI |
+| [Fase 4. Ejecutar y explicar](#fase-4) | 4. Ejecutar y explicar | Informe y comunicación |
+| [4.1 Restaurar filtros](#paso-4-1) | Restaurar filtros | Informe |
+| [4.2 Storytelling](#paso-4-2) | Storytelling | Informe |
+| [4.3 Hallazgos](#paso-4-3) | Hallazgos | Informe |
+| [4.4 Guardar](#paso-4-4) | Guardar | Informe |
 
 ## Recorrido de las cuatro fases
 
@@ -58,7 +66,7 @@ La **[fase 1. Planear](#fase-1)** establece el problema comercial, las preguntas
 
 La **[fase 2. Analizar](#fase-2)** estudia las tablas y su nivel de detalle, qué hace cada campo, qué cálculos son legítimos y cómo reconocer errores de interpretación. Todo sigue siendo conceptual; conocer estos riesgos será indispensable al operar Power BI.
 
-La **[fase 3. Construir](#fase-3)** implementa el análisis en Power BI Desktop. Incluye obtención del archivo, transformación en Power Query, creación de la relación, medidas DAX, cuatro visualizaciones y pruebas técnicas. Cada subpaso especifica la ruta de menú y el resultado esperado.
+La **[fase 3. Construir](#fase-3)** implementa el análisis en Power BI Desktop. Se organiza en configuración inicial (3.1), calidad y transformación en Power Query (3.2), modelo y medidas DAX (3.3), y visualizaciones con sus comprobaciones (3.4). Cada subpaso especifica la ruta de menú y el resultado esperado.
 
 La **[fase 4. Ejecutar y explicar](#fase-4)** utiliza el informe validado para responder las preguntas en orden narrativo, mostrar evidencia, explicar límites y proponer una revisión posterior. Se conserva la selección de filtros correcta y se guarda el PBIX final.
 
@@ -139,259 +147,299 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 [Volver al índice](#indice)
 
 <a id="fase-3"></a>
-## Fase 3. Construir
+## Fase 3. Construir en Power BI
 
-**PRÁCTICA GUIADA EN POWER BI DESKTOP.** Esta fase convierte el razonamiento anterior en un informe verificable. Siga los pasos en secuencia. Cada apartado indica qué seleccionar, qué escribir y qué resultado comprobar antes de avanzar. Algunos rótulos de la interfaz pueden variar ligeramente entre versiones.
+**Modalidad: práctica guiada.** Realice los apartados en orden: **[3.1 Configuración inicial](#paso-3-1) → [3.2 Calidad de datos](#paso-3-2) → [3.3 Modelo de datos](#paso-3-3) → [3.4 Visualizaciones](#paso-3-4)**. Al finalizar cada subpaso, contraste el resultado esperado antes de avanzar. No copie los totales de referencia como valores fijos dentro de los visuales.
 
-<img width="1448" height="1086" alt="image" src="https://github.com/user-attachments/assets/64439d66-7728-4cd0-ad9a-338e2e690e49" />
+> **Organización de las capturas:** cada paso tiene una referencia `3.x.y` y una celda en la columna derecha. Para reemplazar una captura pendiente, copie desde GitHub la dirección de la imagen y sustituya el texto `🖼️ Captura ... pendiente` por `<img src="URL" width="900" alt="Paso 3.x.y">` dentro de la misma celda. Mantenga toda la fila de la tabla en una única línea del archivo `.md`. La columna de acciones se mantiene breve; la columna de imágenes recibe prioridad visual. En tablas Markdown GitHub ajusta el ancho automáticamente y no garantiza una proporción fija.
 
+**Mapa visual de la fase:**
 
+<img src="https://github.com/user-attachments/assets/64439d66-7728-4cd0-ad9a-338e2e690e49" width="900" alt="Captura: general">
 
 <a id="paso-3-1"></a>
-### 3.1. Obtener los archivos
+### 3.1. Configuración inicial
 
-1. Descargar [csv-100k.7z](https://raw.githubusercontent.com/adanbeltran/Labs/main/PowerBI-Taller01-demo/csv-100k.7z).
-2. Extraer su contenido con una herramienta compatible con `.7z` en una carpeta de trabajo, por ejemplo `Taller_01_PowerBI/Contoso`.
-3. Identificar `sales.csv` y `product.csv` y mantenerlos en una ubicación estable.
-4. No abrir y guardar los CSV con una aplicación que pueda cambiar automáticamente precios o fechas.
+**Propósito.** Descargar los insumos, establecer una carpeta de trabajo y definir la interpretación regional antes de leer los CSV. En esta sección aún no se calculan indicadores.
 
-**Resultado esperado:** dos archivos CSV listos para importar. **Verificación:** los nombres coinciden exactamente.
+<a id="paso-3-1-1"></a>
+#### 3.1.1. Descargar y organizar los archivos
+
+Descargue el paquete de [datos Contoso `csv-100k.7z`](https://raw.githubusercontent.com/adanbeltran/Labs/main/PowerBI-Taller01-demo/csv-100k.7z) y extráigalo sin modificar los CSV.
+
+| Acción en Power BI | Captura de pantalla |
+|:---|:---:|
+| **1.** Descargar el paquete `.7z` y extraerlo en `Taller_01_PowerBI/datos`. Verificar que aparezcan `sales.csv` y `product.csv`. Conservar los nombres originales. | 🖼️ **Captura 3.1.1 pendiente.** Pegar aquí la imagen de este paso. |
+| **2.** Guardar el futuro `.pbix` en `Taller_01_PowerBI`. No editar los CSV en Excel ni cambiar sus separadores. | 🖼️ **Captura 3.1.1b pendiente.** Pegar aquí la imagen de este paso. |
+
+**Resultado esperado:** se localizan dos CSV originales en una carpeta conocida. Al cambiar de computador, las rutas absolutas de las fuentes pueden requerir actualización desde Power Query.
+
+<a id="paso-3-1-2"></a>
+#### 3.1.2. Abrir Power BI y localizar Obtener datos
+
+Prepare un informe en blanco y reconozca el conector antes de importarlo.
+
+| Acción en Power BI | Captura de pantalla |
+|:---|:---:|
+| **1.** Abrir Power BI Desktop, crear un informe en blanco e identificar **Inicio → Obtener datos → Texto/CSV**. No pulse **Cargar** todavía. | <img src="https://github.com/user-attachments/assets/f000ec3e-725d-4090-80d2-c2ecec6bf46a" width="850" alt="Captura: get"> |
+
+**Resultado esperado:** se identifica correctamente el conector Texto/CSV.
+
+<a id="paso-3-1-3"></a>
+#### 3.1.3. Configurar la interpretación regional
+
+La fuente original representa números decimales con punto. Defina la región de importación antes de transformarlos.
+
+| Acción en Power BI | Captura de pantalla |
+|:---|:---:|
+| **1.** Ir a **Archivo → Opciones y configuración → Opciones → Archivo actual → Configuración regional**. Seleccionar **Inglés (Estados Unidos)** para la importación y aceptar. Si aparece una opción independiente de formato visible, puede escoger **Español (Colombia)** para presentación. | <img src="https://github.com/user-attachments/assets/7b18bcd3-0ef3-4d16-8cba-162229f93835" width="850" alt="Captura: regional"> |
+
+**Verificación:** interpretar `98.967` como 98,967 (con coma decimal al mostrarlo en Colombia); **no** como 98.967 unidades enteras. El formato de pantalla no arregla un valor mal convertido.
 
 <a id="paso-3-2"></a>
-### 3.2. Configurar la interpretación regional
+### 3.2. Calidad de datos – Power Query
 
-1. Abrir **Power BI Desktop** y crear un informe nuevo.
-2. Ir a **Archivo → Opciones y configuración → Opciones → Archivo actual → Configuración regional**.
-3. Elegir **Inglés (Estados Unidos)** como configuración regional de importación. Confirmar con **Aceptar**.
-4. Si está disponible una opción independiente para la región de presentación del informe, usar **Español (Colombia)**; esto cambia la visualización, no corrige datos mal importados.
+**Propósito.** Importar las dos fuentes y controlar tipos, vacíos, duplicados y precisión antes de trabajar en el modelo. **Importante:** la guía original ya muestra capturas de creación de columnas desde la **vista Tabla usando DAX**. Esas capturas se preservan como referencia alternativa en 3.3.2; para seguir la secuencia principal se crearán `ImporteVenta` e `InicioMes` en **Power Query (M)**, pues allí sí estarán disponibles para consultas y controles posteriores.
 
-**Resultado esperado:** los números de origen con punto decimal podrán convertirse correctamente. **Verificación:** todavía no se han importado datos.
+<a id="paso-3-2-1"></a>
+#### 3.2.1. Importar sales.csv y product.csv
 
-<img width="1585" height="1006" alt="image" src="https://github.com/user-attachments/assets/7b18bcd3-0ef3-4d16-8cba-162229f93835" />
+Use **Transformar datos** en lugar de **Cargar** para poder controlar la calidad antes de aplicar.
 
+| Acción en Power BI | Captura de pantalla |
+|:---|:---:|
+| **1.** **Inicio → Obtener datos → Texto/CSV**. Localizar `sales.csv`. | <img src="https://github.com/user-attachments/assets/f000ec3e-725d-4090-80d2-c2ecec6bf46a" width="850" alt="Captura: get"> |
+| **2.** Comprobar **Delimitador: coma** y vista previa de `sales.csv`. Seleccionar **Transformar datos**, no **Cargar**. | <img src="https://github.com/user-attachments/assets/21beab77-cfd5-42dc-91e6-82d3455f2b73" width="650" alt="Captura: choose"> <img src="https://github.com/user-attachments/assets/53a8bd73-2450-4af3-8f0d-e0491fa8d4f0" width="650" alt="Captura: load"> |
+| **3.** En el Editor de Power Query, renombrar la consulta `sales`. Seleccionar `OrderKey`, `LineNumber`, `OrderDate`, `ProductKey`, `Quantity`, `NetPrice` (Ctrl + clic) → **Quitar otras columnas**. | 🖼️ **Captura 3.2.1c pendiente.** Pegar aquí la imagen de este paso. |
+| **4.** **Inicio → Nuevo origen → Texto/CSV**; seleccionar `product.csv`, renombrar la consulta `product` y conservar `ProductKey`, `ProductName`, `CategoryName`. | <img src="https://github.com/user-attachments/assets/9bb4ba05-db4c-4cb9-b958-84230d7cef2c" width="850" alt="Captura: loaded"> |
+
+**Resultado esperado:** dos consultas en Power Query, `sales` con 6 campos originales y `product` con 3. **No hacer Cerrar y aplicar todavía.** Si los archivos aparecen con encabezados genéricos, usar **Usar primera fila como encabezados**.
+
+<a id="paso-3-2-2"></a>
+#### 3.2.2. Revisar y corregir los tipos de datos
+
+Los valores deben conservarse en su tipo adecuado. El error más riesgoso es convertir el precio decimal con una región incorrecta.
+
+| Acción en Power BI | Captura de pantalla |
+|:---|:---:|
+| **1.** En `sales`: `OrderKey` **Texto**; `LineNumber`, `ProductKey`, `Quantity` **Entero**; `OrderDate` **Fecha**; `NetPrice` **Número decimal**. En `product`: `ProductKey` **Entero**, nombres **Texto**. | 🖼️ **Captura 3.2.2a pendiente.** Pegar aquí la imagen de este paso. |
+| **2.** Para `NetPrice`, si existe un **Tipo cambiado** automático incorrecto, borrarlo antes de convertir. Clic derecho sobre el encabezado → **Cambiar tipo → Usar configuración regional → Número decimal → Inglés (Estados Unidos)**. | 🖼️ **Captura 3.2.2b pendiente.** Pegar aquí la imagen de este paso. |
+| **3.** En `product`, seleccionar nombres y **Transformar → Formato → Recortar**. Confirmar que `ProductKey` tiene igual tipo en ambas consultas. | 🖼️ **Captura 3.2.2c pendiente.** Pegar aquí la imagen de este paso. |
+
+**Verificación:** `OrderDate` reconoce fechas, `NetPrice` conserva hasta seis decimales, y no hay errores de conversión. No utilizar **Número decimal fijo** ni redondear antes de multiplicar.
+
+<a id="paso-3-2-3"></a>
+#### 3.2.3. Examinar calidad y perfil de columnas
+
+El perfilado debe aplicarse sobre **todo el conjunto de datos**, no solo a la muestra de 1.000 filas.
+
+| Acción en Power BI | Captura de pantalla |
+|:---|:---:|
+| **1.** En Power Query, ir a **Vista → Calidad de columna** y **Perfil de columna** (opcional: **Distribución de columna**). | <img src="https://github.com/user-attachments/assets/cd50a6d9-eaa2-45ef-b2a1-de3931cf79df" width="850" alt="Captura: qualitymenu"> |
+| **2.** En la barra inferior, cambiar **Perfilado de columnas basado en las primeras 1.000 filas** por **basado en todo el conjunto de datos**. | <img src="https://github.com/user-attachments/assets/d1d4f80c-39a2-4fd8-adbb-fae9138b92ac" width="850" alt="Captura: quality"> |
+| **3.** Seleccionar `OrderKey`, `Quantity`, `NetPrice` y `LineNumber`. Revisar errores, vacíos, mínimos, máximos y valores distintos en Estadísticas de columna. | <img src="https://github.com/user-attachments/assets/132bacf6-e815-4b08-8c2c-c7144a429128" width="700" alt="Captura: profile"> <img src="https://github.com/user-attachments/assets/0b16ef72-8496-41b5-a034-cea08ea7d3ce" width="700" alt="Captura: fullprofile"> |
+| **4.** Repita la comprobación en `product[ProductKey]` y revise que no existan errores o claves nulas. | 🖼️ **Captura 3.2.3d pendiente.** Pegar aquí la imagen de este paso. |
+
+**Resultado esperado:** perfil completo, sin errores de conversión ni vacíos en los campos requeridos. La gráfica de perfil es una verificación de calidad, no una visualización del informe.
+
+<a id="paso-3-2-4"></a>
+#### 3.2.4. Verificar recuentos y claves
+
+Los totales estructurales se comprueban en Power Query; las cifras agregadas de ventas, unidades y pedidos se confirmarán con medidas DAX en **3.3.3**, después de cargar el modelo.
+
+| Acción en Power BI | Captura de pantalla |
+|:---|:---:|
+| **1.** Clic derecho en `sales` → **Referencia**, renombrar `control_filas_sales`. En esta consulta auxiliar usar **Transformar → Contar filas**. Debe devolver **199.873**. | 🖼️ **Captura 3.2.4a pendiente.** Pegar aquí la imagen de este paso. |
+| **2.** Repetir con una referencia de `product`, llamada `control_filas_product`. Debe devolver **2.517**. | 🖼️ **Captura 3.2.4b pendiente.** Pegar aquí la imagen de este paso. |
+| **3.** Otra referencia de `product`: **Agrupar por → ProductKey → Recuento de filas**. Filtrar recuentos mayores que 1. Debe quedar vacía (0 claves duplicadas). | 🖼️ **Captura 3.2.4c pendiente.** Pegar aquí la imagen de este paso. |
+| **4.** Desactivar **Habilitar carga** de consultas auxiliares (o eliminarlas tras verificar), sin alterar `sales` y `product`. | 🖼️ **Captura 3.2.4d pendiente.** Pegar aquí la imagen de este paso. |
+
+**No avanzar si no coinciden los recuentos.** Los 11.267 registros de 2020 son líneas, no pedidos distintos.
+
+<a id="paso-3-2-5"></a>
+#### 3.2.5. Crear ImporteVenta e InicioMes en Power Query
+
+La secuencia principal usa **Agregar columna → Columna personalizada** para crear estas dos columnas en lenguaje M.
+
+| Acción en Power BI | Captura de pantalla |
+|:---|:---:|
+| **1.** En `sales` elegir **Agregar columna → Columna personalizada**. Nombre: `ImporteVenta`. Fórmula: `[Quantity] * [NetPrice]`. Aceptar y dejar tipo **Número decimal**. | 🖼️ **Captura 3.2.5a pendiente.** Pegar aquí la imagen de este paso. |
+| **2.** Repetir **Columna personalizada**. Nombre: `InicioMes`. Fórmula: `Date.StartOfMonth([OrderDate])`. Aceptar y asignar tipo **Fecha**. | 🖼️ **Captura 3.2.5b pendiente.** Pegar aquí la imagen de este paso. |
+| **3.** Comprobar un registro: cantidad × precio neto = importe de línea. `InicioMes` debe mostrar el primer día del mes del pedido. | 🖼️ **Captura 3.2.5c pendiente.** Pegar aquí la imagen de este paso. |
+
+**Resultado esperado:** `sales` tiene 8 columnas y `product` 3. **No use aquí fórmulas DAX:** `EOMONTH(...)` y la sintaxis de DAX corresponden a otra etapa.
+
+<a id="paso-3-2-6"></a>
+#### 3.2.6. Cerrar y aplicar las transformaciones
+
+Verifique el panel de errores antes de pasar al modelo.
+
+| Acción en Power BI | Captura de pantalla |
+|:---|:---:|
+| **1.** Confirmar consultas de negocio `sales` y `product`, tipos correctos, sin errores y columnas `ImporteVenta` e `InicioMes`. Seleccionar **Inicio → Cerrar y aplicar**. | 🖼️ **Captura 3.2.6 pendiente.** Pegar aquí la imagen de este paso. |
+
+**Resultado esperado:** las tablas quedan disponibles en Power BI Desktop. Las consultas auxiliares no deben cargarse como tablas de negocio.
 
 <a id="paso-3-3"></a>
-### 3.3. Importar los archivos Sales.csv y products.csv
+### 3.3. Modelo de datos
+
+**Propósito.** Configurar la relación de hechos y dimensión y crear indicadores DAX. Aquí las medidas podrán responder dinámicamente a segmentaciones y filtros del informe.
+
+<a id="paso-3-3-1"></a>
+#### 3.3.1. Verificar relación por ProductKey
+
+En la vista Modelo se conserva una relación automática únicamente si es correcta.
 
 | Acción en Power BI | Captura de pantalla |
 |:---|:---:|
-| **1. Seleccionar Obtener datos**. Ir a Inicio → Obtener datos → Texto/CSV. | <img width="1383" height="921" alt="image" src="https://github.com/user-attachments/assets/f000ec3e-725d-4090-80d2-c2ecec6bf46a" /> |
-| **2. Seleccionar archivo**. Buscar y seleccionar `sales.csv`. | <img width="470" height="321" alt="image" src="https://github.com/user-attachments/assets/21beab77-cfd5-42dc-91e6-82d3455f2b73" /> |
-| **3. Cargar datos**. Seleccionar el botón **Cargar**. |<img width="1112" height="826" alt="image" src="https://github.com/user-attachments/assets/53a8bd73-2450-4af3-8f0d-e0491fa8d4f0" /> |
+| **1.** Abrir **Vista Modelo**. Revisar conexión `product[ProductKey]` (lado **1**) → `sales[ProductKey]` (lado **muchos**). | 🖼️ **Captura 3.3.1a pendiente.** Pegar aquí la imagen de este paso. |
+| **2.** Doble clic sobre la relación: **Activa: Sí**; **Cardinalidad: uno a varios**; **Dirección de filtro cruzado: Única** desde `product` hacia `sales`. Si no existe: **Modelado → Administrar relaciones → Nueva**. | 🖼️ **Captura 3.3.1b pendiente.** Pegar aquí la imagen de este paso. |
 
-**Repetir el proceso con el archivo de products.csv**
+**Verificación:** al filtrar una categoría de productos se filtran sus ventas. No combinar las consultas ni admitir muchos a muchos sin revisar las claves.
 
-**Resultado esperado:** los dos archivos cargados**
-<img width="1806" height="813" alt="image" src="https://github.com/user-attachments/assets/9bb4ba05-db4c-4cb9-b958-84230d7cef2c" />
+<a id="paso-3-3-2"></a>
+#### 3.3.2. Reconocer la diferencia entre columnas Power Query y DAX
 
+Las capturas siguientes ya estaban en el taller original y muestran la **ruta alternativa DAX**. **No repita la creación** de `ImporteVenta` ni `InicioMes` si ya existen por Power Query en 3.2.5.
 
+| Acción en Power BI | Captura de pantalla |
+|:---|:---:|
+| **Referencia A (alternativa, no ejecutar de nuevo).** Vista Tabla → tabla `sales`. | <img src="https://github.com/user-attachments/assets/bf020ae3-e5d9-4770-8e6e-60704111f842" width="850" alt="Captura: view"> |
+| **Referencia B.** **Herramientas de tablas → Nueva columna**; para DAX, la expresión de importe sería `ImporteVenta = [Quantity] * [NetPrice]`. | <img src="https://github.com/user-attachments/assets/69f07f68-df39-4f17-93be-bcabcedb2f8a" width="750" alt="Captura: newcol"> <img src="https://github.com/user-attachments/assets/1a5da758-859f-4b46-b624-11a4d3611a5c" width="750" alt="Captura: amount"> |
+| **Referencia C.** En DAX, la fecha de inicio de mes puede escribirse `InicioMes = EOMONTH('sales'[OrderDate], -1) + 1` y definirse como Fecha. | <img src="https://github.com/user-attachments/assets/1907837c-e104-4ca5-b9b2-66d0d040edd8" width="850" alt="Captura: month"> |
+
+**Regla:** las columnas creadas en Power Query aparecen en el modelo. Las creadas por DAX no vuelven a aparecer en Power Query. En este recorrido las dos columnas ya están hechas mediante M.
+
+<a id="paso-3-3-3"></a>
+#### 3.3.3. Crear las tres medidas DAX
+
+Seleccione `sales` y después **Modelado → Nueva medida**. Crear cada medida por separado.
+
+| Acción en Power BI | Captura de pantalla |
+|:---|:---:|
+| **1. Ventas Totales:** `Ventas Totales = SUM('sales'[ImporteVenta])`. | 🖼️ **Captura 3.3.3a pendiente.** Pegar aquí la imagen de este paso. |
+| **2. Unidades Totales:** `Unidades Totales = SUM('sales'[Quantity])`. | 🖼️ **Captura 3.3.3b pendiente.** Pegar aquí la imagen de este paso. |
+| **3. Pedidos distintos:** `Pedidos = DISTINCTCOUNT('sales'[OrderKey])`. Formato: ventas 2 decimales; cantidades y pedidos 0 decimales. | 🖼️ **Captura 3.3.3c pendiente.** Pegar aquí la imagen de este paso. |
+
+**Verificación:** las tres medidas muestran icono de calculadora. `Pedidos` usa `DISTINCTCOUNT`, no recuento de líneas.
+
+<a id="paso-3-3-4"></a>
+#### 3.3.4. Comprobar totales agregados sin filtros
+
+Use un visual de tabla provisional con las tres medidas; el detalle comercial se construirá en 3.4.
+
+| Acción en Power BI | Captura de pantalla |
+|:---|:---:|
+| **1.** Insertar **Tabla** provisional y agregar las medidas. Sin filtros debe mostrar **203.723.865,76** en ventas, **628.370** unidades y **83.130** pedidos distintos. | 🖼️ **Captura 3.3.4a pendiente.** Pegar aquí la imagen de este paso. |
+| **2.** Aplicar temporalmente el intervalo **01/01/2020 a 31/12/2020** en un filtro de fecha del visual: deben aparecer **11.066.206,89**, **35.234** y **4.806**. Luego quitar el filtro y la tabla provisional. | 🖼️ **Captura 3.3.4b pendiente.** Pegar aquí la imagen de este paso. |
+
+**Si no coinciden**, revisar `NetPrice`, cálculo de `ImporteVenta`, `OrderDate`, precisión de los decimales y filtros activos antes de diseñar el tablero.
 
 <a id="paso-3-4"></a>
-### 3.4. Crear columnas en la vista de tabla ###
-| Acción en Power BI | Captura de pantalla |
-|:---|:---:|
-| **1. Seleccionar en el menu lateral la vista de tabla y seleccionar `sales`**  | <img width="1890" height="771" alt="image" src="https://github.com/user-attachments/assets/bf020ae3-e5d9-4770-8e6e-60704111f842" /> |
-| **2. Seleccionar Nueva Columna** | <img width="1837" height="416" alt="image" src="https://github.com/user-attachments/assets/69f07f68-df39-4f17-93be-bcabcedb2f8a" /> |
-| **3. escribir ```ImporteVenta = [Quantity] * [NetPrice]```  Pulsar Confirmar** |<img width="1447" height="360" alt="image" src="https://github.com/user-attachments/assets/1a5da758-859f-4b46-b624-11a4d3611a5c" /> |
-| **4. Agregar una nueva Columna ```InicioMes = EOMONTH('sales'[OrderDate], -1) + 1```  Pulsar Confirmar** |<img width="1585" height="258" alt="image" src="https://github.com/user-attachments/assets/1907837c-e104-4ca5-b9b2-66d0d040edd8" />|
-| **5. Definir tipo de datos Fecha y formato a Columna ```InicioMes```  |<img width="1585" height="258" alt="image" src="https://github.com/user-attachments/assets/1907837c-e104-4ca5-b9b2-66d0d040edd8" />|
+### 3.4. Visualizaciones
 
-**Resultado esperado:** `sales` tiene ocho columnas; `product`, tres. **Verificación:** no hay errores en las columnas nuevas. 
+**Propósito.** Convertir los indicadores validados en cuatro respuestas visuales; luego comprobar interacciones y auditoría por pedido. La página principal se refiere exclusivamente a **2020** y todas las categorías, salvo cuando se realizan pruebas controladas.
 
-<a id="paso-3-6"></a>
-### 3.6. Revisar calidad de los datos
+<a id="paso-3-4-1"></a>
+#### 3.4.1. Crear la página y definir el diseño
+
+Se propone fondo `#F4F7FB`, tarjetas blancas `#FFFFFF`, títulos azul oscuro `#172B4D`, barras de acento `#007F7A` y línea mensual `#1F5A85`.
 
 | Acción en Power BI | Captura de pantalla |
 |:---|:---:|
-| **1. En Power Query ir a -Ver → Calidad de columna → Perfil de columna → En la barra inferior del Editor, cambiar el perfilado de las primeras 1.000 filas a todo el conjunto de datos. Luego de revisar las Estadisticas de las columnas de OrderKey, unitPrice, Quantity, LineNumber  calidad de la columnas **  | <img width="1792" height="182" alt="image" src="https://github.com/user-attachments/assets/cd50a6d9-eaa2-45ef-b2a1-de3931cf79df" /> <img width="1558" height="940" alt="image" src="https://github.com/user-attachments/assets/d1d4f80c-39a2-4fd8-adbb-fae9138b92ac" /><img width="1297" height="480" alt="image" src="https://github.com/user-attachments/assets/132bacf6-e815-4b08-8c2c-c7144a429128" /><img width="1560" height="490" alt="image" src="https://github.com/user-attachments/assets/0b16ef72-8496-41b5-a034-cea08ea7d3ce" />|
-| **2. **, si está disponible | <img width="1837" height="416" alt="image" src="https://github.com/user-attachments/assets/69f07f68-df39-4f17-93be-bcabcedb2f8a" /> ![Uploading image.png…]()|
-| **3. Comprobar errores, vacíos y tipos en los campos del modelo. Para contar filas sin alterar `sales`, → hacer clic derecho en sales → Referencia → renombrar la copia `control_filas_sales`.** |<img width="1447" height="360" alt="image" src="https://github.com/user-attachments/assets/1a5da758-859f-4b46-b624-11a4d3611a5c" /> |
-| **4. Sobre esa consulta auxiliar utilizar → Transformar → Contar filas → Esperar `199.873`** |<img width="1585" height="258" alt="image" src="https://github.com/user-attachments/assets/1907837c-e104-4ca5-b9b2-66d0d040edd8" />|
-| **5. Definir tipo de datos Fecha y formato a Columna ```InicioMes```  |<img width="1585" height="258" alt="image" src="https://github.com/user-attachments/assets/1907837c-e104-4ca5-b9b2-66d0d040edd8" />|
+| **1.** Renombrar la página `Resumen comercial`. Seleccionar **Vista → Temas → Personalizar tema actual**, ajustar la paleta y, si es pertinente, página **16:9**. | 🖼️ **Captura 3.4.1a pendiente.** Pegar aquí la imagen de este paso. |
+| **2.** Insertar cuadro de texto con título `Resumen comercial - Contoso 2020`. Reservar zona superior para filtros y tarjetas; zona central para barras y línea; inferior para tabla. | 🖼️ **Captura 3.4.1b pendiente.** Pegar aquí la imagen de este paso. |
 
+**Verificación:** título visible, contraste adecuado y espacios para cifras completas.
 
+<a id="paso-3-4-2"></a>
+#### 3.4.2. Agregar segmentaciones de fecha y categoría
 
+Ambas segmentaciones pertenecen a la página Resumen, no a todo el informe.
 
-3. Comprobar errores, vacíos y tipos en los campos del modelo.
-4. Para contar filas sin alterar `sales`, hacer **clic derecho en sales → Referencia** y renombrar la copia `control_filas_sales`.
-5. Sobre esa consulta auxiliar utilizar **Transformar → Contar filas**. Esperar **199.873**.
-6. Repetir con una referencia de `product`: esperar **2.517**.
-7. Para duplicados de claves de productos, crear otra **Referencia** de `product`, seleccionar `ProductKey` y usar **Inicio → Agrupar por**; agregar **Recuento de filas** y filtrar conteos mayores que 1. El resultado esperado es **cero claves duplicadas**.
-8. En las consultas auxiliares, clic derecho y **desmarcar Habilitar carga**. Dejar la carga habilitada en `sales` y `product`.
-9. Pulsar **Inicio → Cerrar y aplicar**.
+| Acción en Power BI | Captura de pantalla |
+|:---|:---:|
+| **1.** Insertar **Segmentación de datos** → `sales[OrderDate]`, como fecha individual (no jerarquía). Elegir estilo **Entre**. | 🖼️ **Captura 3.4.2a pendiente.** Pegar aquí la imagen de este paso. |
+| **2.** Insertar otra segmentación → `product[CategoryName]`. Mantener todas las categorías. Al principio dejar fechas sin filtrar para comprobar las tarjetas históricas; después seleccionar 2020. | 🖼️ **Captura 3.4.2b pendiente.** Pegar aquí la imagen de este paso. |
 
-**Resultado esperado:** solo las dos tablas de negocio aparecen en el modelo. **Verificación:** 199.873 líneas de ventas; 2.517 productos; ningún error visible de transformación. Otras comprobaciones específicas (duplicados de pedido-línea, claves huérfanas) pueden hacerse con consultas auxiliares agrupadas, sin modificar las originales.
+**Verificación:** la página `Comprobacion` debe conservar acceso a registros de 2015; no utilizar filtro de fecha a nivel informe.
 
-<a id="paso-3-7"></a>
-### 3.7. Conservar y verificar la relación automática
+<a id="paso-3-4-3"></a>
+#### 3.4.3. Q1: ventas, unidades y pedidos con tarjetas
 
-1. En Power BI Desktop, abrir **Vista Modelo** mediante el icono lateral.
-2. Localizar las tablas `product` y `sales`.
-3. Si existe una relación automática entre `ProductKey`, hacer doble clic en la línea para revisar sus propiedades.
-4. Confirmar **cardinalidad uno a varios (1:*)**: `product` en el lado **1**, `sales` en el lado **\***; **relación activa** y **dirección del filtro cruzado: Única** desde productos hacia ventas.
-5. Si no existe, abrir **Modelado → Administrar relaciones → Nueva relación**, seleccionar ambos `ProductKey`, fijar las propiedades anteriores y guardar.
-6. No aceptar una relación muchos a muchos como solución rápida. Revisar primero unicidad de `product[ProductKey]` y tipos de ambas claves.
+Se usarán exactamente las medidas ya comprobadas.
 
-**Resultado esperado:** una relación activa correctamente configurada. **Por qué no combinar consultas:** el catálogo describe productos y las ventas son hechos; la relación permite filtrar ventas por categoría sin expandir el catálogo dentro de cada línea.
+| Acción en Power BI | Captura de pantalla |
+|:---|:---:|
+| **1.** Insertar **Tarjeta**; asignar `Ventas Totales`; título `Ventas en moneda base`. En **Formato visual** usar **Unidades de visualización: Ninguno** y 2 decimales. | 🖼️ **Captura 3.4.3a pendiente.** Pegar aquí la imagen de este paso. |
+| **2.** Duplicar tarjeta dos veces (Ctrl+C/Ctrl+V). Sustituir por `Unidades Totales` (0 decimales) y `Pedidos` (0 decimales), con títulos `Unidades` y `Pedidos distintos`. | 🖼️ **Captura 3.4.3b pendiente.** Pegar aquí la imagen de este paso. |
+| **3.** Después de comprobar el historial completo, colocar fechas **01/01/2020–31/12/2020**. Deben verse ventas **11.066.206,89**, unidades **35.234** y pedidos **4.806**. | 🖼️ **Captura 3.4.3c pendiente.** Pegar aquí la imagen de este paso. |
 
-<a id="paso-3-8"></a>
-### 3.8. Crear las tres medidas DAX
+**Criterio:** tarjetas sin abreviaturas K/M y con el período correcto.
 
-1. Volver a la **Vista Informe**.
-2. En el panel **Datos**, seleccionar la tabla `sales`.
-3. Abrir **Modelado → Nueva medida**; pegar la primera fórmula y presionar **Entrar**.
-4. Repetir para la segunda y tercera fórmula; cada medida debe aparecer con icono de calculadora.
+<a id="paso-3-4-4"></a>
+#### 3.4.4. Q2: barras de ventas por categoría
 
-```dax
-Ventas Totales = SUM('sales'[ImporteVenta])
-```
+Ranking descendente para reconocer la categoría líder.
 
-```dax
-Unidades Totales = SUM('sales'[Quantity])
-```
+| Acción en Power BI | Captura de pantalla |
+|:---|:---:|
+| **1.** Seleccionar **Gráfico de barras agrupadas**. Eje Y: `product[CategoryName]`. Eje X: `Ventas Totales`. Menú **… → Ordenar por → Ventas Totales → Descendente**. | 🖼️ **Captura 3.4.4a pendiente.** Pegar aquí la imagen de este paso. |
+| **2.** Activar etiquetas y título `Ventas por categoría - 2020`. Destacar Computers si la versión permite configurar colores por categoría. | 🖼️ **Captura 3.4.4b pendiente.** Pegar aquí la imagen de este paso. |
 
-```dax
-Pedidos = DISTINCTCOUNT('sales'[OrderKey])
-```
+**Resultado esperado:** Computers **5.041.111,59**; Cell phones **1.861.564,14**. Si todas las barras repiten el mismo total, revisar relación.
 
-5. Seleccionar `Ventas Totales` y, en **Herramientas de medida**, asignar formato numérico con **dos decimales** y separador de miles. Seleccionar las otras medidas y asignar **cero decimales**.
-6. Insertar temporalmente un visual **Tabla** en el informe; arrastrar las tres medidas a **Valores** para comprobar los resultados **sin filtros**.
-7. Deben aparecer **203.723.865,76** en ventas, **628.370** unidades y **83.130** pedidos. Retirar el visual temporal después de comprobar.
+<a id="paso-3-4-5"></a>
+#### 3.4.5. Q3: tabla de comparación de categorías
 
-**Resultado esperado:** tres medidas reutilizables. **Verificación:** si `Pedidos` devuelve 199.873, se están contando filas en lugar de pedidos distintos.
+Comparar importes, unidades y pedidos por categoría.
 
-<a id="paso-3-9"></a>
-### 3.9. Crear la página de reporte, su diseño y sus filtros
+| Acción en Power BI | Captura de pantalla |
+|:---|:---:|
+| **1.** Insertar **Tabla**. Agregar en orden `product[CategoryName]`, `Ventas Totales`, `Unidades Totales`, `Pedidos`. Ordenar por ventas descendente. | 🖼️ **Captura 3.4.5a pendiente.** Pegar aquí la imagen de este paso. |
+| **2.** Activar totales, formato legible y comparar con la tabla de referencia. Ordenar temporalmente por unidades para ver si cambia el liderazgo y volver a ventas. | 🖼️ **Captura 3.4.5b pendiente.** Pegar aquí la imagen de este paso. |
 
-1. Renombrar la pestaña de la primera página (doble clic) a `Resumen comercial`.
-2. Seleccionar espacio vacío del lienzo; en **Vista → Temas → Personalizar tema actual**, si su versión lo permite, establecer colores consistentes.
-3. Aplicar: fondo `#F4F7FB`; tarjetas y visuales blancos `#FFFFFF`; títulos `#172B4D`; línea mensual `#1F5A85`; categoría destacada `#007F7A`; categorías secundarias `#5F6F84`. Usar fuente legible como Segoe UI.
-4. Configurar el lienzo a **16:9** cuando sea adecuado para presentación; insertar título con **Insertar → Cuadro de texto**: `Resumen comercial | Contoso 2020`.
-5. En **Visualizaciones**, elegir **Segmentación de datos**. Arrastrar `sales[OrderDate]` a su campo. Si aparece una jerarquía, desplegar el campo y escoger **OrderDate** como fecha individual.
-6. Cambiar el estilo del filtro de fecha a **Entre**.
-7. Crear otra **Segmentación de datos** para `product[CategoryName]`, con estilo lista o desplegable. Conservar todas las categorías.
-8. **Dejar el historial sin filtro inicialmente** para probar las tarjetas del paso siguiente; solo después fijar **01/01/2020** hasta **31/12/2020**.
-9. Organizar: encabezado y filtros arriba; tarjetas en franja superior; barras a la izquierda, línea a la derecha y tabla comparativa abajo.
+**Resultado esperado:** Computers lidera tanto ventas (**5.041.111,59**) como unidades (**8.364**). **Nota:** los pedidos por categoría no se suman para obtener el total distinto de pedidos, porque un pedido puede contener varias categorías.
 
-**Resultado esperado:** informe con una página y dos segmentaciones. **Verificación:** el filtro de fecha no debe aplicarse al nivel **Informe**, porque la segunda página necesitará pedidos de 2015.
+<a id="paso-3-4-6"></a>
+#### 3.4.6. Q4: línea de ventas mensuales
 
-<a id="paso-3-10"></a>
-### 3.10. Responder Q1 con tres tarjetas
+El eje debe seguir la fecha real de inicio de mes.
 
-1. Hacer clic en espacio vacío; en **Visualizaciones**, elegir **Tarjeta**.
-2. Arrastrar la medida `Ventas Totales` a **Datos/Valores**.
-3. En **Formato visual** (icono de brocha), habilitar **Título** e introducir `Ventas en moneda base`.
-4. En **Valor destacado / Valores**, seleccionar **Unidades de visualización: Ninguno** y **Decimales: 2**. La ubicación del ajuste puede variar según la versión de la tarjeta.
-5. Copiar y pegar esta tarjeta dos veces, usando **Ctrl+C** y **Ctrl+V**.
-6. En la segunda, sustituir la medida por `Unidades Totales`, cambiar el título a `Unidades` y establecer cero decimales. En la tercera, elegir `Pedidos`, título `Pedidos distintos` y cero decimales.
-7. Alinear las tres tarjetas. **Sin fecha filtrada** confirmar los totales históricos del inicio.
-8. En el segmentador de fechas, aplicar **01/01/2020–31/12/2020**.
+| Acción en Power BI | Captura de pantalla |
+|:---|:---:|
+| **1.** Insertar **Gráfico de líneas**. Eje X: `sales[InicioMes]` como **Fecha** individual, no jerarquía. Eje Y: `Ventas Totales`. | 🖼️ **Captura 3.4.6a pendiente.** Pegar aquí la imagen de este paso. |
+| **2.** Ordenar cronológicamente, activar marcadores, aplicar color `#1F5A85` y título `Evolución mensual de ventas - 2020`. | 🖼️ **Captura 3.4.6b pendiente.** Pegar aquí la imagen de este paso. |
+| **3.** Agregar anotación visual `Marzo: −58,46 % frente a febrero` y contrastar meses de máximo y mínimo. | 🖼️ **Captura 3.4.6c pendiente.** Pegar aquí la imagen de este paso. |
 
-| Tarjeta | Resultado correcto de 2020 |
-| --- | ---: |
-| Ventas en moneda base | 11.066.206,89 |
-| Unidades | 35.234 |
-| Pedidos distintos | 4.806 |
+**Verificación:** febrero **2.658.349,04** (máximo); marzo **1.104.361,28**; septiembre **320.093,34** (mínimo). Deben mostrarse 12 meses ordenados.
 
-**Verificación:** no deben aparecer abreviaturas K o M ni errores por separador decimal.
+<a id="paso-3-4-7"></a>
+#### 3.4.7. Probar interacciones entre filtros y visuales
 
-<a id="paso-3-11"></a>
-### 3.11. Responder Q2 con barras horizontales
+Compruebe el filtrado antes de utilizar el tablero en la fase 4.
 
-1. Elegir **Gráfico de barras agrupadas** en **Visualizaciones**.
-2. Arrastrar `product[CategoryName]` a **Eje Y** y la medida `Ventas Totales` a **Eje X**.
-3. Abrir el menú de los tres puntos **… → Ordenar por → Ventas Totales → Descendente**.
-4. En **Formato visual**, activar **Etiquetas de datos**, habilitar **Título** y escribir `Ventas por categoría | 2020`.
-5. Usar colores discretos y, si la versión ofrece formato por categoría, destacar Computers en verde azulado `#007F7A`.
-6. Verificar que el filtro de fecha sea 2020 y que no haya una categoría aislada en la segmentación.
+| Acción en Power BI | Captura de pantalla |
+|:---|:---:|
+| **1.** Con 2020 activo, seleccionar únicamente `Computers` en la segmentación. Verificar ventas **5.041.111,59**, unidades **8.364**, pedidos **2.094**. | 🖼️ **Captura 3.4.7a pendiente.** Pegar aquí la imagen de este paso. |
+| **2.** Si algún visual no responde, seleccionar la segmentación → **Formato → Editar interacciones** → **Filtrar**. Limpiar la selección para regresar a los totales anuales. | 🖼️ **Captura 3.4.7b pendiente.** Pegar aquí la imagen de este paso. |
 
-**Resultado esperado:** **Computers** encabeza el ranking con **5.041.111,59**; la segunda es **Cell phones**, con **1.861.564,14**. **Verificación:** si todas las categorías muestran el mismo valor, revisar la relación de `ProductKey`.
+**Verificación:** todas las categorías restauradas: 11.066.206,89; 35.234; 4.806.
 
-<a id="paso-3-12"></a>
-### 3.12. Responder Q3 con una tabla comparativa
+<a id="paso-3-4-8"></a>
+#### 3.4.8. Crear una página de comprobación con dos pedidos
 
-1. Seleccionar el visual **Tabla**.
-2. Arrastrar a **Columnas/Valores**, en orden: `product[CategoryName]`, `Ventas Totales`, `Unidades Totales`, `Pedidos`.
-3. Hacer clic sobre `Ventas Totales` hasta ordenar de mayor a menor.
-4. En **Formato visual**, activar totales, ajustar anchos de columna y mostrar todos los números.
-5. Comparar las filas con la tabla resuelta de abajo; ordenar temporalmente por `Unidades Totales` para identificar si cambia el líder y luego volver a ordenar por ventas.
+Esta página verifica el resultado del modelo a nivel de línea de pedido y no lleva filtro global de año.
 
-| Categoría | Ventas Totales | Unidades Totales | Pedidos |
-| --- | ---: | ---: | ---: |
-| Computers | 5.041.111,59 | 8.364 | 2.094 |
-| Cell phones | 1.861.564,14 | 6.945 | 1.822 |
-| Cameras and camcorders | 1.283.114,43 | 3.114 | 848 |
-| TV and Video | 978.424,93 | 1.918 | 554 |
-| Home Appliances | 728.028,31 | 1.583 | 518 |
-| Music, Movies and Audio Books | 672.661,83 | 5.147 | 1.393 |
-| Audio | 362.807,58 | 3.187 | 914 |
-| Games and Toys | 138.494,09 | 4.976 | 1.370 |
-| **Total general** | **11.066.206,89** | **35.234** | **4.806** |
+| Acción en Power BI | Captura de pantalla |
+|:---|:---:|
+| **1.** Añadir página `Comprobacion`. Insertar **Tabla** con `OrderKey`, `LineNumber`, `OrderDate`, `CategoryName`, `Quantity`, `NetPrice`, `ImporteVenta`. En campos de detalle usar **No resumir** cuando aplique. | 🖼️ **Captura 3.4.8a pendiente.** Pegar aquí la imagen de este paso. |
+| **2.** Insertar segmentación de `OrderKey`; seleccionar simultáneamente **1000** y **1001**. Añadir tarjetas con las tres medidas originales. | 🖼️ **Captura 3.4.8b pendiente.** Pegar aquí la imagen de este paso. |
+| **3.** Verificar 3 líneas: pedido 1000 (Audio 1 × 98,967; Computers 1 × 659,780); pedido 1001 (Games and Toys 2 × 54,376). | 🖼️ **Captura 3.4.8c pendiente.** Pegar aquí la imagen de este paso. |
 
-**Resultado esperado:** Computers lidera en ventas y en unidades. **Verificación:** el total de `Pedidos` **no** equivale a sumar pedidos por categoría, porque un pedido puede contener categorías diferentes. Las ventas mostradas por categoría pueden diferir en centavos de la suma de números ya redondeados: conservar precisión original.
+**Control manual:** 98,967 + 659,780 + 108,752 = **867,499** (visualizado como **867,50**); **4 unidades** y **2 pedidos distintos**.
 
-<a id="paso-3-13"></a>
-### 3.13. Responder Q4 con una línea de evolución mensual
-
-1. Elegir **Gráfico de líneas**.
-2. Arrastrar `sales[InicioMes]` a **Eje X** y escoger la fecha individual, **no Jerarquía de fechas**.
-3. Arrastrar `Ventas Totales` a **Eje Y**.
-4. En **Formato visual → Eje X**, configurar un eje cronológico; usar **Continuo** cuando esté disponible y sea legible. Comprobar que los meses estén ordenados desde enero hasta diciembre.
-5. Activar marcadores y un título `Evolución mensual de ventas | 2020`; aplicar color `#1F5A85`.
-6. Usar **Insertar → Cuadro de texto** para añadir, cerca del gráfico y sin taparlo, `Marzo: −58,46 % frente a febrero`.
-7. Verificar los doce valores mensuales:
-
-| Mes | Ventas Totales |
-| --- | ---: |
-| Enero | 2.124.215,68 |
-| Febrero | 2.658.349,04 |
-| Marzo | 1.104.361,28 |
-| Abril | 502.924,03 |
-| Mayo | 1.160.430,61 |
-| Junio | 808.351,16 |
-| Julio | 593.685,68 |
-| Agosto | 524.873,87 |
-| Septiembre | 320.093,34 |
-| Octubre | 388.181,27 |
-| Noviembre | 341.405,95 |
-| Diciembre | 539.334,97 |
-| **Total del año (sin redondear líneas)** | **11.066.206,89** |
-
-**Resultado esperado:** febrero es el máximo y septiembre el mínimo. **Verificación:** 12 meses en orden cronológico y una caída febrero-marzo del 58,46 %. La suma de valores mostrados, redondeados a dos decimales, puede diferir del total calculado con precisión original.
-
-<a id="paso-3-14"></a>
-### 3.14. Probar filtros y relaciones
-
-1. Confirmar que la segmentación de fecha contiene todo 2020.
-2. En `product[CategoryName]`, seleccionar únicamente **Computers**.
-3. Comprobar las tarjetas: **ventas 5.041.111,59**, **unidades 8.364** y **pedidos 2.094**.
-4. Si un visual no cambia, seleccionar la segmentación y abrir **Formato → Editar interacciones**. Elegir el icono **Filtrar** sobre cada visual que deba responder, no **Ninguno**.
-5. Si todas las categorías repiten el total general, volver a **Modelo** y revisar la relación activa por `ProductKey`.
-6. Limpiar el filtro Computers o seleccionar todas las categorías.
-7. Comprobar que las tarjetas recuperan **11.066.206,89**, **35.234** y **4.806**.
-
-**Resultado esperado:** las selecciones cambian coherentemente el modelo completo y pueden restaurarse.
-
-<a id="paso-3-15"></a>
-### 3.15. Crear la página `Comprobacion` y reconstruir dos pedidos
-
-1. Pulsar el símbolo **+** de las pestañas inferiores para crear una página y renombrarla `Comprobacion`.
-2. Verificar que esta página no tiene un filtro global de año 2020.
-3. Insertar una **Tabla** con los campos, en este orden: `sales[OrderKey]`, `sales[LineNumber]`, `sales[OrderDate]`, `product[CategoryName]`, `sales[Quantity]`, `sales[NetPrice]`, `sales[ImporteVenta]`.
-4. Utilizar **No resumir** donde corresponda para mostrar detalle por línea. En el formato de precios e importes mostrar **tres o más decimales**.
-5. Insertar una **Segmentación de datos** con `sales[OrderKey]` y seleccionar conjuntamente **1000** y **1001**; activar selección múltiple si hace falta.
-6. Crear tres tarjetas usando **las mismas medidas** `Ventas Totales`, `Unidades Totales` y `Pedidos` (ver 3.10).
-7. Comparar contra los registros:
-
-| Pedido | Línea | Categoría | Cantidad | NetPrice | ImporteVenta |
-| --- | ---: | --- | ---: | ---: | ---: |
-| 1000 | 0 | Audio | 1 | 98,967 | 98,967 |
-| 1000 | 1 | Computers | 1 | 659,780 | 659,780 |
-| 1001 | 0 | Games and Toys | 2 | 54,376 | 108,752 |
-
-El importe exacto suma **867,499** y se presenta como **867,50**. Hay **4 unidades**, **2 pedidos distintos** y **3 líneas**.
-
-**Resultado esperado:** coinciden tanto la tabla de detalle como las tres tarjetas. Si `Comprobacion` queda vacía, quitar filtros de informe/sincronizados de 2020.
+**Cierre de la fase 3.** Antes de pasar a la fase 4, comprobar la relación activa, las tres medidas, las dos páginas, los filtros y la página de auditoría. Se conserva una cifra completa de control sin forzar redondeos.
 
 [Volver al índice](#indice)
 
