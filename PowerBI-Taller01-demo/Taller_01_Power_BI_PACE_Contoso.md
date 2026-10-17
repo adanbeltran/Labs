@@ -441,14 +441,54 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
   </thead>
   <tbody>
   <tr>
-    <td width="25%" valign="top">
-      <a id="paso-3-4-1"></a>
-      <p><strong>3.4.1. Crear la página y definir el diseño</strong></p>
-<p>Se propone fondo <code>#F4F7FB</code>, tarjetas blancas <code>#FFFFFF</code>, títulos azul oscuro <code>#172B4D</code>, barras de acento <code>#007F7A</code> y línea mensual <code>#1F5A85</code>.</p>
-<div><p><strong>Acción 1.</strong> Renombrar la página <code>Resumen comercial</code>. Seleccionar <strong>Vista → Temas → Personalizar tema actual</strong>, ajustar la paleta y, si es pertinente, página <strong>16:9</strong>.</p></div>
-<div><p><strong>Acción 2.</strong> Insertar cuadro de texto con título <code>Resumen comercial - Contoso 2020</code>. Reservar zona superior para filtros y tarjetas; zona central para barras y línea; inferior para tabla.</p></div>
-<div><strong>Resultado o verificación</strong><p><strong>Verificación:</strong> título visible, contraste adecuado y espacios para cifras completas.</p></div>
-    </td>
+    
+<td width="25%">
+  <b>3.4.1. Crear la página y definir el diseño</b>
+
+  <p><b>1.</b> Abrir la <b>Vista Informe</b> de Power BI.</p>
+
+  <p><b>2.</b> Renombrar la página como <code>Resumen Comercial</code>.</p>
+
+  <p><b>3.</b> Seleccionar la pestaña <b>Diseño</b>.</p>
+
+  <p><b>4.</b> Hacer clic en <b>Personalización del tema</b>.</p>
+
+  <p><b>5.</b> En el panel <b>Visualizaciones</b>, seleccionar <b>Tema</b>.</p>
+
+  <p><b>6.</b> Desplegar <b>Colores → Paleta de colores</b>.</p>
+
+  <p><b>7.</b> Seleccionar el tema <b>Marea accesible</b>.</p>
+
+  <p><b>8.</b> Abrir <b>Formato de página</b> en el panel Visualizaciones.</p>
+
+  <p><b>9.</b> En <b>Configuración del lienzo</b>, seleccionar <b>16:9</b>.</p>
+
+  <p><b>10.</b> Desplegar <b>Fondo del lienzo</b>.</p>
+
+  <p><b>11.</b> Abrir el selector de <b>Color</b>.</p>
+
+  <p><b>12.</b> Seleccionar <b>Más colores</b>.</p>
+
+  <p><b>13.</b> Introducir el código hexadecimal <code>#F4F7FB</code> y establecer <b>Transparencia: 0 %</b>.</p>
+
+  <p><b>14.</b> Seleccionar la pestaña <b>Insertar</b>.</p>
+
+  <p><b>15.</b> Insertar un <b>Cuadro de texto</b> y escribir <code>Resumen comercial - Contoso 2020</code>.</p>
+
+  <p><b>16.</b> Seleccionar el texto, elegir <b>Segoe UI</b> y establecer tamaño <b>24</b>.</p>
+
+  <p><b>17.</b> Abrir el selector de <b>Color de fuente</b>.</p>
+
+  <p><b>18.</b> Activar <b>Negrilla (B)</b>.</p>
+
+  <p><b>19.</b> Aplicar <b>Alineación centrada</b>.</p>
+
+  <p><b>20.</b> Seleccionar <b>Más colores</b> para personalizar el color del título.</p>
+
+  <p><b>21.</b> Introducir el código hexadecimal <code>#172B4D</code>.</p>
+
+  <p><b>Resultado esperado:</b> página <code>Resumen Comercial</code> en formato 16:9, tema <b>Marea accesible</b>, fondo gris claro y título azul oscuro, centrado, en negrilla y tamaño 24.</p>
+</td>
     <td width="75%" align="center" valign="top">
       <p><em><img width="902" height="492" alt="image" src="https://github.com/user-attachments/assets/316ea3eb-29b9-426d-bc97-def94756c371" /></em></p>
 <p><em><img width="877" height="247" alt="image" src="https://github.com/user-attachments/assets/df3b9520-864f-40ed-a112-befef948e752" />.</em></p>
