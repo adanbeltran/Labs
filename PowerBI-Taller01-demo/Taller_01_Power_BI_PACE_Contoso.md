@@ -143,6 +143,10 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 
 **PRÁCTICA GUIADA EN POWER BI DESKTOP.** Esta fase convierte el razonamiento anterior en un informe verificable. Siga los pasos en secuencia. Cada apartado indica qué seleccionar, qué escribir y qué resultado comprobar antes de avanzar. Algunos rótulos de la interfaz pueden variar ligeramente entre versiones.
 
+<img width="1448" height="1086" alt="image" src="https://github.com/user-attachments/assets/64439d66-7728-4cd0-ad9a-338e2e690e49" />
+
+
+
 <a id="paso-3-1"></a>
 ### 3.1. Obtener los archivos
 
