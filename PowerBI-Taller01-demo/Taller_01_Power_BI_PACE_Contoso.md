@@ -230,12 +230,24 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
     <td width="25%" valign="top">
       <a id="paso-3-2-2"></a>
       <p><strong>3.2.2. Examinar calidad y perfil de columnas</strong></p>
-<p>El perfilado debe aplicarse sobre <strong>todo el conjunto de datos</strong>, no solo a la muestra de 1.000 filas.</p>
-<div><p><strong>Acción 1.</strong> En Power Query, ir a <strong>Vista → Calidad de columna</strong> y <strong>Perfil de columna</strong> (opcional: <strong>Distribución de columna</strong>).</p></div>
-<div><p><strong>Acción 2.</strong> En la barra inferior, cambiar <strong>Perfilado de columnas basado en las primeras 1.000 filas</strong> por <strong>basado en todo el conjunto de datos</strong>.</p></div>
-<div><p><strong>Acción 3.</strong> Seleccionar <code>OrderKey</code>, <code>Quantity</code>, <code>NetPrice</code> y <code>LineNumber</code>. Revisar errores, vacíos, mínimos, máximos y valores distintos en Estadísticas de columna.</p></div>
-<div><p><strong>Acción 4.</strong> Repita la comprobación en <code>product[ProductKey]</code> y revise que no existan errores o claves nulas.</p></div>
-<div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> perfil completo, sin errores de conversión ni vacíos en los campos requeridos. La gráfica de perfil es una verificación de calidad, no una visualización del informe.</p></div>
+<p><b>Primera imagen:</b></p>
+  <p>En Power BI Desktop, seleccionar <b>Inicio → Transformar datos</b> para abrir Power Query.</p>
+
+  <p><b>Segunda imagen:</b></p>
+  <p><b>1.</b> Seleccionar la pestaña <b>Vista</b>.</p>
+  <p><b>2.</b> Seleccionar la consulta <b>sales</b>.</p>
+  <p><b>3.</b> Activar <b>Calidad de columna</b> y <b>Perfil de columna</b>.</p>
+  <p><b>4.</b> Cambiar el perfilado de las primeras 1.000 filas a <b>todo el conjunto de datos</b>.</p>
+  <p><b>5.</b> Seleccionar <code>OrderKey</code>, <code>Quantity</code>, <code>NetPrice</code> y <code>LineNumber</code> para revisar sus estadísticas.</p>
+  <p><b>6.</b> En <b>Estadísticas de columna</b>, comprobar los totales de <code>OrderKey</code>:</p>
+  <p>
+    Recuento: <b>199.873</b><br>
+    Distintos: <b>83.130</b><br>
+    Errores: <b>0</b><br>
+    Vacíos: <b>0</b>
+  </p>
+
+  <p><b>Resultado esperado:</b> perfilado completo, sin errores ni valores vacíos en las columnas revisadas.</p>
     </td>
     <td width="75%" align="center" valign="top">
 <img width="705" height="207" alt="image" src="https://github.com/user-attachments/assets/9c44345a-176d-47bf-81a1-2a564fb8ef58" />
