@@ -186,10 +186,10 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
   </tr>
   <tr>
     <td width="25%" valign="top">
-      <a id="paso-3-1-3"></a>
-      <p><strong>3.1.3. Configurar la interpretación regional</strong></p>
+      <a id="paso-3-1-2"></a>
+      <p><strong>3.1.2. Configurar la interpretación regional</strong></p>
 <p>La fuente original representa números decimales con punto. Defina la región de importación antes de transformarlos.</p>
-<div><p><strong>Acción 1.</strong> Ir a <strong>Archivo → Opciones y configuración → Opciones → Archivo actual → Configuración regional</strong>. Seleccionar <strong>Inglés (Estados Unidos)</strong> para la importación y aceptar. Si aparece una opción independiente de formato visible, puede escoger <strong>Español (Colombia)</strong> para presentación.</p></div>
+<div><p><strong>Acción 1.</strong> Abrir Power BI Ir a <strong>Archivo → Opciones y configuración → Opciones → Archivo actual → Configuración regional</strong>. Seleccionar <strong>Inglés (Estados Unidos)</strong> para la importación y aceptar. Si aparece una opción independiente de formato visible, puede escoger <strong>Español (Colombia)</strong> para presentación.</p></div>
 <div><strong>Resultado o verificación</strong><p><strong>Verificación:</strong> interpretar <code>98.967</code> como 98,967 (con coma decimal al mostrarlo en Colombia); <strong>no</strong> como 98.967 unidades enteras. El formato de pantalla no arregla un valor mal convertido.</p></div>
     </td>
     <td width="75%" align="center" valign="top">
@@ -198,10 +198,10 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 </tr>
   <tr>
     <td width="25%" valign="top">
-      <a id="paso-3-1-2"></a>
-      <p><strong>3.1.2. Abrir Power BI y localizar Obtener datos</strong></p>
+      <a id="paso-3-1-3"></a>
+      <p><strong>3.1.3. Obtener datos</strong></p>
        <p>Prepare un informe en blanco y reconozca el conector antes de importarlo.</p>
-      <div><p><strong>Acción 1.</strong> Abrir Power BI Desktop, crear un informe en blanco e identificar <strong>Inicio → Obtener datos → Texto/CSV</strong>. No pulse <strong>Cargar</strong> todavía.</p></div>
+      <div><p><strong>Acción 1.</strong> Crear un informe en blanco e identificar <strong>Inicio → Obtener datos → Texto/CSV</strong> </p></div>
 <div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> se identifica correctamente el conector Texto/CSV.</p></div>
     </td>
       <td width="75%" align="center" valign="top">
