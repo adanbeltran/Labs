@@ -186,7 +186,7 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 ### 3.4. Crear columnas en la vista de tabla ###
 | Acción en Power BI | Captura de pantalla |
 |:---|:---:|
-| **1. Seleccionar la vista de tabla y seleccionar `sales.csv`**  | <img width="1890" height="771" alt="image" src="https://github.com/user-attachments/assets/bf020ae3-e5d9-4770-8e6e-60704111f842" /> |
+| **1. Seleccionar en el menu lateral la vista de tabla y seleccionar `sales`**  | <img width="1890" height="771" alt="image" src="https://github.com/user-attachments/assets/bf020ae3-e5d9-4770-8e6e-60704111f842" /> |
 | **2. Seleccionar Nueva Columna** | <img width="1837" height="416" alt="image" src="https://github.com/user-attachments/assets/69f07f68-df39-4f17-93be-bcabcedb2f8a" /> |
 | **3. escribir ```ImporteVenta = [Quantity] * [NetPrice]```  Pulsar Confirmar** |<img width="1447" height="360" alt="image" src="https://github.com/user-attachments/assets/1a5da758-859f-4b46-b624-11a4d3611a5c" /> |
 | **4. Agregar una nueva Columna ```InicioMes = EOMONTH('sales'[OrderDate], -1) + 1```  Pulsar Confirmar** |<img width="1585" height="258" alt="image" src="https://github.com/user-attachments/assets/1907837c-e104-4ca5-b9b2-66d0d040edd8" />|
@@ -197,8 +197,18 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 <a id="paso-3-6"></a>
 ### 3.6. Revisar calidad y cargar los datos
 
+| Acción en Power BI | Captura de pantalla |
+|:---|:---:|
+| **1. En Power Query ir a -Ver → Calidad de columna → Perfil de columna**  | <img width="1792" height="182" alt="image" src="https://github.com/user-attachments/assets/cd50a6d9-eaa2-45ef-b2a1-de3931cf79df" /> <img width="1558" height="940" alt="image" src="https://github.com/user-attachments/assets/d1d4f80c-39a2-4fd8-adbb-fae9138b92ac" />|
+| **2. En la barra inferior del Editor, cambiar el perfilado de las primeras 1.000 filas a todo el conjunto de datos**, si está disponible | <img width="1837" height="416" alt="image" src="https://github.com/user-attachments/assets/69f07f68-df39-4f17-93be-bcabcedb2f8a" /> |
+| **3. Comprobar errores, vacíos y tipos en los campos del modelo. Para contar filas sin alterar `sales`, → hacer clic derecho en sales → Referencia → renombrar la copia `control_filas_sales`.** |<img width="1447" height="360" alt="image" src="https://github.com/user-attachments/assets/1a5da758-859f-4b46-b624-11a4d3611a5c" /> |
+| **4. Sobre esa consulta auxiliar utilizar → Transformar → Contar filas → Esperar `199.873`** |<img width="1585" height="258" alt="image" src="https://github.com/user-attachments/assets/1907837c-e104-4ca5-b9b2-66d0d040edd8" />|
+| **5. Definir tipo de datos Fecha y formato a Columna ```InicioMes```  |<img width="1585" height="258" alt="image" src="https://github.com/user-attachments/assets/1907837c-e104-4ca5-b9b2-66d0d040edd8" />|
+
+
+
 1. En Power Query ir a **Ver → Calidad de columna** y **Perfil de columna**.
-2. En la barra inferior del Editor, cambiar el perfilado de las primeras 1.000 filas a **todo el conjunto de datos**, si está disponible.
+.
 3. Comprobar errores, vacíos y tipos en los campos del modelo.
 4. Para contar filas sin alterar `sales`, hacer **clic derecho en sales → Referencia** y renombrar la copia `control_filas_sales`.
 5. Sobre esa consulta auxiliar utilizar **Transformar → Contar filas**. Esperar **199.873**.
