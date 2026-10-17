@@ -151,8 +151,6 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 
 **Modalidad: práctica guiada.** Realice los apartados en orden: **[3.1 Configuración inicial](#paso-3-1) → [3.2 Calidad de datos](#paso-3-2) → [3.3 Modelo de datos](#paso-3-3) → [3.4 Visualizaciones](#paso-3-4)**. Al finalizar cada subpaso, contraste el resultado esperado antes de avanzar. No copie los totales de referencia como valores fijos dentro de los visuales.
 
-> **Organización de las capturas:** cada paso tiene una referencia `3.x.y` y una celda en la columna derecha. Para reemplazar una captura pendiente, copie desde GitHub la dirección de la imagen y sustituya el texto `🖼️ Captura ... pendiente` por `<img src="URL" width="900" alt="Paso 3.x.y">` dentro de la misma celda. Mantenga toda la fila de la tabla en una única línea del archivo `.md`. La columna de acciones se mantiene breve; la columna de imágenes recibe prioridad visual. En tablas Markdown GitHub ajusta el ancho automáticamente y no garantiza una proporción fija.
-
 **Mapa visual de la fase:**
 
 <img src="https://github.com/user-attachments/assets/64439d66-7728-4cd0-ad9a-338e2e690e49" width="900" alt="Captura: general">
@@ -189,33 +187,20 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
       <a id="paso-3-1-2"></a>
       <p><strong>3.1.2. Configurar la interpretación regional</strong></p>
 <p>La fuente original representa números decimales con punto. Defina la región de importación antes de transformarlos.</p>
-<div><p><strong>Acción 1.</strong> Abrir Power BI Ir a <strong>Archivo → Opciones y configuración → Opciones → Archivo actual → Configuración regional</strong>. Seleccionar <strong>Inglés (Estados Unidos)</strong> para la importación y aceptar. Si aparece una opción independiente de formato visible, puede escoger <strong>Español (Colombia)</strong> para presentación.</p></div>
-<div><strong>Resultado o verificación</strong><p><strong>Verificación:</strong> interpretar <code>98.967</code> como 98,967 (con coma decimal al mostrarlo en Colombia); <strong>no</strong> como 98.967 unidades enteras. El formato de pantalla no arregla un valor mal convertido.</p></div>
+<div><p><strong>Acción 1.</strong> Abrir Power BI Ir a <strong>Archivo → Opciones y configuración → Opciones → Archivo actual → Configuración regional</strong>. Seleccionar <strong>Inglés (Estados Unidos)</strong> para la importación y aceptar. </p></div>
     </td>
     <td width="75%" align="center" valign="top">
       <div align="center"><img src="https://github.com/user-attachments/assets/7b18bcd3-0ef3-4d16-8cba-162229f93835" width="700" alt="Captura: regional"></div>
     </td>
 </tr>
-  <tr>
-    <td width="25%" valign="top">
-      <a id="paso-3-1-3"></a>
-      <p><strong>3.1.3. Obtener datos</strong></p>
-       <p>Prepare un informe en blanco y reconozca el conector antes de importarlo.</p>
-      <div><p><strong>Acción 1.</strong> Crear un informe en blanco e identificar <strong>Inicio → Obtener datos → Texto/CSV</strong> </p></div>
-<div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> se identifica correctamente el conector Texto/CSV.</p></div>
-    </td>
-      <td width="75%" align="center" valign="top">
-      <div align="center"><img src="https://github.com/user-attachments/assets/f000ec3e-725d-4090-80d2-c2ecec6bf46a" width="700" alt="Captura: get"></div>
-    </td>
-      
-  </tr>
+  
   </tbody>
 </table>
 
 <a id="paso-3-2"></a>
 ### 3.2. Calidad de datos – Power Query
 
-**Propósito.** Importar las dos fuentes y controlar tipos, vacíos, duplicados y precisión antes de trabajar en el modelo. **Importante:** la guía original ya muestra capturas de creación de columnas desde la **vista Tabla usando DAX**. Esas capturas se preservan como referencia alternativa en 3.3.2; para seguir la secuencia principal se crearán `ImporteVenta` e `InicioMes` en **Power Query (M)**, pues allí sí estarán disponibles para consultas y controles posteriores.
+**Propósito.** Importar las dos fuentes (sales.csv y product.csv) controlar tipos, vacíos, duplicados y precisión antes de trabajar en el modelo. 
 
 <table width="100%">
   <thead>
