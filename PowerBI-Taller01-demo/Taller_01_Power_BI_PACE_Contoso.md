@@ -442,25 +442,14 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
   <tbody>
   <tr>
     
-<td width="25%">
+<td width="25%"  valign="top">
+
   <b>3.4.1. Crear la página y definir el diseño</b>
 
   <p><b>1.</b> Abrir la <b>Vista Informe</b> de Power BI.</p>
-
-
-  
-
   <p><b>2.</b> Renombrar la página como <code>Resumen Comercial</code>.</p>
-
-
-
   <p><b>3.</b> Seleccionar la pestaña <b>Diseño</b>.</p>
-
-
-
   <p><b>4.</b> Hacer clic en <b>Personalización del tema</b>.</p>
-
-
 
   <p><b>5.</b> En el panel <b>Visualizaciones</b>, seleccionar <b>Tema</b>.</p>
 
