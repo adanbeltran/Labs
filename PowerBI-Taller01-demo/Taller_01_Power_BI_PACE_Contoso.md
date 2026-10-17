@@ -370,15 +370,50 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
   </tr>
   
   <tr>
-    <td width="25%" valign="top">
-      <a id="paso-3-3-3"></a>
-      <p><strong>3.3.2. Crear las tres medidas DAX</strong></p>
-<p>Seleccione <code>sales</code> y después <strong>Modelado → Nueva medida</strong>. Crear cada medida por separado.</p>
-<div><p><strong>1. Ventas Totales:</strong> <code>Ventas Totales = SUM('sales'[ImporteVenta])</code>.</p></div>
-<div><p><strong>2. Unidades Totales:</strong> <code>Unidades Totales = SUM('sales'[Quantity])</code>.</p></div>
-<div><p><strong>3. Pedidos distintos:</strong> <code>Pedidos = DISTINCTCOUNT('sales'[OrderKey])</code>. Formato: ventas 2 decimales; cantidades y pedidos 0 decimales.</p></div>
-<div><strong>Resultado o verificación</strong><p><strong>Verificación:</strong> las tres medidas muestran icono de calculadora. <code>Pedidos</code> usa <code>DISTINCTCOUNT</code>, no recuento de líneas.</p></div>
-    </td>
+   
+<td width="25%">
+  <b>3.3.2. Crear y configurar las tres medidas DAX</b>
+
+  <p><b>1.</b> En el panel <b>Datos</b>, seleccionar la tabla <code>sales</code>.</p>
+
+  <p><b>2.</b> Abrir la <b>Vista Modelo</b> desde el menú lateral izquierdo.</p>
+
+  <p><b>3.</b> Seleccionar <b>Inicio → Nueva medida</b>.</p>
+
+  <p><b>4.</b> Crear la primera medida:</p>
+  <p><code>Ventas Totales = SUM('sales'[ImporteVenta])</code></p>
+  <p>Pulsar <b>✓</b> para confirmar.</p>
+
+  <p><b>5.</b> Seleccionar nuevamente <b>Nueva medida</b>.</p>
+
+  <p><b>6.</b> Crear la segunda medida:</p>
+  <p><code>Unidades Totales = SUM('sales'[Quantity])</code></p>
+  <p>Pulsar <b>✓</b>.</p>
+
+  <p><b>7.</b> Seleccionar nuevamente <b>Nueva medida</b>.</p>
+
+  <p><b>8.</b> Crear la tercera medida:</p>
+  <p><code>Pedidos = DISTINCTCOUNT('sales'[OrderKey])</code></p>
+  <p>Pulsar <b>✓</b>.</p>
+
+  <p><b>9.</b> En el panel <b>Datos</b>, expandir <code>sales</code> y verificar que aparezcan las tres medidas con el icono de calculadora.</p>
+
+  <p><b>10.</b> Seleccionar <b>Vista Informe</b> desde el menú lateral izquierdo.</p>
+
+  <p><b>11.</b> En el panel <b>Datos</b>, seleccionar la medida <code>Ventas Totales</code>.</p>
+
+  <p><b>12.</b> En <b>Herramientas de medición → Formato</b>, configurar las medidas:</p>
+  <p>
+    • <code>Ventas Totales</code>: número decimal, <b>2 decimales</b>.<br>
+    • <code>Unidades Totales</code>: número entero, <b>0 decimales</b>.<br>
+    • <code>Pedidos</code>: número entero, <b>0 decimales</b>.
+  </p>
+
+  <p><b>Resultado esperado:</b> tres medidas DAX creadas, disponibles en <code>sales</code> y con el formato correcto.</p>
+
+  <p><b>Importante:</b> las medidas se recalculan según los filtros del informe. <code>DISTINCTCOUNT</code> cuenta pedidos diferentes, no líneas de venta.</p>
+</td>
+
     <td width="75%" align="center" valign="top">
    <p><em> <img width="903" height="435" alt="image" src="https://github.com/user-attachments/assets/efb5de8a-adfc-43e1-b4da-f5f6a9622b88" /></em></p>
 
