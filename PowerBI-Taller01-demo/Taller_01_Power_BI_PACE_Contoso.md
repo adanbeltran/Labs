@@ -167,26 +167,15 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 
 
 <a id="paso-3-3"></a>
-### 3.3. Importar ambos CSV y conservar los campos
-
-1. Ir a **Inicio → Obtener datos → Texto/CSV** y abrir `sales.csv`.
-2. En la vista previa, confirmar **Delimitador: Coma**. Si existe la opción de detección de tipos, seleccionar no detectar automáticamente para hacer las conversiones bajo control.
-3. Elegir **Transformar datos**, **no Cargar**. Se abrirá el Editor de **Power Query**.
-4. En el panel izquierdo de **Consultas**, cambiar el nombre de la consulta a `sales` (doble clic en el nombre).
-5. Seleccionar con **Ctrl** únicamente `OrderKey`, `LineNumber`, `OrderDate`, `ProductKey`, `Quantity` y `NetPrice`.
-6. Ir a **Inicio → Quitar columnas → Quitar otras columnas**.
-7. En el mismo Editor de Power Query, abrir **Inicio → Nuevo origen → Texto/CSV** y elegir `product.csv`.
-8. Confirmar coma como delimitador y renombrar la nueva consulta `product`.
-9. Con **Ctrl**, seleccionar únicamente `ProductKey`, `ProductName` y `CategoryName`, y ejecutar **Quitar otras columnas**.
-10. Si ve `Column1`, `Column2`, etc., usar **Transformar → Usar la primera fila como encabezados**. Si todo queda en una columna, corregir el delimitador en la configuración del paso **Origen**.
-
+### 3.3. Importar los archivos Sales.csv y products.csv
 
 | Acción en Power BI | Captura de pantalla |
 |:---|:---:|
 | **1. Seleccionar Obtener datos**. Ir a Inicio → Obtener datos → Texto/CSV. | <img width="1383" height="921" alt="image" src="https://github.com/user-attachments/assets/f000ec3e-725d-4090-80d2-c2ecec6bf46a" /> |
 | **2. Seleccionar archivo**. Buscar y seleccionar `sales.csv`. | <img width="470" height="321" alt="image" src="https://github.com/user-attachments/assets/21beab77-cfd5-42dc-91e6-82d3455f2b73" /> |
-| **3. Cargar datos**. Seleccionar el botón ** Cargar datos**. |<img width="1112" height="826" alt="image" src="https://github.com/user-attachments/assets/53a8bd73-2450-4af3-8f0d-e0491fa8d4f0" /> |
+| **3. Cargar datos**. Seleccionar el botón **Cargar**. |<img width="1112" height="826" alt="image" src="https://github.com/user-attachments/assets/53a8bd73-2450-4af3-8f0d-e0491fa8d4f0" /> |
 
+**Repetir el proceso con el archivo de products.csv**
 
 
 
