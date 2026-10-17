@@ -255,28 +255,11 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 <img width="682" height="732" alt="image" src="https://github.com/user-attachments/assets/adf16f94-8e1b-4cee-b8bb-f260e28c6c9a" />
   </td>
   </tr>
-  <tr>
-      <td width="25%" valign="top">
-      <a id="paso-3-2-4"></a>
-      <p><strong>3.2.4. Verificar recuentos y claves</strong></p>
-<p>Los totales estructurales se comprueban en Power Query; las cifras agregadas de ventas, unidades y pedidos se confirmarán con medidas DAX en <strong>3.3.3</strong>, después de cargar el modelo.</p>
-<div><p><strong>Acción 1.</strong> Clic derecho en <code>sales</code> → <strong>Referencia</strong>, renombrar <code>control_filas_sales</code>. En esta consulta auxiliar usar <strong>Transformar → Contar filas</strong>. Debe devolver <strong>199.873</strong>.</p></div>
-<div><p><strong>Acción 2.</strong> Repetir con una referencia de <code>product</code>, llamada <code>control_filas_product</code>. Debe devolver <strong>2.517</strong>.</p></div>
-<div><p><strong>Acción 3.</strong> Otra referencia de <code>product</code>: <strong>Agrupar por → ProductKey → Recuento de filas</strong>. Filtrar recuentos mayores que 1. Debe quedar vacía (0 claves duplicadas).</p></div>
-<div><p><strong>Acción 4.</strong> Desactivar <strong>Habilitar carga</strong> de consultas auxiliares (o eliminarlas tras verificar), sin alterar <code>sales</code> y <code>product</code>.</p></div>
-<div><strong>Resultado o verificación</strong><p><strong>No avanzar si no coinciden los recuentos.</strong> Los 11.267 registros de 2020 son líneas, no pedidos distintos.</p></div>
-    </td>
-    <td width="75%" align="center" valign="top">
-      <p><em>Captura 3.2.4a pendiente. Pegar aquí la imagen de este paso.</em></p>
-<p><em>Captura 3.2.4b pendiente. Pegar aquí la imagen de este paso.</em></p>
-<p><em>Captura 3.2.4c pendiente. Pegar aquí la imagen de este paso.</em></p>
-<p><em>Captura 3.2.4d pendiente. Pegar aquí la imagen de este paso.</em></p>
-    </td>
-  </tr>
+ 
   <tr>
     <td width="25%" valign="top">
-      <a id="paso-3-2-5"></a>
-      <p><strong>3.2.5. Crear ImporteVenta e InicioMes en Power Query</strong></p>
+      <a id="paso-3-2-3"></a>
+      <p><strong>3.2.3. Crear ImporteVenta e InicioMes en Power Query</strong></p>
 <p>La secuencia principal usa <strong>Agregar columna → Columna personalizada</strong> para crear estas dos columnas en lenguaje M.</p>
 <div><p><strong>Acción 1.</strong> En <code>sales</code> elegir <strong>Agregar columna → Columna personalizada</strong>. Nombre: <code>ImporteVenta</code>. Fórmula: <code>[Quantity] * [NetPrice]</code>. Aceptar y dejar tipo <strong>Número decimal</strong>.</p></div>
 <div><p><strong>Acción 2.</strong> Repetir <strong>Columna personalizada</strong>. Nombre: <code>InicioMes</code>. Fórmula: <code>Date.StartOfMonth([OrderDate])</code>. Aceptar y asignar tipo <strong>Fecha</strong>.</p></div>
@@ -364,20 +347,7 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 <p><em>Captura 3.3.3c pendiente. Pegar aquí la imagen de este paso.</em></p>
     </td>
   </tr>
-  <tr>
-    <td width="25%" valign="top">
-      <a id="paso-3-3-4"></a>
-      <p><strong>3.3.4. Comprobar totales agregados sin filtros</strong></p>
-<p>Use un visual de tabla provisional con las tres medidas; el detalle comercial se construirá en 3.4.</p>
-<div><p><strong>Acción 1.</strong> Insertar <strong>Tabla</strong> provisional y agregar las medidas. Sin filtros debe mostrar <strong>203.723.865,76</strong> en ventas, <strong>628.370</strong> unidades y <strong>83.130</strong> pedidos distintos.</p></div>
-<div><p><strong>Acción 2.</strong> Aplicar temporalmente el intervalo <strong>01/01/2020 a 31/12/2020</strong> en un filtro de fecha del visual: deben aparecer <strong>11.066.206,89</strong>, <strong>35.234</strong> y <strong>4.806</strong>. Luego quitar el filtro y la tabla provisional.</p></div>
-<div><strong>Resultado o verificación</strong><p><strong>Si no coinciden</strong>, revisar <code>NetPrice</code>, cálculo de <code>ImporteVenta</code>, <code>OrderDate</code>, precisión de los decimales y filtros activos antes de diseñar el tablero.</p></div>
-    </td>
-    <td width="75%" align="center" valign="top">
-      <p><em>Captura 3.3.4a pendiente. Pegar aquí la imagen de este paso.</em></p>
-<p><em>Captura 3.3.4b pendiente. Pegar aquí la imagen de este paso.</em></p>
-    </td>
-  </tr>
+
   </tbody>
 </table>
 
