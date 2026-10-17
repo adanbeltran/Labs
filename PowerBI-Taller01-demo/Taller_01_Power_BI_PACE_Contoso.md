@@ -257,14 +257,35 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
   </tr>
  
   <tr>
-    <td width="25%" valign="top">
-      <a id="paso-3-2-3"></a>
-      <p><strong>3.2.3. Crear ImporteVenta e InicioMes en Power Query</strong></p>
-<p>La secuencia principal usa <strong>Agregar columna → Columna personalizada</strong> para crear estas dos columnas en lenguaje M.</p>
-<div><p><strong>Acción 1.</strong> En <code>sales</code> elegir <strong>Agregar columna → Columna personalizada</strong>. Nombre: <code>ImporteVenta</code>. Fórmula: <code>[Quantity] * [NetPrice]</code>. Aceptar y dejar tipo <strong>Número decimal</strong>.</p></div>
-<div><p><strong>Acción 2.</strong> Repetir <strong>Columna personalizada</strong>. Nombre: <code>InicioMes</code>. Fórmula: <code>Date.StartOfMonth([OrderDate])</code>. Aceptar y asignar tipo <strong>Fecha</strong>.</p></div>
-<div><p><strong>Acción 3.</strong> Comprobar un registro: cantidad × precio neto = importe de línea. <code>InicioMes</code> debe mostrar el primer día del mes del pedido.</p></div>
-<div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> <code>sales</code> tiene 8 columnas y <code>product</code> 3. <strong>No use aquí fórmulas DAX:</strong> <code>EOMONTH(...)</code> y la sintaxis de DAX corresponden a otra etapa.</p></div>
+
+<td width="25%">
+  <b>3.2.3. Crear ImporteVenta y verificar el total de ventas</b>
+
+  <p><b>1.</b> Seleccionar la consulta <code>sales</code> y abrir <b>Agregar columna</b>.</p>
+
+  <p><b>2.</b> Seleccionar <b>Columna personalizada</b>.</p>
+
+  <p><b>3.</b> Escribir el nombre <code>ImporteVenta</code> y la fórmula:<br>
+  <code>[Quantity] * [NetPrice]</code></p>
+
+  <p><b>4.</b> Verificar la sintaxis y pulsar <b>Aceptar</b>.</p>
+
+  <p><b>5.</b> Seleccionar la columna <code>ImporteVenta</code>.</p>
+
+  <p><b>6.</b> Abrir la pestaña <b>Transformar</b>.</p>
+
+  <p><b>7.</b> Cambiar <b>Tipo de datos → Número decimal</b>, conservando la precisión original.</p>
+
+  <p><b>8.</b> Con la columna seleccionada, ir a <b>Transformar</b>.</p>
+
+  <p><b>9.</b> Seleccionar <b>Estadísticas → Suma</b> para calcular el total de ventas.</p>
+
+  <p><b>10.</b> Verificar que la suma sea aproximadamente <b>203.723.865,76</b>.</p>
+
+  <p><b>11.</b> En <b>Pasos aplicados</b>, eliminar únicamente el paso de suma para recuperar la tabla.</p>
+
+  <p><b>Resultado esperado:</b> total de ventas validado y tabla <code>sales</code> recuperada, conservando <code>ImporteVenta</code> como número decimal.</p>
+</td>  
     </td>
     <td width="75%" align="center" valign="top">
       <p><em><img width="726" height="412" alt="image" src="https://github.com/user-attachments/assets/5dbdfb2a-5acb-4624-84fc-bf8a4e37a10b" /></em></p>
