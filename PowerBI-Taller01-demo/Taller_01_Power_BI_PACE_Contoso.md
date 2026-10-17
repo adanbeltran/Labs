@@ -199,8 +199,9 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 
 | Acción en Power BI | Captura de pantalla |
 |:---|:---:|
-| **1. En Power Query ir a -Ver → Calidad de columna → Perfil de columna**  | <img width="1792" height="182" alt="image" src="https://github.com/user-attachments/assets/cd50a6d9-eaa2-45ef-b2a1-de3931cf79df" /> <img width="1558" height="940" alt="image" src="https://github.com/user-attachments/assets/d1d4f80c-39a2-4fd8-adbb-fae9138b92ac" />|
-| **2. En la barra inferior del Editor, cambiar el perfilado de las primeras 1.000 filas a todo el conjunto de datos**, si está disponible | <img width="1837" height="416" alt="image" src="https://github.com/user-attachments/assets/69f07f68-df39-4f17-93be-bcabcedb2f8a" /> |
+| **1. En Power Query ir a -Ver → Calidad de columna → Perfil de columna → En la barra inferior del Editor, cambiar el perfilado de las primeras 1.000 filas a todo el conjunto de datos**  | <img width="1792" height="182" alt="image" src="https://github.com/user-attachments/assets/cd50a6d9-eaa2-45ef-b2a1-de3931cf79df" /> <img width="1558" height="940" alt="image" src="https://github.com/user-attachments/assets/d1d4f80c-39a2-4fd8-adbb-fae9138b92ac" /><img width="1297" height="480" alt="image" src="https://github.com/user-attachments/assets/132bacf6-e815-4b08-8c2c-c7144a429128" />|
+| **2. **, si está disponible | <img width="1837" height="416" alt="image" src="https://github.com/user-attachments/assets/69f07f68-df39-4f17-93be-bcabcedb2f8a" /> ![Uploading image.png…]()
+|
 | **3. Comprobar errores, vacíos y tipos en los campos del modelo. Para contar filas sin alterar `sales`, → hacer clic derecho en sales → Referencia → renombrar la copia `control_filas_sales`.** |<img width="1447" height="360" alt="image" src="https://github.com/user-attachments/assets/1a5da758-859f-4b46-b624-11a4d3611a5c" /> |
 | **4. Sobre esa consulta auxiliar utilizar → Transformar → Contar filas → Esperar `199.873`** |<img width="1585" height="258" alt="image" src="https://github.com/user-attachments/assets/1907837c-e104-4ca5-b9b2-66d0d040edd8" />|
 | **5. Definir tipo de datos Fecha y formato a Columna ```InicioMes```  |<img width="1585" height="258" alt="image" src="https://github.com/user-attachments/assets/1907837c-e104-4ca5-b9b2-66d0d040edd8" />|
