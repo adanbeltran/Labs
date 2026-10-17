@@ -162,286 +162,383 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 
 **Propósito.** Descargar los insumos, establecer una carpeta de trabajo y definir la interpretación regional antes de leer los CSV. En esta sección aún no se calculan indicadores.
 
-<a id="paso-3-1-1"></a>
-#### 3.1.1. Descargar y organizar los archivos
-
-Descargue el paquete de [datos Contoso `csv-100k.7z`](https://raw.githubusercontent.com/adanbeltran/Labs/main/PowerBI-Taller01-demo/csv-100k.7z) y extráigalo sin modificar los CSV.
-
-| Acción en Power BI | Captura de pantalla |
-|:---|:---:|
-| **1.** Descargar el paquete `.7z` y extraerlo en `Taller_01_PowerBI/datos`. Verificar que aparezcan `sales.csv` y `product.csv`. Conservar los nombres originales. | 🖼️ **Captura 3.1.1 pendiente.** Pegar aquí la imagen de este paso. |
-| **2.** Guardar el futuro `.pbix` en `Taller_01_PowerBI`. No editar los CSV en Excel ni cambiar sus separadores. | 🖼️ **Captura 3.1.1b pendiente.** Pegar aquí la imagen de este paso. |
-
-**Resultado esperado:** se localizan dos CSV originales en una carpeta conocida. Al cambiar de computador, las rutas absolutas de las fuentes pueden requerir actualización desde Power Query.
-
-<a id="paso-3-1-2"></a>
-#### 3.1.2. Abrir Power BI y localizar Obtener datos
-
-Prepare un informe en blanco y reconozca el conector antes de importarlo.
-
-| Acción en Power BI | Captura de pantalla |
-|:---|:---:|
-| **1.** Abrir Power BI Desktop, crear un informe en blanco e identificar **Inicio → Obtener datos → Texto/CSV**. No pulse **Cargar** todavía. | <img src="https://github.com/user-attachments/assets/f000ec3e-725d-4090-80d2-c2ecec6bf46a" width="850" alt="Captura: get"> |
-
-**Resultado esperado:** se identifica correctamente el conector Texto/CSV.
-
-<a id="paso-3-1-3"></a>
-#### 3.1.3. Configurar la interpretación regional
-
-La fuente original representa números decimales con punto. Defina la región de importación antes de transformarlos.
-
-| Acción en Power BI | Captura de pantalla |
-|:---|:---:|
-| **1.** Ir a **Archivo → Opciones y configuración → Opciones → Archivo actual → Configuración regional**. Seleccionar **Inglés (Estados Unidos)** para la importación y aceptar. Si aparece una opción independiente de formato visible, puede escoger **Español (Colombia)** para presentación. | <img src="https://github.com/user-attachments/assets/7b18bcd3-0ef3-4d16-8cba-162229f93835" width="850" alt="Captura: regional"> |
-
-**Verificación:** interpretar `98.967` como 98,967 (con coma decimal al mostrarlo en Colombia); **no** como 98.967 unidades enteras. El formato de pantalla no arregla un valor mal convertido.
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="25%">Acción en Power BI</th>
+      <th width="75%">Captura de pantalla</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td width="25%" valign="top">
+      <a id="paso-3-1-1"></a>
+      <p><strong>3.1.1. Descargar y organizar los archivos</strong></p>
+<p>Descargue el paquete de <a href="https://raw.githubusercontent.com/adanbeltran/Labs/main/PowerBI-Taller01-demo/csv-100k.7z">datos Contoso <code>csv-100k.7z</code></a> y extráigalo sin modificar los CSV.</p>
+<div><p><strong>Acción 1.</strong> Descargar el paquete <code>.7z</code> y extraerlo en <code>Taller_01_PowerBI/datos</code>. Verificar que aparezcan <code>sales.csv</code> y <code>product.csv</code>. Conservar los nombres originales.</p></div>
+<div><p><strong>Acción 2.</strong> Guardar el futuro <code>.pbix</code> en <code>Taller_01_PowerBI</code>. No editar los CSV en Excel ni cambiar sus separadores.</p></div>
+<div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> se localizan dos CSV originales en una carpeta conocida. Al cambiar de computador, las rutas absolutas de las fuentes pueden requerir actualización desde Power Query.</p></div>
+    </td>
+    <td width="75%" align="center" valign="top">
+      <p><em>Captura 3.1.1 pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><em>Captura 3.1.1b pendiente. Pegar aquí la imagen de este paso.</em></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="25%" valign="top">
+      <a id="paso-3-1-2"></a>
+      <p><strong>3.1.2. Abrir Power BI y localizar Obtener datos</strong></p>
+<p>Prepare un informe en blanco y reconozca el conector antes de importarlo.</p>
+<div><p><strong>Acción 1.</strong> Abrir Power BI Desktop, crear un informe en blanco e identificar <strong>Inicio → Obtener datos → Texto/CSV</strong>. No pulse <strong>Cargar</strong> todavía.</p></div>
+<div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> se identifica correctamente el conector Texto/CSV.</p></div>
+    </td>
+    <td width="75%" align="center" valign="top">
+      <div align="center"><img src="https://github.com/user-attachments/assets/f000ec3e-725d-4090-80d2-c2ecec6bf46a" width="700" alt="Captura: get"></div>
+    </td>
+  </tr>
+  <tr>
+    <td width="25%" valign="top">
+      <a id="paso-3-1-3"></a>
+      <p><strong>3.1.3. Configurar la interpretación regional</strong></p>
+<p>La fuente original representa números decimales con punto. Defina la región de importación antes de transformarlos.</p>
+<div><p><strong>Acción 1.</strong> Ir a <strong>Archivo → Opciones y configuración → Opciones → Archivo actual → Configuración regional</strong>. Seleccionar <strong>Inglés (Estados Unidos)</strong> para la importación y aceptar. Si aparece una opción independiente de formato visible, puede escoger <strong>Español (Colombia)</strong> para presentación.</p></div>
+<div><strong>Resultado o verificación</strong><p><strong>Verificación:</strong> interpretar <code>98.967</code> como 98,967 (con coma decimal al mostrarlo en Colombia); <strong>no</strong> como 98.967 unidades enteras. El formato de pantalla no arregla un valor mal convertido.</p></div>
+    </td>
+    <td width="75%" align="center" valign="top">
+      <div align="center"><img src="https://github.com/user-attachments/assets/7b18bcd3-0ef3-4d16-8cba-162229f93835" width="700" alt="Captura: regional"></div>
+    </td>
+  </tr>
+  </tbody>
+</table>
 
 <a id="paso-3-2"></a>
 ### 3.2. Calidad de datos – Power Query
 
 **Propósito.** Importar las dos fuentes y controlar tipos, vacíos, duplicados y precisión antes de trabajar en el modelo. **Importante:** la guía original ya muestra capturas de creación de columnas desde la **vista Tabla usando DAX**. Esas capturas se preservan como referencia alternativa en 3.3.2; para seguir la secuencia principal se crearán `ImporteVenta` e `InicioMes` en **Power Query (M)**, pues allí sí estarán disponibles para consultas y controles posteriores.
 
-<a id="paso-3-2-1"></a>
-#### 3.2.1. Importar sales.csv y product.csv
-
-Use **Transformar datos** en lugar de **Cargar** para poder controlar la calidad antes de aplicar.
-
-| Acción en Power BI | Captura de pantalla |
-|:---|:---:|
-| **1.** **Inicio → Obtener datos → Texto/CSV**. Localizar `sales.csv`. | <img src="https://github.com/user-attachments/assets/f000ec3e-725d-4090-80d2-c2ecec6bf46a" width="850" alt="Captura: get"> |
-| **2.** Comprobar **Delimitador: coma** y vista previa de `sales.csv`. Seleccionar **Transformar datos**, no **Cargar**. | <img src="https://github.com/user-attachments/assets/21beab77-cfd5-42dc-91e6-82d3455f2b73" width="650" alt="Captura: choose"> <img src="https://github.com/user-attachments/assets/53a8bd73-2450-4af3-8f0d-e0491fa8d4f0" width="650" alt="Captura: load"> |
-| **3.** En el Editor de Power Query, renombrar la consulta `sales`. Seleccionar `OrderKey`, `LineNumber`, `OrderDate`, `ProductKey`, `Quantity`, `NetPrice` (Ctrl + clic) → **Quitar otras columnas**. | 🖼️ **Captura 3.2.1c pendiente.** Pegar aquí la imagen de este paso. |
-| **4.** **Inicio → Nuevo origen → Texto/CSV**; seleccionar `product.csv`, renombrar la consulta `product` y conservar `ProductKey`, `ProductName`, `CategoryName`. | <img src="https://github.com/user-attachments/assets/9bb4ba05-db4c-4cb9-b958-84230d7cef2c" width="850" alt="Captura: loaded"> |
-
-**Resultado esperado:** dos consultas en Power Query, `sales` con 6 campos originales y `product` con 3. **No hacer Cerrar y aplicar todavía.** Si los archivos aparecen con encabezados genéricos, usar **Usar primera fila como encabezados**.
-
-<a id="paso-3-2-2"></a>
-#### 3.2.2. Revisar y corregir los tipos de datos
-
-Los valores deben conservarse en su tipo adecuado. El error más riesgoso es convertir el precio decimal con una región incorrecta.
-
-| Acción en Power BI | Captura de pantalla |
-|:---|:---:|
-| **1.** En `sales`: `OrderKey` **Texto**; `LineNumber`, `ProductKey`, `Quantity` **Entero**; `OrderDate` **Fecha**; `NetPrice` **Número decimal**. En `product`: `ProductKey` **Entero**, nombres **Texto**. | 🖼️ **Captura 3.2.2a pendiente.** Pegar aquí la imagen de este paso. |
-| **2.** Para `NetPrice`, si existe un **Tipo cambiado** automático incorrecto, borrarlo antes de convertir. Clic derecho sobre el encabezado → **Cambiar tipo → Usar configuración regional → Número decimal → Inglés (Estados Unidos)**. | 🖼️ **Captura 3.2.2b pendiente.** Pegar aquí la imagen de este paso. |
-| **3.** En `product`, seleccionar nombres y **Transformar → Formato → Recortar**. Confirmar que `ProductKey` tiene igual tipo en ambas consultas. | 🖼️ **Captura 3.2.2c pendiente.** Pegar aquí la imagen de este paso. |
-
-**Verificación:** `OrderDate` reconoce fechas, `NetPrice` conserva hasta seis decimales, y no hay errores de conversión. No utilizar **Número decimal fijo** ni redondear antes de multiplicar.
-
-<a id="paso-3-2-3"></a>
-#### 3.2.3. Examinar calidad y perfil de columnas
-
-El perfilado debe aplicarse sobre **todo el conjunto de datos**, no solo a la muestra de 1.000 filas.
-
-| Acción en Power BI | Captura de pantalla |
-|:---|:---:|
-| **1.** En Power Query, ir a **Vista → Calidad de columna** y **Perfil de columna** (opcional: **Distribución de columna**). | <img src="https://github.com/user-attachments/assets/cd50a6d9-eaa2-45ef-b2a1-de3931cf79df" width="850" alt="Captura: qualitymenu"> |
-| **2.** En la barra inferior, cambiar **Perfilado de columnas basado en las primeras 1.000 filas** por **basado en todo el conjunto de datos**. | <img src="https://github.com/user-attachments/assets/d1d4f80c-39a2-4fd8-adbb-fae9138b92ac" width="850" alt="Captura: quality"> |
-| **3.** Seleccionar `OrderKey`, `Quantity`, `NetPrice` y `LineNumber`. Revisar errores, vacíos, mínimos, máximos y valores distintos en Estadísticas de columna. | <img src="https://github.com/user-attachments/assets/132bacf6-e815-4b08-8c2c-c7144a429128" width="700" alt="Captura: profile"> <img src="https://github.com/user-attachments/assets/0b16ef72-8496-41b5-a034-cea08ea7d3ce" width="700" alt="Captura: fullprofile"> |
-| **4.** Repita la comprobación en `product[ProductKey]` y revise que no existan errores o claves nulas. | 🖼️ **Captura 3.2.3d pendiente.** Pegar aquí la imagen de este paso. |
-
-**Resultado esperado:** perfil completo, sin errores de conversión ni vacíos en los campos requeridos. La gráfica de perfil es una verificación de calidad, no una visualización del informe.
-
-<a id="paso-3-2-4"></a>
-#### 3.2.4. Verificar recuentos y claves
-
-Los totales estructurales se comprueban en Power Query; las cifras agregadas de ventas, unidades y pedidos se confirmarán con medidas DAX en **3.3.3**, después de cargar el modelo.
-
-| Acción en Power BI | Captura de pantalla |
-|:---|:---:|
-| **1.** Clic derecho en `sales` → **Referencia**, renombrar `control_filas_sales`. En esta consulta auxiliar usar **Transformar → Contar filas**. Debe devolver **199.873**. | 🖼️ **Captura 3.2.4a pendiente.** Pegar aquí la imagen de este paso. |
-| **2.** Repetir con una referencia de `product`, llamada `control_filas_product`. Debe devolver **2.517**. | 🖼️ **Captura 3.2.4b pendiente.** Pegar aquí la imagen de este paso. |
-| **3.** Otra referencia de `product`: **Agrupar por → ProductKey → Recuento de filas**. Filtrar recuentos mayores que 1. Debe quedar vacía (0 claves duplicadas). | 🖼️ **Captura 3.2.4c pendiente.** Pegar aquí la imagen de este paso. |
-| **4.** Desactivar **Habilitar carga** de consultas auxiliares (o eliminarlas tras verificar), sin alterar `sales` y `product`. | 🖼️ **Captura 3.2.4d pendiente.** Pegar aquí la imagen de este paso. |
-
-**No avanzar si no coinciden los recuentos.** Los 11.267 registros de 2020 son líneas, no pedidos distintos.
-
-<a id="paso-3-2-5"></a>
-#### 3.2.5. Crear ImporteVenta e InicioMes en Power Query
-
-La secuencia principal usa **Agregar columna → Columna personalizada** para crear estas dos columnas en lenguaje M.
-
-| Acción en Power BI | Captura de pantalla |
-|:---|:---:|
-| **1.** En `sales` elegir **Agregar columna → Columna personalizada**. Nombre: `ImporteVenta`. Fórmula: `[Quantity] * [NetPrice]`. Aceptar y dejar tipo **Número decimal**. | 🖼️ **Captura 3.2.5a pendiente.** Pegar aquí la imagen de este paso. |
-| **2.** Repetir **Columna personalizada**. Nombre: `InicioMes`. Fórmula: `Date.StartOfMonth([OrderDate])`. Aceptar y asignar tipo **Fecha**. | 🖼️ **Captura 3.2.5b pendiente.** Pegar aquí la imagen de este paso. |
-| **3.** Comprobar un registro: cantidad × precio neto = importe de línea. `InicioMes` debe mostrar el primer día del mes del pedido. | 🖼️ **Captura 3.2.5c pendiente.** Pegar aquí la imagen de este paso. |
-
-**Resultado esperado:** `sales` tiene 8 columnas y `product` 3. **No use aquí fórmulas DAX:** `EOMONTH(...)` y la sintaxis de DAX corresponden a otra etapa.
-
-<a id="paso-3-2-6"></a>
-#### 3.2.6. Cerrar y aplicar las transformaciones
-
-Verifique el panel de errores antes de pasar al modelo.
-
-| Acción en Power BI | Captura de pantalla |
-|:---|:---:|
-| **1.** Confirmar consultas de negocio `sales` y `product`, tipos correctos, sin errores y columnas `ImporteVenta` e `InicioMes`. Seleccionar **Inicio → Cerrar y aplicar**. | 🖼️ **Captura 3.2.6 pendiente.** Pegar aquí la imagen de este paso. |
-
-**Resultado esperado:** las tablas quedan disponibles en Power BI Desktop. Las consultas auxiliares no deben cargarse como tablas de negocio.
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="25%">Acción en Power BI</th>
+      <th width="75%">Captura de pantalla</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td width="25%" valign="top">
+      <a id="paso-3-2-1"></a>
+      <p><strong>3.2.1. Importar sales.csv y product.csv</strong></p>
+<p>Use <strong>Transformar datos</strong> en lugar de <strong>Cargar</strong> para poder controlar la calidad antes de aplicar.</p>
+<div><p><strong>Acción 1.</strong> <strong>Inicio → Obtener datos → Texto/CSV</strong>. Localizar <code>sales.csv</code>.</p></div>
+<div><p><strong>Acción 2.</strong> Comprobar <strong>Delimitador: coma</strong> y vista previa de <code>sales.csv</code>. Seleccionar <strong>Transformar datos</strong>, no <strong>Cargar</strong>.</p></div>
+<div><p><strong>Acción 3.</strong> En el Editor de Power Query, renombrar la consulta <code>sales</code>. Seleccionar <code>OrderKey</code>, <code>LineNumber</code>, <code>OrderDate</code>, <code>ProductKey</code>, <code>Quantity</code>, <code>NetPrice</code> (Ctrl + clic) → <strong>Quitar otras columnas</strong>.</p></div>
+<div><p><strong>Acción 4.</strong> <strong>Inicio → Nuevo origen → Texto/CSV</strong>; seleccionar <code>product.csv</code>, renombrar la consulta <code>product</code> y conservar <code>ProductKey</code>, <code>ProductName</code>, <code>CategoryName</code>.</p></div>
+<div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> dos consultas en Power Query, <code>sales</code> con 6 campos originales y <code>product</code> con 3. <strong>No hacer Cerrar y aplicar todavía.</strong> Si los archivos aparecen con encabezados genéricos, usar <strong>Usar primera fila como encabezados</strong>.</p></div>
+    </td>
+    <td width="75%" align="center" valign="top">
+      <div align="center"><img src="https://github.com/user-attachments/assets/f000ec3e-725d-4090-80d2-c2ecec6bf46a" width="700" alt="Captura: get"></div>
+<div align="center"><img src="https://github.com/user-attachments/assets/21beab77-cfd5-42dc-91e6-82d3455f2b73" width="700" alt="Captura: choose"></div>
+<div align="center"><img src="https://github.com/user-attachments/assets/53a8bd73-2450-4af3-8f0d-e0491fa8d4f0" width="700" alt="Captura: load"></div>
+<p><em>Captura 3.2.1c pendiente. Pegar aquí la imagen de este paso.</em></p>
+<div align="center"><img src="https://github.com/user-attachments/assets/9bb4ba05-db4c-4cb9-b958-84230d7cef2c" width="700" alt="Captura: loaded"></div>
+    </td>
+  </tr>
+  <tr>
+    <td width="25%" valign="top">
+      <a id="paso-3-2-2"></a>
+      <p><strong>3.2.2. Revisar y corregir los tipos de datos</strong></p>
+<p>Los valores deben conservarse en su tipo adecuado. El error más riesgoso es convertir el precio decimal con una región incorrecta.</p>
+<div><p><strong>Acción 1.</strong> En <code>sales</code>: <code>OrderKey</code> <strong>Texto</strong>; <code>LineNumber</code>, <code>ProductKey</code>, <code>Quantity</code> <strong>Entero</strong>; <code>OrderDate</code> <strong>Fecha</strong>; <code>NetPrice</code> <strong>Número decimal</strong>. En <code>product</code>: <code>ProductKey</code> <strong>Entero</strong>, nombres <strong>Texto</strong>.</p></div>
+<div><p><strong>Acción 2.</strong> Para <code>NetPrice</code>, si existe un <strong>Tipo cambiado</strong> automático incorrecto, borrarlo antes de convertir. Clic derecho sobre el encabezado → <strong>Cambiar tipo → Usar configuración regional → Número decimal → Inglés (Estados Unidos)</strong>.</p></div>
+<div><p><strong>Acción 3.</strong> En <code>product</code>, seleccionar nombres y <strong>Transformar → Formato → Recortar</strong>. Confirmar que <code>ProductKey</code> tiene igual tipo en ambas consultas.</p></div>
+<div><strong>Resultado o verificación</strong><p><strong>Verificación:</strong> <code>OrderDate</code> reconoce fechas, <code>NetPrice</code> conserva hasta seis decimales, y no hay errores de conversión. No utilizar <strong>Número decimal fijo</strong> ni redondear antes de multiplicar.</p></div>
+    </td>
+    <td width="75%" align="center" valign="top">
+      <p><em>Captura 3.2.2a pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><em>Captura 3.2.2b pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><em>Captura 3.2.2c pendiente. Pegar aquí la imagen de este paso.</em></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="25%" valign="top">
+      <a id="paso-3-2-3"></a>
+      <p><strong>3.2.3. Examinar calidad y perfil de columnas</strong></p>
+<p>El perfilado debe aplicarse sobre <strong>todo el conjunto de datos</strong>, no solo a la muestra de 1.000 filas.</p>
+<div><p><strong>Acción 1.</strong> En Power Query, ir a <strong>Vista → Calidad de columna</strong> y <strong>Perfil de columna</strong> (opcional: <strong>Distribución de columna</strong>).</p></div>
+<div><p><strong>Acción 2.</strong> En la barra inferior, cambiar <strong>Perfilado de columnas basado en las primeras 1.000 filas</strong> por <strong>basado en todo el conjunto de datos</strong>.</p></div>
+<div><p><strong>Acción 3.</strong> Seleccionar <code>OrderKey</code>, <code>Quantity</code>, <code>NetPrice</code> y <code>LineNumber</code>. Revisar errores, vacíos, mínimos, máximos y valores distintos en Estadísticas de columna.</p></div>
+<div><p><strong>Acción 4.</strong> Repita la comprobación en <code>product[ProductKey]</code> y revise que no existan errores o claves nulas.</p></div>
+<div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> perfil completo, sin errores de conversión ni vacíos en los campos requeridos. La gráfica de perfil es una verificación de calidad, no una visualización del informe.</p></div>
+    </td>
+    <td width="75%" align="center" valign="top">
+      <div align="center"><img src="https://github.com/user-attachments/assets/cd50a6d9-eaa2-45ef-b2a1-de3931cf79df" width="700" alt="Captura: qualitymenu"></div>
+<div align="center"><img src="https://github.com/user-attachments/assets/d1d4f80c-39a2-4fd8-adbb-fae9138b92ac" width="700" alt="Captura: quality"></div>
+<div align="center"><img src="https://github.com/user-attachments/assets/132bacf6-e815-4b08-8c2c-c7144a429128" width="700" alt="Captura: profile"></div>
+<div align="center"><img src="https://github.com/user-attachments/assets/0b16ef72-8496-41b5-a034-cea08ea7d3ce" width="700" alt="Captura: fullprofile"></div>
+<p><em>Captura 3.2.3d pendiente. Pegar aquí la imagen de este paso.</em></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="25%" valign="top">
+      <a id="paso-3-2-4"></a>
+      <p><strong>3.2.4. Verificar recuentos y claves</strong></p>
+<p>Los totales estructurales se comprueban en Power Query; las cifras agregadas de ventas, unidades y pedidos se confirmarán con medidas DAX en <strong>3.3.3</strong>, después de cargar el modelo.</p>
+<div><p><strong>Acción 1.</strong> Clic derecho en <code>sales</code> → <strong>Referencia</strong>, renombrar <code>control_filas_sales</code>. En esta consulta auxiliar usar <strong>Transformar → Contar filas</strong>. Debe devolver <strong>199.873</strong>.</p></div>
+<div><p><strong>Acción 2.</strong> Repetir con una referencia de <code>product</code>, llamada <code>control_filas_product</code>. Debe devolver <strong>2.517</strong>.</p></div>
+<div><p><strong>Acción 3.</strong> Otra referencia de <code>product</code>: <strong>Agrupar por → ProductKey → Recuento de filas</strong>. Filtrar recuentos mayores que 1. Debe quedar vacía (0 claves duplicadas).</p></div>
+<div><p><strong>Acción 4.</strong> Desactivar <strong>Habilitar carga</strong> de consultas auxiliares (o eliminarlas tras verificar), sin alterar <code>sales</code> y <code>product</code>.</p></div>
+<div><strong>Resultado o verificación</strong><p><strong>No avanzar si no coinciden los recuentos.</strong> Los 11.267 registros de 2020 son líneas, no pedidos distintos.</p></div>
+    </td>
+    <td width="75%" align="center" valign="top">
+      <p><em>Captura 3.2.4a pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><em>Captura 3.2.4b pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><em>Captura 3.2.4c pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><em>Captura 3.2.4d pendiente. Pegar aquí la imagen de este paso.</em></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="25%" valign="top">
+      <a id="paso-3-2-5"></a>
+      <p><strong>3.2.5. Crear ImporteVenta e InicioMes en Power Query</strong></p>
+<p>La secuencia principal usa <strong>Agregar columna → Columna personalizada</strong> para crear estas dos columnas en lenguaje M.</p>
+<div><p><strong>Acción 1.</strong> En <code>sales</code> elegir <strong>Agregar columna → Columna personalizada</strong>. Nombre: <code>ImporteVenta</code>. Fórmula: <code>[Quantity] * [NetPrice]</code>. Aceptar y dejar tipo <strong>Número decimal</strong>.</p></div>
+<div><p><strong>Acción 2.</strong> Repetir <strong>Columna personalizada</strong>. Nombre: <code>InicioMes</code>. Fórmula: <code>Date.StartOfMonth([OrderDate])</code>. Aceptar y asignar tipo <strong>Fecha</strong>.</p></div>
+<div><p><strong>Acción 3.</strong> Comprobar un registro: cantidad × precio neto = importe de línea. <code>InicioMes</code> debe mostrar el primer día del mes del pedido.</p></div>
+<div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> <code>sales</code> tiene 8 columnas y <code>product</code> 3. <strong>No use aquí fórmulas DAX:</strong> <code>EOMONTH(...)</code> y la sintaxis de DAX corresponden a otra etapa.</p></div>
+    </td>
+    <td width="75%" align="center" valign="top">
+      <p><em>Captura 3.2.5a pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><em>Captura 3.2.5b pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><em>Captura 3.2.5c pendiente. Pegar aquí la imagen de este paso.</em></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="25%" valign="top">
+      <a id="paso-3-2-6"></a>
+      <p><strong>3.2.6. Cerrar y aplicar las transformaciones</strong></p>
+<p>Verifique el panel de errores antes de pasar al modelo.</p>
+<div><p><strong>Acción 1.</strong> Confirmar consultas de negocio <code>sales</code> y <code>product</code>, tipos correctos, sin errores y columnas <code>ImporteVenta</code> e <code>InicioMes</code>. Seleccionar <strong>Inicio → Cerrar y aplicar</strong>.</p></div>
+<div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> las tablas quedan disponibles en Power BI Desktop. Las consultas auxiliares no deben cargarse como tablas de negocio.</p></div>
+    </td>
+    <td width="75%" align="center" valign="top">
+      <p><em>Captura 3.2.6 pendiente. Pegar aquí la imagen de este paso.</em></p>
+    </td>
+  </tr>
+  </tbody>
+</table>
 
 <a id="paso-3-3"></a>
 ### 3.3. Modelo de datos
 
 **Propósito.** Configurar la relación de hechos y dimensión y crear indicadores DAX. Aquí las medidas podrán responder dinámicamente a segmentaciones y filtros del informe.
 
-<a id="paso-3-3-1"></a>
-#### 3.3.1. Verificar relación por ProductKey
-
-En la vista Modelo se conserva una relación automática únicamente si es correcta.
-
-| Acción en Power BI | Captura de pantalla |
-|:---|:---:|
-| **1.** Abrir **Vista Modelo**. Revisar conexión `product[ProductKey]` (lado **1**) → `sales[ProductKey]` (lado **muchos**). | 🖼️ **Captura 3.3.1a pendiente.** Pegar aquí la imagen de este paso. |
-| **2.** Doble clic sobre la relación: **Activa: Sí**; **Cardinalidad: uno a varios**; **Dirección de filtro cruzado: Única** desde `product` hacia `sales`. Si no existe: **Modelado → Administrar relaciones → Nueva**. | 🖼️ **Captura 3.3.1b pendiente.** Pegar aquí la imagen de este paso. |
-
-**Verificación:** al filtrar una categoría de productos se filtran sus ventas. No combinar las consultas ni admitir muchos a muchos sin revisar las claves.
-
-<a id="paso-3-3-2"></a>
-#### 3.3.2. Reconocer la diferencia entre columnas Power Query y DAX
-
-Las capturas siguientes ya estaban en el taller original y muestran la **ruta alternativa DAX**. **No repita la creación** de `ImporteVenta` ni `InicioMes` si ya existen por Power Query en 3.2.5.
-
-| Acción en Power BI | Captura de pantalla |
-|:---|:---:|
-| **Referencia A (alternativa, no ejecutar de nuevo).** Vista Tabla → tabla `sales`. | <img src="https://github.com/user-attachments/assets/bf020ae3-e5d9-4770-8e6e-60704111f842" width="850" alt="Captura: view"> |
-| **Referencia B.** **Herramientas de tablas → Nueva columna**; para DAX, la expresión de importe sería `ImporteVenta = [Quantity] * [NetPrice]`. | <img src="https://github.com/user-attachments/assets/69f07f68-df39-4f17-93be-bcabcedb2f8a" width="750" alt="Captura: newcol"> <img src="https://github.com/user-attachments/assets/1a5da758-859f-4b46-b624-11a4d3611a5c" width="750" alt="Captura: amount"> |
-| **Referencia C.** En DAX, la fecha de inicio de mes puede escribirse `InicioMes = EOMONTH('sales'[OrderDate], -1) + 1` y definirse como Fecha. | <img src="https://github.com/user-attachments/assets/1907837c-e104-4ca5-b9b2-66d0d040edd8" width="850" alt="Captura: month"> |
-
-**Regla:** las columnas creadas en Power Query aparecen en el modelo. Las creadas por DAX no vuelven a aparecer en Power Query. En este recorrido las dos columnas ya están hechas mediante M.
-
-<a id="paso-3-3-3"></a>
-#### 3.3.3. Crear las tres medidas DAX
-
-Seleccione `sales` y después **Modelado → Nueva medida**. Crear cada medida por separado.
-
-| Acción en Power BI | Captura de pantalla |
-|:---|:---:|
-| **1. Ventas Totales:** `Ventas Totales = SUM('sales'[ImporteVenta])`. | 🖼️ **Captura 3.3.3a pendiente.** Pegar aquí la imagen de este paso. |
-| **2. Unidades Totales:** `Unidades Totales = SUM('sales'[Quantity])`. | 🖼️ **Captura 3.3.3b pendiente.** Pegar aquí la imagen de este paso. |
-| **3. Pedidos distintos:** `Pedidos = DISTINCTCOUNT('sales'[OrderKey])`. Formato: ventas 2 decimales; cantidades y pedidos 0 decimales. | 🖼️ **Captura 3.3.3c pendiente.** Pegar aquí la imagen de este paso. |
-
-**Verificación:** las tres medidas muestran icono de calculadora. `Pedidos` usa `DISTINCTCOUNT`, no recuento de líneas.
-
-<a id="paso-3-3-4"></a>
-#### 3.3.4. Comprobar totales agregados sin filtros
-
-Use un visual de tabla provisional con las tres medidas; el detalle comercial se construirá en 3.4.
-
-| Acción en Power BI | Captura de pantalla |
-|:---|:---:|
-| **1.** Insertar **Tabla** provisional y agregar las medidas. Sin filtros debe mostrar **203.723.865,76** en ventas, **628.370** unidades y **83.130** pedidos distintos. | 🖼️ **Captura 3.3.4a pendiente.** Pegar aquí la imagen de este paso. |
-| **2.** Aplicar temporalmente el intervalo **01/01/2020 a 31/12/2020** en un filtro de fecha del visual: deben aparecer **11.066.206,89**, **35.234** y **4.806**. Luego quitar el filtro y la tabla provisional. | 🖼️ **Captura 3.3.4b pendiente.** Pegar aquí la imagen de este paso. |
-
-**Si no coinciden**, revisar `NetPrice`, cálculo de `ImporteVenta`, `OrderDate`, precisión de los decimales y filtros activos antes de diseñar el tablero.
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="25%">Acción en Power BI</th>
+      <th width="75%">Captura de pantalla</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td width="25%" valign="top">
+      <a id="paso-3-3-1"></a>
+      <p><strong>3.3.1. Verificar relación por ProductKey</strong></p>
+<p>En la vista Modelo se conserva una relación automática únicamente si es correcta.</p>
+<div><p><strong>Acción 1.</strong> Abrir <strong>Vista Modelo</strong>. Revisar conexión <code>product[ProductKey]</code> (lado <strong>1</strong>) → <code>sales[ProductKey]</code> (lado <strong>muchos</strong>).</p></div>
+<div><p><strong>Acción 2.</strong> Doble clic sobre la relación: <strong>Activa: Sí</strong>; <strong>Cardinalidad: uno a varios</strong>; <strong>Dirección de filtro cruzado: Única</strong> desde <code>product</code> hacia <code>sales</code>. Si no existe: <strong>Modelado → Administrar relaciones → Nueva</strong>.</p></div>
+<div><strong>Resultado o verificación</strong><p><strong>Verificación:</strong> al filtrar una categoría de productos se filtran sus ventas. No combinar las consultas ni admitir muchos a muchos sin revisar las claves.</p></div>
+    </td>
+    <td width="75%" align="center" valign="top">
+      <p><em>Captura 3.3.1a pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><em>Captura 3.3.1b pendiente. Pegar aquí la imagen de este paso.</em></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="25%" valign="top">
+      <a id="paso-3-3-2"></a>
+      <p><strong>3.3.2. Reconocer la diferencia entre columnas Power Query y DAX</strong></p>
+<p>Las capturas siguientes ya estaban en el taller original y muestran la <strong>ruta alternativa DAX</strong>. <strong>No repita la creación</strong> de <code>ImporteVenta</code> ni <code>InicioMes</code> si ya existen por Power Query en 3.2.5.</p>
+<div><p><strong>Referencia A (alternativa, no ejecutar de nuevo).</strong> Vista Tabla → tabla <code>sales</code>.</p></div>
+<div><p><strong>Referencia B.</strong> <strong>Herramientas de tablas → Nueva columna</strong>; para DAX, la expresión de importe sería <code>ImporteVenta = [Quantity] * [NetPrice]</code>.</p></div>
+<div><p><strong>Referencia C.</strong> En DAX, la fecha de inicio de mes puede escribirse <code>InicioMes = EOMONTH('sales'[OrderDate], -1) + 1</code> y definirse como Fecha.</p></div>
+<div><strong>Resultado o verificación</strong><p><strong>Regla:</strong> las columnas creadas en Power Query aparecen en el modelo. Las creadas por DAX no vuelven a aparecer en Power Query. En este recorrido las dos columnas ya están hechas mediante M.</p></div>
+    </td>
+    <td width="75%" align="center" valign="top">
+      <div align="center"><img src="https://github.com/user-attachments/assets/bf020ae3-e5d9-4770-8e6e-60704111f842" width="700" alt="Captura: view"></div>
+<div align="center"><img src="https://github.com/user-attachments/assets/69f07f68-df39-4f17-93be-bcabcedb2f8a" width="700" alt="Captura: newcol"></div>
+<div align="center"><img src="https://github.com/user-attachments/assets/1a5da758-859f-4b46-b624-11a4d3611a5c" width="700" alt="Captura: amount"></div>
+<div align="center"><img src="https://github.com/user-attachments/assets/1907837c-e104-4ca5-b9b2-66d0d040edd8" width="700" alt="Captura: month"></div>
+    </td>
+  </tr>
+  <tr>
+    <td width="25%" valign="top">
+      <a id="paso-3-3-3"></a>
+      <p><strong>3.3.3. Crear las tres medidas DAX</strong></p>
+<p>Seleccione <code>sales</code> y después <strong>Modelado → Nueva medida</strong>. Crear cada medida por separado.</p>
+<div><p><strong>1. Ventas Totales:</strong> <code>Ventas Totales = SUM('sales'[ImporteVenta])</code>.</p></div>
+<div><p><strong>2. Unidades Totales:</strong> <code>Unidades Totales = SUM('sales'[Quantity])</code>.</p></div>
+<div><p><strong>3. Pedidos distintos:</strong> <code>Pedidos = DISTINCTCOUNT('sales'[OrderKey])</code>. Formato: ventas 2 decimales; cantidades y pedidos 0 decimales.</p></div>
+<div><strong>Resultado o verificación</strong><p><strong>Verificación:</strong> las tres medidas muestran icono de calculadora. <code>Pedidos</code> usa <code>DISTINCTCOUNT</code>, no recuento de líneas.</p></div>
+    </td>
+    <td width="75%" align="center" valign="top">
+      <p><em>Captura 3.3.3a pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><em>Captura 3.3.3b pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><em>Captura 3.3.3c pendiente. Pegar aquí la imagen de este paso.</em></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="25%" valign="top">
+      <a id="paso-3-3-4"></a>
+      <p><strong>3.3.4. Comprobar totales agregados sin filtros</strong></p>
+<p>Use un visual de tabla provisional con las tres medidas; el detalle comercial se construirá en 3.4.</p>
+<div><p><strong>Acción 1.</strong> Insertar <strong>Tabla</strong> provisional y agregar las medidas. Sin filtros debe mostrar <strong>203.723.865,76</strong> en ventas, <strong>628.370</strong> unidades y <strong>83.130</strong> pedidos distintos.</p></div>
+<div><p><strong>Acción 2.</strong> Aplicar temporalmente el intervalo <strong>01/01/2020 a 31/12/2020</strong> en un filtro de fecha del visual: deben aparecer <strong>11.066.206,89</strong>, <strong>35.234</strong> y <strong>4.806</strong>. Luego quitar el filtro y la tabla provisional.</p></div>
+<div><strong>Resultado o verificación</strong><p><strong>Si no coinciden</strong>, revisar <code>NetPrice</code>, cálculo de <code>ImporteVenta</code>, <code>OrderDate</code>, precisión de los decimales y filtros activos antes de diseñar el tablero.</p></div>
+    </td>
+    <td width="75%" align="center" valign="top">
+      <p><em>Captura 3.3.4a pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><em>Captura 3.3.4b pendiente. Pegar aquí la imagen de este paso.</em></p>
+    </td>
+  </tr>
+  </tbody>
+</table>
 
 <a id="paso-3-4"></a>
 ### 3.4. Visualizaciones
 
 **Propósito.** Convertir los indicadores validados en cuatro respuestas visuales; luego comprobar interacciones y auditoría por pedido. La página principal se refiere exclusivamente a **2020** y todas las categorías, salvo cuando se realizan pruebas controladas.
 
-<a id="paso-3-4-1"></a>
-#### 3.4.1. Crear la página y definir el diseño
-
-Se propone fondo `#F4F7FB`, tarjetas blancas `#FFFFFF`, títulos azul oscuro `#172B4D`, barras de acento `#007F7A` y línea mensual `#1F5A85`.
-
-| Acción en Power BI | Captura de pantalla |
-|:---|:---:|
-| **1.** Renombrar la página `Resumen comercial`. Seleccionar **Vista → Temas → Personalizar tema actual**, ajustar la paleta y, si es pertinente, página **16:9**. | 🖼️ **Captura 3.4.1a pendiente.** Pegar aquí la imagen de este paso. |
-| **2.** Insertar cuadro de texto con título `Resumen comercial - Contoso 2020`. Reservar zona superior para filtros y tarjetas; zona central para barras y línea; inferior para tabla. | 🖼️ **Captura 3.4.1b pendiente.** Pegar aquí la imagen de este paso. |
-
-**Verificación:** título visible, contraste adecuado y espacios para cifras completas.
-
-<a id="paso-3-4-2"></a>
-#### 3.4.2. Agregar segmentaciones de fecha y categoría
-
-Ambas segmentaciones pertenecen a la página Resumen, no a todo el informe.
-
-| Acción en Power BI | Captura de pantalla |
-|:---|:---:|
-| **1.** Insertar **Segmentación de datos** → `sales[OrderDate]`, como fecha individual (no jerarquía). Elegir estilo **Entre**. | 🖼️ **Captura 3.4.2a pendiente.** Pegar aquí la imagen de este paso. |
-| **2.** Insertar otra segmentación → `product[CategoryName]`. Mantener todas las categorías. Al principio dejar fechas sin filtrar para comprobar las tarjetas históricas; después seleccionar 2020. | 🖼️ **Captura 3.4.2b pendiente.** Pegar aquí la imagen de este paso. |
-
-**Verificación:** la página `Comprobacion` debe conservar acceso a registros de 2015; no utilizar filtro de fecha a nivel informe.
-
-<a id="paso-3-4-3"></a>
-#### 3.4.3. Q1: ventas, unidades y pedidos con tarjetas
-
-Se usarán exactamente las medidas ya comprobadas.
-
-| Acción en Power BI | Captura de pantalla |
-|:---|:---:|
-| **1.** Insertar **Tarjeta**; asignar `Ventas Totales`; título `Ventas en moneda base`. En **Formato visual** usar **Unidades de visualización: Ninguno** y 2 decimales. | 🖼️ **Captura 3.4.3a pendiente.** Pegar aquí la imagen de este paso. |
-| **2.** Duplicar tarjeta dos veces (Ctrl+C/Ctrl+V). Sustituir por `Unidades Totales` (0 decimales) y `Pedidos` (0 decimales), con títulos `Unidades` y `Pedidos distintos`. | 🖼️ **Captura 3.4.3b pendiente.** Pegar aquí la imagen de este paso. |
-| **3.** Después de comprobar el historial completo, colocar fechas **01/01/2020–31/12/2020**. Deben verse ventas **11.066.206,89**, unidades **35.234** y pedidos **4.806**. | 🖼️ **Captura 3.4.3c pendiente.** Pegar aquí la imagen de este paso. |
-
-**Criterio:** tarjetas sin abreviaturas K/M y con el período correcto.
-
-<a id="paso-3-4-4"></a>
-#### 3.4.4. Q2: barras de ventas por categoría
-
-Ranking descendente para reconocer la categoría líder.
-
-| Acción en Power BI | Captura de pantalla |
-|:---|:---:|
-| **1.** Seleccionar **Gráfico de barras agrupadas**. Eje Y: `product[CategoryName]`. Eje X: `Ventas Totales`. Menú **… → Ordenar por → Ventas Totales → Descendente**. | 🖼️ **Captura 3.4.4a pendiente.** Pegar aquí la imagen de este paso. |
-| **2.** Activar etiquetas y título `Ventas por categoría - 2020`. Destacar Computers si la versión permite configurar colores por categoría. | 🖼️ **Captura 3.4.4b pendiente.** Pegar aquí la imagen de este paso. |
-
-**Resultado esperado:** Computers **5.041.111,59**; Cell phones **1.861.564,14**. Si todas las barras repiten el mismo total, revisar relación.
-
-<a id="paso-3-4-5"></a>
-#### 3.4.5. Q3: tabla de comparación de categorías
-
-Comparar importes, unidades y pedidos por categoría.
-
-| Acción en Power BI | Captura de pantalla |
-|:---|:---:|
-| **1.** Insertar **Tabla**. Agregar en orden `product[CategoryName]`, `Ventas Totales`, `Unidades Totales`, `Pedidos`. Ordenar por ventas descendente. | 🖼️ **Captura 3.4.5a pendiente.** Pegar aquí la imagen de este paso. |
-| **2.** Activar totales, formato legible y comparar con la tabla de referencia. Ordenar temporalmente por unidades para ver si cambia el liderazgo y volver a ventas. | 🖼️ **Captura 3.4.5b pendiente.** Pegar aquí la imagen de este paso. |
-
-**Resultado esperado:** Computers lidera tanto ventas (**5.041.111,59**) como unidades (**8.364**). **Nota:** los pedidos por categoría no se suman para obtener el total distinto de pedidos, porque un pedido puede contener varias categorías.
-
-<a id="paso-3-4-6"></a>
-#### 3.4.6. Q4: línea de ventas mensuales
-
-El eje debe seguir la fecha real de inicio de mes.
-
-| Acción en Power BI | Captura de pantalla |
-|:---|:---:|
-| **1.** Insertar **Gráfico de líneas**. Eje X: `sales[InicioMes]` como **Fecha** individual, no jerarquía. Eje Y: `Ventas Totales`. | 🖼️ **Captura 3.4.6a pendiente.** Pegar aquí la imagen de este paso. |
-| **2.** Ordenar cronológicamente, activar marcadores, aplicar color `#1F5A85` y título `Evolución mensual de ventas - 2020`. | 🖼️ **Captura 3.4.6b pendiente.** Pegar aquí la imagen de este paso. |
-| **3.** Agregar anotación visual `Marzo: −58,46 % frente a febrero` y contrastar meses de máximo y mínimo. | 🖼️ **Captura 3.4.6c pendiente.** Pegar aquí la imagen de este paso. |
-
-**Verificación:** febrero **2.658.349,04** (máximo); marzo **1.104.361,28**; septiembre **320.093,34** (mínimo). Deben mostrarse 12 meses ordenados.
-
-<a id="paso-3-4-7"></a>
-#### 3.4.7. Probar interacciones entre filtros y visuales
-
-Compruebe el filtrado antes de utilizar el tablero en la fase 4.
-
-| Acción en Power BI | Captura de pantalla |
-|:---|:---:|
-| **1.** Con 2020 activo, seleccionar únicamente `Computers` en la segmentación. Verificar ventas **5.041.111,59**, unidades **8.364**, pedidos **2.094**. | 🖼️ **Captura 3.4.7a pendiente.** Pegar aquí la imagen de este paso. |
-| **2.** Si algún visual no responde, seleccionar la segmentación → **Formato → Editar interacciones** → **Filtrar**. Limpiar la selección para regresar a los totales anuales. | 🖼️ **Captura 3.4.7b pendiente.** Pegar aquí la imagen de este paso. |
-
-**Verificación:** todas las categorías restauradas: 11.066.206,89; 35.234; 4.806.
-
-<a id="paso-3-4-8"></a>
-#### 3.4.8. Crear una página de comprobación con dos pedidos
-
-Esta página verifica el resultado del modelo a nivel de línea de pedido y no lleva filtro global de año.
-
-| Acción en Power BI | Captura de pantalla |
-|:---|:---:|
-| **1.** Añadir página `Comprobacion`. Insertar **Tabla** con `OrderKey`, `LineNumber`, `OrderDate`, `CategoryName`, `Quantity`, `NetPrice`, `ImporteVenta`. En campos de detalle usar **No resumir** cuando aplique. | 🖼️ **Captura 3.4.8a pendiente.** Pegar aquí la imagen de este paso. |
-| **2.** Insertar segmentación de `OrderKey`; seleccionar simultáneamente **1000** y **1001**. Añadir tarjetas con las tres medidas originales. | 🖼️ **Captura 3.4.8b pendiente.** Pegar aquí la imagen de este paso. |
-| **3.** Verificar 3 líneas: pedido 1000 (Audio 1 × 98,967; Computers 1 × 659,780); pedido 1001 (Games and Toys 2 × 54,376). | 🖼️ **Captura 3.4.8c pendiente.** Pegar aquí la imagen de este paso. |
-
-**Control manual:** 98,967 + 659,780 + 108,752 = **867,499** (visualizado como **867,50**); **4 unidades** y **2 pedidos distintos**.
-
-**Cierre de la fase 3.** Antes de pasar a la fase 4, comprobar la relación activa, las tres medidas, las dos páginas, los filtros y la página de auditoría. Se conserva una cifra completa de control sin forzar redondeos.
-
-[Volver al índice](#indice)
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="25%">Acción en Power BI</th>
+      <th width="75%">Captura de pantalla</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td width="25%" valign="top">
+      <a id="paso-3-4-1"></a>
+      <p><strong>3.4.1. Crear la página y definir el diseño</strong></p>
+<p>Se propone fondo <code>#F4F7FB</code>, tarjetas blancas <code>#FFFFFF</code>, títulos azul oscuro <code>#172B4D</code>, barras de acento <code>#007F7A</code> y línea mensual <code>#1F5A85</code>.</p>
+<div><p><strong>Acción 1.</strong> Renombrar la página <code>Resumen comercial</code>. Seleccionar <strong>Vista → Temas → Personalizar tema actual</strong>, ajustar la paleta y, si es pertinente, página <strong>16:9</strong>.</p></div>
+<div><p><strong>Acción 2.</strong> Insertar cuadro de texto con título <code>Resumen comercial - Contoso 2020</code>. Reservar zona superior para filtros y tarjetas; zona central para barras y línea; inferior para tabla.</p></div>
+<div><strong>Resultado o verificación</strong><p><strong>Verificación:</strong> título visible, contraste adecuado y espacios para cifras completas.</p></div>
+    </td>
+    <td width="75%" align="center" valign="top">
+      <p><em>Captura 3.4.1a pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><em>Captura 3.4.1b pendiente. Pegar aquí la imagen de este paso.</em></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="25%" valign="top">
+      <a id="paso-3-4-2"></a>
+      <p><strong>3.4.2. Agregar segmentaciones de fecha y categoría</strong></p>
+<p>Ambas segmentaciones pertenecen a la página Resumen, no a todo el informe.</p>
+<div><p><strong>Acción 1.</strong> Insertar <strong>Segmentación de datos</strong> → <code>sales[OrderDate]</code>, como fecha individual (no jerarquía). Elegir estilo <strong>Entre</strong>.</p></div>
+<div><p><strong>Acción 2.</strong> Insertar otra segmentación → <code>product[CategoryName]</code>. Mantener todas las categorías. Al principio dejar fechas sin filtrar para comprobar las tarjetas históricas; después seleccionar 2020.</p></div>
+<div><strong>Resultado o verificación</strong><p><strong>Verificación:</strong> la página <code>Comprobacion</code> debe conservar acceso a registros de 2015; no utilizar filtro de fecha a nivel informe.</p></div>
+    </td>
+    <td width="75%" align="center" valign="top">
+      <p><em>Captura 3.4.2a pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><em>Captura 3.4.2b pendiente. Pegar aquí la imagen de este paso.</em></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="25%" valign="top">
+      <a id="paso-3-4-3"></a>
+      <p><strong>3.4.3. Q1: ventas, unidades y pedidos con tarjetas</strong></p>
+<p>Se usarán exactamente las medidas ya comprobadas.</p>
+<div><p><strong>Acción 1.</strong> Insertar <strong>Tarjeta</strong>; asignar <code>Ventas Totales</code>; título <code>Ventas en moneda base</code>. En <strong>Formato visual</strong> usar <strong>Unidades de visualización: Ninguno</strong> y 2 decimales.</p></div>
+<div><p><strong>Acción 2.</strong> Duplicar tarjeta dos veces (Ctrl+C/Ctrl+V). Sustituir por <code>Unidades Totales</code> (0 decimales) y <code>Pedidos</code> (0 decimales), con títulos <code>Unidades</code> y <code>Pedidos distintos</code>.</p></div>
+<div><p><strong>Acción 3.</strong> Después de comprobar el historial completo, colocar fechas <strong>01/01/2020–31/12/2020</strong>. Deben verse ventas <strong>11.066.206,89</strong>, unidades <strong>35.234</strong> y pedidos <strong>4.806</strong>.</p></div>
+<div><strong>Resultado o verificación</strong><p><strong>Criterio:</strong> tarjetas sin abreviaturas K/M y con el período correcto.</p></div>
+    </td>
+    <td width="75%" align="center" valign="top">
+      <p><em>Captura 3.4.3a pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><em>Captura 3.4.3b pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><em>Captura 3.4.3c pendiente. Pegar aquí la imagen de este paso.</em></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="25%" valign="top">
+      <a id="paso-3-4-4"></a>
+      <p><strong>3.4.4. Q2: barras de ventas por categoría</strong></p>
+<p>Ranking descendente para reconocer la categoría líder.</p>
+<div><p><strong>Acción 1.</strong> Seleccionar <strong>Gráfico de barras agrupadas</strong>. Eje Y: <code>product[CategoryName]</code>. Eje X: <code>Ventas Totales</code>. Menú <strong>… → Ordenar por → Ventas Totales → Descendente</strong>.</p></div>
+<div><p><strong>Acción 2.</strong> Activar etiquetas y título <code>Ventas por categoría - 2020</code>. Destacar Computers si la versión permite configurar colores por categoría.</p></div>
+<div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> Computers <strong>5.041.111,59</strong>; Cell phones <strong>1.861.564,14</strong>. Si todas las barras repiten el mismo total, revisar relación.</p></div>
+    </td>
+    <td width="75%" align="center" valign="top">
+      <p><em>Captura 3.4.4a pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><em>Captura 3.4.4b pendiente. Pegar aquí la imagen de este paso.</em></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="25%" valign="top">
+      <a id="paso-3-4-5"></a>
+      <p><strong>3.4.5. Q3: tabla de comparación de categorías</strong></p>
+<p>Comparar importes, unidades y pedidos por categoría.</p>
+<div><p><strong>Acción 1.</strong> Insertar <strong>Tabla</strong>. Agregar en orden <code>product[CategoryName]</code>, <code>Ventas Totales</code>, <code>Unidades Totales</code>, <code>Pedidos</code>. Ordenar por ventas descendente.</p></div>
+<div><p><strong>Acción 2.</strong> Activar totales, formato legible y comparar con la tabla de referencia. Ordenar temporalmente por unidades para ver si cambia el liderazgo y volver a ventas.</p></div>
+<div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> Computers lidera tanto ventas (<strong>5.041.111,59</strong>) como unidades (<strong>8.364</strong>). <strong>Nota:</strong> los pedidos por categoría no se suman para obtener el total distinto de pedidos, porque un pedido puede contener varias categorías.</p></div>
+    </td>
+    <td width="75%" align="center" valign="top">
+      <p><em>Captura 3.4.5a pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><em>Captura 3.4.5b pendiente. Pegar aquí la imagen de este paso.</em></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="25%" valign="top">
+      <a id="paso-3-4-6"></a>
+      <p><strong>3.4.6. Q4: línea de ventas mensuales</strong></p>
+<p>El eje debe seguir la fecha real de inicio de mes.</p>
+<div><p><strong>Acción 1.</strong> Insertar <strong>Gráfico de líneas</strong>. Eje X: <code>sales[InicioMes]</code> como <strong>Fecha</strong> individual, no jerarquía. Eje Y: <code>Ventas Totales</code>.</p></div>
+<div><p><strong>Acción 2.</strong> Ordenar cronológicamente, activar marcadores, aplicar color <code>#1F5A85</code> y título <code>Evolución mensual de ventas - 2020</code>.</p></div>
+<div><p><strong>Acción 3.</strong> Agregar anotación visual <code>Marzo: −58,46 % frente a febrero</code> y contrastar meses de máximo y mínimo.</p></div>
+<div><strong>Resultado o verificación</strong><p><strong>Verificación:</strong> febrero <strong>2.658.349,04</strong> (máximo); marzo <strong>1.104.361,28</strong>; septiembre <strong>320.093,34</strong> (mínimo). Deben mostrarse 12 meses ordenados.</p></div>
+    </td>
+    <td width="75%" align="center" valign="top">
+      <p><em>Captura 3.4.6a pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><em>Captura 3.4.6b pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><em>Captura 3.4.6c pendiente. Pegar aquí la imagen de este paso.</em></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="25%" valign="top">
+      <a id="paso-3-4-7"></a>
+      <p><strong>3.4.7. Probar interacciones entre filtros y visuales</strong></p>
+<p>Compruebe el filtrado antes de utilizar el tablero en la fase 4.</p>
+<div><p><strong>Acción 1.</strong> Con 2020 activo, seleccionar únicamente <code>Computers</code> en la segmentación. Verificar ventas <strong>5.041.111,59</strong>, unidades <strong>8.364</strong>, pedidos <strong>2.094</strong>.</p></div>
+<div><p><strong>Acción 2.</strong> Si algún visual no responde, seleccionar la segmentación → <strong>Formato → Editar interacciones</strong> → <strong>Filtrar</strong>. Limpiar la selección para regresar a los totales anuales.</p></div>
+<div><strong>Resultado o verificación</strong><p><strong>Verificación:</strong> todas las categorías restauradas: 11.066.206,89; 35.234; 4.806.</p></div>
+    </td>
+    <td width="75%" align="center" valign="top">
+      <p><em>Captura 3.4.7a pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><em>Captura 3.4.7b pendiente. Pegar aquí la imagen de este paso.</em></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="25%" valign="top">
+      <a id="paso-3-4-8"></a>
+      <p><strong>3.4.8. Crear una página de comprobación con dos pedidos</strong></p>
+<p>Esta página verifica el resultado del modelo a nivel de línea de pedido y no lleva filtro global de año.</p>
+<div><p><strong>Acción 1.</strong> Añadir página <code>Comprobacion</code>. Insertar <strong>Tabla</strong> con <code>OrderKey</code>, <code>LineNumber</code>, <code>OrderDate</code>, <code>CategoryName</code>, <code>Quantity</code>, <code>NetPrice</code>, <code>ImporteVenta</code>. En campos de detalle usar <strong>No resumir</strong> cuando aplique.</p></div>
+<div><p><strong>Acción 2.</strong> Insertar segmentación de <code>OrderKey</code>; seleccionar simultáneamente <strong>1000</strong> y <strong>1001</strong>. Añadir tarjetas con las tres medidas originales.</p></div>
+<div><p><strong>Acción 3.</strong> Verificar 3 líneas: pedido 1000 (Audio 1 × 98,967; Computers 1 × 659,780); pedido 1001 (Games and Toys 2 × 54,376).</p></div>
+<div><strong>Resultado o verificación</strong><p><strong>Control manual:</strong> 98,967 + 659,780 + 108,752 = <strong>867,499</strong> (visualizado como <strong>867,50</strong>); <strong>4 unidades</strong> y <strong>2 pedidos distintos</strong>.</p>
+<p><strong>Cierre de la fase 3.</strong> Antes de pasar a la fase 4, comprobar la relación activa, las tres medidas, las dos páginas, los filtros y la página de auditoría. Se conserva una cifra completa de control sin forzar redondeos.</p>
+<p><a href="#indice">Volver al índice</a></p></div>
+    </td>
+    <td width="75%" align="center" valign="top">
+      <p><em>Captura 3.4.8a pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><em>Captura 3.4.8b pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><em>Captura 3.4.8c pendiente. Pegar aquí la imagen de este paso.</em></p>
+    </td>
+  </tr>
+  </tbody>
+</table>
 
 <a id="fase-4"></a>
 ## Fase 4. Ejecutar y explicar
