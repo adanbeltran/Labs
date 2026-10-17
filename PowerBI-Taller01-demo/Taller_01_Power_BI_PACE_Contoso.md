@@ -413,7 +413,6 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 
   <p><b>Importante:</b> las medidas se recalculan según los filtros del informe. <code>DISTINCTCOUNT</code> cuenta pedidos diferentes, no líneas de venta.</p>
 </td>
-
     <td width="75%" align="center" valign="top">
    <p><em> <img width="903" height="435" alt="image" src="https://github.com/user-attachments/assets/efb5de8a-adfc-43e1-b4da-f5f6a9622b88" /></em></p>
 
