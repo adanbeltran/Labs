@@ -189,20 +189,9 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 | **1. Seleccionar la vista de tabla y seleccionar `sales.csv` | <img width="1890" height="771" alt="image" src="https://github.com/user-attachments/assets/bf020ae3-e5d9-4770-8e6e-60704111f842" /> |
 | **2. Seleccionar Nueva Columna** | <img width="1837" height="416" alt="image" src="https://github.com/user-attachments/assets/69f07f68-df39-4f17-93be-bcabcedb2f8a" /> |
 | **3. escribir ```ImporteVenta = [Quantity] * [NetPrice]```  Pulsar **Confirmar* |<img width="1447" height="360" alt="image" src="https://github.com/user-attachments/assets/1a5da758-859f-4b46-b624-11a4d3611a5c" /> |
+| **4. Agregar una nueva Columna ```InicioMes = EOMONTH('sales'[OrderDate], -1) + 1```  Pulsar **Confirmar* |<img width="1585" height="258" alt="image" src="https://github.com/user-attachments/assets/1907837c-e104-4ca5-b9b2-66d0d040edd8" />|
 
-
-5. Pulsar **Aceptar** y cambiar el tipo de la columna nueva a **Número decimal**.
-6. Repetir **Agregar columna → Columna personalizada**.
-7. Escribir `InicioMes` como nombre y la fórmula:
-
-```powerquery
-Date.StartOfMonth([OrderDate])
-```
-
-8. Pulsar **Aceptar** y cambiar `InicioMes` a tipo **Fecha**.
-9. Verificar una fila: `ImporteVenta` debe ser `Quantity × NetPrice` y `InicioMes` debe ser el primer día del mes de `OrderDate`.
-
-**Resultado esperado:** `sales` tiene ocho columnas; `product`, tres. **Verificación:** no hay errores en las columnas nuevas. Las fórmulas anteriores son **Power Query M**, no DAX.
+**Resultado esperado:** `sales` tiene ocho columnas; `product`, tres. **Verificación:** no hay errores en las columnas nuevas. 
 
 <a id="paso-3-6"></a>
 ### 3.6. Revisar calidad y cargar los datos
