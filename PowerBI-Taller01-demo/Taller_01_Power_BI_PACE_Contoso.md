@@ -184,10 +184,8 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 | Acción en Power BI | Captura de pantalla |
 |:---|:---:|
 | **1. Seleccionar Obtener datos**. Ir a Inicio → Obtener datos → Texto/CSV. | <img width="1383" height="921" alt="image" src="https://github.com/user-attachments/assets/f000ec3e-725d-4090-80d2-c2ecec6bf46a" /> |
-| **2. Seleccionar archivo**. Buscar y seleccionar `sales.csv`. | <img width="470" height="321" alt="image" src="https://github.com/user-attachments/assets/21beab77-cfd5-42dc-91e6-82d3455f2b73" />
- |
-| **3. Cargar datos**. Seleccionar el botón ** Cargar datos**. |<img width="1112" height="826" alt="image" src="https://github.com/user-attachments/assets/53a8bd73-2450-4af3-8f0d-e0491fa8d4f0" />
- |
+| **2. Seleccionar archivo**. Buscar y seleccionar `sales.csv`. | <img width="470" height="321" alt="image" src="https://github.com/user-attachments/assets/21beab77-cfd5-42dc-91e6-82d3455f2b73" /> |
+| **3. Cargar datos**. Seleccionar el botón ** Cargar datos**. |<img width="1112" height="826" alt="image" src="https://github.com/user-attachments/assets/53a8bd73-2450-4af3-8f0d-e0491fa8d4f0" /> |
 
 
 
