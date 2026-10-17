@@ -361,37 +361,18 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
     • <b>Activar esta relación:</b> habilitada.
   </p>
 
-  <p>Si la relación no existe, seleccionar <b>Modelado → Administrar relaciones → Nueva</b> y configurarla con los mismos campos.</p>
-
   <p><b>Resultado esperado:</b> relación activa entre <code>product</code> (lado 1) y <code>sales</code> (lado *), permitiendo filtrar las ventas por categoría de producto.</p>
-
-  <p><b>Importante:</b> no crear relaciones duplicadas ni aceptar una cardinalidad varios a varios sin revisar las claves.</p>
+  
 </td>
     <td width="75%" align="center" valign="top">
       <p><em><img width="917" height="472" alt="image" src="https://github.com/user-attachments/assets/efe82077-8f15-4b25-a22e-2c0cef4b9303" />.</em></p>
     </td>
   </tr>
-  <tr>
-    <td width="25%" valign="top">
-      <a id="paso-3-3-2"></a>
-      <p><strong>3.3.2. Reconocer la diferencia entre columnas Power Query y DAX</strong></p>
-<p>Las capturas siguientes ya estaban en el taller original y muestran la <strong>ruta alternativa DAX</strong>. <strong>No repita la creación</strong> de <code>ImporteVenta</code> ni <code>InicioMes</code> si ya existen por Power Query en 3.2.5.</p>
-<div><p><strong>Referencia A (alternativa, no ejecutar de nuevo).</strong> Vista Tabla → tabla <code>sales</code>.</p></div>
-<div><p><strong>Referencia B.</strong> <strong>Herramientas de tablas → Nueva columna</strong>; para DAX, la expresión de importe sería <code>ImporteVenta = [Quantity] * [NetPrice]</code>.</p></div>
-<div><p><strong>Referencia C.</strong> En DAX, la fecha de inicio de mes puede escribirse <code>InicioMes = EOMONTH('sales'[OrderDate], -1) + 1</code> y definirse como Fecha.</p></div>
-<div><strong>Resultado o verificación</strong><p><strong>Regla:</strong> las columnas creadas en Power Query aparecen en el modelo. Las creadas por DAX no vuelven a aparecer en Power Query. En este recorrido las dos columnas ya están hechas mediante M.</p></div>
-    </td>
-    <td width="75%" align="center" valign="top">
-      <div align="center"><img src="https://github.com/user-attachments/assets/bf020ae3-e5d9-4770-8e6e-60704111f842" width="700" alt="Captura: view"></div>
-<div align="center"><img src="https://github.com/user-attachments/assets/69f07f68-df39-4f17-93be-bcabcedb2f8a" width="700" alt="Captura: newcol"></div>
-<div align="center"><img src="https://github.com/user-attachments/assets/1a5da758-859f-4b46-b624-11a4d3611a5c" width="700" alt="Captura: amount"></div>
-<div align="center"><img src="https://github.com/user-attachments/assets/1907837c-e104-4ca5-b9b2-66d0d040edd8" width="700" alt="Captura: month"></div>
-    </td>
-  </tr>
+  
   <tr>
     <td width="25%" valign="top">
       <a id="paso-3-3-3"></a>
-      <p><strong>3.3.3. Crear las tres medidas DAX</strong></p>
+      <p><strong>3.3.2. Crear las tres medidas DAX</strong></p>
 <p>Seleccione <code>sales</code> y después <strong>Modelado → Nueva medida</strong>. Crear cada medida por separado.</p>
 <div><p><strong>1. Ventas Totales:</strong> <code>Ventas Totales = SUM('sales'[ImporteVenta])</code>.</p></div>
 <div><p><strong>2. Unidades Totales:</strong> <code>Unidades Totales = SUM('sales'[Quantity])</code>.</p></div>
