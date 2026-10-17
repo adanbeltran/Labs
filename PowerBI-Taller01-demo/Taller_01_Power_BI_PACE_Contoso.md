@@ -214,37 +214,18 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
     <td width="25%" valign="top">
       <a id="paso-3-2-1"></a>
       <p><strong>3.2.1. Importar sales.csv y product.csv</strong></p>
-<p>Use <strong>Transformar datos</strong> en lugar de <strong>Cargar</strong> para poder controlar la calidad antes de aplicar.</p>
-<div><p><strong>Acción 1.</strong> <strong>Inicio → Obtener datos → Texto/CSV</strong>. Localizar <code>sales.csv</code>.</p></div>
-<div><p><strong>Acción 2.</strong> Comprobar <strong>Delimitador: coma</strong> y vista previa de <code>sales.csv</code>. Seleccionar <strong>Transformar datos</strong>, no <strong>Cargar</strong>.</p></div>
-<div><p><strong>Acción 3.</strong> En el Editor de Power Query, renombrar la consulta <code>sales</code>. Seleccionar <code>OrderKey</code>, <code>LineNumber</code>, <code>OrderDate</code>, <code>ProductKey</code>, <code>Quantity</code>, <code>NetPrice</code> (Ctrl + clic) → <strong>Quitar otras columnas</strong>.</p></div>
-<div><p><strong>Acción 4.</strong> <strong>Inicio → Nuevo origen → Texto/CSV</strong>; seleccionar <code>product.csv</code>, renombrar la consulta <code>product</code> y conservar <code>ProductKey</code>, <code>ProductName</code>, <code>CategoryName</code>.</p></div>
-<div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> dos consultas en Power Query, <code>sales</code> con 6 campos originales y <code>product</code> con 3. <strong>No hacer Cerrar y aplicar todavía.</strong> Si los archivos aparecen con encabezados genéricos, usar <strong>Usar primera fila como encabezados</strong>.</p></div>
-    </td>
+<div><p><strong>- </strong> <strong>Ir Inicio → Obtener datos → Texto/CSV</strong>. Localizar <code>sales.csv </code> → Cargar.</p></div>
+<div><p><strong>- </strong> <strong>Ir Inicio → Obtener datos → Texto/CSV</strong>; seleccionar <code>product.csv</code> → Cargar.</p></div>
+</td>
     <td width="75%" align="center" valign="top">
       <div align="center"><img src="https://github.com/user-attachments/assets/f000ec3e-725d-4090-80d2-c2ecec6bf46a" width="700" alt="Captura: get"></div>
 <div align="center"><img src="https://github.com/user-attachments/assets/21beab77-cfd5-42dc-91e6-82d3455f2b73" width="700" alt="Captura: choose"></div>
 <div align="center"><img src="https://github.com/user-attachments/assets/53a8bd73-2450-4af3-8f0d-e0491fa8d4f0" width="700" alt="Captura: load"></div>
-<p><em>Captura 3.2.1c pendiente. Pegar aquí la imagen de este paso.</em></p>
+
 <div align="center"><img src="https://github.com/user-attachments/assets/9bb4ba05-db4c-4cb9-b958-84230d7cef2c" width="700" alt="Captura: loaded"></div>
     </td>
   </tr>
-  <tr>
-    <td width="25%" valign="top">
-      <a id="paso-3-2-2"></a>
-      <p><strong>3.2.2. Revisar y corregir los tipos de datos</strong></p>
-<p>Los valores deben conservarse en su tipo adecuado. El error más riesgoso es convertir el precio decimal con una región incorrecta.</p>
-<div><p><strong>Acción 1.</strong> En <code>sales</code>: <code>OrderKey</code> <strong>Texto</strong>; <code>LineNumber</code>, <code>ProductKey</code>, <code>Quantity</code> <strong>Entero</strong>; <code>OrderDate</code> <strong>Fecha</strong>; <code>NetPrice</code> <strong>Número decimal</strong>. En <code>product</code>: <code>ProductKey</code> <strong>Entero</strong>, nombres <strong>Texto</strong>.</p></div>
-<div><p><strong>Acción 2.</strong> Para <code>NetPrice</code>, si existe un <strong>Tipo cambiado</strong> automático incorrecto, borrarlo antes de convertir. Clic derecho sobre el encabezado → <strong>Cambiar tipo → Usar configuración regional → Número decimal → Inglés (Estados Unidos)</strong>.</p></div>
-<div><p><strong>Acción 3.</strong> En <code>product</code>, seleccionar nombres y <strong>Transformar → Formato → Recortar</strong>. Confirmar que <code>ProductKey</code> tiene igual tipo en ambas consultas.</p></div>
-<div><strong>Resultado o verificación</strong><p><strong>Verificación:</strong> <code>OrderDate</code> reconoce fechas, <code>NetPrice</code> conserva hasta seis decimales, y no hay errores de conversión. No utilizar <strong>Número decimal fijo</strong> ni redondear antes de multiplicar.</p></div>
-    </td>
-    <td width="75%" align="center" valign="top">
-      <p><em>Captura 3.2.2a pendiente. Pegar aquí la imagen de este paso.</em></p>
-<p><em>Captura 3.2.2b pendiente. Pegar aquí la imagen de este paso.</em></p>
-<p><em>Captura 3.2.2c pendiente. Pegar aquí la imagen de este paso.</em></p>
-    </td>
-  </tr>
+ 
   <tr>
     <td width="25%" valign="top">
       <a id="paso-3-2-3"></a>
