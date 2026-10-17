@@ -301,20 +301,19 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 
   <p><b>1.</b> Seleccionar la consulta <code>sales</code> y abrir <b>Agregar columna</b>.</p>
 
-  <p><b>2.</b> Seleccionar <b>Columna personalizada</b>.</p>
+  <p><b>2.</b> Seleccionar <b>Agregar Columna</b>.</p>
+  <p><b>3.</b> Seleccionar <b>Columna personalizada</b>.</p>
 
-  <p><b>3.</b> Escribir el nombre <code>InicioMes</code> y la fórmula:<br>
+  <p><b>4.</b> Escribir el nombre <code>InicioMes</code> y la fórmula:<br>
   <code>Date.StartOfMonth([OrderDate])</code></p>
 
-  <p><b>4.</b> Verificar que no existan errores de sintaxis y pulsar <b>Aceptar</b>.</p>
+  <p><b>5.</b> Verificar que no existan errores de sintaxis y pulsar <b>Aceptar</b>.</p>
 
-  <p><b>5.</b> Seleccionar la columna <code>InicioMes</code>.</p>
+  <p><b>6.</b> Seleccionar la columna <code>InicioMes</code>.</p>
 
-  <p><b>6.</b> Abrir la pestaña <b>Transformar</b>.</p>
+  <p><b>7.</b> Abrir la pestaña <b>Transformar</b>.</p>
 
-  <p><b>7.</b> En <b>Tipo de datos</b>, seleccionar <b>Fecha</b>.</p>
-
-  <p><b>8.</b> Comprobar que la columna <code>InicioMes</code> se haya creado correctamente.</p>
+  <p><b>8.</b> En <b>Tipo de datos</b>, seleccionar <b>Fecha</b>.</p>
 
   <p><b>9.</b> Verificar que todas las fechas correspondan al <b>primer día del mes</b> de <code>OrderDate</code>. Por ejemplo, 26/02/2015 debe convertirse en 01/02/2015.</p>
 
