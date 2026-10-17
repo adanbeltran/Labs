@@ -354,8 +354,7 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 <div><strong>Resultado o verificación</strong><p><strong>Verificación:</strong> al filtrar una categoría de productos se filtran sus ventas. No combinar las consultas ni admitir muchos a muchos sin revisar las claves.</p></div>
     </td>
     <td width="75%" align="center" valign="top">
-      <p><em>Captura 3.3.1a pendiente. Pegar aquí la imagen de este paso.</em></p>
-<p><em>Captura 3.3.1b pendiente. Pegar aquí la imagen de este paso.</em></p>
+      <p><em><img width="917" height="472" alt="image" src="https://github.com/user-attachments/assets/efe82077-8f15-4b25-a22e-2c0cef4b9303" />.</em></p>
     </td>
   </tr>
   <tr>
