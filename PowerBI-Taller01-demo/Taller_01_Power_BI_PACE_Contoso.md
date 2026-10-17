@@ -237,13 +237,8 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 <div><p><strong>Acción 4.</strong> Repita la comprobación en <code>product[ProductKey]</code> y revise que no existan errores o claves nulas.</p></div>
 <div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> perfil completo, sin errores de conversión ni vacíos en los campos requeridos. La gráfica de perfil es una verificación de calidad, no una visualización del informe.</p></div>
     </td>
-    <td width="75%" align="center" valign="top">
-      <div align="center"><img src="https://github.com/user-attachments/assets/cd50a6d9-eaa2-45ef-b2a1-de3931cf79df" width="700" alt="Captura: qualitymenu"></div>
-<div align="center"><img src="https://github.com/user-attachments/assets/d1d4f80c-39a2-4fd8-adbb-fae9138b92ac" width="700" alt="Captura: quality"></div>
-<div align="center"><img src="https://github.com/user-attachments/assets/132bacf6-e815-4b08-8c2c-c7144a429128" width="700" alt="Captura: profile"></div>
-<div align="center"><img src="https://github.com/user-attachments/assets/0b16ef72-8496-41b5-a034-cea08ea7d3ce" width="700" alt="Captura: fullprofile"></div>
-<p><em>Captura 3.2.3d pendiente. Pegar aquí la imagen de este paso.</em></p>
-    </td>
+<img width="984" height="271" alt="image" src="https://github.com/user-attachments/assets/13edc524-dd21-4a2e-8a37-e1fcc7026301" />
+<img width="682" height="732" alt="image" src="https://github.com/user-attachments/assets/adf16f94-8e1b-4cee-b8bb-f260e28c6c9a" />
   </tr>
   <tr>
     <td width="25%" valign="top">
