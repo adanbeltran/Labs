@@ -306,6 +306,8 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
       <p><em><img width="873" height="437" alt="image" src="https://github.com/user-attachments/assets/7964aba0-1d74-404a-b759-10743f0b364b" /></em></p>
       <p><em><img width="858" height="482" alt="image" src="https://github.com/user-attachments/assets/92c36a8d-cfa4-4c03-ac76-09812ea0fb43" /></em></p>
       <p><em><img width="848" height="297" alt="image" src="https://github.com/user-attachments/assets/5921980e-fbcd-49a7-bfce-54faf9b98811" />.</em></p>
+      <p><em><img width="888" height="300" alt="image" src="https://github.com/user-attachments/assets/3494c052-377c-4408-a677-6dd99e6b6499" /></em></p>
+
     </td>
   </tr>
   </tbody>
