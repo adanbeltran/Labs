@@ -295,19 +295,38 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
     </td>
   </tr>
   <tr>
-    <td width="25%" valign="top">
-      <a id="paso-3-2-4"></a>
-      <p><strong>3.2.6. Cerrar y aplicar las transformaciones</strong></p>
-<p>Verifique el panel de errores antes de pasar al modelo.</p>
-<div><p><strong>Acción 1.</strong> Confirmar consultas de negocio <code>sales</code> y <code>product</code>, tipos correctos, sin errores y columnas <code>ImporteVenta</code> e <code>InicioMes</code>. Seleccionar <strong>Inicio → Cerrar y aplicar</strong>.</p></div>
-<div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> las tablas quedan disponibles en Power BI Desktop. Las consultas auxiliares no deben cargarse como tablas de negocio.</p></div>
-    </td>
+   
+<td width="25%">
+  <b>3.2.4. Crear InicioMes y verificar el resultado</b>
+
+  <p><b>1.</b> Seleccionar la consulta <code>sales</code> y abrir <b>Agregar columna</b>.</p>
+
+  <p><b>2.</b> Seleccionar <b>Columna personalizada</b>.</p>
+
+  <p><b>3.</b> Escribir el nombre <code>InicioMes</code> y la fórmula:<br>
+  <code>Date.StartOfMonth([OrderDate])</code></p>
+
+  <p><b>4.</b> Verificar que no existan errores de sintaxis y pulsar <b>Aceptar</b>.</p>
+
+  <p><b>5.</b> Seleccionar la columna <code>InicioMes</code>.</p>
+
+  <p><b>6.</b> Abrir la pestaña <b>Transformar</b>.</p>
+
+  <p><b>7.</b> En <b>Tipo de datos</b>, seleccionar <b>Fecha</b>.</p>
+
+  <p><b>8.</b> Comprobar que la columna <code>InicioMes</code> se haya creado correctamente.</p>
+
+  <p><b>9.</b> Verificar que todas las fechas correspondan al <b>primer día del mes</b> de <code>OrderDate</code>. Por ejemplo, 26/02/2015 debe convertirse en 01/02/2015.</p>
+
+  <p><b>10.</b> Seleccionar <b>Inicio → Cerrar y aplicar</b> para guardar las transformaciones y cargar los datos al modelo.</p>
+
+  <p><b>Resultado esperado:</b> columna <code>InicioMes</code> de tipo <b>Fecha</b>, sin errores y con el primer día de cada mes. Las transformaciones quedan aplicadas al modelo.</p>
+</td>
     <td width="75%" align="center" valign="top">
       <p><em><img width="873" height="437" alt="image" src="https://github.com/user-attachments/assets/7964aba0-1d74-404a-b759-10743f0b364b" /></em></p>
       <p><em><img width="858" height="482" alt="image" src="https://github.com/user-attachments/assets/92c36a8d-cfa4-4c03-ac76-09812ea0fb43" /></em></p>
       <p><em><img width="848" height="297" alt="image" src="https://github.com/user-attachments/assets/5921980e-fbcd-49a7-bfce-54faf9b98811" />.</em></p>
       <p><em><img width="888" height="300" alt="image" src="https://github.com/user-attachments/assets/3494c052-377c-4408-a677-6dd99e6b6499" /></em></p>
-
     </td>
   </tr>
   </tbody>
