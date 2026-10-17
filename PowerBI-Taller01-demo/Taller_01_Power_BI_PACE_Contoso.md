@@ -228,8 +228,8 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
  
   <tr>
     <td width="25%" valign="top">
-      <a id="paso-3-2-3"></a>
-      <p><strong>3.2.3. Examinar calidad y perfil de columnas</strong></p>
+      <a id="paso-3-2-2"></a>
+      <p><strong>3.2.2. Examinar calidad y perfil de columnas</strong></p>
 <p>El perfilado debe aplicarse sobre <strong>todo el conjunto de datos</strong>, no solo a la muestra de 1.000 filas.</p>
 <div><p><strong>Acción 1.</strong> En Power Query, ir a <strong>Vista → Calidad de columna</strong> y <strong>Perfil de columna</strong> (opcional: <strong>Distribución de columna</strong>).</p></div>
 <div><p><strong>Acción 2.</strong> En la barra inferior, cambiar <strong>Perfilado de columnas basado en las primeras 1.000 filas</strong> por <strong>basado en todo el conjunto de datos</strong>.</p></div>
@@ -237,11 +237,14 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 <div><p><strong>Acción 4.</strong> Repita la comprobación en <code>product[ProductKey]</code> y revise que no existan errores o claves nulas.</p></div>
 <div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> perfil completo, sin errores de conversión ni vacíos en los campos requeridos. La gráfica de perfil es una verificación de calidad, no una visualización del informe.</p></div>
     </td>
-<img width="984" height="271" alt="image" src="https://github.com/user-attachments/assets/13edc524-dd21-4a2e-8a37-e1fcc7026301" />
+    <td width="75%" align="center" valign="top">
+<img width="705" height="207" alt="image" src="https://github.com/user-attachments/assets/9c44345a-176d-47bf-81a1-2a564fb8ef58" />
+
 <img width="682" height="732" alt="image" src="https://github.com/user-attachments/assets/adf16f94-8e1b-4cee-b8bb-f260e28c6c9a" />
+  </td>
   </tr>
   <tr>
-    <td width="25%" valign="top">
+      <td width="25%" valign="top">
       <a id="paso-3-2-4"></a>
       <p><strong>3.2.4. Verificar recuentos y claves</strong></p>
 <p>Los totales estructurales se comprueban en Power Query; las cifras agregadas de ventas, unidades y pedidos se confirmarán con medidas DAX en <strong>3.3.3</strong>, después de cargar el modelo.</p>
