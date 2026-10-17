@@ -182,21 +182,7 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
     <td width="75%" align="center" valign="top">
       <p><img width="1625" height="925" alt="image" src="https://github.com/user-attachments/assets/dbce2484-2d59-4108-821a-53b0fb7df823" /></p>
 <p><img width="602" height="575" alt="image" src="https://github.com/user-attachments/assets/2be61f12-a0d6-4bcc-9526-7ea7f3058dc6" /></p>
-<p><img width="455" height="445" alt="image" src="https://github.com/user-attachments/assets/213222d5-46c4-476a-b387-c54797280395" /></p>
-
-    </td>
-  </tr>
-  <tr>
-    <td width="25%" valign="top">
-      <a id="paso-3-1-2"></a>
-      <p><strong>3.1.2. Abrir Power BI y localizar Obtener datos</strong></p>
-<p>Prepare un informe en blanco y reconozca el conector antes de importarlo.</p>
-<div><p><strong>Acción 1.</strong> Abrir Power BI Desktop, crear un informe en blanco e identificar <strong>Inicio → Obtener datos → Texto/CSV</strong>. No pulse <strong>Cargar</strong> todavía.</p></div>
-<div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> se identifica correctamente el conector Texto/CSV.</p></div>
-    </td>
-    <td width="75%" align="center" valign="top">
-      <div align="center"><img src="https://github.com/user-attachments/assets/f000ec3e-725d-4090-80d2-c2ecec6bf46a" width="700" alt="Captura: get"></div>
-    </td>
+<p><img width="455" height="445" alt="image" src="https://github.com/user-attachments/assets/213222d5-46c4-476a-b387-c54797280395" /></p> </td>
   </tr>
   <tr>
     <td width="25%" valign="top">
@@ -209,6 +195,19 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
     <td width="75%" align="center" valign="top">
       <div align="center"><img src="https://github.com/user-attachments/assets/7b18bcd3-0ef3-4d16-8cba-162229f93835" width="700" alt="Captura: regional"></div>
     </td>
+</tr>
+  <tr>
+    <td width="25%" valign="top">
+      <a id="paso-3-1-2"></a>
+      <p><strong>3.1.2. Abrir Power BI y localizar Obtener datos</strong></p>
+       <p>Prepare un informe en blanco y reconozca el conector antes de importarlo.</p>
+      <div><p><strong>Acción 1.</strong> Abrir Power BI Desktop, crear un informe en blanco e identificar <strong>Inicio → Obtener datos → Texto/CSV</strong>. No pulse <strong>Cargar</strong> todavía.</p></div>
+<div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> se identifica correctamente el conector Texto/CSV.</p></div>
+    </td>
+      <td width="75%" align="center" valign="top">
+      <div align="center"><img src="https://github.com/user-attachments/assets/f000ec3e-725d-4090-80d2-c2ecec6bf46a" width="700" alt="Captura: get"></div>
+    </td>
+      
   </tr>
   </tbody>
 </table>
