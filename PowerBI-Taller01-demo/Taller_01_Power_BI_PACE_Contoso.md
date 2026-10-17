@@ -181,7 +181,9 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
     </td>
     <td width="75%" align="center" valign="top">
       <p><img width="1625" height="925" alt="image" src="https://github.com/user-attachments/assets/dbce2484-2d59-4108-821a-53b0fb7df823" /></p>
-<p><em>Captura 3.1.1b pendiente. Pegar aquí la imagen de este paso.</em></p>
+<p><img width="602" height="575" alt="image" src="https://github.com/user-attachments/assets/2be61f12-a0d6-4bcc-9526-7ea7f3058dc6" /></p>
+<p><img width="455" height="445" alt="image" src="https://github.com/user-attachments/assets/213222d5-46c4-476a-b387-c54797280395" /></p>
+
     </td>
   </tr>
   <tr>
