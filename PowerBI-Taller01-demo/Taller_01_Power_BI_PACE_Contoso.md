@@ -380,7 +380,7 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 <div><strong>Resultado o verificación</strong><p><strong>Verificación:</strong> las tres medidas muestran icono de calculadora. <code>Pedidos</code> usa <code>DISTINCTCOUNT</code>, no recuento de líneas.</p></div>
     </td>
     <td width="75%" align="center" valign="top">
-      <p><em><img width="115" height="48" alt="image" src="https://github.com/user-attachments/assets/4b60bc16-e791-41b8-9dea-be61af9ae665" />.</em></p>
+    
 <p><em><img width="607" height="405" alt="image" src="https://github.com/user-attachments/assets/965647ea-2472-462b-bca0-dd6b205b641e" />.</em></p>
 <p><em><img width="588" height="393" alt="image" src="https://github.com/user-attachments/assets/0e273741-f97f-4ff7-a7d6-97f9ed779cf3" />.</em></p>
       <p><em><img width="622" height="426" alt="image" src="https://github.com/user-attachments/assets/8bb29a6f-19c1-4be5-83aa-5444526cde37" /></em></p>
