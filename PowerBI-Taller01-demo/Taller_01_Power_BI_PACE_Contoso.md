@@ -267,13 +267,10 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 <div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> <code>sales</code> tiene 8 columnas y <code>product</code> 3. <strong>No use aquí fórmulas DAX:</strong> <code>EOMONTH(...)</code> y la sintaxis de DAX corresponden a otra etapa.</p></div>
     </td>
     <td width="75%" align="center" valign="top">
-      <p><em><img width="762" height="463" alt="image" src="https://github.com/user-attachments/assets/8e683730-ca2c-4629-a0cf-88a270f7515c" /></em></p>
-      <p><em><img width="758" height="347" alt="image" src="https://github.com/user-attachments/assets/e015fff4-6cb5-40d3-8c23-ac24f350020d" /></em></p>
-      <p><em><img width="750" height="547" alt="image" src="https://github.com/user-attachments/assets/21e1b25f-9144-4709-9b5c-419d06b74cf6" /></em></p>
-
-
-      
-<p><em>Captura 3.2.5c pendiente. Pegar aquí la imagen de este paso.</em></p>
+      <p><em><img width="726" height="412" alt="image" src="https://github.com/user-attachments/assets/5dbdfb2a-5acb-4624-84fc-bf8a4e37a10b" /></em></p>
+      <p><em><img width="742" height="318" alt="image" src="https://github.com/user-attachments/assets/9d92b301-a84e-4fe2-bf93-ee3d10c655ba" /></em></p>
+      <p><em><img width="737" height="235" alt="image" src="https://github.com/user-attachments/assets/cec8fce3-5892-4b8e-a3bf-8aca3425ce04" /></em></p>
+      <p><em><img width="722" height="222" alt="image" src="https://github.com/user-attachments/assets/668ef583-8df3-4abf-864c-ffaa446f14da" /></em></p>
     </td>
   </tr>
   <tr>
