@@ -296,14 +296,16 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
   </tr>
   <tr>
     <td width="25%" valign="top">
-      <a id="paso-3-2-6"></a>
+      <a id="paso-3-2-4"></a>
       <p><strong>3.2.6. Cerrar y aplicar las transformaciones</strong></p>
 <p>Verifique el panel de errores antes de pasar al modelo.</p>
 <div><p><strong>Acción 1.</strong> Confirmar consultas de negocio <code>sales</code> y <code>product</code>, tipos correctos, sin errores y columnas <code>ImporteVenta</code> e <code>InicioMes</code>. Seleccionar <strong>Inicio → Cerrar y aplicar</strong>.</p></div>
 <div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> las tablas quedan disponibles en Power BI Desktop. Las consultas auxiliares no deben cargarse como tablas de negocio.</p></div>
     </td>
     <td width="75%" align="center" valign="top">
-      <p><em>Captura 3.2.6 pendiente. Pegar aquí la imagen de este paso.</em></p>
+      <p><em><img width="873" height="437" alt="image" src="https://github.com/user-attachments/assets/7964aba0-1d74-404a-b759-10743f0b364b" /></em></p>
+      <p><em><img width="858" height="482" alt="image" src="https://github.com/user-attachments/assets/92c36a8d-cfa4-4c03-ac76-09812ea0fb43" /></em></p>
+      <p><em><img width="848" height="297" alt="image" src="https://github.com/user-attachments/assets/5921980e-fbcd-49a7-bfce-54faf9b98811" />.</em></p>
     </td>
   </tr>
   </tbody>
