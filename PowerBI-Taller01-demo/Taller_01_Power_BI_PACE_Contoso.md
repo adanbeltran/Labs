@@ -345,14 +345,28 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
   </thead>
   <tbody>
   <tr>
-    <td width="25%" valign="top">
-      <a id="paso-3-3-1"></a>
-      <p><strong>3.3.1. Verificar relación por ProductKey</strong></p>
-<p>En la vista Modelo se conserva una relación automática únicamente si es correcta.</p>
-<div><p><strong>Acción 1.</strong> Abrir <strong>Vista Modelo</strong>. Revisar conexión <code>product[ProductKey]</code> (lado <strong>1</strong>) → <code>sales[ProductKey]</code> (lado <strong>muchos</strong>).</p></div>
-<div><p><strong>Acción 2.</strong> Doble clic sobre la relación: <strong>Activa: Sí</strong>; <strong>Cardinalidad: uno a varios</strong>; <strong>Dirección de filtro cruzado: Única</strong> desde <code>product</code> hacia <code>sales</code>. Si no existe: <strong>Modelado → Administrar relaciones → Nueva</strong>.</p></div>
-<div><strong>Resultado o verificación</strong><p><strong>Verificación:</strong> al filtrar una categoría de productos se filtran sus ventas. No combinar las consultas ni admitir muchos a muchos sin revisar las claves.</p></div>
-    </td>
+  <td width="25%">
+  <b>3.3.1. Verificar relación por ProductKey</b>
+
+  <p><b>1.</b> Seleccionar la <b>Vista Modelo</b> desde el menú lateral izquierdo de Power BI.</p>
+
+  <p><b>2.</b> Identificar la línea que conecta <code>sales</code> con <code>product</code>. Hacer doble clic sobre ella para revisar la relación.</p>
+
+  <p><b>3.</b> En <b>Editar relación</b>, comprobar:</p>
+  <p>
+    • <b>Tabla de origen:</b> <code>sales[ProductKey]</code>.<br>
+    • <b>Tabla relacionada:</b> <code>product[ProductKey]</code>.<br>
+    • <b>Cardinalidad:</b> Varios a uno (*:1).<br>
+    • <b>Dirección de filtro cruzado:</b> Único.<br>
+    • <b>Activar esta relación:</b> habilitada.
+  </p>
+
+  <p>Si la relación no existe, seleccionar <b>Modelado → Administrar relaciones → Nueva</b> y configurarla con los mismos campos.</p>
+
+  <p><b>Resultado esperado:</b> relación activa entre <code>product</code> (lado 1) y <code>sales</code> (lado *), permitiendo filtrar las ventas por categoría de producto.</p>
+
+  <p><b>Importante:</b> no crear relaciones duplicadas ni aceptar una cardinalidad varios a varios sin revisar las claves.</p>
+</td>
     <td width="75%" align="center" valign="top">
       <p><em><img width="917" height="472" alt="image" src="https://github.com/user-attachments/assets/efe82077-8f15-4b25-a22e-2c0cef4b9303" />.</em></p>
     </td>
