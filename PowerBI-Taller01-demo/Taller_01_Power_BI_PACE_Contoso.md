@@ -450,8 +450,22 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 <div><strong>Resultado o verificación</strong><p><strong>Verificación:</strong> título visible, contraste adecuado y espacios para cifras completas.</p></div>
     </td>
     <td width="75%" align="center" valign="top">
-      <p><em>Captura 3.4.1a pendiente. Pegar aquí la imagen de este paso.</em></p>
-<p><em>Captura 3.4.1b pendiente. Pegar aquí la imagen de este paso.</em></p>
+      <p><em><img width="902" height="492" alt="image" src="https://github.com/user-attachments/assets/316ea3eb-29b9-426d-bc97-def94756c371" /></em></p>
+<p><em><img width="877" height="247" alt="image" src="https://github.com/user-attachments/assets/df3b9520-864f-40ed-a112-befef948e752" />.</em></p>
+<p><em><img width="853" height="318" alt="image" src="https://github.com/user-attachments/assets/215c046f-c2a9-4204-bf90-0c4632de6d90" /></em></p>
+      <p><em><img width="860" height="395" alt="image" src="https://github.com/user-attachments/assets/75cf119a-675f-431d-b4b6-5a1c8d21a7b1" />.</em></p>
+        <p><em><img width="857" height="422" alt="image" src="https://github.com/user-attachments/assets/c0f9ea2e-ef78-481a-8361-5ce780a7508d" /></em></p>
+<p><em><img width="492" height="527" alt="image" src="https://github.com/user-attachments/assets/4885db9a-7dcf-40dc-8f43-21d425cdd15e" /></em></p>
+<p><em><img width="300" height="596" alt="image" src="https://github.com/user-attachments/assets/e1e837fb-c872-449e-a7c5-6e2cf1ce6e4c" />.</em></p>
+      <p><em><img width="272" height="607" alt="image" src="https://github.com/user-attachments/assets/1445641e-6a7c-4add-a5dd-422dd36defd0" />.</em></p>
+<p><em><img width="690" height="132" alt="image" src="https://github.com/user-attachments/assets/cb669169-608d-4e42-a34f-d630aa252946" /></em></p>
+<p><em><img width="837" height="192" alt="image" src="https://github.com/user-attachments/assets/e8099ad5-2129-4d7f-8696-a9305e01d1a6" /></em></p>
+<p><em><img width="827" height="492" alt="image" src="https://github.com/user-attachments/assets/245d9a51-83a4-4d86-bfbf-8c1d3358514d" /></em></p>
+<p><em><img width="422" height="472" alt="image" src="https://github.com/user-attachments/assets/7e6c821e-674f-47c7-8802-e8bf17e037dc" /></em></p>
+<p><em><img width="1317" height="780" alt="image" src="https://github.com/user-attachments/assets/73be89d8-c504-4113-b431-58cc60d6eab9" /></em></p>
+
+
+      
     </td>
   </tr>
   <tr>
