@@ -565,9 +565,9 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 <div><strong>Resultado o verificación</strong><p><strong>Criterio:</strong> tarjetas sin abreviaturas K/M y con el período correcto.</p></div>
     </td>
     <td width="75%" align="center" valign="top">
-      <p><em>Captura 3.4.3a pendiente. Pegar aquí la imagen de este paso.</em></p>
-<p><em>Captura 3.4.3b pendiente. Pegar aquí la imagen de este paso.</em></p>
-<p><em>Captura 3.4.3c pendiente. Pegar aquí la imagen de este paso.</em></p>
+      <p><em><img width="646" height="702" alt="image" src="https://github.com/user-attachments/assets/f733c79b-d707-4807-a39a-933ab1c81d83" />.</em></p>
+    <p><em><img width="815" height="487" alt="image" src="https://github.com/user-attachments/assets/0d0402a1-526f-4a2c-aeb5-0b2f6d662215" />.</em></p>
+
     </td>
   </tr>
   <tr>
