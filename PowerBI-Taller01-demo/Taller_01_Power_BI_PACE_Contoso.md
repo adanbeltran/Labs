@@ -509,17 +509,47 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
     </td>
   </tr>
   <tr>
-    <td width="25%" valign="top">
-      <a id="paso-3-4-2"></a>
-      <p><strong>3.4.2. Agregar segmentaciones de fecha y categoría</strong></p>
-<p>Ambas segmentaciones pertenecen a la página Resumen, no a todo el informe.</p>
-<div><p><strong>Acción 1.</strong> Insertar <strong>Segmentación de datos</strong> → <code>sales[OrderDate]</code>, como fecha individual (no jerarquía). Elegir estilo <strong>Entre</strong>.</p></div>
-<div><p><strong>Acción 2.</strong> Insertar otra segmentación → <code>product[CategoryName]</code>. Mantener todas las categorías. Al principio dejar fechas sin filtrar para comprobar las tarjetas históricas; después seleccionar 2020.</p></div>
-<div><strong>Resultado o verificación</strong><p><strong>Verificación:</strong> la página <code>Comprobacion</code> debe conservar acceso a registros de 2015; no utilizar filtro de fecha a nivel informe.</p></div>
-    </td>
+    
+<td width="25%" valign="top">
+  <b>3.4.2. Agregar segmentaciones de fecha y categoría</b>
+
+  <p><b>1.</b> Seleccionar la segmentación de fechas <code>OrderDate</code>.</p>
+
+  <p><b>2.</b> En <b>Compilar visual → Valores</b>, abrir el menú desplegable del campo <code>OrderDate</code>.</p>
+
+  <p>Seleccionar la <b>fecha individual</b>, no la jerarquía de fechas.</p>
+
+  <p><b>3.</b> En <b>Formato visual → Configuración de la segmentación → Opciones</b>, seleccionar el estilo <b>Entre</b>.</p>
+
+  <p><b>4.</b> Establecer el intervalo:</p>
+  <p>
+    Desde: <b>01/01/2020</b><br>
+    Hasta: <b>31/12/2020</b>
+  </p>
+
+  <p><b>5.</b> Insertar otra <b>Segmentación de datos</b> desde el panel Visualizaciones.</p>
+
+  <p><b>6.</b> En <b>Valores</b>, agregar el campo <code>product[CategoryName]</code>.</p>
+
+  <p><b>7.</b> En <b>Formato visual → Configuración de la segmentación</b>:</p>
+  <p>
+    • <b>Estilo:</b> Lista vertical.<br>
+    • <b>Selección única:</b> Desactivada.<br>
+    • <b>Selección múltiple:</b> Activada, sin exigir Ctrl, si está disponible.<br>
+    • <b>Mostrar opción "Seleccionar todo":</b> Activada.
+  </p>
+
+  <p>Quitar cualquier selección individual para incluir todas las categorías.</p>
+
+  <p><b>Resultado esperado:</b> dos segmentaciones en la parte superior del informe: una para el intervalo de fechas de 2020 y otra para seleccionar una o varias categorías.</p>
+
+  <p><b>Importante:</b> ambas segmentaciones deben afectar únicamente la página <code>Resumen Comercial</code>. No aplicar el filtro de 2020 a todo el informe, porque la página <code>Comprobacion</code> utilizará registros de 2015.</p>
+</td>
     <td width="75%" align="center" valign="top">
       <p><em><img width="833" height="341" alt="image" src="https://github.com/user-attachments/assets/091485b9-b25c-43ac-89da-d4a084c6f0f1" /></em></p>
 <p><em><img width="870" height="387" alt="image" src="https://github.com/user-attachments/assets/0db93eab-c8e1-481a-9870-b6bb8b57d4b6" />.</em></p>
+     <p><em><img width="856" height="495" alt="image" src="https://github.com/user-attachments/assets/b18d49ea-1983-4d67-9e8c-b0413d0adf24" />.</em></p>
+     <p><em><img width="871" height="512" alt="image" src="https://github.com/user-attachments/assets/cbb28e21-99b0-46dc-a68e-f416e0927e3f" />.</em></p>
     </td>
   </tr>
   <tr>
