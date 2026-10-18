@@ -674,17 +674,45 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
     </td>
   </tr>
   <tr>
-    <td width="25%" valign="top">
-      <a id="paso-3-4-5"></a>
-      <p><strong>3.4.5. Q3: tabla de comparación de categorías</strong></p>
-<p>Comparar importes, unidades y pedidos por categoría.</p>
-<div><p><strong>Acción 1.</strong> Insertar <strong>Tabla</strong>. Agregar en orden <code>product[CategoryName]</code>, <code>Ventas Totales</code>, <code>Unidades Totales</code>, <code>Pedidos</code>. Ordenar por ventas descendente.</p></div>
-<div><p><strong>Acción 2.</strong> Activar totales, formato legible y comparar con la tabla de referencia. Ordenar temporalmente por unidades para ver si cambia el liderazgo y volver a ventas.</p></div>
-<div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> Computers lidera tanto ventas (<strong>5.041.111,59</strong>) como unidades (<strong>8.364</strong>). <strong>Nota:</strong> los pedidos por categoría no se suman para obtener el total distinto de pedidos, porque un pedido puede contener varias categorías.</p></div>
-    </td>
+   
+<td width="25%" valign="top">
+  <b>3.4.5. Q3: Comparar ventas, unidades y pedidos por categoría</b>
+
+  <p><b>Objetivo:</b> comparar los indicadores comerciales para identificar si la categoría con mayores ventas también lidera en unidades vendidas.</p>
+
+  <p><b>1.</b> En <b>Visualizaciones</b>, seleccionar el objeto visual <b>Tabla</b>.</p>
+
+  <p><b>2.</b> En <b>Compilar visual → Columnas</b>, agregar los campos en este orden:</p>
+  <p>
+    • <code>product[CategoryName]</code>.<br>
+    • <code>Ventas Totales</code>.<br>
+    • <code>Unidades Totales</code>.<br>
+    • <code>Pedidos</code>.
+  </p>
+
+  <p><b>3.</b> Hacer clic en el encabezado <b>Ventas Totales</b> hasta ordenar los importes de <b>mayor a menor</b>. Verificar que Computers aparezca primero.</p>
+
+  <p><b>4.</b> Hacer clic en <b>Unidades Totales</b> para ordenar temporalmente las categorías por cantidad de unidades vendidas, de mayor a menor.</p>
+
+  <p>Comparar ambos ordenamientos y determinar si la categoría líder cambia.</p>
+
+  <p>Finalmente, volver a ordenar por <b>Ventas Totales → Descendente</b>.</p>
+
+  <p><b>Resultado esperado:</b> tabla ordenada de mayor a menor venta, con los tres indicadores y la fila de totales.</p>
+
+  <p><b>Totales de control de 2020:</b></p>
+  <p>
+    • <b>Ventas:</b> 11.066.206,89.<br>
+    • <b>Unidades:</b> 35.234.<br>
+    • <b>Pedidos distintos:</b> 4.806.
+  </p>
+
+  <p><b>Análisis:</b> Computers lidera tanto en ventas como en unidades vendidas. La cantidad de pedidos por categoría no debe sumarse para obtener el total general, porque un pedido puede incluir productos de varias categorías.</p>
+
+  <p><b>Verificación:</b> comprobar que la tabla responda a las segmentaciones de fecha y categoría.</p>
+</td>
     <td width="75%" align="center" valign="top">
-      <p><em>Captura 3.4.5a pendiente. Pegar aquí la imagen de este paso.</em></p>
-<p><em>Captura 3.4.5b pendiente. Pegar aquí la imagen de este paso.</em></p>
+      <p><em><img width="726" height="753" alt="image" src="https://github.com/user-attachments/assets/ec18deea-3fd1-464d-9754-062d4b6794af" />.</em></p>
     </td>
   </tr>
   <tr>
