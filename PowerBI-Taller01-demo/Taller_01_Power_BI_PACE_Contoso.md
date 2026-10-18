@@ -518,8 +518,8 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 <div><strong>Resultado o verificación</strong><p><strong>Verificación:</strong> la página <code>Comprobacion</code> debe conservar acceso a registros de 2015; no utilizar filtro de fecha a nivel informe.</p></div>
     </td>
     <td width="75%" align="center" valign="top">
-      <p><em>Captura 3.4.2a pendiente. Pegar aquí la imagen de este paso.</em></p>
-<p><em>Captura 3.4.2b pendiente. Pegar aquí la imagen de este paso.</em></p>
+      <p><em><img width="833" height="341" alt="image" src="https://github.com/user-attachments/assets/091485b9-b25c-43ac-89da-d4a084c6f0f1" /></em></p>
+<p><em><img width="870" height="387" alt="image" src="https://github.com/user-attachments/assets/0db93eab-c8e1-481a-9870-b6bb8b57d4b6" />.</em></p>
     </td>
   </tr>
   <tr>
