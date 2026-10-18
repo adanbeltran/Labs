@@ -533,7 +533,7 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 
   <p><b>7.</b> En <b>Formato visual → Configuración de la segmentación</b>:</p>
   <p>
-    • <b>Estilo:</b> Lista vertical.<br>
+    • <b>Estilo:</b> Menu Desplegable.<br>
     • <b>Selección única:</b> Desactivada.<br>
     • <b>Selección múltiple:</b> Activada, sin exigir Ctrl, si está disponible.<br>
     • <b>Mostrar opción "Seleccionar todo":</b> Activada.
