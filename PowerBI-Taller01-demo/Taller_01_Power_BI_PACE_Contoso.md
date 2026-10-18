@@ -21,44 +21,9 @@ Contoso es una empresa ficticia. La dirección comercial necesita conocer el imp
 | Paso | Actividad | Modalidad |
 |:---|:---|:---|
 | [Fase 1. Planear](#fase-1) | 1. Planear | Comprensión |
-| [1.1 Contexto y alcance](#paso-1-1) | Contexto y alcance | Comprensión |
-| [1.2 Preguntas y visuales](#paso-1-2) | Preguntas y visuales | Comprensión |
 | [Fase 2. Analizar](#fase-2) | 2. Analizar | Comprensión |
-| [2.1 Granularidad](#paso-2-1) | Granularidad | Comprensión |
-| [2.2 Relaciones](#paso-2-2) | Relaciones | Comprensión |
-| [2.3 Precisión](#paso-2-3) | Precisión | Comprensión |
-| [2.4 Totales de control](#paso-2-4) | Totales de control | Comprensión |
 | [Fase 3. Construir](#fase-3) | 3. Construir | Power BI |
-| [3.1 Configuración inicial](#paso-3-1) | Configuración inicial | Power BI |
-| [3.1.1 Descargar y organizar archivos](#paso-3-1-1) | Descargar y organizar archivos | Power BI |
-| [3.1.2 Localizar Obtener datos](#paso-3-1-2) | Localizar Obtener datos | Power BI |
-| [3.1.3 Configuración regional](#paso-3-1-3) | Configuración regional | Power BI |
-| [3.2 Calidad de datos – Power Query](#paso-3-2) | Calidad de datos – Power Query | Power BI |
-| [3.2.1 Importar CSV](#paso-3-2-1) | Importar CSV | Power BI |
-| [3.2.2 Tipos de datos](#paso-3-2-2) | Tipos de datos | Power BI |
-| [3.2.3 Perfil de calidad](#paso-3-2-3) | Perfil de calidad | Power BI |
-| [3.2.4 Conteos y duplicados](#paso-3-2-4) | Conteos y duplicados | Power BI |
-| [3.2.5 Columnas M](#paso-3-2-5) | Columnas M | Power BI |
-| [3.2.6 Cerrar y aplicar](#paso-3-2-6) | Cerrar y aplicar | Power BI |
-| [3.3 Modelo de datos](#paso-3-3) | Modelo de datos | Power BI |
-| [3.3.1 Relación ProductKey](#paso-3-3-1) | Relación ProductKey | Power BI |
-| [3.3.2 M vs DAX](#paso-3-3-2) | M vs DAX | Power BI |
-| [3.3.3 Medidas DAX](#paso-3-3-3) | Medidas DAX | Power BI |
-| [3.3.4 Totales de control](#paso-3-3-4) | Totales de control | Power BI |
-| [3.4 Visualizaciones](#paso-3-4) | Visualizaciones | Power BI |
-| [3.4.1 Diseño de página](#paso-3-4-1) | Diseño de página | Power BI |
-| [3.4.2 Segmentaciones](#paso-3-4-2) | Segmentaciones | Power BI |
-| [3.4.3 Tarjetas](#paso-3-4-3) | Tarjetas | Power BI |
-| [3.4.4 Barras](#paso-3-4-4) | Barras | Power BI |
-| [3.4.5 Tabla comparativa](#paso-3-4-5) | Tabla comparativa | Power BI |
-| [3.4.6 Línea mensual](#paso-3-4-6) | Línea mensual | Power BI |
-| [3.4.7 Interacciones](#paso-3-4-7) | Interacciones | Power BI |
-| [3.4.8 Comprobación de pedidos](#paso-3-4-8) | Comprobación de pedidos | Power BI |
 | [Fase 4. Ejecutar y explicar](#fase-4) | 4. Ejecutar y explicar | Informe y comunicación |
-| [4.1 Restaurar filtros](#paso-4-1) | Restaurar filtros | Informe |
-| [4.2 Storytelling](#paso-4-2) | Storytelling | Informe |
-| [4.3 Hallazgos](#paso-4-3) | Hallazgos | Informe |
-| [4.4 Guardar](#paso-4-4) | Guardar | Informe |
 
 ## Recorrido de las cuatro fases
 
@@ -832,92 +797,164 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
   </tbody>
 </table>
 
-<a id="fase-4"></a>
-## Fase 4. Ejecutar y explicar
 
-**POWER BI + INTERPRETACIÓN.** Con el informe ya construido, se presentan respuestas comprobadas. No se justifican causalidades que los datos descriptivos no pueden demostrar. La secuencia se orienta a decisiones de negocio y concluye guardando el archivo.
+<a id="fase-4"></a>
+## Fase 4. Ejecutar y explicar | Storytelling empresarial
+
+**Modalidad: presentación ejecutiva y sustentación técnica mediante video.**
+
+El objetivo de esta fase es comunicar los resultados del análisis de ventas de Contoso mediante una narrativa empresarial (*storytelling*). Los estudiantes asumirán el rol de analistas que presentan sus hallazgos ante la gerencia de la empresa.
+
+La actividad consiste en elaborar un **video de máximo 15 minutos**, dividido en dos partes: **7 minutos de presentación ejecutiva de resultados y 8 minutos de explicación técnica del tablero**.
 
 <a id="paso-4-1"></a>
-### 4.1. Restaurar el alcance de 2020 y comprobar las respuestas
+### 4.1. Preparar la presentación para la audiencia
 
-1. En Power BI abrir la pestaña `Resumen comercial`.
-2. En la segmentación de fechas, seleccionar **01/01/2020–31/12/2020**.
-3. En categorías, eliminar selecciones particulares hasta incluir **todas**.
-4. Revisar tarjetas, barras, tabla y línea. Confirmar las respuestas:
+**Audiencia:** gerentes comerciales, directivos y administradores de empresas que necesitan información para tomar decisiones, pero no necesariamente conocen Power BI.
 
-| Pregunta | Respuesta verificada |
-| --- | --- |
-| Q1 | 11.066.206,89 en ventas, 35.234 unidades, 4.806 pedidos distintos. |
-| Q2 | Computers lidera con 5.041.111,59 (45,55 % de ventas del año). |
-| Q3 | Sí. Computers también lidera unidades con 8.364. |
-| Q4 | Febrero es máximo (2.658.349,04), septiembre mínimo (320.093,34); marzo cae 58,46 % frente a febrero. |
+Antes de grabar, definir:
 
-**Verificación:** los títulos que mencionan 2020 deben corresponder exactamente a filtros de 2020.
+1. **Propósito:** ¿qué decisiones empresariales puede apoyar el análisis?
+2. **Mensaje principal:** ¿cuál es el hallazgo más relevante de las ventas de 2020?
+3. **Evidencia:** ¿qué indicadores y gráficos sustentan las conclusiones?
+4. **Recomendaciones:** ¿qué acciones o análisis adicionales debería considerar la gerencia?
+
+**Criterios para una comunicación profesional:**
+
+- Utilizar lenguaje empresarial, claro y preciso.
+- Interpretar las cifras, no limitarse a leerlas.
+- Presentar los valores indicando el período analizado.
+- Evitar términos técnicos de Power BI durante la presentación ejecutiva, salvo que sean indispensables.
+- No explicar los clics ni el procedimiento técnico durante la presentación de resultados.
+- Evitar muletillas, expresiones informales y afirmaciones sin evidencia.
+- No atribuir las variaciones de ventas a causas que los datos no permiten demostrar.
+- Mantener una narración fluida, sin movimientos innecesarios del cursor.
+- Diferenciar los hallazgos comprobados de las hipótesis y recomendaciones.
 
 <a id="paso-4-2"></a>
-### 4.2. Mostrar el informe siguiendo storytelling
+### 4.2. Primera parte del video: storytelling de resultados (7 minutos)
 
-Mantener el informe abierto sin cambiar el período durante el relato. Usar el siguiente orden:
+Presentar el tablero como si se estuviera participando en una reunión de resultados con la gerencia de Contoso.
 
-1. **Contexto:** título, fuente y año seleccionado. Explicar qué decisiones busca apoyar el informe.
-2. **Mensaje principal:** Computers concentra 45,55 % de las ventas; el cambio de marzo merece revisión.
-3. **Magnitud:** mostrar las tres tarjetas (ventas, unidades y pedidos).
-4. **Composición:** mostrar barras por categoría y la tabla para comparar liderazgo en dinero y unidades.
-5. **Evolución:** mostrar la línea de febrero a marzo y el mínimo de septiembre.
-6. **Conclusión y límite:** describir lo observado, aclarar que no se ha identificado la causa y proponer un análisis adicional.
+Seguir la siguiente secuencia:
 
-Si piden prueba técnica, abrir `Comprobacion`, enseñar los pedidos 1000 y 1001 y regresar al resumen. **Criterio:** cada cifra mencionada cuenta con evidencia en el reporte.
+**1. Contexto y objetivo (1 minuto)**
+
+Presentar brevemente la empresa, el período analizado y las preguntas de negocio.
+
+Explicar qué información ofrece el tablero y qué decisiones pretende apoyar.
+
+**2. Panorama general de ventas (1 minuto)**
+
+Mostrar las tres tarjetas del tablero:
+
+- Ventas Totales.
+- Unidades Totales.
+- Pedidos.
+
+Interpretar qué representa cada indicador y cómo se relacionan entre sí.
+
+**3. Desempeño por categorías (2 minutos)**
+
+Mostrar el gráfico de barras y la tabla comparativa.
+
+Explicar:
+
+- ¿Qué categoría genera mayores ingresos?
+- ¿Cuál tiene el mayor volumen de unidades vendidas?
+- ¿Qué diferencias existen entre ventas, unidades y pedidos?
+- ¿Qué implicaciones comerciales podrían tener estas diferencias?
+
+**4. Evolución mensual de ventas (2 minutos)**
+
+Mostrar el gráfico de líneas y explicar:
+
+- El mes de mayores ventas.
+- El mes de menores ventas.
+- La disminución registrada en marzo respecto a febrero.
+- Los cambios observados durante el resto del año.
+
+Evitar afirmar causas que no puedan sustentarse con los datos disponibles.
+
+**5. Conclusiones y recomendaciones (1 minuto)**
+
+Presentar dos conclusiones sustentadas en el tablero y formular al menos una recomendación empresarial.
+
+Diferenciar las decisiones que pueden apoyarse en los resultados disponibles de aquellas que requieren información adicional.
+
+**Resultado esperado:** una presentación coherente que conecte contexto, indicadores, hallazgos, implicaciones comerciales y recomendaciones.
 
 <a id="paso-4-3"></a>
-### 4.3. Comunicar el hallazgo y formular una acción
+### 4.3. Segunda parte del video: explicación técnica del tablero (8 minutos)
 
-**Relato resuelto:** «En 2020, Contoso registró 11.066.206,89 en ventas, 35.234 unidades y 4.806 pedidos distintos. Computers lideró tanto en ventas como en unidades y representó el 45,55 % del importe anual. El máximo mensual ocurrió en febrero y las ventas cayeron un 58,46 % en marzo. Este resultado describe un cambio, pero no establece su causa. Recomendamos descomponer la variación por producto y categoría y contrastarla con información de inventario y campañas comerciales».
+Después de la presentación ejecutiva, realizar una explicación técnica dirigida al docente.
 
-**Propuesta:** el analista comercial examinará qué productos y categorías contribuyeron a la variación entre febrero y marzo; la dirección comercial podrá revisar el hallazgo junto con disponibilidad de inventario y acciones promocionales. No atribuir el comportamiento a una causa sin nuevas evidencias.
+Demostrar cómo se construyó el informe sin necesidad de repetir todas las operaciones desde cero.
+
+**1. Preparación y calidad de datos (2 minutos)**
+
+- Mostrar las consultas `sales` y `product`.
+- Explicar la revisión de calidad de los datos.
+- Mostrar las columnas `ImporteVenta` e `InicioMes`.
+- Explicar cómo se verificaron los totales de control.
+
+**2. Modelo de datos y medidas DAX (2 minutos)**
+
+- Mostrar la relación entre las tablas mediante `ProductKey`.
+- Explicar la cardinalidad uno a varios.
+- Mostrar las medidas `Ventas Totales`, `Unidades Totales` y `Pedidos`.
+- Explicar por qué se utiliza `DISTINCTCOUNT` para contar los pedidos.
+
+**3. Construcción de visualizaciones (3 minutos)**
+
+- Identificar los campos utilizados en las tarjetas.
+- Explicar la configuración de los gráficos de barras y líneas.
+- Mostrar el funcionamiento de los filtros de fecha y categoría.
+- Justificar por qué se eligió cada visualización para responder las preguntas de negocio.
+
+**4. Comprobación del modelo (1 minuto)**
+
+- Abrir la página `Comprobacion`.
+- Seleccionar los pedidos 1000 y 1001.
+- Mostrar las tres líneas de venta.
+- Verificar los resultados: **867,50 en ventas, 4 unidades y 2 pedidos distintos**.
 
 <a id="paso-4-4"></a>
-### 4.4. Guardar y verificar la solución
+### 4.4. Requisitos y entrega del video
 
-1. En Power BI Desktop, regresar a `Resumen comercial` y restaurar 2020 y todas las categorías.
-2. Elegir **Archivo → Guardar como**.
-3. Escribir el nombre `Taller_01_Contoso_PACE.pbix` y seleccionar la carpeta de trabajo.
-4. Pulsar **Guardar** y comprobar que el archivo existe.
-5. Confirmar que contiene las dos páginas, relación activa, tres medidas, filtros funcionales y controles correctos. Conservar los CSV en su ubicación original si luego desea actualizar consultas.
+**Duración máxima: 15 minutos.**
 
-**Entregable:** archivo `.pbix` funcional. Las fases de comprensión no requieren generar visuales ni archivos por separado.
+| Parte | Duración |
+|---|---:|
+| Presentación ejecutiva mediante storytelling | 7 minutos |
+| Explicación técnica de la construcción del tablero | 8 minutos |
+| **Total** | **15 minutos** |
 
-[Volver al índice](#indice)
+**Requisitos:**
 
-<a id="dificultades"></a>
-## Dificultades frecuentes
+1. Grabar la pantalla de Power BI Desktop mostrando el informe funcional.
+2. Incluir narración oral clara y comprensible.
+3. Seguir el orden establecido para la presentación ejecutiva y la explicación técnica.
+4. Mostrar evidencias directamente en Power BI, no únicamente capturas estáticas.
+5. Mantener visibles los filtros correspondientes al análisis de 2020.
+6. Evitar leer los gráficos sin interpretar sus resultados.
+7. Comprobar que los indicadores y las visualizaciones respondan correctamente a las segmentaciones.
 
-| Situación | Qué revisar en Power BI |
-| --- | --- |
-| El CSV aparece en una columna | Power Query → paso **Origen** → delimitador coma. |
-| `NetPrice` queda en miles o genera error | Quitar una conversión incorrecta y volver a convertir desde texto con **Usar configuración regional: Inglés (Estados Unidos)**. |
-| Las ventas son incorrectas pero cantidades correctas | Tipo y precisión de `NetPrice`; fórmula de `ImporteVenta`; filtros. |
-| Las categorías repiten el mismo importe | Relación activa por `ProductKey` y dirección de filtro. |
-| La relación sugerida es muchos a muchos | Revisar unicidad de la clave de `product` y tipos compatibles. |
-| Aparecen 11.267 «pedidos» en 2020 | Se contaron filas. Utilizar `DISTINCTCOUNT('sales'[OrderKey])`. |
-| Las tarjetas muestran K o M | Formato visual → valor destacado → unidades de visualización **Ninguno**. |
-| Meses en orden incorrecto | `InicioMes` como Fecha individual; ordenar cronológicamente. |
-| No aparecen los pedidos 1000 y 1001 | Quitar filtros de informe o segmentaciones sincronizadas con el año 2020. |
-| Los totales visibles difieren por centavos al sumarse | Conservar decimales originales; no sumar ni redondear cantidades ya formateadas. |
+**Entregables:**
 
-<a id="fuentes"></a>
-## Fuentes y documentación técnica
+- Enlace al video con permisos de visualización para el docente.
+- Archivo `.pbix` con el tablero funcional y las páginas `Resumen Comercial` y `Comprobacion`.
 
-1. [Repositorio original del taller y datos Contoso](https://github.com/adanbeltran/Labs/tree/main/PowerBI-Taller01-demo).
-2. [SQLBI, Contoso V2, datos de ejemplo](https://github.com/sql-bi/Contoso-Data-Generator-V2-Data/releases/tag/ready-to-use-data-2024).
-3. [Microsoft Learn, conector Texto/CSV](https://learn.microsoft.com/es-es/power-query/connectors/text-csv).
-4. [Microsoft Learn, tipos de datos de Power Query](https://learn.microsoft.com/es-es/power-query/data-types).
-5. [Microsoft Learn, columna personalizada de Power Query](https://learn.microsoft.com/es-es/power-query/add-custom-column).
-6. [Microsoft Learn, función Date.StartOfMonth](https://learn.microsoft.com/es-es/powerquery-m/date-startofmonth).
-7. [Microsoft Learn, relaciones en Power BI](https://learn.microsoft.com/es-es/power-bi/transform-model/desktop-create-and-manage-relationships).
-8. [Microsoft Learn, conceptos de esquema de estrella](https://learn.microsoft.com/es-es/power-bi/guidance/star-schema).
-9. [Microsoft Learn, creación de medidas](https://learn.microsoft.com/es-es/power-bi/transform-model/desktop-measures).
-10. [Microsoft Learn, segmentaciones](https://learn.microsoft.com/es-es/power-bi/visuals/power-bi-visualization-slicers).
-11. [Microsoft Learn, formato de tarjetas](https://learn.microsoft.com/es-es/power-bi/visuals/power-bi-visualization-card).
-12. [Microsoft Learn, gráficos de líneas](https://learn.microsoft.com/es-es/power-bi/visuals/power-bi-line-chart).
-13. [Microsoft Learn, temas del informe](https://learn.microsoft.com/es-es/power-bi/create-reports/desktop-report-themes).
-14. [Google Career Certificates, metodología PACE](https://www.coursera.org/learn/foundations-of-data-science).
+<a id="paso-4-5"></a>
+### 4.5. Criterios de evaluación
+
+| Criterio | Peso |
+|---|---:|
+| Claridad del storytelling y adaptación a la audiencia empresarial | 20 % |
+| Interpretación de indicadores y hallazgos sustentados | 25 % |
+| Calidad de conclusiones y recomendaciones comerciales | 15 % |
+| Explicación técnica de datos, modelo, medidas y visualizaciones | 30 % |
+| Presentación profesional y cumplimiento del tiempo | 10 % |
+| **Total** | **100 %** |
+
+**Resultado esperado:** un video que evidencie la capacidad de interpretar información para apoyar decisiones empresariales y demostrar la comprensión técnica de la construcción y validación del tablero en Power BI.
