@@ -547,10 +547,11 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 </td>
     <td width="75%" align="center" valign="top">
       <p><em><img width="833" height="341" alt="image" src="https://github.com/user-attachments/assets/091485b9-b25c-43ac-89da-d4a084c6f0f1" /></em></p>
-<p><em><img width="870" height="387" alt="image" src="https://github.com/user-attachments/assets/0db93eab-c8e1-481a-9870-b6bb8b57d4b6" />.</em></p>
+      <p><em><img width="870" height="387" alt="image" src="https://github.com/user-attachments/assets/0db93eab-c8e1-481a-9870-b6bb8b57d4b6" />.</em></p>
      <p><em><img width="856" height="495" alt="image" src="https://github.com/user-attachments/assets/b18d49ea-1983-4d67-9e8c-b0413d0adf24" />.</em></p>
-     <p><em><img width="871" height="512" alt="image" src="https://github.com/user-attachments/assets/cbb28e21-99b0-46dc-a68e-f416e0927e3f" />.</em></p>
-     <p><em><img width="1250" height="711" alt="image" src="https://github.com/user-attachments/assets/39469465-8aaa-4527-a31f-9d86e1cf97fb" /></em></p>
+     <p><em><img width="673" height="592" alt="image" src="https://github.com/user-attachments/assets/b5c8d763-9a4d-4b03-ae75-7bebf34e8266" />.</em></p>
+  
+
     </td>
   </tr>
   <tr>
