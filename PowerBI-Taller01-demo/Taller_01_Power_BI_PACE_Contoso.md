@@ -765,36 +765,68 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
       <p><em><img width="1377" height="793" alt="image" src="https://github.com/user-attachments/assets/7e96c1f2-76c9-4cbf-a799-603600e2d2f1" /></em></p>
     </td>
   </tr>
+  
   <tr>
-    <td width="25%" valign="top">
-      <a id="paso-3-4-7"></a>
-      <p><strong>3.4.7. Probar interacciones entre filtros y visuales</strong></p>
-<p>Compruebe el filtrado antes de utilizar el tablero en la fase 4.</p>
-<div><p><strong>Acción 1.</strong> Con 2020 activo, seleccionar únicamente <code>Computers</code> en la segmentación. Verificar ventas <strong>5.041.111,59</strong>, unidades <strong>8.364</strong>, pedidos <strong>2.094</strong>.</p></div>
-<div><p><strong>Acción 2.</strong> Si algún visual no responde, seleccionar la segmentación → <strong>Formato → Editar interacciones</strong> → <strong>Filtrar</strong>. Limpiar la selección para regresar a los totales anuales.</p></div>
-<div><strong>Resultado o verificación</strong><p><strong>Verificación:</strong> todas las categorías restauradas: 11.066.206,89; 35.234; 4.806.</p></div>
-    </td>
+    
+<td width="25%" valign="top">
+  <a id="paso-3-4-8"></a>
+  <b>3.4.8. Crear una página de comprobación con dos pedidos</b>
+
+  <p><b>Objetivo:</b> verificar los cálculos del modelo utilizando dos pedidos y sus líneas de venta.</p>
+
+  <p><b>1. Crear página:</b> añadir una página y renombrarla <code>Comprobacion</code>.</p>
+
+  <p><b>2. Insertar tabla:</b> agregar el visual <b>Tabla</b> con las siguientes columnas, en este orden:</p>
+  <p>
+    • <code>sales[OrderKey]</code><br>
+    • <code>sales[LineNumber]</code><br>
+    • <code>sales[OrderDate]</code><br>
+    • <code>product[CategoryName]</code><br>
+    • <code>sales[Quantity]</code><br>
+    • <code>sales[NetPrice]</code><br>
+    • <code>sales[ImporteVenta]</code>
+  </p>
+
+  <p><b>3. Ajustar presentación:</b> configurar los campos de detalle como <b>No resumir</b>, cuando corresponda. Ampliar manualmente las columnas para facilitar la lectura y ajustar el tamaño de la tabla al contenido.</p>
+
+  <p><b>4. Filtrar pedidos:</b> insertar una <b>Segmentación de datos</b> con <code>sales[OrderKey]</code>. Seleccionar únicamente los pedidos <b>1000</b> y <b>1001</b>.</p>
+
+  <p><b>5. Insertar indicadores:</b> agregar tres tarjetas con las medidas DAX existentes:</p>
+  <p>
+    • <code>Ventas Totales</code><br>
+    • <code>Pedidos</code><br>
+    • <code>Unidades Totales</code>
+  </p>
+
+  <p><b>6. Organizar el diseño:</b> ubicar la tabla de detalle a la izquierda y la segmentación con las tres tarjetas a la derecha, manteniendo tamaños y espacios uniformes.</p>
+
+  <p><b>7. Verificar las líneas:</b> comprobar que aparezcan tres registros:</p>
+  <p>
+    • Pedido 1000: Audio, 1 unidad, importe 98,967.<br>
+    • Pedido 1000: Computers, 1 unidad, importe 659,780.<br>
+    • Pedido 1001: Games and Toys, 2 unidades, importe 108,752.
+  </p>
+
+  <p><b>8. Comprobar totales:</b> realizar la suma manual:</p>
+  <p><code>98,967 + 659,780 + 108,752 = 867,499</code></p>
+
+  <p>El valor mostrado con dos decimales debe ser aproximadamente <b>867,50</b>.</p>
+
+  <p>Las tarjetas deben mostrar:</p>
+  <p>
+    • <b>Ventas Totales:</b> 867,50.<br>
+    • <b>Pedidos:</b> 2.<br>
+    • <b>Unidades Totales:</b> 4.
+  </p>
+
+  <p><b>Resultado esperado:</b> página de comprobación con tres líneas de venta, dos pedidos distintos, cuatro unidades y un total de 867,50.</p>
+
+  <p><b>Importante:</b> esta página utiliza registros de 2015. No debe recibir el filtro de 2020 aplicado en <code>Resumen Comercial</code>.</p>
+
+  <p><b>Cierre de la fase 3:</b> verificar el funcionamiento de las dos páginas, las relaciones, las medidas DAX y los filtros antes de continuar con la presentación de resultados.</p>
+</td>
     <td width="75%" align="center" valign="top">
-      <p><em>Captura 3.4.7a pendiente. Pegar aquí la imagen de este paso.</em></p>
-<p><em>Captura 3.4.7b pendiente. Pegar aquí la imagen de este paso.</em></p>
-    </td>
-  </tr>
-  <tr>
-    <td width="25%" valign="top">
-      <a id="paso-3-4-8"></a>
-      <p><strong>3.4.8. Crear una página de comprobación con dos pedidos</strong></p>
-<p>Esta página verifica el resultado del modelo a nivel de línea de pedido y no lleva filtro global de año.</p>
-<div><p><strong>Acción 1.</strong> Añadir página <code>Comprobacion</code>. Insertar <strong>Tabla</strong> con <code>OrderKey</code>, <code>LineNumber</code>, <code>OrderDate</code>, <code>CategoryName</code>, <code>Quantity</code>, <code>NetPrice</code>, <code>ImporteVenta</code>. En campos de detalle usar <strong>No resumir</strong> cuando aplique.</p></div>
-<div><p><strong>Acción 2.</strong> Insertar segmentación de <code>OrderKey</code>; seleccionar simultáneamente <strong>1000</strong> y <strong>1001</strong>. Añadir tarjetas con las tres medidas originales.</p></div>
-<div><p><strong>Acción 3.</strong> Verificar 3 líneas: pedido 1000 (Audio 1 × 98,967; Computers 1 × 659,780); pedido 1001 (Games and Toys 2 × 54,376).</p></div>
-<div><strong>Resultado o verificación</strong><p><strong>Control manual:</strong> 98,967 + 659,780 + 108,752 = <strong>867,499</strong> (visualizado como <strong>867,50</strong>); <strong>4 unidades</strong> y <strong>2 pedidos distintos</strong>.</p>
-<p><strong>Cierre de la fase 3.</strong> Antes de pasar a la fase 4, comprobar la relación activa, las tres medidas, las dos páginas, los filtros y la página de auditoría. Se conserva una cifra completa de control sin forzar redondeos.</p>
-<p><a href="#indice">Volver al índice</a></p></div>
-    </td>
-    <td width="75%" align="center" valign="top">
-      <p><em>Captura 3.4.8a pendiente. Pegar aquí la imagen de este paso.</em></p>
-<p><em>Captura 3.4.8b pendiente. Pegar aquí la imagen de este paso.</em></p>
-<p><em>Captura 3.4.8c pendiente. Pegar aquí la imagen de este paso.</em></p>
+      <p><em><img width="1333" height="757" alt="image" src="https://github.com/user-attachments/assets/e6454df2-f4f8-4712-a33a-faa12e9bfef5" /></em></p>
     </td>
   </tr>
   </tbody>
