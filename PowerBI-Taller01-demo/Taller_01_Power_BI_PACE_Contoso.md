@@ -716,19 +716,53 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
     </td>
   </tr>
   <tr>
-    <td width="25%" valign="top">
-      <a id="paso-3-4-6"></a>
-      <p><strong>3.4.6. Q4: línea de ventas mensuales</strong></p>
-<p>El eje debe seguir la fecha real de inicio de mes.</p>
-<div><p><strong>Acción 1.</strong> Insertar <strong>Gráfico de líneas</strong>. Eje X: <code>sales[InicioMes]</code> como <strong>Fecha</strong> individual, no jerarquía. Eje Y: <code>Ventas Totales</code>.</p></div>
-<div><p><strong>Acción 2.</strong> Ordenar cronológicamente, activar marcadores, aplicar color <code>#1F5A85</code> y título <code>Evolución mensual de ventas - 2020</code>.</p></div>
-<div><p><strong>Acción 3.</strong> Agregar anotación visual <code>Marzo: −58,46 % frente a febrero</code> y contrastar meses de máximo y mínimo.</p></div>
-<div><strong>Resultado o verificación</strong><p><strong>Verificación:</strong> febrero <strong>2.658.349,04</strong> (máximo); marzo <strong>1.104.361,28</strong>; septiembre <strong>320.093,34</strong> (mínimo). Deben mostrarse 12 meses ordenados.</p></div>
-    </td>
+    
+<td width="25%" valign="top">
+  <b>3.4.6. Q4: Evolución mensual de ventas</b>
+
+  <p><b>Objetivo:</b> analizar la evolución de las ventas durante 2020 e identificar los meses de mayor y menor actividad comercial.</p>
+
+  <p><b>1.</b> En <b>Visualizaciones</b>, seleccionar <b>Gráfico de líneas</b>.</p>
+
+  <p><b>2.</b> En <b>Compilar visual</b>, configurar:</p>
+  <p>
+    • <b>Eje X:</b> <code>sales[InicioMes]</code>, como fecha individual, no jerarquía.<br>
+    • <b>Eje Y:</b> <code>Ventas Totales</code>.
+  </p>
+
+  <p>Verificar que los meses estén ordenados cronológicamente, de enero a diciembre de 2020.</p>
+
+  <p><b>3.</b> Seleccionar el gráfico y abrir <b>Formato visual</b>.</p>
+
+  <p><b>4.</b> En <b>General → Título</b>, escribir <b>Ventas por Mes</b> y centrarlo.</p>
+
+  <p><b>5.</b> Desactivar el <b>Subtítulo</b> y mantener el fondo blanco.</p>
+
+  <p><b>6.</b> En <b>Objeto visual → Marcadores</b>, activar los puntos de la línea para identificar las ventas de cada mes.</p>
+
+  <p><b>7.</b> En <b>Marcadores → Aplicar configuración a</b>, seleccionar la serie <code>Ventas Totales</code> y mantener los marcadores visibles.</p>
+
+  <p><b>8.</b> Insertar un <b>Cuadro de texto</b> con la anotación:</p>
+  <p><i>Marzo: caída del 58,46 % respecto a febrero.</i></p>
+
+  <p>Ubicarlo en un espacio libre del gráfico, sin ocultar la línea ni los valores.</p>
+
+  <p><b>9.</b> Ajustar el tamaño y la posición del gráfico para alinearlo con la tabla comparativa y el gráfico de barras.</p>
+
+  <p><b>Resultado esperado:</b> gráfico de líneas con la evolución de las ventas de enero a diciembre de 2020, marcadores visibles y anotación de la caída de marzo.</p>
+
+  <p><b>Totales de control:</b></p>
+  <p>
+    • <b>Febrero:</b> 2.658.349,04 (máximo).<br>
+    • <b>Marzo:</b> 1.104.361,28.<br>
+    • <b>Septiembre:</b> 320.093,34 (mínimo).
+  </p>
+
+  <p><b>Verificación:</b> comprobar que el gráfico responda a los filtros de período y categoría. Distinguir la disminución observada de sus posibles causas, que no pueden determinarse únicamente con estos datos.</p>
+</td>
     <td width="75%" align="center" valign="top">
-      <p><em>Captura 3.4.6a pendiente. Pegar aquí la imagen de este paso.</em></p>
-<p><em>Captura 3.4.6b pendiente. Pegar aquí la imagen de este paso.</em></p>
-<p><em>Captura 3.4.6c pendiente. Pegar aquí la imagen de este paso.</em></p>
+      <p><em><img width="785" height="767" alt="image" src="https://github.com/user-attachments/assets/0a729a5a-9566-4599-a15d-b4d0d9bc6792" /></em></p>
+      <p><em><img width="1377" height="793" alt="image" src="https://github.com/user-attachments/assets/7e96c1f2-76c9-4cbf-a799-603600e2d2f1" /></em></p>
     </td>
   </tr>
   <tr>
