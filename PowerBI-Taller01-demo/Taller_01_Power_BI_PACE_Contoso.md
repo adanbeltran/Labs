@@ -555,19 +555,68 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
     </td>
   </tr>
   <tr>
-    <td width="25%" valign="top">
-      <a id="paso-3-4-3"></a>
-      <p><strong>3.4.3. Q1: ventas, unidades y pedidos con tarjetas</strong></p>
-<p>Se usarán exactamente las medidas ya comprobadas.</p>
-<div><p><strong>Acción 1.</strong> Insertar <strong>Tarjeta</strong>; asignar <code>Ventas Totales</code>; título <code>Ventas en moneda base</code>. En <strong>Formato visual</strong> usar <strong>Unidades de visualización: Ninguno</strong> y 2 decimales.</p></div>
-<div><p><strong>Acción 2.</strong> Duplicar tarjeta dos veces (Ctrl+C/Ctrl+V). Sustituir por <code>Unidades Totales</code> (0 decimales) y <code>Pedidos</code> (0 decimales), con títulos <code>Unidades</code> y <code>Pedidos distintos</code>.</p></div>
-<div><p><strong>Acción 3.</strong> Después de comprobar el historial completo, colocar fechas <strong>01/01/2020–31/12/2020</strong>. Deben verse ventas <strong>11.066.206,89</strong>, unidades <strong>35.234</strong> y pedidos <strong>4.806</strong>.</p></div>
-<div><strong>Resultado o verificación</strong><p><strong>Criterio:</strong> tarjetas sin abreviaturas K/M y con el período correcto.</p></div>
-    </td>
+    
+<td width="25%" valign="top">
+  <b>3.4.3. Q1: Ventas, unidades y pedidos con tarjetas</b>
+
+  <p>Se utilizarán las tres medidas DAX creadas en la fase 3.3.</p>
+
+  <p><b>1.</b> En <b>Visualizaciones</b>, seleccionar el visual <b>Tarjeta</b>.</p>
+
+  <p><b>2.</b> En el panel <b>Datos → sales</b>, arrastrar la medida <code>Ventas Totales</code> al campo <b>Valores</b> de la tarjeta.</p>
+
+  <p><b>3.</b> Seleccionar la tarjeta y abrir <b>Formato visual</b> (icono de brocha).</p>
+
+  <p><b>4.</b> Seleccionar la pestaña <b>Objeto visual</b>.</p>
+
+  <p><b>5.</b> En <b>Llamada → Valor</b>, configurar el formato del número.</p>
+
+  <p><b>6.</b> Establecer <b>Mostrar unidades: Ninguno</b> y <b>2 posiciones decimales</b>. Esto evita abreviaturas como K o M.</p>
+
+  <p><b>7.</b> En <b>General → Efectos → Fondo</b>, activar el fondo de la tarjeta.</p>
+
+  <p><b>8.</b> Seleccionar el color <code>#FFFFFF</code> y establecer <b>Transparencia: 0 %</b>.</p>
+
+  <p><b>9.</b> Repetir el procedimiento para crear las otras dos tarjetas, utilizando las medidas:</p>
+
+  <p>
+    • <code>Unidades Totales</code>: 0 decimales.<br>
+    • <code>Pedidos</code>: 0 decimales.
+  </p>
+
+  <p>Configurar los nombres visibles de los indicadores como <b>Ventas Totales</b>, <b>Unidades Totales</b> y <b>Pedidos distintos</b>.</p>
+
+  <p><b>10. Verificar los resultados:</b> con el filtro de fechas entre <b>01/01/2020</b> y <b>31/12/2020</b> y todas las categorías incluidas, comprobar:</p>
+
+  <p>
+    • <b>Ventas:</b> 11.066.206,89.<br>
+    • <b>Unidades:</b> 35.234.<br>
+    • <b>Pedidos:</b> 4.806.
+  </p>
+
+  <p><b>11. Organizar el tablero:</b></p>
+
+  <p>• Ubicar el título centrado en la parte superior.</p>
+
+  <p>• Colocar las segmentaciones de <b>Período de Análisis</b> y <b>Categoría</b> en una misma fila, debajo del título.</p>
+
+  <p>• Configurar la segmentación de categorías como <b>Desplegable</b> para ahorrar espacio.</p>
+
+  <p>• Situar las tres tarjetas en una fila horizontal, debajo de los filtros, en este orden: <b>Ventas Totales → Unidades Totales → Pedidos</b>.</p>
+
+  <p>• Asignar a las tres tarjetas el mismo ancho y alto, dejando espacios uniformes.</p>
+
+  <p>• Utilizar <b>Formato → Alinear</b> y <b>Distribuir horizontalmente</b>, si están disponibles, para mantener una presentación ordenada.</p>
+
+  <p>• Reservar la zona inferior para los gráficos de barras, evolución mensual y tabla comparativa.</p>
+
+  <p><b>Resultado esperado:</b> tres tarjetas blancas, alineadas horizontalmente, con cifras completas y filtros organizados en la parte superior del informe.</p>
+
+  <p><b>Control de calidad:</b> si las ventas muestran <b>11.066.206,90</b> en lugar de <b>11.066.206,89</b>, revisar la precisión de <code>ImporteVenta</code> y el cálculo antes de continuar. No modificar manualmente los resultados.</p>
+</td>
     <td width="75%" align="center" valign="top">
       <p><em><img width="646" height="702" alt="image" src="https://github.com/user-attachments/assets/f733c79b-d707-4807-a39a-933ab1c81d83" />.</em></p>
     <p><em><img width="815" height="487" alt="image" src="https://github.com/user-attachments/assets/0d0402a1-526f-4a2c-aeb5-0b2f6d662215" />.</em></p>
-
     </td>
   </tr>
   <tr>
