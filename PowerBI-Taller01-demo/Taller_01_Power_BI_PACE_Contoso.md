@@ -630,8 +630,8 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
 <div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> Computers <strong>5.041.111,59</strong>; Cell phones <strong>1.861.564,14</strong>. Si todas las barras repiten el mismo total, revisar relación.</p></div>
     </td>
     <td width="75%" align="center" valign="top">
-      <p><em>Captura 3.4.4a pendiente. Pegar aquí la imagen de este paso.</em></p>
-<p><em>Captura 3.4.4b pendiente. Pegar aquí la imagen de este paso.</em></p>
+      <p><em><img width="755" height="737" alt="image" src="https://github.com/user-attachments/assets/714ea952-1ce9-494a-abd1-add2180462b4" /></p>
+<p><em><img width="520" height="302" alt="image" src="https://github.com/user-attachments/assets/3b55d620-c4af-4755-843a-960cd6ae36be" />o.</em></p>
     </td>
   </tr>
   <tr>
