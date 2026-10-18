@@ -621,14 +621,53 @@ Un total de control se calcula independientemente sobre el mismo origen y sirve 
     </td>
   </tr>
   <tr>
-    <td width="25%" valign="top">
-      <a id="paso-3-4-4"></a>
-      <p><strong>3.4.4. Q2: barras de ventas por categoría</strong></p>
-<p>Ranking descendente para reconocer la categoría líder.</p>
-<div><p><strong>Acción 1.</strong> Seleccionar <strong>Gráfico de barras agrupadas</strong>. Eje Y: <code>product[CategoryName]</code>. Eje X: <code>Ventas Totales</code>. Menú <strong>… → Ordenar por → Ventas Totales → Descendente</strong>.</p></div>
-<div><p><strong>Acción 2.</strong> Activar etiquetas y título <code>Ventas por categoría - 2020</code>. Destacar Computers si la versión permite configurar colores por categoría.</p></div>
-<div><strong>Resultado o verificación</strong><p><strong>Resultado esperado:</strong> Computers <strong>5.041.111,59</strong>; Cell phones <strong>1.861.564,14</strong>. Si todas las barras repiten el mismo total, revisar relación.</p></div>
-    </td>
+    
+<td width="25%" valign="top">
+  <b>3.4.4. Q2: Ventas por categoría</b>
+
+  <p><b>Objetivo:</b> identificar la categoría con mayores ventas en 2020 mediante un gráfico de barras horizontales.</p>
+
+  <p><b>1.</b> En <b>Visualizaciones</b>, seleccionar <b>Gráfico de barras agrupadas</b>.</p>
+
+  <p><b>2.</b> Asignar los campos:</p>
+  <p>
+    • <b>Eje Y:</b> <code>product[CategoryName]</code>.<br>
+    • <b>Eje X:</b> <code>Ventas Totales</code>.<br>
+    • <b>Leyenda:</b> dejar vacía.
+  </p>
+
+  <p>En el menú <b>...</b> del gráfico, seleccionar <b>Ordenar por → Ventas Totales → Descendente</b>.</p>
+
+  <p><b>3.</b> Seleccionar el gráfico y abrir <b>Formato visual</b>.</p>
+
+  <p><b>4.</b> Seleccionar la pestaña <b>General</b>.</p>
+
+  <p><b>5.</b> En <b>Título → Texto</b>, escribir <b>Ventas por Categoría</b>.</p>
+
+  <p><b>6.</b> Establecer la <b>alineación centrada</b> del título.</p>
+
+  <p><b>7.</b> Desactivar <b>Subtítulo</b>.</p>
+
+  <p><b>8.</b> Cambiar a la pestaña <b>Objeto visual</b>.</p>
+
+  <p><b>9.</b> Desplegar <b>Barras</b> para configurar los colores.</p>
+
+  <p><b>10.</b> En <b>Aplicar configuración a → Categorías</b>, seleccionar <b>Computers</b>.</p>
+
+  <p><b>11.</b> En <b>Color</b>, elegir un verde del tema <b>Marea accesible</b> para destacar Computers. Mantener las demás categorías en azul.</p>
+
+  <p><b>12.</b> Activar <b>Etiquetas de datos → Valor</b> y configurar <b>Mostrar unidades: Ninguno</b> para presentar los importes completos.</p>
+
+  <p><b>Resultado esperado:</b> gráfico de barras horizontales, ordenado de mayor a menor, con Computers destacada y los valores de ventas visibles.</p>
+
+  <p><b>Totales de control:</b></p>
+  <p>
+    • <b>Computers:</b> 5.041.111,59.<br>
+    • <b>Cell phones:</b> 1.861.564,14.
+  </p>
+
+  <p><b>Verificación:</b> Computers debe ocupar la primera posición y presentar la barra más larga. Las demás categorías deben mostrar barras proporcionales a sus ventas.</p>
+</td>
     <td width="75%" align="center" valign="top">
       <p><em><img width="755" height="737" alt="image" src="https://github.com/user-attachments/assets/714ea952-1ce9-494a-abd1-add2180462b4" /></p>
 <p><em><img width="520" height="302" alt="image" src="https://github.com/user-attachments/assets/3b55d620-c4af-4755-843a-960cd6ae36be" />o.</em></p>
