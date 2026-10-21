@@ -53,7 +53,7 @@ Definirás el sistema operativo y los recursos de la máquina. Usarás un tamañ
 2. Escribe `servidor-web` en **Name** y comprueba el compartimento. En **Placement**, conserva un dominio de disponibilidad de tu región. Mantén **On-demand capacity**.
 3. En **Image and shape > Change Image**, selecciona la imagen de plataforma **Oracle Linux 9**.
 4. En **Change Shape**, selecciona **Virtual Machine > AMD (Advanced Micro Devices, fabricante de procesadores)** y la unidad `VM.Standard.E4.Flex` (Virtual Machine, máquina virtual). Si no está disponible, selecciona `VM.Standard.E5.Flex` (Virtual Machine, máquina virtual).
-5. Configura **1 OCPU (Oracle Compute Processing Unit, unidad de procesamiento de Oracle)** y **2 GB (gigabytes, unidad de capacidad de memoria) de memoria**. Pulsa **Select Shape** y revisa los valores y el costo estimado antes de continuar.
+5. Configura **1 OCPU (Oracle Compute Processing Unit, unidad de procesamiento de Oracle)** y **16 GB (gigabytes, unidad de capacidad de memoria) de memoria**. Pulsa **Select Shape** y revisa los valores y el costo estimado antes de continuar.
 
 <img width="757" height="482" alt="image" src="https://github.com/user-attachments/assets/508e6f2f-ae12-42e9-820a-972035922837" />
 
