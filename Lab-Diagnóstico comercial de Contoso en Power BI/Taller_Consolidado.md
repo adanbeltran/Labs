@@ -5,8 +5,7 @@
 **Objetivo:** construir un informe autónomo de diagnóstico comercial para comparar el desempeño por cliente, tienda y producto, detectar cambios que requieren revisión, identificar sus contribuciones y sustentar recomendaciones ante la gerencia.
 
 **Dirigido a:** estudiantes de último semestre de Administración de Empresas.  
-**Duración orientativa:** seis horas de trabajo guiado, más la preparación de los videos. Se presenta como un solo taller y una entrega final; el docente puede distribuir su desarrollo entre las clases disponibles.  
-**Punto de partida:** la demostración del taller 1 ya realizada por el docente. La carga de los CSV, la configuración regional, los controles básicos y el cálculo de pedidos se consideran conocimientos previos. Se puede comenzar en un PBIX nuevo; no se exige utilizar ni entregar el archivo del taller 1.  
+
 **Caso central:** explorar todos los meses del historial disponible para descubrir variaciones que requieran revisión y sustentar prioridades comerciales.  
 **Resultado:** seis vistas de negocio: `Gerencia`, `Clientes`, `Tiendas`, `Productos`, `Factores comerciales` y `Alertas comerciales`, además de la página técnica `Control_T2`.
 
@@ -28,8 +27,6 @@ La empresa dispone de registros de ventas, pero todavía no ha identificado qué
 | **4. Ejecutar y explicar** | **Sí** | Validar, investigar y comunicar resultados. | PBIX y dos videos. |
 
 **Regla metodológica:** las fases 1 y 2 son de lectura y razonamiento. La descarga, la apertura de Power BI y todas las operaciones técnicas comienzan en la fase 3.
-
-**Uso de la columna de pantallazos:** las tablas de la fase 3 conservan una columna de instrucciones del 25 % y otra del 75 % vacía. Para documentar el procedimiento, edite este archivo en GitHub y pegue las imágenes en la celda derecha del paso correspondiente. Mantenga las etiquetas `<td>` y `</td>`. Puede insertar más de una imagen por paso.
 
 **Fórmulas suministradas:** los bloques DAX se copian en Modelado → Nueva medida, salvo Calendario, que se crea con Nueva tabla. Cada bloque explica el indicador que produce. Las tres medidas básicas quedan como referencia breve para iniciar en blanco; no constituyen actividades nuevas.
 
@@ -63,14 +60,11 @@ La referencia de clase es el [Taller 1 publicado en GitHub](https://github.com/a
 <a id="fase-1"></a>
 ## Fase 1. Planear
 
-**SOLO COMPRENSIÓN. No abrir Power BI.** Se define el problema y la audiencia. Estas decisiones orientarán el análisis de las tablas y los indicadores en la fase 2.
-
 <a id="paso-1-1"></a>
 ### 1.1. Comprender el problema empresarial
 
 La gerencia comercial de Contoso quiere conocer la evolución de su operación y establecer un seguimiento mensual. No dispone de un diagnóstico previo sobre aumentos, caídas o anomalías. Solicita analizar todos los meses disponibles, detectar cuáles requieren atención y examinar el comportamiento de tiendas, clientes, productos, pedidos y ticket promedio antes de recomendar acciones.
 
-**Actividad:** explicar en tres o cuatro líneas qué información necesita la gerencia para decidir qué revisar primero. Distinguir el cambio medido de sus posibles causas.
 
 <a id="paso-1-2"></a>
 ### 1.2. Definir preguntas, datos y vistas
@@ -85,7 +79,6 @@ La gerencia comercial de Contoso quiere conocer la evolución de su operación y
 | Q6 | ¿Qué meses requieren revisión y cómo se justifican sus alertas? | Líneas con anomalías, tabla de alertas y análisis de aumentos y disminuciones. | Alertas comerciales. |
 | Q7 | ¿Qué dos asuntos debería revisar primero la gerencia? | Evidencias seleccionadas entre las vistas. | Presentación ejecutiva. |
 
-**Actividad:** elegir dos preguntas y explicar qué decisión empresarial puede apoyar cada una.
 
 <a id="paso-1-3"></a>
 ### 1.3. Delimitar el alcance
@@ -97,7 +90,6 @@ La gerencia comercial de Contoso quiere conocer la evolución de su operación y
 - Presentar tres hallazgos cuantificados y dos recomendaciones priorizadas.
 - Indicar la información adicional necesaria para comprobar las hipótesis.
 
-**Producto de la fase:** un párrafo con el problema, la audiencia y las decisiones que se apoyarán.
 
 <a id="paso-1-4"></a>
 ### 1.4. Justificar la detección y revisión de cambios
@@ -110,14 +102,12 @@ El **30 %** se adopta como umbral inicial de práctica para cambios mensuales, t
 
 **Aprendizaje esperado:** detectar una señal, verificar datos y filtros, contrastar métodos, localizar contribuciones y proponer una revisión proporcionada a la evidencia. Los períodos investigados se elegirán a partir de los resultados de toda la serie y de su importancia comercial, sin una conclusión anticipada.
 
-**Actividad:** proponer una decisión que podría apoyar una alerta y explicar qué comprobación debería realizarse antes de actuar.
 
 [Volver al índice](#indice)
 
 <a id="fase-2"></a>
 ## Fase 2. Analizar
 
-**SOLO COMPRENSIÓN. No abrir Power BI ni descargar archivos.** Se estudia cómo se conectan las nuevas dimensiones con las ventas. Lo acordado aquí se implementará en la fase 3.
 
 <a id="paso-2-1"></a>
 ### 2.1. Retomar las tablas conocidas y sus dimensiones
@@ -130,7 +120,7 @@ El **30 %** se adopta como umbral inicial de práctica para cambios mensuales, t
 | store | Código, descripción y país de la tienda. |
 | Calendario | Meses del historial y referencia para las comparaciones temporales. |
 
-Se conserva la distinción entre línea de venta, pedido y cliente explicada en el taller 1. En esta práctica interesa cómo esas unidades permiten responder preguntas comerciales.
+
 
 <a id="paso-2-2"></a>
 ### 2.2. Reconocer variables descriptivas y relaciones
@@ -146,8 +136,6 @@ El país del cliente es `customer[CountryFull]` y el país de la tienda es `stor
 
 Las dimensiones filtran a `sales` mediante relaciones **uno a varios y de dirección única**. Se conservarán separadas, con una sola fila por clave. Estas relaciones forman un esquema de estrella: las dimensiones permiten explorar la tabla de ventas desde distintas perspectivas.
 
-**Actividad:** explicar qué visual utilizaría para comparar las ventas por país del cliente y cuál para compararlas por país de la tienda.
-
 <a id="paso-2-3"></a>
 ### 2.3. Interpretar los indicadores
 
@@ -162,7 +150,7 @@ Las dimensiones filtran a `sales` mediante relaciones **uno a varios y de direcc
 
 El total de un promedio se calcula a partir de sus sumas y conteos. Los clientes y pedidos distintos pueden repetirse entre categorías; el total general se recalcula con `DISTINCTCOUNT`, como explica su [documentación oficial](https://learn.microsoft.com/en-us/dax/distinctcount-function-dax).
 
-**Actividad:** explicar por qué el total del ticket no se obtiene promediando los tickets de las categorías.
+
 
 <a id="paso-2-4"></a>
 ### 2.4. Establecer reglas de comparación
