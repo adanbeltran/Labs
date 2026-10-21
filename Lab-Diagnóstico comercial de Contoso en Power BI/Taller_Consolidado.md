@@ -237,7 +237,8 @@ Las fórmulas DAX nuevas se suministran para copiar y se interpretan por su resu
 <p><strong>Comprobar:</strong> la base está disponible mediante carga directa y los tres indicadores conocidos pueden utilizarse. No se crean consultas auxiliares ni rutinas M de preparación.</p>
 </td>
 <td width="75%" valign="top">
-<!-- Captura 3.1.1: Retomar la carga demostrada y configurar el archivo. Pegue aquí una o varias imágenes. -->
+<img width="1575" height="975" alt="image" src="https://github.com/user-attachments/assets/798387c4-d029-4f1a-b41a-c1ae6cde0788" />
+
 <p><br><br></p>
 </td>
 </tr>
