@@ -59,6 +59,9 @@ La referencia de clase es el [Taller 1 publicado en GitHub](https://github.com/a
 
 <a id="fase-1"></a>
 ## Fase 1. Planear
+<img width="1672" height="941" alt="fase 1" src="https://github.com/user-attachments/assets/0d5a4920-55b8-4633-aafb-32111a167fb2" />
+
+
 
 <a id="paso-1-1"></a>
 ### 1.1. Comprender el problema empresarial
@@ -96,17 +99,13 @@ La gerencia comercial de Contoso quiere conocer la evolución de su operación y
 
 **Justificación empresarial:** la gerencia necesita un criterio reproducible para priorizar revisiones en todos los meses. Una señal puede orientar la comprobación de datos, la revisión de pedidos y la consulta con responsables comerciales. La alerta debe acompañarse de su magnitud absoluta, el segmento afectado y la evidencia necesaria para decidir una acción.
 
-**Justificación pedagógica:** esta actividad se incorpora para que el estudiante distinga la importancia de un cambio para el negocio, su carácter inusual dentro de una serie y la evidencia que puede ayudar a interpretarlo. Comparará una regla transparente, una detección automática y el análisis por dimensiones; deberá justificar coincidencias y diferencias, sin aceptar una salida del programa como una causa demostrada.
-
 El **30 %** se adopta como umbral inicial de práctica para cambios mensuales, tanto positivos como negativos. Se comparará con 20 % y 40 % para discutir cuántos casos se priorizan. En una aplicación empresarial, su elección exigiría considerar volatilidad, estacionalidad, magnitud monetaria y capacidad de respuesta. La sensibilidad del detector y el umbral porcentual son parámetros distintos.
-
-**Aprendizaje esperado:** detectar una señal, verificar datos y filtros, contrastar métodos, localizar contribuciones y proponer una revisión proporcionada a la evidencia. Los períodos investigados se elegirán a partir de los resultados de toda la serie y de su importancia comercial, sin una conclusión anticipada.
-
 
 [Volver al índice](#indice)
 
 <a id="fase-2"></a>
 ## Fase 2. Analizar
+<img width="1672" height="941" alt="fase 2" src="https://github.com/user-attachments/assets/ad419961-6e7b-4d0e-9f7e-b8a1354bf379" />
 
 
 <a id="paso-2-1"></a>
