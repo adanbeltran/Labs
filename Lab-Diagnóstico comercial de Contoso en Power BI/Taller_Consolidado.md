@@ -241,6 +241,8 @@ Las fórmulas DAX nuevas se suministran para copiar y se interpretan por su resu
 <img width="1086" height="723" alt="image" src="https://github.com/user-attachments/assets/5bbe7f36-6589-456a-ade3-72299ed5a17e" />
 <img width="1806" height="818" alt="image" src="https://github.com/user-attachments/assets/aa26bf55-f674-44c6-b063-bd983d72f97c" />
 <img width="1742" height="900" alt="image" src="https://github.com/user-attachments/assets/23d55a96-6d84-4950-bcb4-6a25ca9d3081" />
+<img width="1040" height="863" alt="image" src="https://github.com/user-attachments/assets/7f865bef-ffd5-4afa-8f21-a7a8849dfcf0" />
+
 
 
 
@@ -264,7 +266,7 @@ Las fórmulas DAX nuevas se suministran para copiar y se interpretan por su resu
 <td width="25%" valign="top">
 <a id="paso-3-2-1"></a>
 <p><strong>3.2.1. Preparar el tiempo para comparar todos los meses</strong></p>
-<ol><li>Seleccionar <strong>Modelado → Nueva tabla</strong> y copiar la fórmula suministrada. Si ya existe una tabla equivalente, conservarla.</li><li>Seleccionar Calendario → <strong>Marcar como tabla de fechas</strong> → Date. Relacionar Calendario[Date] con sales[OrderDate], activa 1:* y de dirección única.</li><li>Ordenar Mes por MesNumero y AnioMes por AnioMesOrden desde <strong>Herramientas de columna → Ordenar por columna</strong>.</li><li>En Vista Datos, consultar OrderDate en orden ascendente y descendente para anotar el primer y el último mes del historial. En la guía se los denomina mes inicial y mes final; utilizar como límites sus fechas de primer día.</li><li>Nombrar la página técnica <code>Control_T2</code> y agregar un cuadro de texto con esos límites. Registrar si la cobertura de un extremo está pendiente de confirmar; los meses se investigan sin una variación predeterminada.</li></ol><details><summary>Copiar Calendario</summary><pre><code class="language-dax">Calendario =
+<ol><li>Seleccionar <strong>Modelado → Nueva tabla</strong> y copiar la fórmula suministrada.Seleccionar Calendario → <strong>Marcar como tabla de fechas</strong> → Date. Relacionar Calendario[Date] con sales[OrderDate], activa 1:* y de dirección única.</li><li>Ordenar Mes por MesNumero y AnioMes por AnioMesOrden desde <strong>Herramientas de columna → Ordenar por columna</strong>.</li><li>En Vista Datos, consultar OrderDate en orden ascendente y descendente para anotar el primer y el último mes del historial. En la guía se los denomina mes inicial y mes final; utilizar como límites sus fechas de primer día.</li><li>Nombrar la página técnica <code>Control_T2</code> y agregar un cuadro de texto con esos límites. Registrar si la cobertura de un extremo está pendiente de confirmar; los meses se investigan sin una variación predeterminada.</li></ol><details><summary>Copiar Calendario</summary><pre><code class="language-dax">Calendario =
 VAR FechaMin = MIN(sales[OrderDate])
 VAR FechaMax = MAX(sales[OrderDate])
 RETURN
@@ -286,7 +288,14 @@ RETURN
 <p><strong>Comprobar:</strong> el modelo permite seleccionar un mes y consultar su referencia anterior. La comparación temporal es el propósito de esta tabla; no se agregan transformaciones en Power Query.</p>
 </td>
 <td width="75%" valign="top">
-<!-- Captura 3.2.1: Preparar el tiempo para comparar todos los meses. Pegue aquí una o varias imágenes. -->
+ <img width="1858" height="890" alt="image" src="https://github.com/user-attachments/assets/c63566a0-1f70-458f-88ba-d377c28e7a37" />
+    <img width="1876" height="912" alt="image" src="https://github.com/user-attachments/assets/b97b0d1b-d5e8-4226-8dde-aaaccc1ebc70" />
+    <img width="775" height="572" alt="image" src="https://github.com/user-attachments/assets/2f844a67-70db-4f18-9d75-112a717ea8b1" />
+    <img width="943" height="963" alt="image" src="https://github.com/user-attachments/assets/309f61a6-cd81-4c62-a292-9a72198d9aa6" />
+    <img width="653" height="692" alt="image" src="https://github.com/user-attachments/assets/22a0008e-70bc-420e-aed1-509c817aa1d2" />
+
+
+
 <p><br><br></p>
 </td>
 </tr>
@@ -301,6 +310,9 @@ DIVIDE([Ventas Totales], [Pedidos])</code></pre></details>
 <p><strong>Comprobar:</strong> los indicadores cambian con los filtros y sus totales se calculan a partir de las sumas y conteos de la selección.</p>
 </td>
 <td width="75%" valign="top">
+   
+
+
 <!-- Captura 3.2.2: Añadir los indicadores para interpretar clientes y ticket. Pegue aquí una o varias imágenes. -->
 <p><br><br></p>
 </td>
