@@ -310,7 +310,8 @@ DIVIDE([Ventas Totales], [Pedidos])</code></pre></details>
 <p><strong>Comprobar:</strong> los indicadores cambian con los filtros y sus totales se calculan a partir de las sumas y conteos de la selección.</p>
 </td>
 <td width="75%" valign="top">
-   
+<img width="1856" height="891" alt="image" src="https://github.com/user-attachments/assets/ca1807c7-054c-4339-95b1-c273a833998b" />
+
 
 
 <!-- Captura 3.2.2: Añadir los indicadores para interpretar clientes y ticket. Pegue aquí una o varias imágenes. -->
