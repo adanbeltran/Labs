@@ -283,7 +283,6 @@ Las fórmulas DAX nuevas se suministran para copiar y se interpretan por su resu
 
 <p><strong>Comprobación:</strong> las cuatro tablas aparecen en el panel Datos y las tres relaciones están correctamente configuradas en la Vista Modelo.</p>
 
-<p><strong>Nota:</strong> la tabla <code>Calendario</code> se creará en el paso 3.2.1. No importar <code>date.csv</code> ni marcar una tabla de fechas en este paso.</p>
 
 </td>
 <td width="75%" valign="top">
@@ -292,7 +291,7 @@ Las fórmulas DAX nuevas se suministran para copiar y se interpretan por su resu
 <img width="1086" height="723" alt="image" src="https://github.com/user-attachments/assets/5bbe7f36-6589-456a-ade3-72299ed5a17e" />
 <img width="1806" height="818" alt="image" src="https://github.com/user-attachments/assets/aa26bf55-f674-44c6-b063-bd983d72f97c" />
 <img width="1742" height="900" alt="image" src="https://github.com/user-attachments/assets/23d55a96-6d84-4950-bcb4-6a25ca9d3081" />
-<img width="1040" height="863" alt="image" src="https://github.com/user-attachments/assets/7f865bef-ffd5-4afa-8f21-a7a8849dfcf0" />
+
 
 
 
@@ -340,6 +339,7 @@ RETURN
 </td>
 <td width="75%" valign="top">
  <img width="1858" height="890" alt="image" src="https://github.com/user-attachments/assets/c63566a0-1f70-458f-88ba-d377c28e7a37" />
+    <img width="1040" height="863" alt="image" src="https://github.com/user-attachments/assets/7f865bef-ffd5-4afa-8f21-a7a8849dfcf0" />
     <img width="1876" height="912" alt="image" src="https://github.com/user-attachments/assets/b97b0d1b-d5e8-4226-8dde-aaaccc1ebc70" />
     <img width="775" height="572" alt="image" src="https://github.com/user-attachments/assets/2f844a67-70db-4f18-9d75-112a717ea8b1" />
     <img width="943" height="963" alt="image" src="https://github.com/user-attachments/assets/309f61a6-cd81-4c62-a292-9a72198d9aa6" />
