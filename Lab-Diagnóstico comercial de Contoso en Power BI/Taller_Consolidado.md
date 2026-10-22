@@ -317,6 +317,7 @@ DIVIDE([Ventas Totales], [Pedidos])</code></pre></details>
 <img width="1235" height="117" alt="image" src="https://github.com/user-attachments/assets/89fac197-831e-40aa-86af-8f8834c07479" />
 <img width="1286" height="125" alt="image" src="https://github.com/user-attachments/assets/1621cbd2-9c14-4c55-8de0-94bbae4877c7" />
 <img width="1160" height="116" alt="image" src="https://github.com/user-attachments/assets/8e1387ee-38ed-4702-bc73-8bbc78de94e2" />
+<img width="1168" height="136" alt="image" src="https://github.com/user-attachments/assets/ce77f32c-e2e0-4f03-a833-6166cf421f6e" />
 
 
 
