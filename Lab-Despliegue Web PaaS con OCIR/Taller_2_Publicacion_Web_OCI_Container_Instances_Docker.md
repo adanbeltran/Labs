@@ -270,6 +270,8 @@ docker rm ecored-prueba
 <td width="75%" valign="top">
 <p><strong>Captura oficial de referencia</strong></p>
 <p><a href="https://oracle.github.io/fmw-kubernetes/wcsites-domains/oracle-cloud/ocir/images/ocir-5.png"><img src="https://oracle.github.io/fmw-kubernetes/wcsites-domains/oracle-cloud/ocir/images/ocir-5.png" alt="Oracle Container Registry: Create Repository" width="100%"></a></p>
+  <img width="940" height="434" alt="image" src="https://github.com/user-attachments/assets/ecb2cc11-e777-4b7a-a85f-562bfacf303a" />
+
 <p><em>Referencia oficial de una interfaz anterior: localiza Container Registry y Create repository. Usa São Paulo y los valores de la columna izquierda. [18]</em></p>
 <p><strong>Captura específica del paso</strong></p>
 <p>Repositorio ecored/web, compartimento Infraestructura_y_Cloud y acceso Public.</p>
