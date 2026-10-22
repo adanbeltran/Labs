@@ -354,13 +354,95 @@ RETURN
 </tr>
 <tr>
 <td width="25%" valign="top">
+
 <a id="paso-3-2-2"></a>
-<p><strong>3.2.2. Añadir los indicadores para interpretar clientes y ticket</strong></p>
-<ol><li>Crear cada medida suministrada mediante <strong>Modelado → Nueva medida</strong>.</li><li>Clientes Compradores identifica quiénes compraron en la selección; Pedidos por Cliente resume la frecuencia en ese contexto; Ticket Promedio representa ventas por pedido.</li><li>Interpretar las medidas según el mes y los segmentos seleccionados. En una categoría, el ticket corresponde al importe de esa categoría por pedido que la incluye.</li></ol><details><summary>Copiar Clientes Compradores</summary><pre><code class="language-dax">Clientes Compradores =
-DISTINCTCOUNT(sales[CustomerKey])</code></pre></details><details><summary>Copiar Pedidos por Cliente</summary><pre><code class="language-dax">Pedidos por Cliente =
-DIVIDE([Pedidos], [Clientes Compradores])</code></pre></details><details><summary>Copiar Ticket Promedio</summary><pre><code class="language-dax">Ticket Promedio =
-DIVIDE([Ventas Totales], [Pedidos])</code></pre></details>
-<p><strong>Comprobar:</strong> los indicadores cambian con los filtros y sus totales se calculan a partir de las sumas y conteos de la selección.</p>
+<p><strong>3.2.2. Crear y verificar las medidas comerciales</strong></p>
+
+<ol>
+<li>
+<strong>Verificar las medidas básicas del taller 1.</strong>
+
+<p>En el panel <strong>Datos</strong>, comprobar si existen las medidas <code>Ventas Totales</code> y <code>Pedidos</code>.</p>
+
+<p>Si no existen, crearlas mediante <strong>Modelado → Nueva medida</strong>, utilizando las siguientes fórmulas:</p>
+
+<details>
+<summary>Copiar Ventas Totales</summary>
+<pre><code class="language-dax">Ventas Totales =
+SUMX(
+    sales,
+    sales[Quantity] * sales[NetPrice]
+)</code></pre>
+</details>
+
+<details>
+<summary>Copiar Pedidos</summary>
+<pre><code class="language-dax">Pedidos =
+DISTINCTCOUNT(sales[OrderKey])</code></pre>
+</details>
+
+<p><strong>Ventas Totales</strong> calcula el importe vendido y <strong>Pedidos</strong> cuenta los pedidos únicos.</p>
+</li>
+
+<li>
+<strong>Crear Clientes Compradores.</strong>
+
+<p>Seleccionar <strong>Modelado → Nueva medida</strong> y copiar la fórmula:</p>
+
+<details>
+<summary>Copiar Clientes Compradores</summary>
+<pre><code class="language-dax">Clientes Compradores =
+DISTINCTCOUNT(sales[CustomerKey])</code></pre>
+</details>
+
+<p>Cuenta los clientes diferentes que realizaron compras dentro del período y los segmentos seleccionados.</p>
+</li>
+
+<li>
+<strong>Crear Pedidos por Cliente.</strong>
+
+<p>Seleccionar <strong>Modelado → Nueva medida</strong> y copiar la fórmula:</p>
+
+<details>
+<summary>Copiar Pedidos por Cliente</summary>
+<pre><code class="language-dax">Pedidos por Cliente =
+DIVIDE(
+    [Pedidos],
+    [Clientes Compradores]
+)</code></pre>
+</details>
+
+<p>Calcula el número promedio de pedidos por cliente comprador en la selección.</p>
+</li>
+
+<li>
+<strong>Crear Ticket Promedio.</strong>
+
+<p>Seleccionar <strong>Modelado → Nueva medida</strong> y copiar la fórmula:</p>
+
+<details>
+<summary>Copiar Ticket Promedio</summary>
+<pre><code class="language-dax">Ticket Promedio =
+DIVIDE(
+    [Ventas Totales],
+    [Pedidos]
+)</code></pre>
+</details>
+
+<p>Calcula el importe promedio por pedido. Si se filtra una categoría de productos, representa las ventas de esa categoría divididas entre los pedidos que la incluyen.</p>
+</li>
+
+<li>
+<strong>Verificar las medidas creadas.</strong>
+
+<p>Comprobar en el panel <strong>Datos</strong> que existan las cinco medidas sin errores DAX.</p>
+
+<p>Los indicadores deben responder a los filtros de fecha, cliente, tienda y producto.</p>
+</li>
+</ol>
+
+<p><strong>Comprobación:</strong> Ventas Totales y Pedidos constituyen la base de cálculo. Clientes Compradores, Pedidos por Cliente y Ticket Promedio permiten analizar el comportamiento comercial según el contexto seleccionado.</p>
+
 </td>
 <td width="75%" valign="top">
 <img width="1856" height="891" alt="image" src="https://github.com/user-attachments/assets/ca1807c7-054c-4339-95b1-c273a833998b" />
