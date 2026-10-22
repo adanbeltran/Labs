@@ -231,9 +231,60 @@ Las fórmulas DAX nuevas se suministran para copiar y se interpretan por su resu
 <tbody>
 <tr>
 <td width="25%" valign="top">
+
 <a id="paso-3-1-1"></a>
-<p><strong>3.1.1. Retomar la carga demostrada y configurar el archivo</strong></p>
-<ol><li>Abrir un <strong>Informe en blanco</strong> y guardarlo como <code>Taller_02_Contoso_Apellidos.pbix</code>. Si ya dispone de una base de clase, puede trabajar sobre una copia; el archivo del taller 1 no es requisito.</li><li><strong>Antes de importar:</strong> ir a <strong>Archivo → Opciones y configuración → Opciones → Archivo actual → Configuración regional</strong>. Seleccionar <strong>Inglés (Estados Unidos)</strong> para la importación y aceptar.</li><li>Usar la carpeta del mismo <a href="https://raw.githubusercontent.com/adanbeltran/Labs/main/PowerBI-Taller01-demo/csv-100k.7z">paquete Contoso</a>. En <strong>Inicio → Obtener datos → Texto/CSV</strong>, cargar sales.csv, product.csv, customer.csv y store.csv, uno por uno. Confirmar delimitador coma y encabezados en la vista previa y pulsar <strong>Cargar</strong>. Mantener la detección automática de tipos; no abrir el Editor avanzado.</li><li>Conservar los nombres sales, product, customer y store. Retomar las relaciones conocidas: product[ProductKey] → sales[ProductKey], customer[CustomerKey] → sales[CustomerKey] y store[StoreKey] → sales[StoreKey], activas 1:* y de dirección única.</p>
+<p><strong>3.1.1. Preparar el archivo, importar los datos y verificar el modelo</strong></p>
+
+<ol>
+<li>
+<strong>Crear y guardar el informe.</strong>
+<p>Abrir Power BI Desktop, seleccionar <strong>Informe en blanco</strong> y guardar como <code>Taller_02_Contoso_Apellidos.pbix</code>.</p>
+<p>Si dispone de una base creada en clase, puede trabajar sobre una copia. No es obligatorio utilizar el archivo del taller 1.</p>
+</li>
+
+<li>
+<strong>Configurar la región antes de importar.</strong>
+<p>Ir a <strong>Archivo → Opciones y configuración → Opciones → Archivo actual → Configuración regional</strong>.</p>
+<p>En la configuración regional para la importación, seleccionar <strong>Inglés (Estados Unidos)</strong> y pulsar <strong>Aceptar</strong>.</p>
+</li>
+
+<li>
+<strong>Importar los archivos de Contoso.</strong>
+<p>Descargar y descomprimir el <a href="https://raw.githubusercontent.com/adanbeltran/Labs/main/PowerBI-Taller01-demo/csv-100k.7z">paquete Contoso</a>.</p>
+<p>Ir a <strong>Inicio → Obtener datos → Texto/CSV</strong>. En la carpeta <code>csv-100k</code>, importar uno por uno:</p>
+<ul>
+<li><code>sales.csv</code></li>
+<li><code>product.csv</code></li>
+<li><code>customer.csv</code></li>
+<li><code>store.csv</code></li>
+</ul>
+<p>En cada vista previa, comprobar el <strong>delimitador coma</strong> y los encabezados. Pulsar <strong>Cargar</strong>.</p>
+<p>Conservar la detección automática de tipos de datos. No realizar transformaciones adicionales en Power Query.</p>
+</li>
+
+<li>
+<strong>Verificar las tablas importadas.</strong>
+<p>En el panel <strong>Datos</strong>, comprobar que aparezcan las cuatro tablas: <code>sales</code>, <code>product</code>, <code>customer</code> y <code>store</code>.</p>
+<p>Conservar sus nombres originales.</p>
+</li>
+
+<li>
+<strong>Verificar las relaciones del modelo.</strong>
+<p>Abrir la <strong>Vista Modelo</strong> y comprobar estas relaciones:</p>
+<ul>
+<li><code>product[ProductKey]</code> → <code>sales[ProductKey]</code></li>
+<li><code>customer[CustomerKey]</code> → <code>sales[CustomerKey]</code></li>
+<li><code>store[StoreKey]</code> → <code>sales[StoreKey]</code></li>
+</ul>
+<p>Si falta alguna, crearla mediante <strong>Administrar relaciones → Nueva</strong>.</p>
+<p>Configurar todas como <strong>activas, uno a varios (1:*) y con dirección de filtro única</strong> hacia <code>sales</code>.</p>
+</li>
+</ol>
+
+<p><strong>Comprobación:</strong> las cuatro tablas aparecen en el panel Datos y las tres relaciones están correctamente configuradas en la Vista Modelo.</p>
+
+<p><strong>Nota:</strong> la tabla <code>Calendario</code> se creará en el paso 3.2.1. No importar <code>date.csv</code> ni marcar una tabla de fechas en este paso.</p>
+
 </td>
 <td width="75%" valign="top">
 <img width="1575" height="975" alt="image" src="https://github.com/user-attachments/assets/798387c4-d029-4f1a-b41a-c1ae6cde0788" />
