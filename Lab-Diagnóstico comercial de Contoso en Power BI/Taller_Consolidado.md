@@ -423,7 +423,7 @@ IF(
     <img width="1197" height="212" alt="image" src="https://github.com/user-attachments/assets/384aa24f-3a84-4480-bb52-619b977c409f" />
     <img width="1240" height="262" alt="image" src="https://github.com/user-attachments/assets/effef527-c1ff-43f9-ab0a-09600c906633" />
     <img width="1196" height="262" alt="image" src="https://github.com/user-attachments/assets/5b03f87d-1185-4955-9258-aca20da601d0" />
-<img width="1196" height="262" alt="image" src="https://github.com/user-attachments/assets/273ec6a0-3209-411b-8d63-f804cdee7218" />
+   
 
 
 
@@ -441,6 +441,14 @@ IF(
 <p><strong>Comprobar:</strong> se comprueba el comportamiento de las medidas nuevas; no se repite el perfilado ni la conciliación básica del dataset del taller 1.</p>
 </td>
 <td width="75%" valign="top">
+    <img width="1102" height="328" alt="image" src="https://github.com/user-attachments/assets/bdbbaae5-ae6b-433c-b645-0eb13cefbc81" />
+    <img width="1228" height="318" alt="image" src="https://github.com/user-attachments/assets/18b660ae-93cc-4bf7-b60f-711593d31aff" />
+    <img width="1262" height="272" alt="image" src="https://github.com/user-attachments/assets/3adc5e0d-1c22-4e31-a9a8-15cf3c65f787" />
+    <img width="1456" height="290" alt="image" src="https://github.com/user-attachments/assets/30b50bc5-99c5-4547-af14-3758bb6df602" />
+
+
+
+
 <!-- Captura 3.2.5: Dar formato y comprobar el contexto del análisis. Pegue aquí una o varias imágenes. -->
 <p><br><br></p>
 </td>
