@@ -93,11 +93,8 @@ Reemplaza `NAMESPACE` en los comandos por el namespace real de tu tenancy. Si co
 <td width="75%" valign="top">
 <p><strong>Captura oficial de referencia</strong></p>
 <img width="946" height="419" alt="image" src="https://github.com/user-attachments/assets/9f4983a3-531b-48b3-820a-01569ea7f0d7" />
-
-<p><em>Referencia de Docker Desktop. La comprobación de Client y Server se realiza con el comando indicado. [19]</em></p>
-<p><strong>Captura específica del paso</strong></p>
-<p>Terminal con docker version mostrando Client y Server.</p>
-<blockquote><p>Espacio para la captura de pantalla de este paso.</p></blockquote>
+<img width="510" height="152" alt="image" src="https://github.com/user-attachments/assets/ec9eb56c-6113-4ac6-add9-f044625f42e9" />
+<img width="913" height="158" alt="image" src="https://github.com/user-attachments/assets/5aeb0858-64c3-45d0-993a-ccca0701f0fa" />
 
 </td>
 </tr>
