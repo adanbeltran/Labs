@@ -369,7 +369,8 @@ RETURN
 <p><strong>Comprobar:</strong> para cualquier mes elegido con referencia, se obtienen las ventas y los pedidos del mes inmediatamente anterior, con los mismos filtros de dimensiones.</p>
 </td>
 <td width="75%" valign="top">
-<!-- Captura 3.2.3: Obtener la referencia del mes anterior. Pegue aquí una o varias imágenes. -->
+<img width="1902" height="602" alt="image" src="https://github.com/user-attachments/assets/61eef6f8-25ee-41b0-9051-36dfd18c55ef" />
+
 <p><br><br></p>
 </td>
 </tr>
