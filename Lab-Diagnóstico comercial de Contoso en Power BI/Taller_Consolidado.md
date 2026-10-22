@@ -418,6 +418,17 @@ IF(
 <p><strong>Comprobar:</strong> las medidas permiten distinguir el cambio en el número de pedidos del cambio en su importe medio.</p>
 </td>
 <td width="75%" valign="top">
+    <img width="1367" height="381" alt="image" src="https://github.com/user-attachments/assets/b9554052-842a-449d-aac5-8d00b5629c54" />
+    <img width="1275" height="212" alt="image" src="https://github.com/user-attachments/assets/792951d4-309b-491e-860f-63179f533f54" />
+    <img width="1197" height="212" alt="image" src="https://github.com/user-attachments/assets/384aa24f-3a84-4480-bb52-619b977c409f" />
+    <img width="1240" height="262" alt="image" src="https://github.com/user-attachments/assets/effef527-c1ff-43f9-ab0a-09600c906633" />
+    <img width="1196" height="262" alt="image" src="https://github.com/user-attachments/assets/5b03f87d-1185-4955-9258-aca20da601d0" />
+<img width="1196" height="262" alt="image" src="https://github.com/user-attachments/assets/273ec6a0-3209-411b-8d63-f804cdee7218" />
+
+
+
+
+
 <!-- Captura 3.2.4: Comparar ventas, pedidos y ticket. Pegue aquí una o varias imágenes. -->
 <p><br><br></p>
 </td>
