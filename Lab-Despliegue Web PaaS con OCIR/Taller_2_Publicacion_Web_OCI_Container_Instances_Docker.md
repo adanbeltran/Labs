@@ -57,12 +57,6 @@ Usa los siguientes nombres o selecciona los recursos equivalentes de tu cuenta. 
 
 Reemplaza `NAMESPACE` en los comandos por el namespace real de tu tenancy. Si compartes la cuenta con otros grupos, usa nombres de repositorio e instancia distintos, por ejemplo `grupo01/ecored` y `ecored-grupo01`.
 
-## Cómo utilizar la guía visual
-
-Cada paso tiene dos columnas: **instrucciones, 25 %**, y **capturas de pantalla, 75 %**. Las imágenes oficiales incluidas permiten ubicar pantallas y controles; pueden mostrar otra versión de la interfaz, región o nombres de ejemplo. Aplica los valores escritos en las instrucciones.
-
-Cuando se indica **Captura por incorporar**, el espacio está preparado para la imagen específica de ese paso. Esos espacios no representan capturas ya realizadas. Al documentar la práctica, conserva visibles los campos necesarios y oculta el valor de los tokens.
-
 ## Índice
 
 1. [Construir y probar la imagen con Docker](#fase-1-construir-y-probar-la-imagen-con-docker).
@@ -78,7 +72,7 @@ Cuando se indica **Captura por incorporar**, el espacio está preparado para la 
 
 <table width="100%" style="width:100%;table-layout:fixed">
 <colgroup><col width="25%"><col width="75%"></colgroup>
-<thead><tr><th width="25%" align="left">Instrucciones del paso · 25 %</th><th width="75%" align="left">Capturas de pantalla · 75 %</th></tr></thead>
+<thead><tr><th width="25%" align="left">Instrucciones del paso /th><th width="75%" align="left">Capturas de pantalla</th></tr></thead>
 <tbody>
 <tr>
 <td width="25%" valign="top" style="overflow-wrap:anywhere">
@@ -98,7 +92,8 @@ Cuando se indica **Captura por incorporar**, el espacio está preparado para la 
 </td>
 <td width="75%" valign="top">
 <p><strong>Captura oficial de referencia</strong></p>
-<p><a href="https://docs.docker.com/get-started/docker-concepts/the-basics/images/click-image.webp"><img src="https://docs.docker.com/get-started/docker-concepts/the-basics/images/click-image.webp" alt="Docker Desktop: panel lateral y vista Images" width="100%"></a></p>
+<img width="946" height="419" alt="image" src="https://github.com/user-attachments/assets/9f4983a3-531b-48b3-820a-01569ea7f0d7" />
+
 <p><em>Referencia de Docker Desktop. La comprobación de Client y Server se realiza con el comando indicado. [19]</em></p>
 <p><strong>Captura específica del paso</strong></p>
 <p>Terminal con docker version mostrando Client y Server.</p>
