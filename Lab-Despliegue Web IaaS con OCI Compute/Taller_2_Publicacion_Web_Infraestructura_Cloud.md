@@ -219,6 +219,7 @@ Descargarás una copia del repositorio para colocar la página en el servidor. E
 git clone --depth 1 "https://github.com/adanbeltran/ecored-estatica" ~/pagina-taller
 ```
 <img width="997" height="147" alt="image" src="https://github.com/user-attachments/assets/05a4bbbc-b8eb-4516-bb71-3de3677593b3" />
+
 ```bash
 ls -la ~/pagina-taller
 ```
