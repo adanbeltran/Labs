@@ -40,6 +40,9 @@ Un **sistema operativo (SO)** proporciona abstracciones y mecanismos para ejecut
 - **Modo usuario** y **modo kernel** describen niveles de privilegio de ejecución. Aplicaciones, shell y buena parte de servicios operan en modo usuario; el núcleo ejecuta operaciones privilegiadas.
 - **Shell ≠ kernel:** escribir `ls` o `Get-Process` no significa que esos comandos sean funciones internas del núcleo. La aplicación o cmdlet utiliza bibliotecas e interfaces del sistema según la operación.
 
+<img width="1055" height="1491" alt="image" src="https://github.com/user-attachments/assets/092bfc8f-b88d-4a2d-8cf2-87295419a49c" />
+
+
 ![Comparación arquitectónica entre GNU/Linux y Windows, infografía reutilizada](assets/arquitectura_sistemas_operativos.png)
 
 *Ilustración 1. Modelo didáctico comparado de GNU/Linux y Windows. Las flechas representan relaciones funcionales simplificadas, no la secuencia obligatoria de toda instrucción.*
