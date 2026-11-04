@@ -643,6 +643,10 @@ IF(
 <p><strong>Comprobar:</strong> se puede elegir cualquier mes del historial; las vistas de detalle muestran uno a la vez y conservan su comparación con el anterior.</p>
 </td>
 <td width="75%" valign="top">
+    <img width="884" height="313" alt="image" src="https://github.com/user-attachments/assets/f654f9ca-0fac-4dd1-8b66-d0139e01f143" />
+    <img width="815" height="307" alt="image" src="https://github.com/user-attachments/assets/e36ae33c-f26b-47e9-8a5a-95ca22a0d593" />
+
+
 <!-- Captura 3.3.2: Configurar la selección de un mes para explorar. Pegue aquí una o varias imágenes. -->
 <p><br><br></p>
 </td>
