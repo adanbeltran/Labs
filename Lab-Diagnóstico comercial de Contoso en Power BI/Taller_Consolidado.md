@@ -639,7 +639,7 @@ IF(
 <td width="25%" valign="top">
 <a id="paso-3-3-2"></a>
 <p><strong>3.3.2. Configurar la selección de un mes para explorar</strong></p>
-<ol><li>En Gerencia, Clientes, Tiendas y Productos, conservar el intervalo entre mes inicial y mes final mediante el filtro avanzado de Calendario[InicioMes], como en 3.2.5. Mantener disponibles todos sus años.</li><li>En Gerencia, insertar segmentaciones de Calendario[AnioMes], store[CountryName], store[StoreKey] y product[CategoryName].</li><li>Activar Selección única en el mes. Elegir un mes con referencia anterior para probar los gráficos; esta selección inicial no lo declara como período crítico.</li><li>Titular los filtros Mes de análisis, País de la tienda, Tienda y Categoría. Mantener todos los segmentos. Los meses de investigación se elegirán después del seguimiento de toda la serie en 3.4.</li></ol>
+<ol><li>En Gerencia, Clientes, Tiendas y Productos, conservar el intervalo entre mes inicial y mes final mediante el filtro avanzado de Calendario[InicioMes] </li><li>En Gerencia, insertar segmentaciones de Calendario[AnioMes], store[CountryName], store[StoreKey] y product[CategoryName].</li><li>Activar Selección única en el mes. Elegir un mes con referencia anterior para probar los gráficos; esta selección inicial no lo declara como período crítico.</li><li>Titular los filtros Mes de análisis, País de la tienda, Tienda y Categoría. Mantener todos los segmentos. Los meses de investigación se elegirán después del seguimiento de toda la serie en 3.4.</li></ol>
 <p><strong>Comprobar:</strong> se puede elegir cualquier mes del historial; las vistas de detalle muestran uno a la vez y conservan su comparación con el anterior.</p>
 </td>
 <td width="75%" valign="top">
