@@ -604,7 +604,9 @@ IF(
 <a id="paso-3-3-1"></a>
 <p><strong>3.3.1. Organizar las vistas y retomar los indicadores conocidos</strong></p>
 <ol><li>Crear las páginas Gerencia, Clientes, Tiendas, Productos, Factores comerciales y Alertas comerciales. Conservar Control_T2.</li><li>Elegir lienzo 16:9 y reservar la franja superior para título, período y filtros. Distribuir los gráficos sin superponerlos.</li><li>En Gerencia, reutilizar la construcción de tarjetas demostrada: Ventas Totales, Variacion Ventas %, Pedidos, Clientes Compradores y Ticket Promedio. Mantener las unidades completas y los formatos de 3.2.5.</li><li>Reservar cintas y cascada en Gerencia; 
-    barras al 100 % y dispersión en Tiendas; Treemap y árbol en Productos; influenciadores en Factores comerciales; y líneas y tabla mensual en Alertas comerciales.</li></ol>
+    barras al 100 % y dispersión en Tiendas; 
+    Treemap y árbol en Productos;
+    influenciadores en Factores comerciales; y líneas y tabla mensual en Alertas comerciales.</li></ol>
 <p><strong>Comprobar:</strong> el espacio se organiza por preguntas comerciales y las tarjetas básicas se usan como contexto de los gráficos nuevos.</p>
 </td>
 <td width="75%" valign="top">
@@ -615,6 +617,19 @@ IF(
 <img width="815" height="275" alt="image" src="https://github.com/user-attachments/assets/c174ddbe-a59e-4505-82d8-a1352c7705f6" />
 
 <img width="821" height="290" alt="image" src="https://github.com/user-attachments/assets/9efc90b5-4645-49cf-b410-4ccf4954deb9" />
+
+<img width="762" height="272" alt="image" src="https://github.com/user-attachments/assets/3f0e0e26-2dad-4551-a27d-ba9dfafc30e4" />
+
+<img width="729" height="283" alt="image" src="https://github.com/user-attachments/assets/321544e1-f0e9-4c9d-a47c-6fd668082ee1" />
+
+<img width="770" height="283" alt="image" src="https://github.com/user-attachments/assets/85e38155-a37c-441a-977c-7f0cadf3b3d3" />
+
+<img width="774" height="274" alt="image" src="https://github.com/user-attachments/assets/db51d7a2-b84e-4894-bf41-87444775c572" />
+
+<img width="767" height="275" alt="image" src="https://github.com/user-attachments/assets/0849c574-b8bb-48eb-bdd9-9b25c5335657" />
+
+
+
 
 
 <!-- Captura 3.3.1: Organizar las vistas y retomar los indicadores conocidos. Pegue aquí una o varias imágenes. -->
