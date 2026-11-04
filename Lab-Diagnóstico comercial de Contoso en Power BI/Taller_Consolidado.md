@@ -659,6 +659,8 @@ IF(
 <p><strong>Comprobar:</strong> el contexto mensual se comparte entre las cuatro vistas; Factores comerciales y Alertas comerciales conservarán su alcance histórico independiente.</p>
 </td>
 <td width="75%" valign="top">
+    <img width="823" height="404" alt="image" src="https://github.com/user-attachments/assets/c07758e2-af06-44a0-b8cc-7c005214011c" />
+
 <!-- Captura 3.3.3: Sincronizar solo las cuatro vistas mensuales. Pegue aquí una o varias imágenes. -->
 <p><br><br></p>
 </td>
