@@ -1,0 +1,35 @@
+# Prueba directa de Companies Service. SOLO laboratorio local.
+@base = http://127.0.0.1:8001
+@uid = estudiante-demo
+
+### 1. Sin identidad simulada: 401
+GET {{base}}/api/companies
+Accept: application/json
+
+### 2. Crear empresa con identidad simulada: 201
+# @name createCompanyLocal
+POST {{base}}/api/companies
+X-User-Id: {{uid}}
+Content-Type: application/json
+
+{
+  "name": "Reciclajes Aula",
+  "nit": "NIT-{{$timestamp}}",
+  "city": "Bogotá",
+  "sector": "Reciclaje"
+}
+
+### 3. Listar empresas del usuario
+GET {{base}}/api/companies
+X-User-Id: {{uid}}
+Accept: application/json
+
+### 4. Consultar empresa creada
+GET {{base}}/api/companies/{{createCompanyLocal.response.body.$.id}}
+X-User-Id: {{uid}}
+Accept: application/json
+
+### 5. Otro usuario no debe tener acceso a la empresa
+GET {{base}}/api/companies/{{createCompanyLocal.response.body.$.id}}
+X-User-Id: otro-estudiante
+Accept: application/json

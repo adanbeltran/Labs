@@ -1,0 +1,47 @@
+# Prueba directa de Materials Service. SOLO laboratorio local.
+# Antes de ejecutarla, cree una empresa con tests/01-companies-independiente.http
+# y copie el ID de empresa a companyId. Use el MISMO UID.
+@base = http://127.0.0.1:8002
+@uid = estudiante-demo
+@companyId = PEGAR_ID_REAL_DE_EMPRESA
+
+### 1. Sin identidad simulada: 401
+GET {{base}}/api/materials
+Accept: application/json
+
+### 2. Crear material de empresa propia: 201
+# @name createMaterialLocal
+POST {{base}}/api/materials
+X-User-Id: {{uid}}
+Content-Type: application/json
+
+{
+  "company_id": "{{companyId}}",
+  "material_type": "Cartón",
+  "quantity": 25,
+  "unit": "kg",
+  "location": "Bogotá"
+}
+
+### 3. Consultar material recién creado
+GET {{base}}/api/materials/{{createMaterialLocal.response.body.$.id}}
+X-User-Id: {{uid}}
+Accept: application/json
+
+### 4. Listar materiales
+GET {{base}}/api/materials
+X-User-Id: {{uid}}
+Accept: application/json
+
+### 5. Intentar crear para una empresa de otro usuario: debe rechazarse
+POST {{base}}/api/materials
+X-User-Id: otro-estudiante
+Content-Type: application/json
+
+{
+  "company_id": "{{companyId}}",
+  "material_type": "Cartón",
+  "quantity": 1,
+  "unit": "kg",
+  "location": "Bogotá"
+}
