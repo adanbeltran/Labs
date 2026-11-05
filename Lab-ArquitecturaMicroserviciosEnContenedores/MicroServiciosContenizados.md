@@ -71,6 +71,8 @@ git clone https://github.com/adanbeltran/ecored-microservicios.git .
 git status
 Get-ChildItem
 ```
+<img width="480" height="276" alt="image" src="https://github.com/user-attachments/assets/cd4284ab-b989-4abf-ad80-d13dc868ad49" />
+
 
 Compruebe que los archivos del repositorio aparezcan en el **Explorador de VS Code**.
 
