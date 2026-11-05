@@ -28,9 +28,20 @@ Al terminar, el estudiante podrá explicar la separación de responsabilidades d
 
 ---
 
-## 0. Clonar el código desde GitHub
+## 0. Preparar el entorno y clonar el proyecto desde GitHub
 
-**Herramientas:** Git, VS Code, Python 3.12+, Node.js 24+, npm, Docker Desktop y extensión **REST Client** para VS Code. Verifique versiones antes de continuar:
+**Herramientas:** Git, VS Code, Python 3.12+, Node.js 24+, npm, Docker Desktop y extensión REST Client.
+
+### 0.1. Crear y abrir la carpeta de trabajo
+
+1. Abra **Visual Studio Code**.
+2. Seleccione **Archivo → Abrir carpeta**.
+3. Cree la carpeta `C:\Ecored-Microservicios` y ábrala en VS Code.
+4. Abra **Terminal → Nueva terminal** (PowerShell).
+
+### 0.2. Verificar las herramientas
+
+Desde la terminal integrada de VS Code, ejecute:
 
 ```powershell
 git --version
@@ -40,20 +51,34 @@ npm --version
 docker version
 ```
 
-En una terminal PowerShell:
+Verifique que todas las herramientas estén instaladas y que Docker Desktop esté ejecutándose.
+
+### 0.3. Clonar el repositorio
+
+Confirme que la terminal esté ubicada en la carpeta de trabajo y ejecute:
 
 ```powershell
-git clone https://github.com/adanbeltran/ecored-microservicios.git
-cd ecored-microservicios
-code .
+cd C:\Ecored-Microservicios
+git clone https://github.com/adanbeltran/ecored-microservicios.git .
 ```
 
-Todos los comandos de este taller parten de la **raíz** `ecored-microservicios`, salvo cuando se indique un cambio de carpeta dentro de una terminal. Compruebe que existen `frontend/`, `local-gateway/`, `services/companies-service/`, `services/materials-service/` y `tests/`.
+**Nota:** El punto (`.`) permite clonar directamente en la carpeta actual, que debe estar vacía.
+
+### 0.4. Verificar el proyecto
 
 ```powershell
+git status
 Get-ChildItem
-Get-ChildItem services
 ```
+
+Compruebe que los archivos del repositorio aparezcan en el **Explorador de VS Code**.
+
+### 0.5. Instalar REST Client
+
+En VS Code, abra **Extensiones** (`Ctrl + Shift + X`), busque **REST Client** de Huachao Mao e instálela para ejecutar las pruebas de los endpoints mediante archivos `.http`.
+
+**Resultado esperado:** Proyecto clonado en `C:\Ecored-Microservicios`, abierto en VS Code y listo para configurar y ejecutar los microservicios.
+
 
 
 ## 1. Descripción de la arquitectura cloud native y los 12 factores
