@@ -55,11 +55,11 @@ Get-ChildItem
 Get-ChildItem services
 ```
 
-> **Nota sobre imágenes:** las capturas están en `assets/`, al mismo nivel que este `.md`. En GitHub se referencian con rutas relativas, por ejemplo `![Conexión de base de datos](assets/image-31.png)`; no utilice rutas absolutas del equipo ni barras invertidas de Windows.
-
----
 
 ## 1. Descripción de la arquitectura cloud native y los 12 factores
+
+<img width="1672" height="941" alt="image" src="https://github.com/user-attachments/assets/192df20c-7d75-48a5-b2a3-f4f12573e3d4" />
+
 
 ### 1.1 Componentes y límites de responsabilidad
 
@@ -73,17 +73,6 @@ Get-ChildItem services
 | MongoDB Atlas | Base de datos externa | Persistencia de Empresas | URI externa |
 | Oracle Autonomous Database | Base de datos administrada | Persistencia de Materiales | Conexión TLS |
 
-```mermaid
-flowchart TB
-  U[Usuario] --> F[Frontend React]
-  F -->|ID token Firebase| G[Gateway de desarrollo]
-  G -->|X-User-Id confiable| E[Companies Service · Django]
-  G -->|X-User-Id confiable| M[Materials Service · Express]
-  M -->|HTTP: validar empresa| E
-  E --> D1[(MongoDB Atlas)]
-  M --> D2[(Oracle Autonomous Database)]
-  F -->|Inicio de sesión| A[Firebase Authentication]
-```
 
 Los microservicios **no comparten directamente sus bases de datos**. Materiales consulta a Empresas por HTTP para confirmar existencia y pertenencia antes de almacenar un material. El encabezado `X-User-Id` solo es confiable cuando lo establece el gateway tras validar el token. No se debe exponer el acceso directo a los puertos internos a clientes no confiables.
 
@@ -98,10 +87,10 @@ La tabla distingue los factores observables en el código de las prácticas que 
 | III. Config | Configuración fuera del código | Archivos `.env` separados por servicio, excluidos del control de versiones y del contexto Docker | Aplicado; verificar exclusiones |
 | IV. Backing services | Recursos conectables | Firebase, MongoDB Atlas y Oracle; las URI y credenciales provienen del entorno | Aplicado |
 | V. Build, release, run | Separar construcción y ejecución | `docker build` produce imágenes; la configuración se suministra al ejecutar; la publicación crea artefactos versionados | Demostrado parcialmente en este taller |
-| VI. Processes | Procesos sin estado | APIs que reciben solicitudes y guardan datos en servicios externos; comprobar que no dependen de archivos locales persistentes | Parcial / verificar |
+| VI. Processes | Procesos sin estado | APIs que reciben solicitudes y guardan datos en servicios externos; comprobar que no dependen de archivos locales persistentes | Parcial |
 | VII. Port binding | Servicio publicado por puerto | 8001, 8002 y 8080 para backends; Dockerfile documenta `EXPOSE` | Aplicado |
 | VIII. Concurrency | Escalar con procesos | Imágenes separadas permiten instancias independientes; **el escalado no se implementa** aquí | Preparado, no demostrado |
-| IX. Disposability | Inicio y parada rápidos | Verificación de conexiones al iniciar y terminación del proceso; comprobar reinicio y cierre correcto | Parcial / verificar |
+| IX. Disposability | Inicio y parada rápidos | Verificación de conexiones al iniciar y terminación del proceso; comprobar reinicio y cierre correcto | Parcial |
 | X. Dev/prod parity | Paridad de entornos | Dependencias fijadas e imágenes reproducibles reducen diferencias; no se valida entorno productivo | Parcial |
 | XI. Logs | Flujos de eventos | Salidas de consola y `docker logs`; evitar depender solo de archivos internos | Aplicado / verificar |
 | XII. Admin processes | Tareas administrativas | SQL de inicialización en `services/materials-service/sql/001_schema.sql` | Parcial: ejecución manual controlada |
