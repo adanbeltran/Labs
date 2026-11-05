@@ -80,6 +80,8 @@ Compruebe que los archivos del repositorio aparezcan en el **Explorador de VS Co
 
 En VS Code, abra **Extensiones** (`Ctrl + Shift + X`), busque **REST Client** de Huachao Mao e instálela para ejecutar las pruebas de los endpoints mediante archivos `.http`.
 
+<img width="898" height="280" alt="image" src="https://github.com/user-attachments/assets/6d88ce12-280d-4613-9fba-aefb42deb993" />
+
 **Resultado esperado:** Proyecto clonado en `C:\Ecored-Microservicios`, abierto en VS Code y listo para configurar y ejecutar los microservicios.
 
 
