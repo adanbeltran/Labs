@@ -63,6 +63,8 @@ git clone https://github.com/adanbeltran/ecored-microservicios.git .
 
 **Nota:** El punto (`.`) permite clonar directamente en la carpeta actual, que debe estar vacía.
 
+<img width="873" height="427" alt="image" src="https://github.com/user-attachments/assets/c71b4761-5e3f-4b28-bc3d-caae284ff4f6" />
+
 ### 0.4. Verificar el proyecto
 
 ```powershell
