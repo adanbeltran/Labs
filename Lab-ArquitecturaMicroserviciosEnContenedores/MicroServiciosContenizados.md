@@ -1,4 +1,4 @@
-# Taller 5. EcoRed: arquitectura cloud native, microservicios y contenedores
+# Arquitectura de microservicios basada en principios Cloud Native: construcción y publicación de imágenes Docker
 
 > **Alcance:** clonar el código, analizar la arquitectura y los doce factores, preparar los servicios externos, configurar el entorno, ejecutar y probar cada microservicio, construir imágenes Docker y publicarlas en Docker Hub. No se requiere desplegar contenedores en un proveedor de nube.
 
