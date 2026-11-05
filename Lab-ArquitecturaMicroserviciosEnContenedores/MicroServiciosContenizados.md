@@ -48,7 +48,6 @@ git --version
 python --version
 node --version
 npm --version
-docker version
 ```
 
 Verifique que todas las herramientas estén instaladas y que Docker Desktop esté ejecutándose.
