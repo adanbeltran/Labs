@@ -135,11 +135,16 @@ Los backing services se crean **antes** de ejecutar los microservicios. No almac
 
 ### 2.1 Firebase Authentication
 
-1. Abra la [consola de Firebase](https://console.firebase.google.com/) y cree o seleccione un proyecto.
+1. Abra la [consola de Firebase](https://console.firebase.google.com/) y cree un proyecto **EcoredMicroservicios**.
 2. En **Build → Authentication → Sign-in method**, habilite **Email/Password**.
 3. En **Authentication → Users**, cree un usuario de prueba (correo y contraseña de laboratorio).
 4. En **Project settings → Your apps**, registre una **aplicación web** y copie `apiKey`, `authDomain`, `projectId` y `appId`.
 5. Verifique que `projectId` sea exactamente el mismo en el frontend y el gateway. Autorice los dominios locales cuando la configuración de Firebase lo requiera.
+
+<img width="494" height="260" alt="image" src="https://github.com/user-attachments/assets/c6a4ed7b-2b5c-4cef-9d31-c3481fa279e8" />
+<img width="461" height="263" alt="image" src="https://github.com/user-attachments/assets/01b376a1-c682-4f38-8f6a-91db448a1f94" />
+
+
 
 **Validación:** la API REST de Firebase debe devolver un `idToken` al autenticar el usuario. El archivo `.http` de integración realiza esa solicitud y no requiere guardar la contraseña en el repositorio.
 
