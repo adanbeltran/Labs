@@ -90,6 +90,8 @@ En VS Code, abra **Extensiones** (`Ctrl + Shift + X`), busque **REST Client** de
 
 <img width="1672" height="941" alt="image" src="https://github.com/user-attachments/assets/192df20c-7d75-48a5-b2a3-f4f12573e3d4" />
 
+<img width="2145" height="2636" alt="image" src="https://github.com/user-attachments/assets/b1f2e5ab-72ed-49ea-b194-4c6adf9b68f8" />
+
 
 ### 1.1 Componentes y límites de responsabilidad
 
