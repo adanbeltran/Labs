@@ -1,0 +1,33 @@
+# REST Client de VS Code: usuario de prueba Firebase (nunca publicar sus credenciales)
+@gateway = http://127.0.0.1:8080
+@token = {{firebaseLogin.response.body.$.idToken}}
+@companyId = {{createCompany.response.body.$.id}}
+### Obtener token de Firebase
+# @name firebaseLogin
+# @prompt firebaseApiKey API key web de Firebase
+# @prompt email Correo de prueba
+# @prompt password Contraseña del usuario de prueba
+POST https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={{firebaseApiKey}}
+Content-Type: application/json
+
+{ "email": "{{email}}", "password": "{{password}}", "returnSecureToken": true }
+### Crear empresa, 201
+# @name createCompany
+POST {{gateway}}/api/companies
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "name": "EcoRed Aula {{$timestamp}}", "nit": "NIT-{{$timestamp}}", "city": "Bogotá", "sector": "Reciclaje" }
+### Listar empresas
+GET {{gateway}}/api/companies
+Authorization: Bearer {{token}}
+### Crear material, 201
+# @name createMaterial
+POST {{gateway}}/api/materials
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "company_id": "{{companyId}}", "material_type": "Cartón", "quantity": 25, "unit": "kg", "location": "Bogotá" }
+### Recuperar material
+GET {{gateway}}/api/materials/{{createMaterial.response.body.$.id}}
+Authorization: Bearer {{token}}

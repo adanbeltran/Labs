@@ -1,0 +1,16 @@
+# Extensión REST Client para VS Code
+@companies = http://127.0.0.1:8001
+@materials = http://127.0.0.1:8002
+@gateway = http://127.0.0.1:8080
+### Empresas: salud, 200
+GET {{companies}}/api/health
+### Materiales: salud, 200
+GET {{materials}}/api/health
+### Gateway: salud, 200
+GET {{gateway}}/health
+### Sin JWT, gateway debe rechazar, 401
+GET {{gateway}}/api/companies
+### Sin identidad interna, empresas debe rechazar, 401
+GET {{companies}}/api/companies
+### Sin identidad interna, materiales debe rechazar, 401
+GET {{materials}}/api/materials

@@ -1,0 +1,11 @@
+# Sustituir IP_PUBLICA antes de ejecutar. Solo HTTP para demostración.
+@publicIp = IP_PUBLICA
+@gateway = http://{{publicIp}}:8080
+### Gateway disponible, 200
+GET {{gateway}}/health
+### Gateway protege empresas, 401 sin token
+GET {{gateway}}/api/companies
+### Gateway protege materiales, 401 sin token
+GET {{gateway}}/api/materials
+### Frontend HTML, 200
+GET http://{{publicIp}}/
