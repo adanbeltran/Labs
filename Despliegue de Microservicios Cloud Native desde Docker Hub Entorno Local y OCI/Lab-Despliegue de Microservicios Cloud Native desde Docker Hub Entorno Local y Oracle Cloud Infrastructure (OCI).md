@@ -1,4 +1,4 @@
-# Despliegue de Microservicios Cloud Native desde Docker Hub: Entorno Local y Oracle Cloud Infrastructure (OCI)
+# Despliegue de Microservicios Cloud Native desde Docker Hub: Entorno Local y Oracle Cloud Infrastructure (OCI) 
 
 > **Continuación del Taller 5.** Las **dos fases parten exclusivamente de imágenes ya publicadas en Docker Hub**. En la Fase 1 se utilizan imágenes del docente o de otro compañero para reproducir EcoRed localmente. En la Fase 2 se descargan desde Docker Hub **las cuatro imágenes propias publicadas anteriormente**, se reetiquetan y publican en Oracle Cloud Infrastructure Registry (OCIR), se ejecutan en OCI Container Instances y se valida su acceso desde una IP pública. **No se realiza `docker build` en ninguna fase.**
 >
