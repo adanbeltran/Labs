@@ -1,4 +1,4 @@
-# Taller. Publicación de un sitio web con Docker y OCI Container Instances
+****# Taller. Publicación de un sitio web con Docker y OCI Container Instances
 
 ## Objetivo
 
@@ -300,7 +300,7 @@ Reemplaza `NAMESPACE` en los comandos por el namespace real de tu tenancy. Si co
 <li><strong>Username, usuario identificado con dominio de identidad o federación:</strong> <code>NAMESPACE/DOMINIO/USUARIO</code>.</li>
 <li><strong>Password:</strong> El <strong>Auth Token</strong> generado en el paso 2.2.</li>
 </ul>
-<p>Usa el dominio y usuario reales que muestra tu perfil. Por ejemplo, si tu usuario es <code>docente@ejemplo.com</code> y tu namespace es <code>abc123ejemplo</code>, el usuario completo será <code>abc123ejemplo/docente@ejemplo.com</code>.
+<p>Usa el NAMESPACE y usuario reales que muestra tu perfil. Por ejemplo, si tu usuario es <code>docente@ejemplo.com</code> y tu namespace es <code>abc123ejemplo</code>, el usuario completo será <code>abc123ejemplo/docente@ejemplo.com</code>.
   
 <p>El resultado esperado es <strong>Login Succeeded</strong>. Al pegar el token puede que la terminal no muestre caracteres.</p>
 <p><code>gru.ocir.io</code> es un endpoint de OCIR para São Paulo. Si trabajas en otra región, consulta su endpoint y úsalo tanto en el inicio de sesión como en <code>tag</code> y <code>push</code>. [6]</p>
