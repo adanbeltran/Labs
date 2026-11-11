@@ -164,7 +164,7 @@ Reemplaza `NAMESPACE` en los comandos por el namespace real de tu tenancy. Si co
 <tbody>
 <tr>
 <td width="50%" valign="top">
-<p><strong>Lugar: terminal local de VS Code, dentro de <code>ecored-container</code>.</strong></p>
+<p><strong>Lugar: terminal local de VS Code </strong></p>
 <p><code>docker build --platform linux/amd64 -t ecored-web:v1 .</code></p>
 <p>El punto final indica que Docker usará la carpeta actual como contexto de construcción. <code>v1</code> identifica esta versión de tu imagen. La plataforma <code>linux/amd64</code> corresponde a la shape E4 que usarás en OCI. [4]</p>
 <p>Comprueba que la imagen exista y tenga la plataforma esperada:</p>
@@ -175,12 +175,10 @@ Reemplaza `NAMESPACE` en los comandos por el namespace real de tu tenancy. Si co
 
 </td>
 <td width="50%" valign="top">
-<p><strong>Captura oficial de referencia</strong></p>
-<p><a href="https://docs.docker.com/get-started/docker-concepts/the-basics/images/click-image.webp"><img src="https://docs.docker.com/get-started/docker-concepts/the-basics/images/click-image.webp" alt="Vista Images de Docker Desktop" width="100%"></a></p>
-<p><em>En Images podrás localizar tu imagen ecored-web con la etiqueta v1. La captura oficial muestra otra imagen como ejemplo. [19]</em></p>
-<p><strong>Captura específica del paso</strong></p>
-<p>Construcción completada e imagen ecored-web:v1 con plataforma linux/amd64.</p>
-<blockquote><p>Espacio para la captura de pantalla de este paso.</p></blockquote>
+<p><strong>Captura pantalla</strong></p>
+<img width="1281" height="447" alt="image" src="https://github.com/user-attachments/assets/e2ba40de-5beb-41c0-99af-906becb26c82" />
+<img width="953" height="186" alt="image" src="https://github.com/user-attachments/assets/1d557b69-47b3-4f12-a4b0-9bd7a35c0063" />
+
 
 </td>
 </tr>
