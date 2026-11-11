@@ -135,7 +135,7 @@ Reemplaza `NAMESPACE` en los comandos por el namespace real de tu tenancy. Si co
 <tr>
 <td width="50%" valign="top">
 <p><strong>Lugar: editor de VS Code.</strong></p>
-<p>En la raíz de <code>ecored-container</code>, crea un archivo llamado exactamente <strong><code>Dockerfile</code></strong>, sin extensión. Pega lo siguiente y guarda:</p>
+<p>En la raíz de <DockerOCIR</code>, crea un archivo llamado exactamente <strong><code>dockerfile</code></strong>, sin extensión. Pega lo siguiente y guarda:</p>
 <p><code>FROM docker.io/library/nginx:stable-alpine</code><br>
 &nbsp;<br>
 <code>COPY index.html styles.css app.js /usr/share/nginx/html/</code><br>
@@ -149,9 +149,8 @@ Reemplaza `NAMESPACE` en los comandos por el namespace real de tu tenancy. Si co
 
 </td>
 <td width="50%" valign="top">
-<p><strong>Captura por incorporar</strong></p>
-<p>Dockerfile completo abierto en VS Code, sin extensión .txt.</p>
-<blockquote><p>Espacio para la captura de pantalla de este paso.</p></blockquote>
+<img width="1025" height="828" alt="image" src="https://github.com/user-attachments/assets/10469665-c259-4386-849b-456db1e64d76" />
+
 
 </td>
 </tr>
