@@ -312,15 +312,16 @@ Reemplaza `NAMESPACE` en los comandos por el namespace real de tu tenancy. Si co
 <li><strong>Username, usuario identificado con dominio de identidad o federación:</strong> <code>NAMESPACE/DOMINIO/USUARIO</code>.</li>
 <li><strong>Password:</strong> El <strong>Auth Token</strong> generado en el paso 2.2.</li>
 </ul>
-<p>Usa el dominio y usuario reales que muestra tu perfil. Por ejemplo, si tu dominio es <code>Default</code>, tu usuario es <code>docente@ejemplo.com</code> y tu namespace es <code>abc123ejemplo</code>, el usuario completo será <code>abc123ejemplo/Default/docente@ejemplo.com</code>. No agregues <code>Default</code> ni <code>oracleidentitycloudservice</code> si no corresponden a tu cuenta. [5]</p>
+<p>Usa el dominio y usuario reales que muestra tu perfil. Por ejemplo, si tu usuario es <code>docente@ejemplo.com</code> y tu namespace es <code>abc123ejemplo</code>, el usuario completo será <code>abc123ejemplo/docente@ejemplo.com</code>.
+  
 <p>El resultado esperado es <strong>Login Succeeded</strong>. Al pegar el token puede que la terminal no muestre caracteres.</p>
 <p><code>gru.ocir.io</code> es un endpoint de OCIR para São Paulo. Si trabajas en otra región, consulta su endpoint y úsalo tanto en el inicio de sesión como en <code>tag</code> y <code>push</code>. [6]</p>
 
 </td>
 <td width="50%" valign="top">
-<p><strong>Captura por incorporar</strong></p>
-<p>Terminal con Login Succeeded después de docker login gru.ocir.io.</p>
-<blockquote><p>Espacio para la captura de pantalla de este paso.</p></blockquote>
+
+<img width="1047" height="277" alt="image" src="https://github.com/user-attachments/assets/2f095d1b-6276-46d1-9ae6-ef08538e3d24" />
+
 
 </td>
 </tr>
