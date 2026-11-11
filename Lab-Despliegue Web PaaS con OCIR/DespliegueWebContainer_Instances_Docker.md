@@ -78,7 +78,7 @@ Reemplaza `NAMESPACE` en los comandos por el namespace real de tu tenancy. Si co
 <p><strong>Lugar: Docker Desktop y terminal local de VS Code.</strong></p>
 <ol>
 <li>Inicia Docker Desktop y espera a que el motor esté disponible.</li>
-<li>Abre VS Code y una terminal desde <strong>Terminal &gt; New Terminal</strong>.</li>
+<li>Abre VS Code, Crear Carpeta DockerOCIR  y una terminal desde <strong>Terminal &gt; New Terminal</strong>.</li>
 <li>Ejecuta:</li>
 </ol>
 <p><code>docker version</code></p>
@@ -88,8 +88,11 @@ Reemplaza `NAMESPACE` en los comandos por el namespace real de tu tenancy. Si co
 </td>
 <td width="50%" valign="top">
 <p><strong>Captura oficial de referencia</strong></p>
-<img width="100%" alt="image" src="https://github.com/user-attachments/assets/9f4983a3-531b-48b3-820a-01569ea7f0d7" />
-<img width="100%" alt="image" src="https://github.com/user-attachments/assets/ec9eb56c-6113-4ac6-add9-f044625f42e9" />
+  
+<img width="1856" height="635" alt="image" src="https://github.com/user-attachments/assets/8e536892-1425-4d32-bb6c-12ef72e20721" />
+
+<img width="1188" height="932" alt="image" src="https://github.com/user-attachments/assets/a8986762-3e71-4567-8203-56ff227044a5" />
+
 
 
 </td>
