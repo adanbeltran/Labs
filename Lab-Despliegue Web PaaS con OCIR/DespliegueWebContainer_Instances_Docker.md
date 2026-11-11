@@ -250,6 +250,7 @@ Reemplaza `NAMESPACE` en los comandos por el namespace real de tu tenancy. Si co
 
 </td>
 <td width="50%" valign="top">
+  
 <img width="1245" height="522" alt="image" src="https://github.com/user-attachments/assets/c10c7341-1cc8-4526-b592-4174968a4f43" />
   
 <img width="953" height="601" alt="image" src="https://github.com/user-attachments/assets/59cf858d-759c-49bd-a337-bd9fa58d7cb5" />
@@ -281,7 +282,6 @@ Reemplaza `NAMESPACE` en los comandos por el namespace real de tu tenancy. Si co
 
 </td>
 <td width="50%" valign="top">
-
 
 <img width="1662" height="687" alt="image" src="https://github.com/user-attachments/assets/a48618c9-efd4-4557-962e-64f9308ab6e9" />
 
