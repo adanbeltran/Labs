@@ -442,9 +442,19 @@ Reemplaza `NAMESPACE` en los comandos por el namespace real de tu tenancy. Si co
 
 </td>
 <td width="50%" valign="top">
-<p><strong>Captura por incorporar</strong></p>
-<p>Service Gateway habilitado y rutas de la subred pública.</p>
-<blockquote><p>Espacio para la captura de pantalla de este paso.</p></blockquote>
+
+<img width="1775" height="646" alt="image" src="https://github.com/user-attachments/assets/0c7bd6ac-a79e-4145-a581-f75b21733735" />
+
+<img width="1616" height="355" alt="image" src="https://github.com/user-attachments/assets/ad770b42-828e-41be-bc7d-d0441dcad54e" />
+
+<img width="1882" height="667" alt="image" src="https://github.com/user-attachments/assets/87c5f685-14ec-43e8-a0b0-f6cfa725bad2" />
+
+<img width="1115" height="397" alt="image" src="https://github.com/user-attachments/assets/8bb6ea70-375c-4cc9-ae06-6b9113797c84" />
+
+
+
+
+
 
 </td>
 </tr>
