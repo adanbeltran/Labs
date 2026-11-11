@@ -281,12 +281,15 @@ Reemplaza `NAMESPACE` en los comandos por el namespace real de tu tenancy. Si co
 
 </td>
 <td width="50%" valign="top">
-<p><strong>Captura oficial de referencia</strong></p>
-<p><a href="https://oracle.github.io/fmw-kubernetes/wcsites-domains/oracle-cloud/ocir/images/ocir-2.png"><img src="https://oracle.github.io/fmw-kubernetes/wcsites-domains/oracle-cloud/ocir/images/ocir-2.png" alt="Perfil de usuario y sección Auth Tokens de OCI" width="100%"></a></p>
-<p><em>Referencia oficial de la sección Auth Tokens. En la interfaz actual puede encontrarse en Tokens and keys. [18]</em></p>
-<p><strong>Captura específica del paso</strong></p>
-<p>Ubicación del namespace y descripción del Auth Token, sin mostrar el token.</p>
-<blockquote><p>Espacio para la captura de pantalla de este paso.</p></blockquote>
+
+
+<img width="1662" height="687" alt="image" src="https://github.com/user-attachments/assets/a48618c9-efd4-4557-962e-64f9308ab6e9" />
+
+<img width="1698" height="727" alt="image" src="https://github.com/user-attachments/assets/7f62838b-ab12-4fba-87f8-3b1de6388025" />
+
+<img width="1413" height="356" alt="image" src="https://github.com/user-attachments/assets/408dcfed-a613-4581-874b-3bcd642fb1cb" />
+
+  
 
 </td>
 </tr>
