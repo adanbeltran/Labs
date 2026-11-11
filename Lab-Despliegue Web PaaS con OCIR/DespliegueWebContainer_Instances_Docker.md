@@ -390,9 +390,18 @@ Reemplaza `NAMESPACE` en los comandos por el namespace real de tu tenancy. Si co
 
 </td>
 <td width="50%" valign="top">
-<p><strong>Captura por incorporar</strong></p>
-<p>Subred pública, ruta al Internet Gateway y regla de ingreso TCP 80.</p>
-<blockquote><p>Espacio para la captura de pantalla de este paso.</p></blockquote>
+
+<img width="1282" height="553" alt="image" src="https://github.com/user-attachments/assets/9fc06ecb-7b96-4b7a-8a8b-aee3de88f014" />
+
+<img width="1092" height="502" alt="image" src="https://github.com/user-attachments/assets/92d3b218-2e2b-4476-abdc-65b6e7ee8680" />
+
+<img width="1467" height="452" alt="image" src="https://github.com/user-attachments/assets/eb378e03-f11b-483d-90ff-a0fbc94a3eca" />
+
+<img width="1351" height="328" alt="image" src="https://github.com/user-attachments/assets/d2b81960-847c-4cee-9b7c-46856362c336" />
+
+
+
+
 
 </td>
 </tr>
