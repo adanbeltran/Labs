@@ -70,28 +70,26 @@ Reemplaza `NAMESPACE` en los comandos por el namespace real de tu tenancy. Si co
 
 ### Paso 1.1. Comprobar Docker en el computador
 
-<table width="100%" style="width:100%;table-layout:fixed">
-<colgroup><col width="50%"><col width="50%"></colgroup>
+<table width="100%">
 <thead><tr><th width="50%" align="left">Instrucciones</th><th width="50%" align="left">Capturas de pantalla</th></tr></thead>
 <tbody>
 <tr>
-<td width="50%" valign="top" style="overflow-wrap:anywhere">
+<td width="50%" valign="top">
 <p><strong>Lugar: Docker Desktop y terminal local de VS Code.</strong></p>
 <ol>
 <li>Inicia Docker Desktop y espera a que el motor esté disponible.</li>
 <li>Abre VS Code y una terminal desde <strong>Terminal &gt; New Terminal</strong>.</li>
 <li>Ejecuta:</li>
 </ol>
-<pre style="white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word"><code class="language-bash">docker version
-</code></pre>
+<p><code>docker version</code></p>
 <p>Debes ver información de <strong>Client</strong> y <strong>Server</strong>. Si solo aparece Client y un error de conexión, inicia o revisa Docker Desktop antes de continuar.</p>
 
 
 </td>
 <td width="50%" valign="top">
 <p><strong>Captura oficial de referencia</strong></p>
-<img width="946" height="419" alt="image" src="https://github.com/user-attachments/assets/9f4983a3-531b-48b3-820a-01569ea7f0d7" />
-<img width="510" height="152" alt="image" src="https://github.com/user-attachments/assets/ec9eb56c-6113-4ac6-add9-f044625f42e9" />
+<img width="100%" alt="image" src="https://github.com/user-attachments/assets/9f4983a3-531b-48b3-820a-01569ea7f0d7" />
+<img width="100%" alt="image" src="https://github.com/user-attachments/assets/ec9eb56c-6113-4ac6-add9-f044625f42e9" />
 
 
 </td>
@@ -101,18 +99,16 @@ Reemplaza `NAMESPACE` en los comandos por el namespace real de tu tenancy. Si co
 
 ### Paso 1.2. Descargar EcoRed
 
-<table width="100%" style="width:100%;table-layout:fixed">
-<colgroup><col width="50%"><col width="50%"></colgroup>
+<table width="100%">
 <thead><tr><th width="50%" align="left">Instrucciones</th><th width="50%" align="left">Capturas de pantalla</th></tr></thead>
 <tbody>
 <tr>
-<td width="50%" valign="top" style="overflow-wrap:anywhere">
+<td width="50%" valign="top">
 <p><strong>Lugar: terminal local de VS Code.</strong></p>
 <p>Ubícate en una carpeta donde guardes tus proyectos y ejecuta los siguientes comandos, uno por uno:</p>
-<pre style="white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word"><code class="language-bash">git clone https://github.com/adanbeltran/ecored-estatica.git ecored-container
-cd ecored-container
-code .
-</code></pre>
+<p><code>git clone https://github.com/adanbeltran/ecored-estatica.git ecored-container</code><br>
+<code>cd ecored-container</code><br>
+<code>code .</code></p>
 <p>En la ventana del proyecto deben aparecer <code>index.html</code>, <code>styles.css</code> y <code>app.js</code>. Estos son los archivos que publicaremos.</p>
 
 <p>EcoRed es una aplicación estática: su interactividad se ejecuta en JavaScript en el navegador y sus datos de demostración se guardan en <code>localStorage</code>. El acceso de usuario es simulado. Este despliegue conserva ese funcionamiento.</p>
@@ -121,7 +117,7 @@ code .
 <td width="50%" valign="top">
 
 <p>VS Code con index.html, styles.css y app.js en la carpeta del proyecto.</p>
-<img width="913" height="158" alt="image" src="https://github.com/user-attachments/assets/5aeb0858-64c3-45d0-993a-ccca0701f0fa" />
+<img width="100%" alt="image" src="https://github.com/user-attachments/assets/5aeb0858-64c3-45d0-993a-ccca0701f0fa" />
 
 </td>
 </tr>
@@ -130,22 +126,20 @@ code .
 
 ### Paso 1.3. Crear el Dockerfile
 
-<table width="100%" style="width:100%;table-layout:fixed">
-<colgroup><col width="50%"><col width="50%"></colgroup>
+<table width="100%">
 <thead><tr><th width="50%" align="left">Instrucciones</th><th width="50%" align="left">Capturas de pantalla</th></tr></thead>
 <tbody>
 <tr>
-<td width="50%" valign="top" style="overflow-wrap:anywhere">
+<td width="50%" valign="top">
 <p><strong>Lugar: editor de VS Code.</strong></p>
 <p>En la raíz de <code>ecored-container</code>, crea un archivo llamado exactamente <strong><code>Dockerfile</code></strong>, sin extensión. Pega lo siguiente y guarda:</p>
-<pre style="white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word"><code class="language-dockerfile">FROM docker.io/library/nginx:stable-alpine
-
-COPY index.html styles.css app.js /usr/share/nginx/html/
-
-EXPOSE 80
-
-CMD [&quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot;]
-</code></pre>
+<p><code>FROM docker.io/library/nginx:stable-alpine</code><br>
+&nbsp;<br>
+<code>COPY index.html styles.css app.js /usr/share/nginx/html/</code><br>
+&nbsp;<br>
+<code>EXPOSE 80</code><br>
+&nbsp;<br>
+<code>CMD ["nginx", "-g", "daemon off;"]</code></p>
 <p>La imagen oficial de Nginx aporta el servidor. La instrucción <code>COPY</code> incorpora los tres archivos de EcoRed en su directorio de publicación. El comando final mantiene Nginx ejecutándose en primer plano para que el contenedor permanezca activo. [2]</p>
 <p><code>EXPOSE 80</code> describe el puerto que utiliza la imagen. El acceso real dependerá de la publicación local del puerto o, en OCI, de la red y sus reglas.</p>
 
@@ -163,23 +157,19 @@ CMD [&quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot;]
 
 ### Paso 1.4. Construir la imagen
 
-<table width="100%" style="width:100%;table-layout:fixed">
-<colgroup><col width="50%"><col width="50%"></colgroup>
+<table width="100%">
 <thead><tr><th width="50%" align="left">Instrucciones</th><th width="50%" align="left">Capturas de pantalla</th></tr></thead>
 <tbody>
 <tr>
-<td width="50%" valign="top" style="overflow-wrap:anywhere">
+<td width="50%" valign="top">
 <p><strong>Lugar: terminal local de VS Code, dentro de <code>ecored-container</code>.</strong></p>
-<pre style="white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word"><code class="language-bash">docker build --platform linux/amd64 -t ecored-web:v1 .
-</code></pre>
+<p><code>docker build --platform linux/amd64 -t ecored-web:v1 .</code></p>
 <p>El punto final indica que Docker usará la carpeta actual como contexto de construcción. <code>v1</code> identifica esta versión de tu imagen. La plataforma <code>linux/amd64</code> corresponde a la shape E4 que usarás en OCI. [4]</p>
 <p>Comprueba que la imagen exista y tenga la plataforma esperada:</p>
-<pre style="white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word"><code class="language-bash">docker image ls ecored-web
-docker image inspect ecored-web:v1 --format &#39;{{.Os}}/{{.Architecture}}&#39;
-</code></pre>
+<p><code>docker image ls ecored-web</code><br>
+<code>docker image inspect ecored-web:v1 --format '{{.Os}}/{{.Architecture}}'</code></p>
 <p>El segundo comando debe mostrar:</p>
-<pre style="white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word"><code class="language-text">linux/amd64
-</code></pre>
+<p><code>linux/amd64</code></p>
 
 </td>
 <td width="50%" valign="top">
@@ -197,26 +187,22 @@ docker image inspect ecored-web:v1 --format &#39;{{.Os}}/{{.Architecture}}&#39;
 
 ### Paso 1.5. Probar la página con Docker en el computador
 
-<table width="100%" style="width:100%;table-layout:fixed">
-<colgroup><col width="50%"><col width="50%"></colgroup>
+<table width="100%">
 <thead><tr><th width="50%" align="left">Instrucciones</th><th width="50%" align="left">Capturas de pantalla</th></tr></thead>
 <tbody>
 <tr>
-<td width="50%" valign="top" style="overflow-wrap:anywhere">
+<td width="50%" valign="top">
 <p><strong>Lugar: terminal local y navegador del computador.</strong></p>
 <p>Inicia un contenedor de prueba:</p>
-<pre style="white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word"><code class="language-bash">docker run -d --platform linux/amd64 --name ecored-prueba -p 8080:80 ecored-web:v1
-</code></pre>
+<p><code>docker run -d --platform linux/amd64 --name ecored-prueba -p 8080:80 ecored-web:v1</code></p>
 <p>La relación <code>8080:80</code> publica el puerto 80 del contenedor en el puerto 8080 de tu computador. [4]</p>
 <p>Abre <a href="http://localhost:8080">http://localhost:8080</a> y verifica que cargue EcoRed. Comprueba el diseño, la navegación y las acciones disponibles en la página.</p>
 <p>Consulta el estado y los registros:</p>
-<pre style="white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word"><code class="language-bash">docker ps
-docker logs ecored-prueba
-</code></pre>
+<p><code>docker ps</code><br>
+<code>docker logs ecored-prueba</code></p>
 <p>Después de comprobar el resultado, detén y elimina únicamente el contenedor de prueba:</p>
-<pre style="white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word"><code class="language-bash">docker stop ecored-prueba
-docker rm ecored-prueba
-</code></pre>
+<p><code>docker stop ecored-prueba</code><br>
+<code>docker rm ecored-prueba</code></p>
 <p>La imagen <code>ecored-web:v1</code> permanece en tu computador para subirla a OCIR.</p>
 
 </td>
@@ -237,12 +223,11 @@ docker rm ecored-prueba
 
 ### Paso 2.1. Crear el repositorio en OCIR
 
-<table width="100%" style="width:100%;table-layout:fixed">
-<colgroup><col width="50%"><col width="50%"></colgroup>
+<table width="100%">
 <thead><tr><th width="50%" align="left">Instrucciones</th><th width="50%" align="left">Capturas de pantalla</th></tr></thead>
 <tbody>
 <tr>
-<td width="50%" valign="top" style="overflow-wrap:anywhere">
+<td width="50%" valign="top">
 <p><strong>Lugar: consola web de OCI.</strong></p>
 <ol>
 <li>Inicia sesión como administrador y selecciona la misma región de tu red. En el ejemplo, <strong>Brazil East (São Paulo)</strong>.</li>
@@ -265,7 +250,7 @@ docker rm ecored-prueba
 <td width="50%" valign="top">
 <p><strong>Captura oficial de referencia</strong></p>
 <p><a href="https://oracle.github.io/fmw-kubernetes/wcsites-domains/oracle-cloud/ocir/images/ocir-5.png"><img src="https://oracle.github.io/fmw-kubernetes/wcsites-domains/oracle-cloud/ocir/images/ocir-5.png" alt="Oracle Container Registry: Create Repository" width="100%"></a></p>
-  <img width="940" height="434" alt="image" src="https://github.com/user-attachments/assets/ecb2cc11-e777-4b7a-a85f-562bfacf303a" />
+  <img width="100%" alt="image" src="https://github.com/user-attachments/assets/ecb2cc11-e777-4b7a-a85f-562bfacf303a" />
 
 <p><em>Referencia oficial de una interfaz anterior: localiza Container Registry y Create repository. Usa São Paulo y los valores de la columna izquierda. [18]</em></p>
 <p><strong>Captura específica del paso</strong></p>
@@ -279,12 +264,11 @@ docker rm ecored-prueba
 
 ### Paso 2.2. Copiar el namespace y generar un Auth Token
 
-<table width="100%" style="width:100%;table-layout:fixed">
-<colgroup><col width="50%"><col width="50%"></colgroup>
+<table width="100%">
 <thead><tr><th width="50%" align="left">Instrucciones</th><th width="50%" align="left">Capturas de pantalla</th></tr></thead>
 <tbody>
 <tr>
-<td width="50%" valign="top" style="overflow-wrap:anywhere">
+<td width="50%" valign="top">
 <p><strong>Lugar: consola web de OCI.</strong></p>
 <ol>
 <li>Abre el menú de perfil y entra en <strong>Tenancy</strong>, <strong>Tenancy details</strong> o la página de información general de tu tenancy.</li>
@@ -312,16 +296,14 @@ docker rm ecored-prueba
 
 ### Paso 2.3. Iniciar sesión en OCIR desde Docker
 
-<table width="100%" style="width:100%;table-layout:fixed">
-<colgroup><col width="50%"><col width="50%"></colgroup>
+<table width="100%">
 <thead><tr><th width="50%" align="left">Instrucciones</th><th width="50%" align="left">Capturas de pantalla</th></tr></thead>
 <tbody>
 <tr>
-<td width="50%" valign="top" style="overflow-wrap:anywhere">
+<td width="50%" valign="top">
 <p><strong>Lugar: terminal local de VS Code.</strong></p>
 <p>Para São Paulo, ejecuta:</p>
-<pre style="white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word"><code class="language-bash">docker login gru.ocir.io
-</code></pre>
+<p><code>docker login gru.ocir.io</code></p>
 <p>Cuando solicite las credenciales:</p>
 <ul>
 <li><strong>Username, usuario IAM sin dominio en su identificación:</strong> <code>NAMESPACE/USUARIO</code>.</li>
@@ -345,17 +327,15 @@ docker rm ecored-prueba
 
 ### Paso 2.4. Etiquetar y subir la imagen
 
-<table width="100%" style="width:100%;table-layout:fixed">
-<colgroup><col width="50%"><col width="50%"></colgroup>
+<table width="100%">
 <thead><tr><th width="50%" align="left">Instrucciones</th><th width="50%" align="left">Capturas de pantalla</th></tr></thead>
 <tbody>
 <tr>
-<td width="50%" valign="top" style="overflow-wrap:anywhere">
+<td width="50%" valign="top">
 <p><strong>Lugar: terminal local de VS Code.</strong></p>
 <p>Reemplaza <code>NAMESPACE</code> por el valor copiado de OCI y ejecuta:</p>
-<pre style="white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word"><code class="language-bash">docker tag ecored-web:v1 gru.ocir.io/NAMESPACE/ecored/web:v1
-docker push gru.ocir.io/NAMESPACE/ecored/web:v1
-</code></pre>
+<p><code>docker tag ecored-web:v1 gru.ocir.io/NAMESPACE/ecored/web:v1</code><br>
+<code>docker push gru.ocir.io/NAMESPACE/ecored/web:v1</code></p>
 <p>La ruta reúne el registro regional, el namespace de tu tenancy, el repositorio y la etiqueta de versión. Escríbela sin <code>https://</code>. Si elegiste otro nombre de repositorio, sustitúyelo también. [5]</p>
 <p>Espera a que termine <code>docker push</code>. Vuelve a <strong>Container Registry &gt; ecored/web</strong> y comprueba que aparezca la imagen con etiqueta <strong><code>v1</code></strong>. Conserva el digest mostrado para identificar la imagen publicada.</p>
 <p>El comando <code>push</code> almacena la imagen en OCIR. La ejecución de la página comenzará cuando crees la instancia en la siguiente fase.</p>
@@ -375,12 +355,11 @@ docker push gru.ocir.io/NAMESPACE/ecored/web:v1
 
 ### Paso 3.1. Comprobar la red existente
 
-<table width="100%" style="width:100%;table-layout:fixed">
-<colgroup><col width="50%"><col width="50%"></colgroup>
+<table width="100%">
 <thead><tr><th width="50%" align="left">Instrucciones</th><th width="50%" align="left">Capturas de pantalla</th></tr></thead>
 <tbody>
 <tr>
-<td width="50%" valign="top" style="overflow-wrap:anywhere">
+<td width="50%" valign="top">
 <p><strong>Lugar: consola web de OCI, Networking &gt; Virtual cloud networks.</strong></p>
 <p>Abre <code>red-infraestructura</code> y revisa <code>subred-web</code>:</p>
 <ul>
@@ -415,12 +394,11 @@ docker push gru.ocir.io/NAMESPACE/ecored/web:v1
 
 ### Paso 3.2. Verificar o agregar el Service Gateway
 
-<table width="100%" style="width:100%;table-layout:fixed">
-<colgroup><col width="50%"><col width="50%"></colgroup>
+<table width="100%">
 <thead><tr><th width="50%" align="left">Instrucciones</th><th width="50%" align="left">Capturas de pantalla</th></tr></thead>
 <tbody>
 <tr>
-<td width="50%" valign="top" style="overflow-wrap:anywhere">
+<td width="50%" valign="top">
 <p><strong>Lugar: consola web de OCI, dentro de <code>red-infraestructura</code>.</strong></p>
 <p>La documentación de Container Instances solicita una VCN con <strong>Service Gateway</strong> cuando se utiliza una imagen de OCIR. El Internet Gateway permite el acceso público de la página. [7]</p>
 <ol>
@@ -463,12 +441,11 @@ Busca **Container Instances**, selecciona `Infraestructura_y_Cloud` y pulsa **Cr
 
 ### Paso 3.3. Basic information
 
-<table width="100%" style="width:100%;table-layout:fixed">
-<colgroup><col width="50%"><col width="50%"></colgroup>
+<table width="100%">
 <thead><tr><th width="50%" align="left">Instrucciones</th><th width="50%" align="left">Capturas de pantalla</th></tr></thead>
 <tbody>
 <tr>
-<td width="50%" valign="top" style="overflow-wrap:anywhere">
+<td width="50%" valign="top">
 <ul>
 <li><strong>Name:</strong> <code>ecored-container</code>.</li>
 <li><strong>Create in compartment:</strong> <code>Infraestructura_y_Cloud</code>.</li>
@@ -498,12 +475,11 @@ Busca **Container Instances**, selecciona `Infraestructura_y_Cloud` y pulsa **Cr
 
 ### Paso 3.4. Networking
 
-<table width="100%" style="width:100%;table-layout:fixed">
-<colgroup><col width="50%"><col width="50%"></colgroup>
+<table width="100%">
 <thead><tr><th width="50%" align="left">Instrucciones</th><th width="50%" align="left">Capturas de pantalla</th></tr></thead>
 <tbody>
 <tr>
-<td width="50%" valign="top" style="overflow-wrap:anywhere">
+<td width="50%" valign="top">
 <ul>
 <li><strong>Virtual cloud network:</strong> Existente: <code>red-infraestructura</code>.</li>
 <li><strong>Subnet:</strong> Existente: <code>subred-web</code>.</li>
@@ -529,12 +505,11 @@ Busca **Container Instances**, selecciona `Infraestructura_y_Cloud` y pulsa **Cr
 
 ### Paso 3.5. Containers
 
-<table width="100%" style="width:100%;table-layout:fixed">
-<colgroup><col width="50%"><col width="50%"></colgroup>
+<table width="100%">
 <thead><tr><th width="50%" align="left">Instrucciones</th><th width="50%" align="left">Capturas de pantalla</th></tr></thead>
 <tbody>
 <tr>
-<td width="50%" valign="top" style="overflow-wrap:anywhere">
+<td width="50%" valign="top">
 <p>En <strong>Storage</strong>, continúa sin agregar volúmenes: EcoRed ya está incluido en la imagen. Después, pulsa <strong>Add container</strong> y configura:</p>
 <ul>
 <li><strong>Name:</strong> <code>nginx-ecored</code>.</li>
@@ -561,12 +536,11 @@ Busca **Container Instances**, selecciona `Infraestructura_y_Cloud` y pulsa **Cr
 
 ### Paso 3.6. Review details
 
-<table width="100%" style="width:100%;table-layout:fixed">
-<colgroup><col width="50%"><col width="50%"></colgroup>
+<table width="100%">
 <thead><tr><th width="50%" align="left">Instrucciones</th><th width="50%" align="left">Capturas de pantalla</th></tr></thead>
 <tbody>
 <tr>
-<td width="50%" valign="top" style="overflow-wrap:anywhere">
+<td width="50%" valign="top">
 <p>Comprueba el nombre, la shape, la red, la asignación de IP pública y la imagen <code>v1</code>. Pulsa <strong>Create</strong>.</p>
 <p>Espera a que la instancia esté <strong>Active</strong> y el contenedor esté ejecutándose. Abre los detalles y copia la <strong>IP pública de esta nueva instancia</strong>. Esa IP será la dirección para probar la publicación.</p>
 
@@ -588,16 +562,14 @@ Busca **Container Instances**, selecciona `Infraestructura_y_Cloud` y pulsa **Cr
 
 ### Paso 4.1. Abrir EcoRed desde internet
 
-<table width="100%" style="width:100%;table-layout:fixed">
-<colgroup><col width="50%"><col width="50%"></colgroup>
+<table width="100%">
 <thead><tr><th width="50%" align="left">Instrucciones</th><th width="50%" align="left">Capturas de pantalla</th></tr></thead>
 <tbody>
 <tr>
-<td width="50%" valign="top" style="overflow-wrap:anywhere">
+<td width="50%" valign="top">
 <p><strong>Lugar: navegador del computador o de otro dispositivo.</strong></p>
 <p>Escribe la dirección siguiente, reemplazando <code>IP_PUBLICA</code> por la IP de la instancia de contenedores:</p>
-<pre style="white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word"><code class="language-text">http://IP_PUBLICA/
-</code></pre>
+<p><code>http://IP_PUBLICA/</code></p>
 <p>Realiza estas comprobaciones:</p>
 <ol>
 <li>Verifica que aparezca EcoRed con su diseño completo.</li>
@@ -622,12 +594,11 @@ Busca **Container Instances**, selecciona `Infraestructura_y_Cloud` y pulsa **Cr
 
 ### Paso 4.2. Consultar los registros de Nginx en OCI
 
-<table width="100%" style="width:100%;table-layout:fixed">
-<colgroup><col width="50%"><col width="50%"></colgroup>
+<table width="100%">
 <thead><tr><th width="50%" align="left">Instrucciones</th><th width="50%" align="left">Capturas de pantalla</th></tr></thead>
 <tbody>
 <tr>
-<td width="50%" valign="top" style="overflow-wrap:anywhere">
+<td width="50%" valign="top">
 <p><strong>Lugar: consola web de OCI.</strong></p>
 <ol>
 <li>Abre <strong>Container Instances &gt; ecored-container</strong>.</li>
@@ -653,12 +624,11 @@ Busca **Container Instances**, selecciona `Infraestructura_y_Cloud` y pulsa **Cr
 
 ### Paso 5.1. Revisar el consumo y el presupuesto
 
-<table width="100%" style="width:100%;table-layout:fixed">
-<colgroup><col width="50%"><col width="50%"></colgroup>
+<table width="100%">
 <thead><tr><th width="50%" align="left">Instrucciones</th><th width="50%" align="left">Capturas de pantalla</th></tr></thead>
 <tbody>
 <tr>
-<td width="50%" valign="top" style="overflow-wrap:anywhere">
+<td width="50%" valign="top">
 <p><strong>Lugar: consola web de OCI, Billing &amp; Cost Management.</strong></p>
 <ol>
 <li>Abre <strong>Cost Analysis</strong> y filtra por <code>Infraestructura_y_Cloud</code> y el período de la práctica.</li>
@@ -682,28 +652,26 @@ Busca **Container Instances**, selecciona `Infraestructura_y_Cloud` y pulsa **Cr
 
 ### Paso 5.2. Guardar evidencias y decidir cuándo detener el servicio
 
-<table width="100%" style="width:100%;table-layout:fixed">
-<colgroup><col width="50%"><col width="50%"></colgroup>
+<table width="100%">
 <thead><tr><th width="50%" align="left">Instrucciones</th><th width="50%" align="left">Capturas de pantalla</th></tr></thead>
 <tbody>
 <tr>
-<td width="50%" valign="top" style="overflow-wrap:anywhere">
+<td width="50%" valign="top">
 <p>Registra los datos técnicos de tu despliegue, por ejemplo:</p>
-<pre style="white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word"><code class="language-text">Región: sa-saopaulo-1
-Compartimento: Infraestructura_y_Cloud
-VCN: red-infraestructura
-Subred: subred-web
-Repositorio OCIR: ecored/web
-Imagen: gru.ocir.io/NAMESPACE/ecored/web:v1
-Digest de la imagen: valor mostrado en OCIR
-Container Instance: ecored-container
-Shape: CI.Standard.E4.Flex
-OCPUs: 1
-Memoria: 2 GB
-Contenedor: nginx-ecored
-IP pública: IP_PUBLICA
-URL: http://IP_PUBLICA/
-</code></pre>
+<p><code>Región: sa-saopaulo-1</code><br>
+<code>Compartimento: Infraestructura_y_Cloud</code><br>
+<code>VCN: red-infraestructura</code><br>
+<code>Subred: subred-web</code><br>
+<code>Repositorio OCIR: ecored/web</code><br>
+<code>Imagen: gru.ocir.io/NAMESPACE/ecored/web:v1</code><br>
+<code>Digest de la imagen: valor mostrado en OCIR</code><br>
+<code>Container Instance: ecored-container</code><br>
+<code>Shape: CI.Standard.E4.Flex</code><br>
+<code>OCPUs: 1</code><br>
+<code>Memoria: 2 GB</code><br>
+<code>Contenedor: nginx-ecored</code><br>
+<code>IP pública: IP_PUBLICA</code><br>
+<code>URL: http://IP_PUBLICA/</code></p>
 <p>Guarda el Dockerfile y, si elaboras una guía en Git, agrega tus capturas y los resultados de las comprobaciones. Conserva los tokens en un lugar privado.</p>
 <p>Si el docente debe verificar la URL, mantén la instancia activa hasta que termine esa revisión.</p>
 
@@ -720,12 +688,11 @@ URL: http://IP_PUBLICA/
 
 ### Paso 5.3. Detener o eliminar los recursos de esta práctica
 
-<table width="100%" style="width:100%;table-layout:fixed">
-<colgroup><col width="50%"><col width="50%"></colgroup>
+<table width="100%">
 <thead><tr><th width="50%" align="left">Instrucciones</th><th width="50%" align="left">Capturas de pantalla</th></tr></thead>
 <tbody>
 <tr>
-<td width="50%" valign="top" style="overflow-wrap:anywhere">
+<td width="50%" valign="top">
 <p><strong>Lugar: consola web de OCI.</strong></p>
 <p>Cuando ya no se requiera el sitio, elige una de estas opciones:</p>
 <ul>
@@ -735,8 +702,7 @@ URL: http://IP_PUBLICA/
 <p>Si terminaste definitivamente, elimina también el repositorio de imágenes creado para esta práctica cuando ya no lo necesites y revoca el Auth Token <code>docker-ecored</code> si solo se usaba para ella. Revisa los recursos restantes, pues detener la instancia no elimina otros conceptos de consumo.</p>
 <p>Conserva la VCN, la subred y los gateways mientras otros recursos los utilicen.</p>
 <p>Puedes cerrar también la sesión local de Docker en OCIR:</p>
-<pre style="white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word"><code class="language-bash">docker logout gru.ocir.io
-</code></pre>
+<p><code>docker logout gru.ocir.io</code></p>
 
 </td>
 <td width="50%" valign="top">
@@ -753,12 +719,11 @@ URL: http://IP_PUBLICA/
 
 ### Extensión opcional. Publicar el acceso por subdominio
 
-<table width="100%" style="width:100%;table-layout:fixed">
-<colgroup><col width="50%"><col width="50%"></colgroup>
+<table width="100%">
 <thead><tr><th width="50%" align="left">Instrucciones</th><th width="50%" align="left">Capturas de pantalla</th></tr></thead>
 <tbody>
 <tr>
-<td width="50%" valign="top" style="overflow-wrap:anywhere">
+<td width="50%" valign="top">
 <p>Puedes configurar un subdominio de DuckDNS para acceder al sitio por nombre:</p>
 <ol>
 <li>Abre <a href="https://www.duckdns.org/">DuckDNS</a> e inicia sesión.</li>
@@ -766,13 +731,11 @@ URL: http://IP_PUBLICA/
 <li>En <strong>current ip</strong>, escribe explícitamente la IP pública de la instancia de contenedores y pulsa <strong>update ip</strong>. Verifica ese dato: la IP detectada desde tu navegador puede ser la de tu conexión doméstica.</li>
 <li>Comprueba la resolución DNS desde la terminal:</li>
 </ol>
-<pre style="white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word"><code class="language-bash">nslookup ecored-grupo01.duckdns.org
-</code></pre>
+<p><code>nslookup ecored-grupo01.duckdns.org</code></p>
 <ol start="5">
 <li>Cuando la respuesta corresponda a la IP de la instancia, abre:</li>
 </ol>
-<pre style="white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word"><code class="language-text">http://ecored-grupo01.duckdns.org/
-</code></pre>
+<p><code>http://ecored-grupo01.duckdns.org/</code></p>
 <p>DuckDNS permite asociar el nombre con una dirección IP. Este despliegue sigue usando HTTP. Para servir HTTPS hace falta configurar TLS y un certificado en una ampliación del taller. [15]</p>
 <p>Después de recrear o volver a iniciar la instancia, verifica su IP pública y actualiza el registro de DuckDNS si cambió.</p>
 
