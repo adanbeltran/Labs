@@ -337,7 +337,9 @@ Reemplaza `NAMESPACE` en los comandos por el namespace real de tu tenancy. Si co
 <td width="50%" valign="top">
 <p><strong>Lugar: terminal local de VS Code.</strong></p>
 <p>Reemplaza <code>NAMESPACE</code> por el valor copiado de OCI y ejecuta:</p>
+
 <p><code>docker tag ecored-web:v1 gru.ocir.io/NAMESPACE/ecored/web:v1</code><br>
+
 <code>docker push gru.ocir.io/NAMESPACE/ecored/web:v1</code></p>
 <p>La ruta reúne el registro regional, el namespace de tu tenancy, el repositorio y la etiqueta de versión. Escríbela sin <code>https://</code>. Si elegiste otro nombre de repositorio, sustitúyelo también. [5]</p>
 <p>Espera a que termine <code>docker push</code>. Vuelve a <strong>Container Registry &gt; ecored/web</strong> y comprueba que aparezca la imagen con etiqueta <strong><code>v1</code></strong>. Conserva el digest mostrado para identificar la imagen publicada.</p>
@@ -345,9 +347,11 @@ Reemplaza `NAMESPACE` en los comandos por el namespace real de tu tenancy. Si co
 
 </td>
 <td width="50%" valign="top">
-<p><strong>Captura por incorporar</strong></p>
-<p>Docker push completado y etiqueta v1 visible en el repositorio de OCIR.</p>
-<blockquote><p>Espacio para la captura de pantalla de este paso.</p></blockquote>
+
+<img width="921" height="368" alt="image" src="https://github.com/user-attachments/assets/710e28be-fc9e-4d79-b043-9fe6e90ec201" />
+
+<img width="1757" height="543" alt="image" src="https://github.com/user-attachments/assets/50a13fe9-7517-4311-876a-df095923b071" />
+
 
 </td>
 </tr>
