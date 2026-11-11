@@ -207,12 +207,14 @@ Reemplaza `NAMESPACE` en los comandos por el namespace real de tu tenancy. Si co
 
 </td>
 <td width="50%" valign="top">
-<p><strong>Captura oficial de referencia</strong></p>
-<p><a href="https://docs.docker.com/get-started/docker-concepts/the-basics/images/view-your-containers.webp"><img src="https://docs.docker.com/get-started/docker-concepts/the-basics/images/view-your-containers.webp" alt="Docker Desktop: contenedores en ejecución" width="100%"></a></p>
-<p><em>Referencia para ubicar el contenedor y el puerto publicado. Tu contenedor debe llamarse ecored-prueba. [20]</em></p>
-<p><strong>Captura específica del paso</strong></p>
-<p>EcoRed en http://localhost:8080 y contenedor ecored-prueba en ejecución.</p>
-<blockquote><p>Espacio para la captura de pantalla de este paso.</p></blockquote>
+
+<img width="1013" height="127" alt="image" src="https://github.com/user-attachments/assets/43106f09-9599-4956-b41c-cc8e354a293a" />
+<img width="1867" height="490" alt="image" src="https://github.com/user-attachments/assets/391ca69c-59c3-4e0d-99a6-9ce111c9dab1" />
+<img width="1833" height="847" alt="image" src="https://github.com/user-attachments/assets/2e5cb2b9-b43d-46cc-96a3-f7969b537194" />
+<img width="1342" height="568" alt="image" src="https://github.com/user-attachments/assets/89e3c538-69fb-41c0-920d-581aca08e449" />
+<img width="722" height="193" alt="image" src="https://github.com/user-attachments/assets/84a0a745-0a0a-45b8-b1b4-af937ead31d6" />
+<img width="1492" height="796" alt="image" src="https://github.com/user-attachments/assets/214d9198-277b-4013-8d51-615da051c5d5" />
+
 
 </td>
 </tr>
