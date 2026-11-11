@@ -6,23 +6,8 @@ Publicar el sitio web estático EcoRed en una plataforma de contenedores adminis
 
 **Flujo de publicación:** código del sitio → imagen Docker → OCIR → Container Instances → navegador.
 
-**Tiempo estimado:** 90 a 120 minutos, con Docker Desktop instalado.
+<img width="1122" height="1402" alt="image" src="https://github.com/user-attachments/assets/cefdf48e-b1f3-488b-a3a9-0f562aae9eac" />
 
-**Código del sitio:** [adanbeltran/ecored-estatica](https://github.com/adanbeltran/ecored-estatica).
-
-## Por qué se trabaja con un enfoque PaaS
-
-En PaaS, el usuario despliega su aplicación sobre un entorno proporcionado por el proveedor y conserva el control de la aplicación, mientras el proveedor administra la infraestructura que la soporta. Esta separación de responsabilidades es el criterio central para analizar el modelo. [16]
-
-En este taller, **OCI se utiliza como plataforma para publicar y ejecutar el sitio web**. El estudiante entrega una imagen que contiene EcoRed y Nginx; Oracle se ocupa de los servidores y del entorno que ejecuta el contenedor. El trabajo se concentra en preparar, desplegar y comprobar la aplicación. [1][17]
-
-| Responsabilidad de Oracle | Responsabilidad del estudiante |
-| --- | --- |
-| Aprovisionar y mantener la infraestructura de ejecución | Preparar los archivos del sitio y el Dockerfile |
-| Administrar los servidores y el sistema operativo anfitrión | Construir y actualizar la imagen, incluido Nginx y sus dependencias |
-| Proporcionar el servicio de ejecución de contenedores | Elegir recursos, configurar el acceso de red y comprobar la publicación |
-
-**Precisión sobre la clasificación:** Oracle presenta Container Instances como un servicio de **cómputo serverless para contenedores**. El taller aplica principios de PaaS al alojamiento web mediante ese servicio administrado. La publicación de un sitio, por sí sola, no determina el modelo: también importa qué responsabilidades asume el proveedor. La construcción y el mantenimiento de la imagen siguen a cargo del estudiante. [16][17]
 
 ## Requisitos
 
