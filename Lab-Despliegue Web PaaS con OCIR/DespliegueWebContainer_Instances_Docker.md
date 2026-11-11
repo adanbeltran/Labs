@@ -452,20 +452,17 @@ Reemplaza `NAMESPACE` en los comandos por el namespace real de tu tenancy. Si co
 <img width="1115" height="397" alt="image" src="https://github.com/user-attachments/assets/8bb6ea70-375c-4cc9-ae06-6b9113797c84" />
 
 
-
-
-
-
 </td>
 </tr>
 </tbody>
 </table>
 
+
+### Paso 3.3. Crear Container Instance
 **Lugar: consola web de OCI.**
 
 Busca **Container Instances**, selecciona `Infraestructura_y_Cloud` y pulsa **Create container instance**. Completa las secciones del asistente. [1][7]
 
-### Paso 3.3. Basic information
 
 <table width="100%">
 <thead><tr><th width="50%" align="left">Instrucciones</th><th width="50%" align="left">Capturas de pantalla</th></tr></thead>
@@ -478,7 +475,7 @@ Busca **Container Instances**, selecciona `Infraestructura_y_Cloud` y pulsa **Cr
 <li><strong>Availability domain:</strong> Uno disponible en tu región.</li>
 <li><strong>Shape:</strong> <code>CI.Standard.E4.Flex</code>.</li>
 <li><strong>Number of OCPUs:</strong> <code>1</code>.</li>
-<li><strong>Amount of memory:</strong> <code>2 GB</code>.</li>
+<li><strong>Amount of memory:</strong> <code>16 GB</code>.</li>
 <li><strong>Container restart policy:</strong> <code>Always</code>.</li>
 <li><strong>Graceful shutdown timeout:</strong> <code>30</code> segundos.</li>
 </ul>
@@ -487,12 +484,15 @@ Busca **Container Instances**, selecciona `Infraestructura_y_Cloud` y pulsa **Cr
 
 </td>
 <td width="50%" valign="top">
-<p><strong>Captura oficial de referencia</strong></p>
-<p><a href="https://docs.oracle.com/en/learn/manage-oci-container-instances/images/05-shape-config.png"><img src="https://docs.oracle.com/en/learn/manage-oci-container-instances/images/05-shape-config.png" alt="Configuración de shape de Container Instances" width="100%"></a></p>
-<p><em>Ubica la selección de shape y recursos. Configura E4 con 1 OCPU y 2 GB; los valores de la captura son ilustrativos. [1]</em></p>
-<p><strong>Captura específica del paso</strong></p>
-<p>Basic information: nombre, compartimento, E4, 1 OCPU, 2 GB y política Always.</p>
-<blockquote><p>Espacio para la captura de pantalla de este paso.</p></blockquote>
+
+<img width="717" height="602" alt="image" src="https://github.com/user-attachments/assets/ad41282c-8a55-416f-9952-4646df58bd3b" />
+
+<img width="892" height="433" alt="image" src="https://github.com/user-attachments/assets/fdcf4c56-a28b-40ca-a33f-c4e90f177adf" />
+
+<img width="815" height="587" alt="image" src="https://github.com/user-attachments/assets/c8f48a2a-eac0-459b-be2a-951cc7fc617b" />
+
+<img width="877" height="558" alt="image" src="https://github.com/user-attachments/assets/1d408996-4e5d-44ac-bfc4-274677f8c35b" />
+
 
 </td>
 </tr>
