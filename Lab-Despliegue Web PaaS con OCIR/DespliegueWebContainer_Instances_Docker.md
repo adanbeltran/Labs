@@ -517,12 +517,12 @@ Busca **Container Instances**, selecciona `Infraestructura_y_Cloud` y pulsa **Cr
 
 </td>
 <td width="50%" valign="top">
-<p><strong>Captura oficial de referencia</strong></p>
-<p><a href="https://docs.oracle.com/en/learn/manage-oci-container-instances/images/06-networking.png"><img src="https://docs.oracle.com/en/learn/manage-oci-container-instances/images/06-networking.png" alt="Configuración de red de Container Instances" width="100%"></a></p>
-<p><em>Ubica la VCN, subred y asignación de IP pública. Selecciona los recursos de esta guía. [1]</em></p>
-<p><strong>Captura específica del paso</strong></p>
-<p>Networking: VCN, subred y Assign a public IPv4 address.</p>
-<blockquote><p>Espacio para la captura de pantalla de este paso.</p></blockquote>
+
+<img width="877" height="558" alt="image" src="https://github.com/user-attachments/assets/ae9657f1-d3dc-421b-aca5-3b09da5e0b19" />
+
+<img width="862" height="582" alt="image" src="https://github.com/user-attachments/assets/5e530663-a341-441a-adff-ac2c3c1064fc" />
+
+
 
 </td>
 </tr>
@@ -551,9 +551,15 @@ Busca **Container Instances**, selecciona `Infraestructura_y_Cloud` y pulsa **Cr
 
 </td>
 <td width="50%" valign="top">
-<p><strong>Captura por incorporar</strong></p>
-<p>Imagen de OCIR seleccionada: ecored/web, etiqueta v1; contenedor nginx-ecored.</p>
-<blockquote><p>Espacio para la captura de pantalla de este paso.</p></blockquote>
+
+<img width="1877" height="627" alt="image" src="https://github.com/user-attachments/assets/3fa34153-121d-4e19-a66f-94b7df56afca" />
+
+<img width="1543" height="697" alt="image" src="https://github.com/user-attachments/assets/e12b5214-f161-4006-a994-cc02014d83ad" />
+
+<img width="1503" height="687" alt="image" src="https://github.com/user-attachments/assets/49ecb821-da06-4009-8b54-f1935f183409" />
+
+<img width="1155" height="413" alt="image" src="https://github.com/user-attachments/assets/60d8f380-8cd4-4fea-85ee-d44d1557278a" />
+
 
 </td>
 </tr>
@@ -572,12 +578,9 @@ Busca **Container Instances**, selecciona `Infraestructura_y_Cloud` y pulsa **Cr
 
 </td>
 <td width="50%" valign="top">
-<p><strong>Captura oficial de referencia</strong></p>
-<p><a href="https://docs.oracle.com/en/learn/manage-oci-container-instances/images/15-container-instance-live.png"><img src="https://docs.oracle.com/en/learn/manage-oci-container-instances/images/15-container-instance-live.png" alt="Detalles de Container Instance activa y dirección pública" width="100%"></a></p>
-<p><em>Referencia para localizar el estado de la instancia y su dirección pública. Tu instancia se llamará ecored-container. [1]</em></p>
-<p><strong>Captura específica del paso</strong></p>
-<p>Instancia ecored-container activa y su IP pública.</p>
-<blockquote><p>Espacio para la captura de pantalla de este paso.</p></blockquote>
+
+<img width="1883" height="647" alt="image" src="https://github.com/user-attachments/assets/06694452-22cc-400b-a96b-4139be68c952" />
+
 
 </td>
 </tr>
@@ -609,9 +612,13 @@ Busca **Container Instances**, selecciona `Infraestructura_y_Cloud` y pulsa **Cr
 
 </td>
 <td width="50%" valign="top">
-<p><strong>Captura por incorporar</strong></p>
-<p>EcoRed por IP pública y solicitudes correctas de index.html, styles.css y app.js.</p>
-<blockquote><p>Espacio para la captura de pantalla de este paso.</p></blockquote>
+
+<img width="1603" height="658" alt="image" src="https://github.com/user-attachments/assets/1b5dc653-9e2c-43f0-9ee9-244c0d59af72" />
+
+<img width="398" height="135" alt="image" src="https://github.com/user-attachments/assets/1a1882ff-4bdf-44ae-8bb4-9b820546573e" />
+
+<img width="1808" height="921" alt="image" src="https://github.com/user-attachments/assets/eda7c902-d1b8-404a-a225-d7789bdb7cae" />
+
 
 </td>
 </tr>
@@ -637,9 +644,12 @@ Busca **Container Instances**, selecciona `Infraestructura_y_Cloud` y pulsa **Cr
 
 </td>
 <td width="50%" valign="top">
-<p><strong>Captura por incorporar</strong></p>
-<p>View logs con solicitudes HTTP de EcoRed.</p>
-<blockquote><p>Espacio para la captura de pantalla de este paso.</p></blockquote>
+
+<img width="1877" height="593" alt="image" src="https://github.com/user-attachments/assets/4e05a0fd-d8fd-4fc1-b9b1-a37dca4de2d1" />
+
+<img width="1117" height="651" alt="image" src="https://github.com/user-attachments/assets/dca76baf-54f6-4b31-bc14-7afea0ceced7" />
+
+
 
 </td>
 </tr>
@@ -667,9 +677,16 @@ Busca **Container Instances**, selecciona `Infraestructura_y_Cloud` y pulsa **Cr
 
 </td>
 <td width="50%" valign="top">
-<p><strong>Captura por incorporar</strong></p>
-<p>Presupuesto o consumo y regla de alerta, sin datos personales innecesarios.</p>
-<blockquote><p>Espacio para la captura de pantalla de este paso.</p></blockquote>
+
+
+<img width="907" height="592" alt="image" src="https://github.com/user-attachments/assets/9c61851c-ea1f-4a12-8d45-39b6a0bccaad" />
+
+
+<img width="1003" height="638" alt="image" src="https://github.com/user-attachments/assets/e11aaf86-cd7b-4846-a464-4000d6c188f0" />
+
+<img width="1647" height="287" alt="image" src="https://github.com/user-attachments/assets/aceaad3c-8e2a-47c7-9ffd-6c22f8e3d0c5" />
+
+
 
 </td>
 </tr>
@@ -741,58 +758,8 @@ Busca **Container Instances**, selecciona `Infraestructura_y_Cloud` y pulsa **Cr
 </tbody>
 </table>
 
-## Extensión opcional: DuckDNS
 
-### Extensión opcional. Publicar el acceso por subdominio
 
-<table width="100%">
-<thead><tr><th width="50%" align="left">Instrucciones</th><th width="50%" align="left">Capturas de pantalla</th></tr></thead>
-<tbody>
-<tr>
-<td width="50%" valign="top">
-<p>Puedes configurar un subdominio de DuckDNS para acceder al sitio por nombre:</p>
-<ol>
-<li>Abre <a href="https://www.duckdns.org/">DuckDNS</a> e inicia sesión.</li>
-<li>Crea un subdominio disponible, por ejemplo <code>ecored-grupo01.duckdns.org</code>, o selecciona uno que ya controles.</li>
-<li>En <strong>current ip</strong>, escribe explícitamente la IP pública de la instancia de contenedores y pulsa <strong>update ip</strong>. Verifica ese dato: la IP detectada desde tu navegador puede ser la de tu conexión doméstica.</li>
-<li>Comprueba la resolución DNS desde la terminal:</li>
-</ol>
-<p><code>nslookup ecored-grupo01.duckdns.org</code></p>
-<ol start="5">
-<li>Cuando la respuesta corresponda a la IP de la instancia, abre:</li>
-</ol>
-<p><code>http://ecored-grupo01.duckdns.org/</code></p>
-<p>DuckDNS permite asociar el nombre con una dirección IP. Este despliegue sigue usando HTTP. Para servir HTTPS hace falta configurar TLS y un certificado en una ampliación del taller. [15]</p>
-<p>Después de recrear o volver a iniciar la instancia, verifica su IP pública y actualiza el registro de DuckDNS si cambió.</p>
-
-</td>
-<td width="50%" valign="top">
-<p><strong>Captura por incorporar</strong></p>
-<p>DuckDNS apuntando a la IP pública y sitio abierto por http://SUBDOMINIO.duckdns.org/.</p>
-<blockquote><p>Espacio para la captura de pantalla de este paso.</p></blockquote>
-
-</td>
-</tr>
-</tbody>
-</table>
-
-## Solución de problemas
-
-| Problema | Qué revisar |
-| --- | --- |
-| Docker no se conecta al motor | Docker Desktop iniciado; `docker version` debe mostrar Client y Server |
-| Dockerfile no encontrado | Terminal ubicada en `ecored-container`, archivo llamado `Dockerfile` y punto al final del comando `docker build` |
-| Error al copiar archivos durante la construcción | Existen `index.html`, `styles.css` y `app.js` en la carpeta del Dockerfile; las carpetas adicionales solo se copian si existen |
-| El nombre `ecored-prueba` ya está en uso | Revisa `docker ps -a` y elimina únicamente el contenedor de prueba anterior antes de repetir `docker run` |
-| Puerto local 8080 ocupado | Cambia la publicación a `-p 8081:80` y abre `http://localhost:8081` |
-| `unauthorized` al iniciar sesión o subir | Namespace correcto, formato de usuario y dominio según el perfil, Auth Token vigente y endpoint de la región |
-| El `push` funciona, pero no ves la imagen | Región y compartimento seleccionados en OCIR; nombre exacto del repositorio y etiqueta `v1` |
-| OCI no logra descargar la imagen | Ruta y etiqueta existentes; repositorio público; VCN con Service Gateway; rutas, DNS y salida HTTPS permitida |
-| Error de arquitectura o `exec format error` | Imagen `linux/amd64` y shape `CI.Standard.E4.Flex`; reconstruye y sube una versión nueva si había otra arquitectura |
-| La instancia está activa, pero la URL no responde | IP pública de la instancia correcta, subred pública, ruta al Internet Gateway, regla de ingreso TCP 80 y contenedor ejecutándose |
-| Aparece la página de bienvenida de Nginx | Se seleccionó la imagen base de Nginx en vez de la imagen de EcoRed, o faltó copiar los archivos al construir |
-| La página funciona por IP y falla por nombre | Registro de DuckDNS apuntando a la IP correcta y resolución DNS actualizada; prueba `nslookup` |
-| Los datos de prueba parecen haber desaparecido | Se cambió de navegador, de dispositivo o de origen: localhost, IP y subdominio tienen almacenamiento local independiente |
 
 ## Resultado esperado
 
