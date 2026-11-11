@@ -108,10 +108,8 @@ Reemplaza `NAMESPACE` en los comandos por el namespace real de tu tenancy. Si co
 <tr>
 <td width="50%" valign="top">
 <p><strong>Lugar: terminal local de VS Code.</strong></p>
-<p>Ubícate en una carpeta donde guardes tus proyectos y ejecuta los siguientes comandos, uno por uno:</p>
-<p><code>git clone https://github.com/adanbeltran/ecored-estatica.git ecored-container</code><br>
-<code>cd ecored-container</code><br>
-<code>code .</code></p>
+<p>Ubicado en la carpeta DockerOCIR, ejecuta los siguientes comandos, uno por uno:</p>
+<p><code>git clone https://github.com/adanbeltran/ecored-estatica.git .</code><br>
 <p>En la ventana del proyecto deben aparecer <code>index.html</code>, <code>styles.css</code> y <code>app.js</code>. Estos son los archivos que publicaremos.</p>
 
 <p>EcoRed es una aplicación estática: su interactividad se ejecuta en JavaScript en el navegador y sus datos de demostración se guardan en <code>localStorage</code>. El acceso de usuario es simulado. Este despliegue conserva ese funcionamiento.</p>
@@ -120,7 +118,9 @@ Reemplaza `NAMESPACE` en los comandos por el namespace real de tu tenancy. Si co
 <td width="50%" valign="top">
 
 <p>VS Code con index.html, styles.css y app.js en la carpeta del proyecto.</p>
-<img width="100%" alt="image" src="https://github.com/user-attachments/assets/5aeb0858-64c3-45d0-993a-ccca0701f0fa" />
+<img width="850" height="442" alt="image" src="https://github.com/user-attachments/assets/6b82ec90-2123-4bfb-9156-bc4c6f93af23" />
+
+
 
 </td>
 </tr>
