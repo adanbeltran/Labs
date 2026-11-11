@@ -4,9 +4,10 @@
 
 Publicar el sitio web estático EcoRed en una plataforma de contenedores administrados de OCI. Construirás y probarás una imagen con Docker, la subirás a OCI Container Registry (OCIR) y la desplegarás en Container Instances para que los usuarios accedan desde un navegador mediante HTTP.
 
-**Flujo de publicación:** código del sitio → imagen Docker → OCIR → Container Instances → navegador.
 
-<img width="1122" height="1402" alt="image" src="https://github.com/user-attachments/assets/cefdf48e-b1f3-488b-a3a9-0f562aae9eac" />
+
+<img width="1122" height="1402" alt="image" src="https://github.com/user-attachments/assets/8962af62-7d45-4eb5-85cf-5a8d7f45ba0a" />
+
 
 
 ## Requisitos
