@@ -421,6 +421,7 @@ $OCIR_GATEWAY = "${BASE}/gateway:${TAG_PROPIO}"
 $OCIR_FRONTEND = "${BASE}/frontend:${TAG_PROPIO}"
 $IP_PUBLICA = 'CAMBIAR_IP_PUBLICA'       # Asignar después del despliegue
 ```
+<img width="1286" height="360" alt="image" src="https://github.com/user-attachments/assets/cac9f5fa-b259-485a-8b68-1c9e847c34c5" />
 
 **Alternativa sin variables:** utilice los nombres completos de la **opción B** de cada paso, reemplazando los marcadores por valores reales. Nunca publique el Auth Token.
 
