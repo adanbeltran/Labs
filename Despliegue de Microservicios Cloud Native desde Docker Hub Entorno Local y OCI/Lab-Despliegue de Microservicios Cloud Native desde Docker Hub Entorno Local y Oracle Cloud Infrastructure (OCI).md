@@ -202,9 +202,6 @@ done
 
 Se requiere Firebase Authentication (métodos Email/Password y/o Google), una conexión MongoDB Atlas válida y un Oracle Autonomous Database con tabla `materials`. No utilice claves o contraseñas del docente. En Oracle la tabla y privilegios deben corresponder al usuario que use el microservicio.
 
-![Pantallazo original: acceso a Oracle Autonomous Database](assets/image-10.png)
-
-![Pantallazo original: consulta de la tabla MATERIALS](assets/image-30.png)
 
 **Factor IV:** Firebase, MongoDB y Oracle se usan como recursos externos configurados, no empaquetados en imágenes.
 
