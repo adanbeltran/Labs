@@ -472,9 +472,7 @@ docker pull MI_USUARIO_DOCKERHUB/ecored-frontend:1.0
 
 En la consola de OCI seleccione la región adecuada. Vaya a **Developer Services → Containers & Artifacts → Container Registry**, cree repositorios (por ejemplo `ecored/companies`, `ecored/materials`, `ecored/gateway`, `ecored/frontend`) y verifique permisos IAM para publicar y consumir imágenes. Anote el **Object Storage namespace** del tenancy (no confundir con el nombre visible del tenancy).
 
-![Captura del taller original: los repositorios de Docker Hub son una referencia conceptual; la pantalla de OCIR es distinta](assets/image-54.png)
 
-**No es una captura de OCIR.** Consulte la consola actual para identificar los campos del repositorio.
 
 ### Paso 3. Generar un Auth Token e iniciar sesión
 
