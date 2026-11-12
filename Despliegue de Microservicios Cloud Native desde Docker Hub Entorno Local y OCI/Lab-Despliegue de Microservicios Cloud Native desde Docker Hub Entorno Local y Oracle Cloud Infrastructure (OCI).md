@@ -1,10 +1,7 @@
 # Despliegue de Microservicios Cloud Native desde Docker Hub: Entorno Local y Oracle Cloud Infrastructure (OCI) 
 
-> **Continuación del Taller 5.** Las **dos fases parten exclusivamente de imágenes ya publicadas en Docker Hub**. En la Fase 1 se utilizan imágenes del docente o de otro compañero para reproducir EcoRed localmente. En la Fase 2 se descargan desde Docker Hub **las cuatro imágenes propias publicadas anteriormente**, se reetiquetan y publican en Oracle Cloud Infrastructure Registry (OCIR), se ejecutan en OCI Container Instances y se valida su acceso desde una IP pública. **No se realiza `docker build` en ninguna fase.**
->
-> **Alcance:** dos fases, con capturas originales del laboratorio anterior dentro de `assets/`. Las capturas de Docker y la aplicación corresponden al taller original; los pasos de OCI son nuevos y se acompañan de un **diagrama propio**, no de capturas inventadas.
+<img width="1672" height="941" alt="image" src="https://github.com/user-attachments/assets/0724e797-c56a-4dae-9bc1-0965a7c70d34" />
 
-> **Compatibilidad:** en cada paso que utilice referencias a imágenes, registros o contenedores se muestran **dos opciones completas y equivalentes**: **A. PowerShell con variables `$` definidas al inicio de cada fase** y **B. nombres completos**, compatibles con CMD, PowerShell y Bash. No se exige ejecutar bucles. También se describen alternativas gráficas cuando están disponibles. Las variables de PowerShell no se interpretan en CMD.
 
 ## Objetivo
 
