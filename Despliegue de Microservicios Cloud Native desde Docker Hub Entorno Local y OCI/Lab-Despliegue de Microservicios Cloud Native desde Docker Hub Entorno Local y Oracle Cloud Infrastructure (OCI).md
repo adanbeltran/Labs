@@ -531,9 +531,6 @@ docker tag MI_USUARIO_DOCKERHUB/ecored-frontend:1.0 gru.ocir.io/MI_NAMESPACE/eco
 docker images
 ```
 
-
-![Pantallazo original del etiquetado para Docker Hub; la referencia de destino cambia en OCIR](assets/image-49.png)
-
 ### Paso 5. Publicar las cuatro imágenes
 
 **Opción A. PowerShell con variables:**
@@ -544,6 +541,8 @@ docker push $OCIR_MATERIALS
 docker push $OCIR_GATEWAY
 docker push $OCIR_FRONTEND
 ```
+<img width="1122" height="511" alt="image" src="https://github.com/user-attachments/assets/0fdb548e-7aba-406e-82b6-884dada37ca6" />
+
 
 **Opción B. Nombres completos (CMD, PowerShell y Bash):**
 
