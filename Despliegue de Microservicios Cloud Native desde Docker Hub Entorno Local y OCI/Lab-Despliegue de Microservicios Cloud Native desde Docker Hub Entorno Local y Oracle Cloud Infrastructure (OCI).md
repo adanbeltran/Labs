@@ -457,7 +457,7 @@ docker pull MI_USUARIO_DOCKERHUB/ecored-frontend:1.0
 
 ![Pantallazo original: listado de imágenes disponibles](assets/image-46.png)
 
-![Pantallazo original: paso de etiquetado para un registry](assets/image-48.png)
+
 
 **Factores I, II y V:** código propio versionado, dependencias declaradas y artefactos identificables por versión o digest. Anote SHA256 de las imágenes con `docker image inspect --format '{{.Id}}' ...`.
 
@@ -465,19 +465,30 @@ docker pull MI_USUARIO_DOCKERHUB/ecored-frontend:1.0
 
 ### Paso 2. Ubicar región, namespace y repositorios
 
-En la consola de OCI seleccione la región adecuada. Vaya a **Developer Services → Containers & Artifacts → Container Registry**, cree repositorios (por ejemplo `ecored/companies`, `ecored/materials`, `ecored/gateway`, `ecored/frontend`) y verifique permisos IAM para publicar y consumir imágenes. Anote el **Object Storage namespace** del tenancy (no confundir con el nombre visible del tenancy).
+En la consola de OCI seleccione la región adecuada. Vaya a **Developer Services → Containers & Artifacts → Container Registry**, cree repositorios (por ejemplo `ecored/companies`, `ecored/materials`, `ecored/gateway`, `ecored/frontend`). 
 
+<img width="1127" height="348" alt="image" src="https://github.com/user-attachments/assets/cc89b4b1-5ace-4b7e-8d28-d6025b14dd06" />
+<img width="668" height="307" alt="image" src="https://github.com/user-attachments/assets/8af8a5eb-ec97-48f0-b033-b8827625860a" />
+<img width="651" height="246" alt="image" src="https://github.com/user-attachments/assets/915e6593-1598-474e-a83e-88ed3aa5d9db" />
+<img width="663" height="307" alt="image" src="https://github.com/user-attachments/assets/b4ebe82b-131a-4954-90d4-6507d7d7ce20" />
+<img width="597" height="296" alt="image" src="https://github.com/user-attachments/assets/bc7189fd-22e2-42cc-b5cf-719315324c68" />
+
+<img width="1310" height="330" alt="image" src="https://github.com/user-attachments/assets/f0e04932-f10d-4108-9a85-d0cfc9f82eba" />
 
 
 ### Paso 3. Generar un Auth Token e iniciar sesión
 
-En el perfil del usuario de OCI abra **Auth Tokens → Generate Token** y guarde el token de forma segura. Desde la consola identifique: el registro regional (por ejemplo, `gru.ocir.io` si corresponde a su región), el **namespace** de Object Storage y el nombre IAM del usuario autorizado. **No confunda el usuario de Docker Hub con el de OCI.**
+En el perfil del usuario de OCI abra **Auth Tokens → Generate Token** y guarde el token de forma segura. 
+<img width="1142" height="197" alt="image" src="https://github.com/user-attachments/assets/163ae2ae-5536-4e6f-9392-c318658511f2" />
+
 
 **Opción A. PowerShell con variables definidas al inicio:**
 
 ```powershell
 docker login $REGISTRY -u "${NAMESPACE}/${OCI_USUARIO}"
 ```
+<img width="1431" height="132" alt="image" src="https://github.com/user-attachments/assets/228efaf8-a687-4295-8d42-85a5e1e8076c" />
+
 
 **Opción B. Nombre completo (CMD, PowerShell y Bash):**
 
@@ -485,7 +496,7 @@ docker login $REGISTRY -u "${NAMESPACE}/${OCI_USUARIO}"
 docker login gru.ocir.io -u MI_NAMESPACE/MI_USUARIO_OCI
 ```
 
-La contraseña solicitada por Docker es el **Auth Token de OCI**, no la contraseña de la consola. El formato de usuario puede requerir un prefijo de dominio de identidad; utilice el indicado en OCI. `gru.ocir.io` es un ejemplo, no una región obligatoria.
+La contraseña solicitada por Docker es el **Auth Token de OCI**, no la contraseña de la consola. 
 
 **Alternativa gráfica:** Docker Desktop permite consultar las imágenes, pero la autenticación con OCIR mediante `docker login` es el método reproducible para este taller.
 
@@ -495,7 +506,7 @@ No incluya el token en capturas ni en `.env` públicos.
 
 ### Paso 4. Asociar las imágenes propias a OCIR
 
-Utilice exclusivamente las imágenes que **usted construyó en el Taller 5**. Los comandos `docker tag` agregan referencias al mismo contenido, sin reconstruirlo. Estos ejemplos usan el registro `gru.ocir.io`, un namespace y un usuario Docker Hub de ejemplo que debe sustituir.
+Utilice exclusivamente las imágenes que **usted construyó en el Taller anterior**. Los comandos `docker tag` agregan referencias al mismo contenido, sin reconstruirlo. Estos ejemplos usan el registro `gru.ocir.io`, un namespace y un usuario Docker Hub de ejemplo que debe sustituir.
 
 **Opción A. PowerShell con las variables de la fase 2:**
 
@@ -504,8 +515,11 @@ docker tag $PROPIA_COMPANIES $OCIR_COMPANIES
 docker tag $PROPIA_MATERIALS $OCIR_MATERIALS
 docker tag $PROPIA_GATEWAY $OCIR_GATEWAY
 docker tag $PROPIA_FRONTEND $OCIR_FRONTEND
-docker images
+docker images | Select-String "^gru"
 ```
+<img width="1285" height="92" alt="image" src="https://github.com/user-attachments/assets/0b050c80-540e-482e-aa60-4045266d8533" />
+<img width="1247" height="216" alt="image" src="https://github.com/user-attachments/assets/479bef5e-9f65-440b-b6d5-944a2933eb69" />
+
 
 **Opción B. Nombres completos (CMD, PowerShell y Bash):**
 
@@ -517,7 +531,6 @@ docker tag MI_USUARIO_DOCKERHUB/ecored-frontend:1.0 gru.ocir.io/MI_NAMESPACE/eco
 docker images
 ```
 
-**Alternativa gráfica:** Docker Desktop → Images → Local → Tag (si la versión instalada permite esta opción). Cada etiqueta destino debe coincidir exactamente con la de OCIR.
 
 ![Pantallazo original del etiquetado para Docker Hub; la referencia de destino cambia en OCIR](assets/image-49.png)
 
