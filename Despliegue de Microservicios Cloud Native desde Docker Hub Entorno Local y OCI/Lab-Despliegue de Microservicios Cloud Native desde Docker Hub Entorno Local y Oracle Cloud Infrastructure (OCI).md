@@ -559,19 +559,164 @@ docker push gru.ocir.io/MI_NAMESPACE/ecored/frontend:1.0
 @($OCIR_COMPANIES,$OCIR_MATERIALS,$OCIR_GATEWAY,$OCIR_FRONTEND) | ForEach-Object { docker push $_ }
 ```
 
-**Alternativa gráfica:** Docker Desktop → Images → Push, cuando esté disponible y el registro admita la autenticación. Si no, utilice A o B.
 
-![Pantallazo original de `docker push` a Docker Hub; no es una captura de OCIR](assets/image-50.png)
-
-![Pantallazo original de publicación de otras imágenes a Docker Hub](assets/image-51.png)
 
 Verifique **en la consola real de OCIR** repositorio, etiqueta y digest de cada imagen. **Factor V:** separar artefacto, publicación y ejecución. Nunca inserte contraseñas en imágenes.
+<img width="902" height="242" alt="image" src="https://github.com/user-attachments/assets/4add4e42-edbd-4c2f-b13a-fec02833e57e" />
+
 
 ## 2.4. Red y Container Instance
 
 ### Paso 6. Preparar VCN, subred pública y políticas de acceso
 
-En **Networking → Virtual Cloud Networks** cree o seleccione una VCN con subred pública, ruta a Internet Gateway y NSG / Security Lists para permitir **TCP/80** y **TCP/8080** solo desde las redes necesarias. Los puertos internos **8001 y 8002 no deben quedar expuestos a Internet**. Requiere salida DNS/HTTPS para Firebase, Atlas y servicios OCI. Configure en MongoDB Atlas una allowlist de salida (IP pública o NAT de OCI) y conectividad segura con Autonomous Database.
+**Objetivo:** verificar y ajustar la infraestructura de red existente en OCI para desplegar los cuatro microservicios de EcoRed mediante Container Instances.
+
+**Infraestructura existente:**
+
+| Recurso | Configuración |
+|---|---|
+| Región | São Paulo (`sa-saopaulo-1`) |
+| Compartment | `Infraestructura_y_Cloud` |
+| VCN | `red-infraestructura` |
+| CIDR de VCN | `10.0.0.0/16` |
+| Subred pública | `subred-web` |
+| CIDR de subred | `10.0.0.0/24` |
+| Internet Gateway | `salida-internet` |
+| Service Gateway | `servicios-oracle` |
+| Security List | `Default Security List for red-infraestructura` |
+| Route Table | `Default Route Table for red-infraestructura` |
+
+**Importante:** no es necesario crear otra VCN, subred ni gateways. Se reutilizará la infraestructura existente y únicamente se realizarán los ajustes que se describen a continuación.
+
+#### 6.1. Agregar la regla de entrada TCP/8080
+
+En la consola de OCI:
+
+1. Ingrese a **Networking → Virtual Cloud Networks**.
+2. Seleccione `red-infraestructura`.
+3. Abra **Security → Security Lists**.
+4. Seleccione `Default Security List for red-infraestructura`.
+5. Ingrese a **Security rules → Add Ingress Rules**.
+6. Configure los siguientes valores:
+
+| Campo | Valor |
+|---|---|
+| Stateless | No |
+| Source Type | CIDR |
+| Source CIDR | `0.0.0.0/0` |
+| IP Protocol | TCP |
+| Source Port Range | All |
+| Destination Port Range | `8080` |
+| Description | `EcoRed API Gateway` |
+
+7. Seleccione **Add Ingress Rules**.
+
+**Verificación:**
+
+La Security List debe permitir los siguientes puertos:
+
+| Puerto | Servicio | Acceso desde Internet |
+|---|---|---|
+| 80 | Frontend | Permitido |
+| 8080 | API Gateway | Permitido |
+| 8001 | Companies | No permitido |
+| 8002 | Materials | No permitido |
+
+**Nota:** el puerto TCP/80 ya está configurado. No es necesario agregarlo nuevamente.
+
+Para simplificar las pruebas académicas se utiliza `0.0.0.0/0`. En un entorno de producción, el acceso debe limitarse a los orígenes necesarios y protegerse mediante HTTPS y controles de autenticación.
+
+No modifique la regla TCP/22 sin verificar previamente si otros recursos de la VCN utilizan SSH.
+
+#### 6.2. Agregar la ruta hacia el Service Gateway
+
+El Service Gateway `servicios-oracle` ya existe. Se debe agregar una ruta que permita utilizarlo para acceder a servicios regionales de Oracle, incluido OCIR.
+
+1. Ingrese a **Networking → Virtual Cloud Networks**.
+2. Seleccione `red-infraestructura`.
+3. Abra **Routing → Route Tables**.
+4. Seleccione `Default Route Table for red-infraestructura`.
+5. Haga clic en **Add Route Rules**.
+6. Configure:
+
+| Campo | Valor |
+|---|---|
+| Target Type | Service Gateway |
+| Destination Service | All GRU Services In Oracle Services Network |
+| Target Service Gateway | `servicios-oracle` |
+| Description | `Acceso a servicios OCI y OCIR` |
+
+7. Guarde los cambios.
+
+**Verificación:**
+
+La tabla de rutas debe contener:
+
+| Destino | Target Type | Target |
+|---|---|---|
+| `0.0.0.0/0` | Internet Gateway | `salida-internet` |
+| All GRU Services In Oracle Services Network | Service Gateway | `servicios-oracle` |
+
+**Importante:** conserve la ruta existente hacia Internet Gateway.
+
+#### 6.3. Verificar las reglas de salida
+
+1. Abra **Security → Security Lists**.
+2. Seleccione `Default Security List for red-infraestructura`.
+3. Revise **Egress Rules**.
+4. Verifique que exista la siguiente configuración:
+
+| Campo | Valor |
+|---|---|
+| Stateless | No |
+| Destination | `0.0.0.0/0` |
+| IP Protocol | All Protocols |
+| Source Port Range | All |
+| Destination Port Range | All |
+
+Esta regla ya existe en la infraestructura actual, por lo que no es necesario modificarla.
+
+Permite establecer conexiones salientes hacia servicios como Firebase y MongoDB Atlas. Para acceder a estos servicios también deben estar configuradas sus respectivas credenciales, reglas de acceso y conexiones seguras.
+
+**Nota:** las reglas anteriores corresponden a la Security List existente. Verifique que `subred-web` tenga asociada esta lista y que no existan restricciones adicionales en algún Network Security Group (NSG).
+
+#### 6.4. Verificar la subred pública
+
+1. Ingrese a **Networking → Virtual Cloud Networks**.
+2. Seleccione `red-infraestructura`.
+3. Abra **Subnets**.
+4. Seleccione `subred-web`.
+5. Verifique:
+
+| Propiedad | Valor |
+|---|---|
+| Estado | Available |
+| Subnet Access | Public Subnet |
+| IPv4 CIDR | `10.0.0.0/24` |
+| Route Table | `Default Route Table for red-infraestructura` |
+
+No es necesario modificar la subred.
+
+#### 6.5. Verificación final
+
+Antes de continuar con la creación de la Container Instance, confirme:
+
+- [ ] VCN `red-infraestructura` disponible.
+- [ ] Subred pública `subred-web` disponible.
+- [ ] Internet Gateway `salida-internet` disponible.
+- [ ] Ruta `0.0.0.0/0` hacia Internet Gateway.
+- [ ] Regla de entrada TCP/80 habilitada.
+- [ ] Regla de entrada TCP/8080 habilitada.
+- [ ] Puertos TCP/8001 y TCP/8002 sin exposición pública.
+- [ ] Regla de salida habilitada.
+- [ ] Ruta hacia Service Gateway `servicios-oracle`.
+- [ ] Security List asociada correctamente a `subred-web`.
+
+**Resultado esperado:** la infraestructura de red queda preparada para desplegar los cuatro contenedores de EcoRed, permitiendo acceso público al frontend y al API Gateway, manteniendo los microservicios internos sin acceso directo desde Internet y proporcionando conectividad hacia los servicios externos y OCIR.
+
+**Continuación:** en el Paso 7, al crear la Container Instance, seleccione la VCN `red-infraestructura`, la subred `subred-web` y habilite la asignación de una dirección IPv4 pública. Configure también los permisos necesarios para descargar las imágenes privadas desde OCIR.
+
+
 
 ### Paso 7. Crear una Container Instance con cuatro contenedores
 
