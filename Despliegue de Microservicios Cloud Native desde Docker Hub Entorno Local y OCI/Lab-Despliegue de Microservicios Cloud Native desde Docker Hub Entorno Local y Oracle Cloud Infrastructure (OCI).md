@@ -732,6 +732,8 @@ En **Developer Services → Containers & Artifacts → Container Instances → C
 
 <img width="1093" height="692" alt="image" src="https://github.com/user-attachments/assets/39d455fc-99f3-4fb0-a0e4-95705e7e9fd0" />
 
+<img width="1035" height="682" alt="image" src="https://github.com/user-attachments/assets/bdc73690-2d33-48ca-95b2-91d526251658" />
+
 <img width="1082" height="717" alt="image" src="https://github.com/user-attachments/assets/d2ab2500-78a8-4c92-88c8-d4225b72be4e" />
 
 <img width="1121" height="678" alt="image" src="https://github.com/user-attachments/assets/867feb80-9c0f-4d15-8516-b4261b853142" />
