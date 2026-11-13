@@ -44,7 +44,13 @@ Desplegar EcoRed a partir de imágenes previamente publicadas en Docker Hub, pri
       - [2.4.1.2. Verificar las reglas de salida](#2412-verificar-las-reglas-de-salida)
       - [2.4.1.3. Verificar la subred pública](#2413-verificar-la-subred-pública)
       - [2.4.1.4. Verificación final](#2414-verificación-final)
-    - [2.4.2. Crear una Container Instance con cuatro contenedores](#242-crear-una-container-instance-con-cuatro-contenedores)
+    - [2.4.2. Verificar imágenes y configurar permisos IAM para OCIR](#242-verificar-imágenes-y-configurar-permisos-iam-para-ocir)
+      - [2.4.2.1. Confirmar los repositorios y las etiquetas](#2421-confirmar-los-repositorios-y-las-etiquetas)
+      - [2.4.2.2. Crear el Dynamic Group para Container Instances](#2422-crear-el-dynamic-group-para-container-instances)
+      - [2.4.2.3. Crear la política IAM para leer los repositorios](#2423-crear-la-política-iam-para-leer-los-repositorios)
+    - [2.4.3. Preparar un subdominio público con DuckDNS](#243-preparar-un-subdominio-público-con-duckdns)
+    - [2.4.4. Verificar OCIR con una instancia mínima (prueba recomendada)](#244-verificar-ocir-con-una-instancia-mínima-prueba-recomendada)
+    - [2.4.5. Crear una Container Instance con cuatro contenedores](#245-crear-una-container-instance-con-cuatro-contenedores)
   - [2.5. Inyectar variables y probar la IP pública](#25-inyectar-variables-y-probar-la-ip-pública)
     - [2.5.1. Configurar las variables en OCI, sin reconstruir imágenes](#251-configurar-las-variables-en-oci-sin-reconstruir-imágenes)
     - [2.5.2. Ejecutar comprobaciones públicas de conectividad](#252-ejecutar-comprobaciones-públicas-de-conectividad)
@@ -52,6 +58,12 @@ Desplegar EcoRed a partir de imágenes previamente publicadas en Docker Hub, pri
   - [2.6. Entregables y verificación de doce factores](#26-entregables-y-verificación-de-doce-factores)
     - [2.6.1. Entregables](#261-entregables)
     - [2.6.2. Tabla de comprobación de los 12 factores](#262-tabla-de-comprobación-de-los-12-factores)
+  - [2.7. Infraestructura como código (IaC): gestionar correcciones de configuración con Terraform](#27-infraestructura-como-código-iac-gestionar-correcciones-de-configuración-con-terraform)
+    - [2.7.1. Generar un stack Terraform a partir de la infraestructura existente](#271-generar-un-stack-terraform-a-partir-de-la-infraestructura-existente)
+    - [2.7.2. Identificar y verificar el parámetro que se necesita corregir](#272-identificar-y-verificar-el-parámetro-que-se-necesita-corregir)
+    - [2.7.3. Editar el código del stack y guardar los cambios](#273-editar-el-código-del-stack-y-guardar-los-cambios)
+    - [2.7.4. Ejecutar Plan y revisar si Terraform reemplazará la instancia](#274-ejecutar-plan-y-revisar-si-terraform-reemplazará-la-instancia)
+    - [2.7.5. Ejecutar Apply y verificar la nueva versión](#275-ejecutar-apply-y-verificar-la-nueva-versión)
 - [Fuentes oficiales](#fuentes-oficiales)
 
 ## Compatibilidad de terminales y uso de imágenes
@@ -701,22 +713,143 @@ Antes de continuar con la creación de la Container Instance, confirme:
 - [ ] Regla de entrada TCP/8080 habilitada.
 - [ ] Puertos TCP/8001 y TCP/8002 sin exposición pública.
 - [ ] Regla de salida habilitada.
-- [ ] Ruta hacia Service Gateway `servicios-oracle`.
 - [ ] Security List asociada correctamente a `subred-web`.
+- [ ] Internet Gateway y tabla de rutas existentes conservados sin cambios.
 
-**Resultado esperado:** la infraestructura de red queda preparada para desplegar los cuatro contenedores de EcoRed, permitiendo acceso público al frontend y al API Gateway, manteniendo los microservicios internos sin acceso directo desde Internet y proporcionando conectividad hacia los servicios externos y OCIR.
+**Precisión sobre Service Gateway:** `servicios-oracle` existe en la VCN, pero su existencia no garantiza una ruta desde `subred-web`. En la infraestructura de referencia, OCI rechazó agregar `All GRU Services In Oracle Services Network` a la misma tabla que contiene `0.0.0.0/0 → salida-internet`. **No elimine la ruta a Internet ni afirme que OCIR está accesible solo porque el gateway existe.** La prueba del apartado 2.4.4 confirmará si la Container Instance puede descargar una imagen privada con las rutas y los permisos actuales. Si falla por conectividad, revise una topología de rutas compatible según la documentación de OCI, sin modificar a ciegas la red compartida.
 
-**Continuación:** en el apartado 2.4.2, al crear la Container Instance, seleccione la VCN `red-infraestructura`, la subred `subred-web` y habilite la asignación de una dirección IPv4 pública. Configure también los permisos necesarios para descargar las imágenes privadas desde OCIR.
+**Resultado esperado:** la Security List permite acceso público a TCP/80 y TCP/8080; los microservicios 8001/8002 no cuentan con reglas de ingreso público. La conectividad hacia OCIR y el acceso a sus imágenes privadas se validarán en los siguientes apartados.
 
-### 2.4.2. Crear una Container Instance con cuatro contenedores
+**Continuación:** verifique las imágenes y la autorización IAM en 2.4.2, prepare el DNS en 2.4.3 y realice una prueba mínima de descarga en 2.4.4 antes del despliegue completo.
 
-En **Developer Services → Containers & Artifacts → Container Instances → Create Container Instance**:
+### 2.4.2. Verificar imágenes y configurar permisos IAM para OCIR
 
-1. Indique nombre `ecored-lab`, compartimento, dominio de disponibilidad y *shape* según cuota/presupuesto.
-2. Seleccione la VCN, subred pública, asignación de IP pública y NSG de la etapa anterior.
-3. Agregue **cuatro contenedores** utilizando las imágenes privadas OCIR: `frontend`, `gateway`, `companies`, `materials`. Configure las credenciales / políticas necesarias para que la instancia pueda obtener imágenes privadas.
-4. Declare los puertos TCP **80, 8080, 8001 y 8002** como puertos de escucha de la instancia según los contenedores; **solo 80 y 8080** deben ser accesibles desde Internet en el NSG.
-5. Use política de reinicio adecuada, revisión de logs y recursos de memoria/CPU. Los cuatro contenedores **comparten red, ciclo de vida y recursos**. No se crea ni administra una VM, pero esto **no es Kubernetes ni autoscaling de réplicas**.
+Antes de crear la Container Instance definitiva, se comprobará que las imágenes privadas existen y que el servicio OCI tiene autorización para descargarlas. **Iniciar sesión como administrador no transfiere los permisos del usuario a la identidad de la Container Instance.**
+
+#### 2.4.2.1. Confirmar los repositorios y las etiquetas
+
+En **Developer Services → Containers & Artifacts → Container Registry**, seleccione el compartment `Infraestructura_y_Cloud` y compruebe **Image versions** en cada repositorio:
+
+| Repositorio privado | Referencia de imagen en la región GRU |
+|---|---|
+| `ecored/frontend` | `gru.ocir.io/MI_NAMESPACE/ecored/frontend:1.0` |
+| `ecored/gateway` | `gru.ocir.io/MI_NAMESPACE/ecored/gateway:1.0` |
+| `ecored/companies` | `gru.ocir.io/MI_NAMESPACE/ecored/companies:1.0` |
+| `ecored/materials` | `gru.ocir.io/MI_NAMESPACE/ecored/materials:1.0` |
+
+Reemplace `MI_NAMESPACE` por el **namespace del tenancy** configurado en el apartado 2.2.1. Confirme que la etiqueta Docker `1.0` esté asociada a una versión disponible. La pestaña **Tags** de metadatos OCI no equivale a las etiquetas de versión de una imagen Docker.
+
+#### 2.4.2.2. Crear el Dynamic Group para Container Instances
+
+1. Abra **Identity & Security → Compartments → Infraestructura_y_Cloud** y copie el **OCID del compartimento**.
+2. Abra **Identity & Security → Domains → Default → Dynamic Groups**.
+3. Seleccione **Create dynamic group**.
+4. Nombre: `dg-ecored-container`.
+5. Descripción: `Autorizar Container Instances para descargar imágenes privadas desde OCIR`.
+6. Seleccione el editor manual de **Matching rules** y escriba:
+
+```text
+ALL {resource.type='computecontainerinstance', resource.compartment.id='OCID_COMPARTIMENTO'}
+```
+
+7. Sustituya `OCID_COMPARTIMENTO` por el OCID real de `Infraestructura_y_Cloud` y seleccione **Create**.
+
+**Nota:** si el grupo ya existe con esta regla, compruébelo y reutilícelo. No modifique un grupo generado por otros servicios, por ejemplo, `VBStudio-Dynamic-Group-*`.
+
+#### 2.4.2.3. Crear la política IAM para leer los repositorios
+
+1. Abra **Identity & Security → Policies → Create Policy**.
+2. Cree la política en el **compartment raíz del tenancy**.
+3. Nombre: `policy-ecored-ocir`.
+4. Descripción: `Permitir a Container Instances leer imágenes privadas OCIR`.
+5. En **Show manual editor**, escriba:
+
+```text
+Allow dynamic-group dg-ecored-container to read repos in compartment Infraestructura_y_Cloud
+```
+
+6. Guarde la política y confirme que figure en la lista. Si utiliza un dominio de identidad distinto de `Default`, ajuste la referencia del grupo según su dominio.
+
+**Verificación:** el Dynamic Group identifica instancias `computecontainerinstance` del compartment y la política les concede el permiso `read repos`. Si la política ya existe, no la duplique. Puede existir un breve período de propagación de las políticas IAM.
+
+**Referencia oficial:** https://docs.oracle.com/en-us/iaas/Content/container-instances/permissions/policy-reference.htm
+
+### 2.4.3. Preparar un subdominio público con DuckDNS
+
+La dirección IPv4 pública de una Container Instance se conoce **después** de su creación. Por ello, no debe escribirse una IP aún desconocida dentro de las variables de entorno del frontend. Para mantener una URL estable sin reconstruir imágenes se utilizará un subdominio DNS dinámico.
+
+1. Ingrese a https://www.duckdns.org/ e inicie sesión.
+2. En **Domains**, registre un subdominio disponible; el ejemplo del taller es `ecored-lab.duckdns.org`.
+3. Anote el nombre del subdominio. No comparta ni capture el **token privado de DuckDNS**.
+4. Antes de crear los contenedores, configure las variables públicas:
+
+**Frontend:**
+
+```dotenv
+VITE_API_URL=http://ecored-lab.duckdns.org:8080/api
+```
+
+**Gateway:**
+
+```dotenv
+CORS_ORIGINS=http://ecored-lab.duckdns.org
+```
+
+5. Cree la Container Instance con **Assign a public IPv4 address**.
+6. Una vez finalizada la creación, copie la IP pública asignada en OCI y actualice **Current IP → Update IP** para ese subdominio en DuckDNS.
+7. Compruebe en PowerShell:
+
+```powershell
+nslookup ecored-lab.duckdns.org
+```
+
+**Explicación:** `VITE_API_URL` se ejecuta en el **navegador**, por lo que debe utilizar el nombre DNS o una dirección pública accesible desde el equipo del usuario. En cambio, `COMPANIES_URL=http://127.0.0.1:8001` y `MATERIALS_URL=http://127.0.0.1:8002` son conexiones **internas** entre contenedores de la misma Container Instance. El origen CORS del frontend en HTTP/80 no lleva `:8080`.
+
+**Limitación:** DuckDNS resuelve el nombre de dominio, pero **no proporciona HTTPS a la aplicación automáticamente**. El acceso HTTP permite pruebas de salud y conectividad; para iniciar sesión con credenciales reales mediante Firebase, configure un punto de entrada HTTPS y autorice el dominio en Firebase Authentication. La configuración HTTP del laboratorio no debe utilizarse para transmitir contraseñas o tokens reales.
+
+### 2.4.4. Verificar OCIR con una instancia mínima (prueba recomendada)
+
+Antes de introducir todas las variables de entorno, puede comprobar la descarga de imágenes privadas utilizando **una sola imagen**.
+
+1. Abra **Developer Services → Containers & Artifacts → Container Instances → Create Container Instance**.
+2. Indique el nombre `ecored-prueba-ocir`, compartment `Infraestructura_y_Cloud`, una shape admitida y recursos mínimos compatibles con la imagen.
+3. En **Networking**, seleccione `red-infraestructura` y `subred-web`, active **Assign a public IPv4 address** y no seleccione NSG adicional si utiliza la Security List existente.
+4. Agregue un único contenedor `frontend`, seleccionado desde **OCI Container Registry → ecored/frontend → 1.0**. Utilice los permisos IAM creados en 2.4.2.
+5. Cree la instancia y consulte **Work requests → Messages** y **Containers**.
+
+| Resultado | Interpretación |
+|---|---|
+| Container Instance en `Active` y contenedor en ejecución | OCIR permitió descargar la imagen y el proceso inició |
+| `Failed` con error *image could not be pulled* | Revise referencia, IAM y conectividad al registro |
+| `Active` pero React muestra variables faltantes | La descarga se logró; faltan variables de configuración de la aplicación |
+
+En esta prueba puede omitirse el `.env`, pues solo se comprueba el acceso a la imagen privada. **El estado `Active` no demuestra que Firebase, Atlas u Oracle Database funcionen.** Conserve las evidencias y elimine la instancia de prueba después de verificarlas para evitar costos.
+
+### 2.4.5. Crear una Container Instance con cuatro contenedores
+
+En **Developer Services → Containers & Artifacts → Container Instances → Create Container Instance**, utilice las pantallas **Basic information → Networking → Storage → Containers → Review**.
+
+1. **Basic information:** nombre `ecored-lab`, compartment `Infraestructura_y_Cloud`, Availability Domain `AD-1` cuando corresponda, shape `CI.Standard.E4.Flex`, OCPU `1` y memoria `16 GB` cuando la cuota y el presupuesto lo permitan. Configure la política de reinicio `Always` y el tiempo de apagado ordenado según el laboratorio.
+2. **Networking:** seleccione la VCN `red-infraestructura`, subred pública `subred-web`, dirección IPv4 privada automática y **Assign a public IPv4 address**. La opción **Use network security groups to control traffic** puede quedar desactivada si se emplean las reglas ya existentes de la Security List.
+3. **Storage:** para este taller no es obligatorio adjuntar almacenamiento; MongoDB Atlas y Oracle Autonomous Database realizan la persistencia externa.
+4. **Containers:** agregue los cuatro contenedores desde los repositorios privados OCIR. Seleccione el tag `1.0` y utilice los permisos IAM del Dynamic Group; no marque **Provide credentials manually** si el acceso mediante IAM ya funciona.
+
+| Nombre | Repositorio OCIR | Puerto interno |
+|---|---|---|
+| `frontend` | `ecored/frontend:1.0` | TCP/80 |
+| `gateway` | `ecored/gateway:1.0` | TCP/8080 |
+| `companies` | `ecored/companies:1.0` | TCP/8001 |
+| `materials` | `ecored/materials:1.0` | TCP/8002 |
+
+5. En **Environmental variables**, agregue individualmente la configuración de cada contenedor conforme al apartado **2.5.1**, **antes de seleccionar Create**. No incluya el carácter `=` en el campo **Key** de la consola; escriba, por ejemplo, `ORACLE_USER` en **Key** y su valor en **Value**.
+6. **Review:** compruebe nombres, repositorios, tags, subred, variables, CPU y memoria; luego seleccione **Create**.
+7. En **Container Instances**, confirme que `ecored-lab` esté en estado `Active`; en **Containers**, compruebe el estado de los cuatro procesos y revise sus logs. Si falla la descarga de alguna imagen, examine **Work requests → Error messages** antes de cambiar variables de aplicación.
+
+**Red:** los cuatro contenedores comparten el espacio de red de la Container Instance. Los puertos TCP/80 y TCP/8080 pueden atender solicitudes externas según la Security List; **no** agregue reglas de ingreso público para TCP/8001 ni TCP/8002. Compartir una instancia no implica escalado independiente ni alta disponibilidad.
+
+**Advertencia sobre variables:** OCI Container Instances no ofrece una modificación directa de las variables de entorno mediante su operación estándar de actualización. Para aplicar una corrección en esas variables, revise el procedimiento de **IaC con Terraform y Resource Manager del apartado 2.7**; puede requerir el reemplazo de la instancia. No basta con reiniciarla.
+
+**Capturas de referencia de la creación y configuración en OCI:**
 
 <img width="1140" height="716" alt="image" src="https://github.com/user-attachments/assets/92abb375-c74c-4eeb-bee8-05f2a8f7b7a3" />
 
@@ -754,12 +887,14 @@ En la sección de variables de entorno de **cada contenedor** configure lo sigui
 
 | Contenedor | Variables determinantes en OCI |
 |---|---|
-| `companies` | `DJANGO_SECRET_KEY`, `DJANGO_DEBUG=False`, `DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost`, `MONGODB_URI`, `MONGODB_DB_NAME` |
+| `companies` | `PORT=8001`, `DJANGO_SECRET_KEY`, `DJANGO_DEBUG=False`, `DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost`, `MONGODB_URI`, `MONGODB_DB_NAME` |
 | `materials` | `HOST=0.0.0.0`, `PORT=8002`, `ORACLE_USER`, `ORACLE_PASSWORD`, `ORACLE_CONNECT_STRING`, `COMPANIES_SERVICE_URL=http://127.0.0.1:8001/api` |
-| `gateway` | `HOST=0.0.0.0`, `PORT=8080`, `FIREBASE_PROJECT_ID`, `COMPANIES_URL=http://127.0.0.1:8001`, `MATERIALS_URL=http://127.0.0.1:8002`, `CORS_ORIGINS=http://IP_PUBLICA` |
-| `frontend` | `VITE_API_URL=http://IP_PUBLICA:8080/api`, `VITE_FIREBASE_API_KEY`, `VITE_FIREBASE_AUTH_DOMAIN`, `VITE_FIREBASE_PROJECT_ID`, `VITE_FIREBASE_APP_ID` |
+| `gateway` | `HOST=0.0.0.0`, `PORT=8080`, `FIREBASE_PROJECT_ID`, `FIREBASE_JWKS_URL` (si aplica), `COMPANIES_URL=http://127.0.0.1:8001`, `MATERIALS_URL=http://127.0.0.1:8002`, `CORS_ORIGINS=http://ecored-lab.duckdns.org` |
+| `frontend` | `VITE_API_URL=http://ecored-lab.duckdns.org:8080/api`, `VITE_FIREBASE_API_KEY`, `VITE_FIREBASE_AUTH_DOMAIN`, `VITE_FIREBASE_PROJECT_ID`, `VITE_FIREBASE_APP_ID` |
 
-**Atención con el acceso público:** cuando el frontend se sirve desde `http://IP_PUBLICA`, el navegador debe poder alcanzar el Gateway en `http://IP_PUBLICA:8080/api`. La IP pública corresponde a la Container Instance; `127.0.0.1` en el navegador del estudiante sería **su propio computador**, no OCI. El usuario puede sustituir `IP_PUBLICA` después de conocer la IP, actualizar variables e iniciar/reiniciar la instancia según lo permita el servicio.
+**Comprobación obligatoria de Firebase:** en **Firebase Console → Project settings → General → Your apps → SDK setup and configuration → Config**, copie la clave web `apiKey` vigente y compruebe que corresponda al mismo `projectId`. En **Google Cloud → APIs & Services → Credentials**, revise que no esté eliminada ni bloqueada por restricciones incompatibles. Un `API_KEY_INVALID` indica que Firebase rechazó la API Key y debe diagnosticarse antes de reconstruir o reemplazar la instancia.
+
+**Atención con el acceso público:** el frontend se ejecuta en el navegador del estudiante, por lo que `VITE_API_URL` **no** debe apuntar a `127.0.0.1`. El script `40-runtime-config.sh` de la imagen EcoRed publica las variables `VITE_*` recibidas al iniciar Nginx en `/runtime-config.js`, sin compilar otra vez. El DNS puede actualizarse después de recibir la IP pública; **las variables de entorno de la Container Instance no pueden corregirse mediante un simple reinicio**. Para modificar sus valores use el flujo de Terraform del apartado 2.7.
 
 **Limitación de la demostración:** HTTP por IP pública **no ofrece cifrado**; evite introducir contraseñas o tokens reales en una conexión HTTP no protegida. Para demostrar el flujo completo de autenticación desde el navegador, configure **DNS y HTTPS**, junto con el dominio autorizado en Firebase (por ejemplo, mediante un balanceador con TLS). Una IP pública HTTP permite comprobar conectividad, frontend, `/health` y el rechazo `401`, pero **no garantiza** que los proveedores de identidad permitan iniciar sesión: en particular, no suponga que el acceso mediante Google funciona sobre una IP HTTP. Si no dispone de DNS/HTTPS, documente esta limitación y utilice pruebas de conectividad y de backend con usuarios/datos de ensayo, sin exponer credenciales.
 
@@ -769,29 +904,29 @@ En la sección de variables de entorno de **cada contenedor** configure lo sigui
 
 <img width="1325" height="835" alt="image" src="https://github.com/user-attachments/assets/f3e387f7-86c6-4198-bc29-fdf77b2ebe05" />
 
-**Opción A. PowerShell con `$IP_PUBLICA` (definida al comienzo de la fase 2):**
+**Opción A. PowerShell con IP pública (prueba directa de red):**
 
 ```powershell
-$IP_PUBLICA = 'CAMBIAR_IP_PUBLICA'   # Actualizarla con la IP mostrada en OCI
+$IP_PUBLICA = 'CAMBIAR_IP_PUBLICA'  # IP real mostrada por OCI
 Test-NetConnection $IP_PUBLICA -Port 80
 Test-NetConnection $IP_PUBLICA -Port 8080
 curl.exe -i "http://${IP_PUBLICA}:8080/health"
 curl.exe -i "http://${IP_PUBLICA}:8080/api/companies"
-Start-Process "http://${IP_PUBLICA}/"
 ```
 
-**Opción B. IP escrita completa (CMD, PowerShell y Bash):**
+**Opción B. PowerShell con DuckDNS (prueba del acceso público previsto):**
 
-```console
-curl.exe -i http://IP_PUBLICA:8080/health
-curl.exe -i http://IP_PUBLICA:8080/api/companies
+```powershell
+nslookup ecored-lab.duckdns.org
+Test-NetConnection ecored-lab.duckdns.org -Port 80
+Test-NetConnection ecored-lab.duckdns.org -Port 8080
+curl.exe -i http://ecored-lab.duckdns.org:8080/health
+Start-Process http://ecored-lab.duckdns.org/
 ```
 
-Sustituya `IP_PUBLICA` por la dirección real. La respuesta esperada es **200** para `/health` y **401** para `/api/companies` sin token.
+**Resultado esperado:** código HTTP **200** para `/health` y **401** para `/api/companies` sin token. Si DuckDNS resuelve a una IP antigua, actualice **Current IP** desde su cuenta de DuckDNS. En CMD y Bash puede utilizar `curl` con las mismas URLs (en PowerShell se utiliza `curl.exe` para evitar el alias).
 
-**Alternativa sin terminal:** abra `http://IP_PUBLICA/` y `http://IP_PUBLICA:8080/health` en el navegador; para comprobar códigos y autenticación utilice REST Client o Postman. **Bash** admite `curl -i` sin el sufijo `.exe`.
-
-Después abra `http://IP_PUBLICA/` y ejecute `tests/03-oci-publica.http`, que utiliza esa IP para verificar el gateway. Si Firebase permite correctamente el origen, pruebe además la autenticación y creación de datos reales. La prueba `401` demuestra que la petición sin token no pasa al microservicio; **no** demuestra por sí sola que el flujo completo funcione.
+Para realizar las pruebas del archivo `tests/03-oci-publica.http`, configure su variable de destino con el host público real. Verificar `401` sin token demuestra que la ruta está protegida, pero **no demuestra autenticación integral ni persistencia**. Para probar la autenticación real con Firebase, utilice un punto de entrada HTTPS y el dominio autorizado en Firebase.
 
 ![Pantallazo original: acceso a aplicación autenticada local. Repita la verificación desde la IP pública, no se trata de una captura OCI](assets/image-64.png)
 
@@ -804,14 +939,14 @@ Después abra `http://IP_PUBLICA/` y ejecute `tests/03-oci-publica.http`, que ut
 - Verifique que Empresas consulta MongoDB Atlas y que Materiales escribe en Oracle Autonomous Database, sin copiar bases de datos dentro de imágenes.
 - Consulte logs de cada contenedor desde la consola OCI, sin imprimir tokens ni contraseñas. **Factor XI:** registros como flujos de eventos del proceso.
 - Confirme que `http://IP_PUBLICA:8001` y `:8002` **no son accesibles** desde fuera, mientras el Gateway sí responde según las reglas establecidas.
-- Si se cambia una variable de entorno, no reconstruya la imagen: realice un nuevo release o actualice la configuración en OCI según corresponda. **Factores III, V y X**.
+- Si una variable de entorno requiere corrección (por ejemplo, `VITE_FIREBASE_API_KEY`), ajuste la definición declarativa con Terraform en **Resource Manager**, revise el `Plan` y ejecute `Apply` solo si el reemplazo propuesto está controlado. No se soluciona con un simple reinicio. **Factores III, V y X**; consulte el apartado 2.7.
 - Termine o elimine la Container Instance al acabar el taller para evitar cobros; confirme en la consola el estado de los recursos.
 
 ## 2.6. Entregables y verificación de doce factores
 
 ### 2.6.1. Entregables
 
-Un PDF breve con las capturas solicitadas y explicación técnica de cada una, **sin credenciales ni tokens**. Debe contener: imágenes ajenas y su origen, `docker images`, contenedores locales en ejecución, pruebas HTTP y registro de empresa/material; imágenes propias verificadas primero en Docker Hub y después publicadas en los cuatro repositorios OCIR (URL, tag y digest), configuración de OCI Container Instances con cuatro contenedores, reglas NSG, IP pública, pruebas HTTP y evidencia de persistencia. Adjunte los archivos de pruebas `.http` sin claves y enlace a los repositorios propios del Taller 5. No entregue un `.env` con datos reales.
+Un PDF breve con las capturas solicitadas y explicación técnica de cada una, **sin credenciales ni tokens**. Debe contener: imágenes ajenas y su origen, `docker images`, contenedores locales en ejecución, pruebas HTTP y registro de empresa/material; imágenes propias verificadas primero en Docker Hub y después publicadas en los cuatro repositorios OCIR (URL, tag y digest), configuración de OCI Container Instances con cuatro contenedores, reglas de la Security List (o NSG si se utiliza), política IAM de lectura OCIR, DNS de DuckDNS, IP pública, pruebas HTTP y evidencia de persistencia. Adjunte los archivos de pruebas `.http` sin claves y enlace a los repositorios propios del Taller 5. No entregue un `.env` con datos reales.
 
 ### 2.6.2. Tabla de comprobación de los 12 factores
 
@@ -830,7 +965,94 @@ Un PDF breve con las capturas solicitadas y explicación técnica de cada una, *
 | XI. Logs | `docker logs` local y logs en OCI | **Prueba práctica** |
 | XII. Admin processes | Tareas administrativas puntuales y separadas de la aplicación | **Análisis**; no demostrado por el despliegue |
 
-**Criterio de aprobación:** no basta con capturas de repositorios; debe demostrarse la reproducción local con imágenes ajenas de Docker Hub y el despliegue en OCI desde imágenes propias de Docker Hub, con evidencias de `docker pull`, `docker tag`, `docker push`, acceso público y respuestas HTTP. La autenticación integral desde el navegador en OCI exige un origen admitido por Firebase y transporte seguro; cuando se utilice únicamente IP HTTP, documente explícitamente esa limitación en vez de presentar un inicio de sesión no verificado como exitoso.
+**Criterio de aprobación:** no basta con capturas de repositorios; debe demostrarse la reproducción local con imágenes ajenas de Docker Hub y el despliegue en OCI desde imágenes propias de Docker Hub, con evidencias de `docker pull`, `docker tag`, `docker push`, permisos IAM de acceso a OCIR, resolución DNS, acceso público y respuestas HTTP. La autenticación integral desde el navegador en OCI exige un origen admitido por Firebase y transporte seguro; cuando se utilice únicamente IP HTTP, documente explícitamente esa limitación en vez de presentar un inicio de sesión no verificado como exitoso.
+
+## 2.7. Infraestructura como código (IaC): gestionar correcciones de configuración con Terraform
+
+La **infraestructura como código (*Infrastructure as Code*, IaC)** consiste en describir los recursos tecnológicos mediante archivos declarativos que pueden versionarse, revisarse y ejecutarse de forma reproducible. En este taller, **Terraform** describe la OCI Container Instance, las referencias a las imágenes OCIR, los recursos de CPU y memoria, la subred y las variables de entorno de los cuatro contenedores. **OCI Resource Manager** ejecuta Terraform a través de un *stack* y de trabajos (*jobs*) de tipo **Plan** y **Apply**. Esta práctica facilita corregir configuraciones sin reconstruir las imágenes Docker y permite observar cuándo un cambio exige reemplazar la instancia.
+
+### 2.7.1. Generar un stack Terraform a partir de la infraestructura existente
+
+1. En OCI abra **Developer Services → Resource Manager → Stacks**.
+2. Seleccione **Create stack** y, en el origen de la configuración, elija **Existing compartment**.
+3. Región: **Brazil East (São Paulo)**; compartimento de origen: `Infraestructura_y_Cloud`.
+4. Si aparece **Services to discover**, seleccione los servicios requeridos. Para centrar el ejercicio en el despliegue, priorice **Container Instances**; incorporar red, OCIR u otros servicios puede ampliar innecesariamente el alcance del stack.
+5. Nombre sugerido: `stack-ecored-terraform`.
+6. Revise las opciones y seleccione **Create**. Al finalizar la generación, abra el stack y compruebe **Terraform configuration**, **View state** y **Jobs**.
+7. Descargue una copia de la configuración y consérvela como referencia. **No publique el estado Terraform ni variables confidenciales**: pueden contener contraseñas y URI de bases de datos.
+
+**Importante:** Resource Discovery captura infraestructura existente. Antes de ejecutar `Apply`, confirme si el stack contiene solamente la Container Instance de EcoRed o también otros recursos del compartimento. La configuración generada puede necesitar ajustes y no debe aplicarse automáticamente.
+
+### 2.7.2. Identificar y verificar el parámetro que se necesita corregir
+
+Si aparece `API_KEY_INVALID` al iniciar sesión en EcoRed:
+
+1. En **Firebase Console → Project settings → General → Your apps → Config**, consulte el `apiKey` asociado al proyecto Firebase utilizado por el frontend.
+2. En **Google Cloud → APIs & Services → Credentials**, verifique que la clave exista y que sus restricciones sean compatibles con Firebase Authentication.
+3. Abra `http://ecored-lab.duckdns.org/runtime-config.js` para consultar la configuración que recibió el frontend desplegado. Compare `VITE_FIREBASE_API_KEY` y el `projectId` con los valores de Firebase.
+4. Si la clave es incorrecta, corríjala en el código Terraform según el apartado siguiente. **No suponga que cualquier error de inicio de sesión se soluciona reemplazando la Container Instance**.
+
+Documentación de Firebase: https://firebase.google.com/docs/projects/api-keys
+
+### 2.7.3. Editar el código del stack y guardar los cambios
+
+1. Abra el stack generado en **Resource Manager → Stacks**.
+2. Seleccione **Edit → Edit Terraform configuration in code editor**.
+3. Busque el recurso `oci_container_instances_container_instance` que representa `ecored-lab` y, dentro de su contenedor `frontend`, localice el mapa `environment_variables`.
+4. Modifique únicamente el valor necesario. El siguiente fragmento **ilustra** el cambio; el nombre y la estructura deben coincidir con el HCL realmente generado:
+
+```hcl
+containers {
+  display_name = "frontend"
+  image_url    = "gru.ocir.io/MI_NAMESPACE/ecored/frontend:1.0"
+
+  environment_variables = {
+    VITE_API_URL              = "http://ecored-lab.duckdns.org:8080/api"
+    VITE_FIREBASE_API_KEY     = "API_KEY_CORREGIDA"
+    VITE_FIREBASE_AUTH_DOMAIN = "PROYECTO.firebaseapp.com"
+    VITE_FIREBASE_PROJECT_ID  = "PROYECTO"
+    VITE_FIREBASE_APP_ID      = "APP_ID"
+  }
+}
+```
+
+5. Verifique que permanecen las variables de los otros tres contenedores y que no se alteran accidentalmente la VCN, la subred, las imágenes o la shape.
+6. En el árbol del **Code Editor**, haga clic derecho en el stack y seleccione **Save changes**. Como alternativa, puede descargar la configuración, editarla localmente y cargar el ZIP actualizado mediante **Edit** del stack.
+
+**Seguridad:** utilice valores de ejemplo en los materiales que se suben a GitHub. El estado Terraform puede conservar secretos aunque los parámetros de entrada se marquen como `sensitive`. Si una clave privada se ha expuesto en capturas, rótela antes de utilizarla.
+
+### 2.7.4. Ejecutar Plan y revisar si Terraform reemplazará la instancia
+
+1. Abra el stack actualizado y seleccione **Plan** o, desde Code Editor, **Save changes and run Plan action**.
+2. Abra **Jobs → Logs** y revise los recursos que Terraform propone crear, modificar o eliminar.
+3. Para cambiar variables de entorno en OCI Container Instances, **espere que el proveedor pueda proponer reemplazar la Container Instance completa** (`-/+`, *must be replaced*). No asuma que reiniciar la instancia actualizará las variables.
+4. **No ejecute Apply** si el plan incluye cambios inesperados en otras máquinas, VCN, subredes, repositorios o políticas IAM. Si el stack fue generado desde todo el compartimento, revise especialmente su alcance.
+
+| Resultado de `Plan` | Interpretación | Acción |
+|---|---|---|
+| `No changes` | Terraform no detecta diferencias con la configuración declarada | Compruebe que guardó la corrección y que no existe un `ignore_changes` que la oculte |
+| `-/+` sobre `ecored-lab` | Reemplazo de la Container Instance para aplicar la nueva configuración | Proceda únicamente si acepta interrupción y ha validado el resto del plan |
+| Cambios sobre otros recursos | El stack tiene un alcance más amplio que la corrección | Detenga el proceso y depure el código o use un stack independiente |
+
+**No es necesario eliminar manualmente la instancia antes de generar el plan.** Terraform puede planificar su reemplazo, manteniendo trazabilidad del cambio.
+
+### 2.7.5. Ejecutar Apply y verificar la nueva versión
+
+1. Tras revisar el plan y aceptar los cambios, seleccione **Apply** y utilice, cuando esté disponible, el plan aprobado.
+2. En **Jobs**, espere el estado `Succeeded`; revise los logs si el despliegue falla.
+3. Compruebe que `ecored-lab` se encuentre en `Active` y sus cuatro contenedores estén ejecutándose.
+4. **La nueva instancia puede recibir otra IP pública.** En DuckDNS actualice **Current IP** de `ecored-lab.duckdns.org`.
+5. Verifique `nslookup ecored-lab.duckdns.org`, `http://ecored-lab.duckdns.org:8080/health` y `/runtime-config.js`. Para demostrar autenticación real con Firebase utilice HTTPS y un dominio autorizado.
+6. Conserve la evidencia del Plan anterior, el Apply, el estado de la nueva instancia y la variable corregida, sin mostrar credenciales.
+
+**Precaución:** nunca utilice **Destroy** sobre un stack que también administre infraestructura compartida. Si el objetivo es crear una **segunda Container Instance con otro nombre**, prepare un nuevo stack con **estado Terraform independiente** y verifique que su primer Plan solo agregue el recurso previsto, sin reemplazar `ecored-lab`.
+
+**Referencias oficiales:**
+
+- https://docs.oracle.com/en-us/iaas/Content/ResourceManager/Tasks/create-stack-compartment.htm
+- https://docs.oracle.com/en-us/iaas/Content/ResourceManager/Tasks/code-editor.htm
+- https://docs.oracle.com/en-us/iaas/Content/ResourceManager/Tasks/update-stack-tf-config.htm
+- https://docs.oracle.com/en-us/iaas/tools/terraform-provider-oci/latest/docs/r/container_instances_container_instance.html
 
 ---
 
@@ -844,4 +1066,10 @@ Un PDF breve con las capturas solicitadas y explicación técnica de cada una, *
 - Oracle. *Getting an Auth Token*. https://docs.oracle.com/en-us/iaas/Content/Registry/Tasks/registrygettingauthtoken.htm
 - Oracle. *Streamline the management of your containerized applications using OCI Container Instances*. https://docs.oracle.com/en/solutions/oci-container-instances-for-containerized-applications/
 - Docker. *Docker run reference*. https://docs.docker.com/reference/cli/docker/container/run/
+- Oracle. *Container Instances IAM Policies*. https://docs.oracle.com/en-us/iaas/Content/container-instances/permissions/policy-reference.htm
+- Oracle. *Creating a Stack from an Existing Compartment*. https://docs.oracle.com/en-us/iaas/Content/ResourceManager/Tasks/create-stack-compartment.htm
+- Oracle. *Editing a Configuration Using Code Editor*. https://docs.oracle.com/en-us/iaas/Content/ResourceManager/Tasks/code-editor.htm
+- Oracle. *OCI Terraform Provider: Container Instance*. https://docs.oracle.com/en-us/iaas/tools/terraform-provider-oci/latest/docs/r/container_instances_container_instance.html
+- Firebase. *Learn about and manage API keys for Firebase*. https://firebase.google.com/docs/projects/api-keys
+- DuckDNS. *Dynamic DNS service*. https://www.duckdns.org/
 - Repositorio de código: https://github.com/adanbeltran/ecored-microservicios
