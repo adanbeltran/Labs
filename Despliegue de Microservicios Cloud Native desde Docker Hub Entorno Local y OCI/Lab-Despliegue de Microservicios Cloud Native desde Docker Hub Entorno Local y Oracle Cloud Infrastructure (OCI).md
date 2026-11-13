@@ -718,6 +718,28 @@ En **Developer Services → Containers & Artifacts → Container Instances → C
 4. Declare los puertos TCP **80, 8080, 8001 y 8002** como puertos de escucha de la instancia según los contenedores; **solo 80 y 8080** deben ser accesibles desde Internet en el NSG.
 5. Use política de reinicio adecuada, revisión de logs y recursos de memoria/CPU. Los cuatro contenedores **comparten red, ciclo de vida y recursos**. No se crea ni administra una VM, pero esto **no es Kubernetes ni autoscaling de réplicas**.
 
+<img width="1140" height="716" alt="image" src="https://github.com/user-attachments/assets/92abb375-c74c-4eeb-bee8-05f2a8f7b7a3" />
+
+
+<img width="525" height="632" alt="image" src="https://github.com/user-attachments/assets/8f779287-0b17-4806-8035-0047a4fc0743" />
+
+<img width="643" height="372" alt="image" src="https://github.com/user-attachments/assets/3553f65a-eb59-4422-a2bb-c3d6693f706c" />
+<img width="995" height="477" alt="image" src="https://github.com/user-attachments/assets/076bb5e1-bfe5-479f-84ac-76359ac43a66" />
+
+<img width="1522" height="802" alt="image" src="https://github.com/user-attachments/assets/bcd0aecb-3a62-4463-9875-c99d96780163" />
+
+<img width="1053" height="522" alt="image" src="https://github.com/user-attachments/assets/ab786b0d-1ef9-4b68-91b5-a0112678bee8" />
+
+<img width="1093" height="692" alt="image" src="https://github.com/user-attachments/assets/39d455fc-99f3-4fb0-a0e4-95705e7e9fd0" />
+
+<img width="1082" height="717" alt="image" src="https://github.com/user-attachments/assets/d2ab2500-78a8-4c92-88c8-d4225b72be4e" />
+
+<img width="1121" height="678" alt="image" src="https://github.com/user-attachments/assets/867feb80-9c0f-4d15-8516-b4261b853142" />
+
+<img width="1188" height="513" alt="image" src="https://github.com/user-attachments/assets/52335e6f-09bf-4daf-b982-96a03e6b9175" />
+
+
+
 ![Diagrama propio del despliegue en Container Instances; no corresponde a una captura de la consola OCI](assets/arquitectura-container-instance.svg)
 
 **Factor VIII:** la separación por contenedores no implica escalado horizontal automático; la instancia comparte límites de recursos y reinicio. Para alta disponibilidad y escalado independiente haría falta otro diseño.
