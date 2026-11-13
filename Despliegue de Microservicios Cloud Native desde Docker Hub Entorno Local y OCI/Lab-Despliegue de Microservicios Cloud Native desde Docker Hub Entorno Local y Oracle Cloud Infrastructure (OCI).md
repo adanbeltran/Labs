@@ -2,28 +2,56 @@
 
 <img width="1672" height="941" alt="image" src="https://github.com/user-attachments/assets/0724e797-c56a-4dae-9bc1-0965a7c70d34" />
 
-
 ## Objetivo
 
 Desplegar EcoRed a partir de imágenes previamente publicadas en Docker Hub, primero en el entorno local con imágenes de otra persona y después en Oracle Cloud Infrastructure con imágenes propias, **sin recompilar ni modificar los artefactos**. Configurar los backing services mediante variables de entorno, comprobar los endpoints, la autenticación y la persistencia en ambos entornos, y relacionar la práctica con los doce factores de *The Twelve-Factor App*.
 
 ## Tabla de contenido
 
+- [Objetivo](#objetivo)
 - [Compatibilidad de terminales y uso de imágenes](#compatibilidad-de-terminales-y-uso-de-imágenes)
 - [Arquitectura y resultados esperados](#arquitectura-y-resultados-esperados)
 - [Ruta de las imágenes entre entornos](#ruta-de-las-imágenes-entre-entornos)
 - [Fase 1. Reproducción y ejecución local desde Docker Hub](#fase-1-reproducción-y-ejecución-local-desde-docker-hub)
+  - [Variables PowerShell de la fase 1 (definir una sola vez)](#variables-powershell-de-la-fase-1-definir-una-sola-vez)
   - [1.1. Selección y descarga](#11-selección-y-descarga)
+    - [1.1.1. Preparar Docker y una carpeta de trabajo](#111-preparar-docker-y-una-carpeta-de-trabajo)
+    - [1.1.2. Elegir el propietario y descargar las cuatro imágenes](#112-elegir-el-propietario-y-descargar-las-cuatro-imágenes)
   - [1.2. Servicios externos y variables de entorno](#12-servicios-externos-y-variables-de-entorno)
+    - [1.2.1. Comprobar los backing services propios](#121-comprobar-los-backing-services-propios)
+    - [1.2.2. Crear los cuatro archivos `.env`](#122-crear-los-cuatro-archivos-env)
   - [1.3. Red y ejecución de cuatro contenedores](#13-red-y-ejecución-de-cuatro-contenedores)
+    - [1.3.1. Crear la red virtual Docker](#131-crear-la-red-virtual-docker)
+    - [1.3.2. Ejecutar Empresas y Materiales](#132-ejecutar-empresas-y-materiales)
+    - [1.3.3. Ejecutar el gateway y el frontend](#133-ejecutar-el-gateway-y-el-frontend)
   - [1.4. Pruebas independientes e integrales](#14-pruebas-independientes-e-integrales)
+    - [1.4.1. Revisar salud, aislamiento y logs](#141-revisar-salud-aislamiento-y-logs)
+    - [1.4.2. Realizar una prueba autenticada de extremo a extremo](#142-realizar-una-prueba-autenticada-de-extremo-a-extremo)
+    - [1.4.3. Finalizar la reproducción](#143-finalizar-la-reproducción)
 - [Fase 2. Despliegue en OCI desde imágenes propias de Docker Hub](#fase-2-despliegue-en-oci-desde-imágenes-propias-de-docker-hub)
+  - [Variables PowerShell de la fase 2 (definir una sola vez)](#variables-powershell-de-la-fase-2-definir-una-sola-vez)
   - [2.1. Descargar imágenes propias desde Docker Hub](#21-descargar-imágenes-propias-desde-docker-hub)
+    - [2.1.1. Descargar desde Docker Hub las cuatro imágenes propias](#211-descargar-desde-docker-hub-las-cuatro-imágenes-propias)
   - [2.2. Preparar OCIR](#22-preparar-ocir)
+    - [2.2.1. Ubicar región, namespace y repositorios](#221-ubicar-región-namespace-y-repositorios)
+    - [2.2.2. Generar un Auth Token e iniciar sesión](#222-generar-un-auth-token-e-iniciar-sesión)
   - [2.3. Etiquetar y publicar en OCIR](#23-etiquetar-y-publicar-en-ocir)
+    - [2.3.1. Asociar las imágenes propias a OCIR](#231-asociar-las-imágenes-propias-a-ocir)
+    - [2.3.2. Publicar las cuatro imágenes](#232-publicar-las-cuatro-imágenes)
   - [2.4. Red y Container Instance](#24-red-y-container-instance)
+    - [2.4.1. Preparar VCN, subred pública y políticas de acceso](#241-preparar-vcn-subred-pública-y-políticas-de-acceso)
+      - [2.4.1.1. Agregar la regla de entrada TCP/8080](#2411-agregar-la-regla-de-entrada-tcp8080)
+      - [2.4.1.2. Verificar las reglas de salida](#2412-verificar-las-reglas-de-salida)
+      - [2.4.1.3. Verificar la subred pública](#2413-verificar-la-subred-pública)
+      - [2.4.1.4. Verificación final](#2414-verificación-final)
+    - [2.4.2. Crear una Container Instance con cuatro contenedores](#242-crear-una-container-instance-con-cuatro-contenedores)
   - [2.5. Inyectar variables y probar la IP pública](#25-inyectar-variables-y-probar-la-ip-pública)
+    - [2.5.1. Configurar las variables en OCI, sin reconstruir imágenes](#251-configurar-las-variables-en-oci-sin-reconstruir-imágenes)
+    - [2.5.2. Ejecutar comprobaciones públicas de conectividad](#252-ejecutar-comprobaciones-públicas-de-conectividad)
+    - [2.5.3. Comprobar persistencia, observabilidad y seguridad](#253-comprobar-persistencia-observabilidad-y-seguridad)
   - [2.6. Entregables y verificación de doce factores](#26-entregables-y-verificación-de-doce-factores)
+    - [2.6.1. Entregables](#261-entregables)
+    - [2.6.2. Tabla de comprobación de los 12 factores](#262-tabla-de-comprobación-de-los-12-factores)
 - [Fuentes oficiales](#fuentes-oficiales)
 
 ## Compatibilidad de terminales y uso de imágenes
@@ -106,7 +134,7 @@ $CONT_FRONTEND = 'ecored-frontend'
 
 ## 1.1. Selección y descarga
 
-### Paso 1. Preparar Docker y una carpeta de trabajo
+### 1.1.1. Preparar Docker y una carpeta de trabajo
 
 En los computadores del aula (Windows) abra **VS Code → Terminal → New Terminal**, o utilice **Símbolo del sistema (CMD)** o **Windows PowerShell**. Docker CLI funciona desde cualquiera de las tres. Verifique el motor Docker:
 
@@ -143,7 +171,7 @@ cd ecored-imagenes
 
 > Estos comandos son equivalentes a crear carpetas manualmente. No son necesarios para utilizar Docker; se presentan para comprender cómo automatizar tareas. **No ejecute bloques con sintaxis de PowerShell en CMD ni Bash sin adaptarlos.**
 
-### Paso 2. Elegir el propietario y descargar las cuatro imágenes
+### 1.1.2. Elegir el propietario y descargar las cuatro imágenes
 
 Solicite al docente o a otro equipo las cuatro referencias completas de Docker Hub: repositorio y etiqueta. Las siguientes corresponden a las imágenes de ejemplo; si usa las de un compañero, sustituya **cada nombre** por el publicado por ese equipo.
 
@@ -195,14 +223,13 @@ done
 
 ## 1.2. Servicios externos y variables de entorno
 
-### Paso 3. Comprobar los backing services propios
+### 1.2.1. Comprobar los backing services propios
 
 Se requiere Firebase Authentication (métodos Email/Password y/o Google), una conexión MongoDB Atlas válida y un Oracle Autonomous Database con tabla `materials`. No utilice claves o contraseñas del docente. En Oracle la tabla y privilegios deben corresponder al usuario que use el microservicio.
 
-
 **Factor IV:** Firebase, MongoDB y Oracle se usan como recursos externos configurados, no empaquetados en imágenes.
 
-### Paso 4. Crear los cuatro archivos `.env`
+### 1.2.2. Crear los cuatro archivos `.env`
 
 Desde la carpeta `ecored-imagenes`, cree `companies.docker.env`, `materials.docker.env`, `gateway.docker.env` y `frontend.docker.env`. Son **archivos diferentes**; reemplazar los valores `CAMBIAR_...` por credenciales reales sin subirlos a GitHub.
 
@@ -258,7 +285,7 @@ VITE_FIREBASE_APP_ID=CAMBIAR_APP_ID_WEB
 
 ## 1.3. Red y ejecución de cuatro contenedores
 
-### Paso 5. Crear la red virtual Docker
+### 1.3.1. Crear la red virtual Docker
 
 **Opción A. PowerShell con variables:**
 
@@ -278,7 +305,7 @@ docker network create ecored-net
 
 **Opciones equivalentes:** el comando `docker network create ecored-net` es idéntico en CMD, PowerShell y Bash.
 
-### Paso 6. Ejecutar Empresas y Materiales
+### 1.3.2. Ejecutar Empresas y Materiales
 
 **Opción A. PowerShell con variables (dos comandos individuales):**
 
@@ -302,7 +329,7 @@ Reemplace las referencias de `adanbeltran` por las de la otra persona cuando cor
 
 **Alternativa gráfica:** Docker Desktop → Images → Run. Puede que la interfaz no exponga todas las opciones de red o `--env-file`; en tal caso utilice uno de los dos bloques anteriores.
 
-### Paso 7. Ejecutar el gateway y el frontend
+### 1.3.3. Ejecutar el gateway y el frontend
 
 **Opción A. PowerShell con variables:**
 
@@ -320,7 +347,7 @@ docker run -d --name ecored-frontend --network ecored-net --env-file frontend.do
 docker ps
 ```
 
-**Nota:** utilice las imágenes elegidas en el paso 2, sin mezclar autores incompatibles.
+**Nota:** utilice las imágenes elegidas en el apartado 1.1.2, sin mezclar autores incompatibles.
 
 ![Pantallazo original: comando para iniciar el gateway](assets/image-61.png)
 
@@ -332,7 +359,7 @@ docker ps
 
 ## 1.4. Pruebas independientes e integrales
 
-### Paso 8. Revisar salud, aislamiento y logs
+### 1.4.1. Revisar salud, aislamiento y logs
 
 **Opción A. PowerShell con variables:**
 
@@ -358,7 +385,7 @@ Abra en Visual Studio Code `tests/01-local.http` e instale la extensión **REST 
 
 ![Pantallazo original: archivo de pruebas HTTP abierto en VS Code](assets/image-66.png)
 
-### Paso 9. Realizar una prueba autenticada de extremo a extremo
+### 1.4.2. Realizar una prueba autenticada de extremo a extremo
 
 Abra `http://localhost:8088`, inicie sesión con un usuario válido en Firebase, registre una empresa, publique un material asociado y compruebe el almacenamiento. También puede ejecutar `tests/02-flujo-firebase.http` mediante REST Client (solicita la API key y un usuario de prueba). En Firebase autorice el dominio local empleado.
 
@@ -374,7 +401,7 @@ Abra `http://localhost:8088`, inicie sesión con un usuario válido en Firebase,
 
 **Prueba de integración relevante:** Materiales debe validar la empresa a través de la API interna de Empresas antes de persistir el material. El éxito depende de las tres dependencias externas: Firebase, MongoDB y Oracle.
 
-### Paso 10. Finalizar la reproducción
+### 1.4.3. Finalizar la reproducción
 
 **Opción A. PowerShell con variables:**
 
@@ -427,7 +454,7 @@ $IP_PUBLICA = 'CAMBIAR_IP_PUBLICA'       # Asignar después del despliegue
 
 ## 2.1. Descargar imágenes propias desde Docker Hub
 
-### Paso 1. Descargar desde Docker Hub las cuatro imágenes propias
+### 2.1.1. Descargar desde Docker Hub las cuatro imágenes propias
 
 **Comando común, válido tanto en PowerShell como en CMD:**
 
@@ -457,13 +484,11 @@ docker pull MI_USUARIO_DOCKERHUB/ecored-frontend:1.0
 
 ![Pantallazo original: listado de imágenes disponibles](assets/image-46.png)
 
-
-
 **Factores I, II y V:** código propio versionado, dependencias declaradas y artefactos identificables por versión o digest. Anote SHA256 de las imágenes con `docker image inspect --format '{{.Id}}' ...`.
 
 ## 2.2. Preparar OCIR
 
-### Paso 2. Ubicar región, namespace y repositorios
+### 2.2.1. Ubicar región, namespace y repositorios
 
 En la consola de OCI seleccione la región adecuada. Vaya a **Developer Services → Containers & Artifacts → Container Registry**, cree repositorios (por ejemplo `ecored/companies`, `ecored/materials`, `ecored/gateway`, `ecored/frontend`). 
 
@@ -475,12 +500,10 @@ En la consola de OCI seleccione la región adecuada. Vaya a **Developer Services
 
 <img width="1310" height="330" alt="image" src="https://github.com/user-attachments/assets/f0e04932-f10d-4108-9a85-d0cfc9f82eba" />
 
-
-### Paso 3. Generar un Auth Token e iniciar sesión
+### 2.2.2. Generar un Auth Token e iniciar sesión
 
 En el perfil del usuario de OCI abra **Auth Tokens → Generate Token** y guarde el token de forma segura. 
 <img width="1142" height="197" alt="image" src="https://github.com/user-attachments/assets/163ae2ae-5536-4e6f-9392-c318658511f2" />
-
 
 **Opción A. PowerShell con variables definidas al inicio:**
 
@@ -488,7 +511,6 @@ En el perfil del usuario de OCI abra **Auth Tokens → Generate Token** y guarde
 docker login $REGISTRY -u "${NAMESPACE}/${OCI_USUARIO}"
 ```
 <img width="1431" height="132" alt="image" src="https://github.com/user-attachments/assets/228efaf8-a687-4295-8d42-85a5e1e8076c" />
-
 
 **Opción B. Nombre completo (CMD, PowerShell y Bash):**
 
@@ -504,7 +526,7 @@ No incluya el token en capturas ni en `.env` públicos.
 
 ## 2.3. Etiquetar y publicar en OCIR
 
-### Paso 4. Asociar las imágenes propias a OCIR
+### 2.3.1. Asociar las imágenes propias a OCIR
 
 Utilice exclusivamente las imágenes que **usted construyó en el Taller anterior**. Los comandos `docker tag` agregan referencias al mismo contenido, sin reconstruirlo. Estos ejemplos usan el registro `gru.ocir.io`, un namespace y un usuario Docker Hub de ejemplo que debe sustituir.
 
@@ -520,7 +542,6 @@ docker images | Select-String "^gru"
 <img width="1285" height="92" alt="image" src="https://github.com/user-attachments/assets/0b050c80-540e-482e-aa60-4045266d8533" />
 <img width="1247" height="216" alt="image" src="https://github.com/user-attachments/assets/479bef5e-9f65-440b-b6d5-944a2933eb69" />
 
-
 **Opción B. Nombres completos (CMD, PowerShell y Bash):**
 
 ```console
@@ -531,7 +552,7 @@ docker tag MI_USUARIO_DOCKERHUB/ecored-frontend:1.0 gru.ocir.io/MI_NAMESPACE/eco
 docker images
 ```
 
-### Paso 5. Publicar las cuatro imágenes
+### 2.3.2. Publicar las cuatro imágenes
 
 **Opción A. PowerShell con variables:**
 
@@ -542,7 +563,6 @@ docker push $OCIR_GATEWAY
 docker push $OCIR_FRONTEND
 ```
 <img width="1122" height="511" alt="image" src="https://github.com/user-attachments/assets/0fdb548e-7aba-406e-82b6-884dada37ca6" />
-
 
 **Opción B. Nombres completos (CMD, PowerShell y Bash):**
 
@@ -559,15 +579,12 @@ docker push gru.ocir.io/MI_NAMESPACE/ecored/frontend:1.0
 @($OCIR_COMPANIES,$OCIR_MATERIALS,$OCIR_GATEWAY,$OCIR_FRONTEND) | ForEach-Object { docker push $_ }
 ```
 
-
-
 Verifique **en la consola real de OCIR** repositorio, etiqueta y digest de cada imagen. **Factor V:** separar artefacto, publicación y ejecución. Nunca inserte contraseñas en imágenes.
 <img width="902" height="242" alt="image" src="https://github.com/user-attachments/assets/4add4e42-edbd-4c2f-b13a-fec02833e57e" />
 
-
 ## 2.4. Red y Container Instance
 
-### Paso 6. Preparar VCN, subred pública y políticas de acceso
+### 2.4.1. Preparar VCN, subred pública y políticas de acceso
 
 **Objetivo:** verificar y ajustar la infraestructura de red existente en OCI para desplegar los cuatro microservicios de EcoRed mediante Container Instances.
 
@@ -588,7 +605,7 @@ Verifique **en la consola real de OCIR** repositorio, etiqueta y digest de cada 
 
 **Importante:** no es necesario crear otra VCN, subred ni gateways. Se reutilizará la infraestructura existente y únicamente se realizarán los ajustes que se describen a continuación.
 
-#### 6.1. Agregar la regla de entrada TCP/8080
+#### 2.4.1.1. Agregar la regla de entrada TCP/8080
 
 En la consola de OCI:
 
@@ -611,7 +628,6 @@ En la consola de OCI:
 
 <img width="925" height="362" alt="image" src="https://github.com/user-attachments/assets/00177e06-c3ee-420a-b6fd-f9423147448b" />
 
-
 7. Seleccione **Add Ingress Rules**.
 
 **Verificación:**
@@ -626,14 +642,13 @@ La Security List debe permitir los siguientes puertos:
 | 8002 | Materials | No permitido |
 <img width="1680" height="445" alt="image" src="https://github.com/user-attachments/assets/95f6d7e3-726b-49ea-a6ee-c4f324294515" />
 
-
 **Nota:** el puerto TCP/80 ya está configurado. No es necesario agregarlo nuevamente.
 
 Para simplificar las pruebas académicas se utiliza `0.0.0.0/0`. En un entorno de producción, el acceso debe limitarse a los orígenes necesarios y protegerse mediante HTTPS y controles de autenticación.
 
 No modifique la regla TCP/22 sin verificar previamente si otros recursos de la VCN utilizan SSH.
 
-#### 6.2. Verificar las reglas de salida
+#### 2.4.1.2. Verificar las reglas de salida
 
 1. Abra **Security → Security Lists**.
 2. Seleccione `Default Security List for red-infraestructura`.
@@ -656,7 +671,7 @@ Permite establecer conexiones salientes hacia servicios como Firebase y MongoDB 
 
 **Nota:** las reglas anteriores corresponden a la Security List existente. Verifique que `subred-web` tenga asociada esta lista y que no existan restricciones adicionales en algún Network Security Group (NSG).
 
-#### 6.4. Verificar la subred pública
+#### 2.4.1.3. Verificar la subred pública
 
 1. Ingrese a **Networking → Virtual Cloud Networks**.
 2. Seleccione `red-infraestructura`.
@@ -674,7 +689,7 @@ Permite establecer conexiones salientes hacia servicios como Firebase y MongoDB 
 
 No es necesario modificar la subred.
 
-#### 6.5. Verificación final
+#### 2.4.1.4. Verificación final
 
 Antes de continuar con la creación de la Container Instance, confirme:
 
@@ -691,11 +706,9 @@ Antes de continuar con la creación de la Container Instance, confirme:
 
 **Resultado esperado:** la infraestructura de red queda preparada para desplegar los cuatro contenedores de EcoRed, permitiendo acceso público al frontend y al API Gateway, manteniendo los microservicios internos sin acceso directo desde Internet y proporcionando conectividad hacia los servicios externos y OCIR.
 
-**Continuación:** en el Paso 7, al crear la Container Instance, seleccione la VCN `red-infraestructura`, la subred `subred-web` y habilite la asignación de una dirección IPv4 pública. Configure también los permisos necesarios para descargar las imágenes privadas desde OCIR.
+**Continuación:** en el apartado 2.4.2, al crear la Container Instance, seleccione la VCN `red-infraestructura`, la subred `subred-web` y habilite la asignación de una dirección IPv4 pública. Configure también los permisos necesarios para descargar las imágenes privadas desde OCIR.
 
-
-
-### Paso 7. Crear una Container Instance con cuatro contenedores
+### 2.4.2. Crear una Container Instance con cuatro contenedores
 
 En **Developer Services → Containers & Artifacts → Container Instances → Create Container Instance**:
 
@@ -711,7 +724,7 @@ En **Developer Services → Containers & Artifacts → Container Instances → C
 
 ## 2.5. Inyectar variables y probar la IP pública
 
-### Paso 8. Configurar las variables en OCI, sin reconstruir imágenes
+### 2.5.1. Configurar las variables en OCI, sin reconstruir imágenes
 
 En la sección de variables de entorno de **cada contenedor** configure lo siguiente, sustituyendo los marcadores por valores reales. **No copie el `.env` local sin adaptar las URLs**. Los contenedores de una misma Container Instance comparten espacio de red, por lo que sus procesos pueden conectarse mediante `127.0.0.1` y sus puertos internos.
 
@@ -726,7 +739,7 @@ En la sección de variables de entorno de **cada contenedor** configure lo sigui
 
 **Limitación de la demostración:** HTTP por IP pública **no ofrece cifrado**; evite introducir contraseñas o tokens reales en una conexión HTTP no protegida. Para demostrar el flujo completo de autenticación desde el navegador, configure **DNS y HTTPS**, junto con el dominio autorizado en Firebase (por ejemplo, mediante un balanceador con TLS). Una IP pública HTTP permite comprobar conectividad, frontend, `/health` y el rechazo `401`, pero **no garantiza** que los proveedores de identidad permitan iniciar sesión: en particular, no suponga que el acceso mediante Google funciona sobre una IP HTTP. Si no dispone de DNS/HTTPS, documente esta limitación y utilice pruebas de conectividad y de backend con usuarios/datos de ensayo, sin exponer credenciales.
 
-### Paso 9. Ejecutar comprobaciones públicas de conectividad
+### 2.5.2. Ejecutar comprobaciones públicas de conectividad
 
 **Opción A. PowerShell con `$IP_PUBLICA` (definida al comienzo de la fase 2):**
 
@@ -758,7 +771,7 @@ Después abra `http://IP_PUBLICA/` y ejecute `tests/03-oci-publica.http`, que ut
 
 ![Pantallazo original: material guardado; reproduzca el resultado desde la IP pública](assets/image-69.png)
 
-### Paso 10. Comprobar persistencia, observabilidad y seguridad
+### 2.5.3. Comprobar persistencia, observabilidad y seguridad
 
 - Verifique que Empresas consulta MongoDB Atlas y que Materiales escribe en Oracle Autonomous Database, sin copiar bases de datos dentro de imágenes.
 - Consulte logs de cada contenedor desde la consola OCI, sin imprimir tokens ni contraseñas. **Factor XI:** registros como flujos de eventos del proceso.
@@ -768,11 +781,11 @@ Después abra `http://IP_PUBLICA/` y ejecute `tests/03-oci-publica.http`, que ut
 
 ## 2.6. Entregables y verificación de doce factores
 
-### Entregables
+### 2.6.1. Entregables
 
 Un PDF breve con las capturas solicitadas y explicación técnica de cada una, **sin credenciales ni tokens**. Debe contener: imágenes ajenas y su origen, `docker images`, contenedores locales en ejecución, pruebas HTTP y registro de empresa/material; imágenes propias verificadas primero en Docker Hub y después publicadas en los cuatro repositorios OCIR (URL, tag y digest), configuración de OCI Container Instances con cuatro contenedores, reglas NSG, IP pública, pruebas HTTP y evidencia de persistencia. Adjunte los archivos de pruebas `.http` sin claves y enlace a los repositorios propios del Taller 5. No entregue un `.env` con datos reales.
 
-### Tabla de comprobación de los 12 factores
+### 2.6.2. Tabla de comprobación de los 12 factores
 
 | Factor | Aplicación en EcoRed | Estado a demostrar |
 |---|---|---|
