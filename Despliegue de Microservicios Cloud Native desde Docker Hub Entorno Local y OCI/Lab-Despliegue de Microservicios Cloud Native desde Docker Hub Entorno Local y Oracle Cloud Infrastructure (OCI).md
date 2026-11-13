@@ -609,6 +609,9 @@ En la consola de OCI:
 | Destination Port Range | `8080` |
 | Description | `EcoRed API Gateway` |
 
+<img width="925" height="362" alt="image" src="https://github.com/user-attachments/assets/00177e06-c3ee-420a-b6fd-f9423147448b" />
+
+
 7. Seleccione **Add Ingress Rules**.
 
 **Verificación:**
@@ -621,6 +624,8 @@ La Security List debe permitir los siguientes puertos:
 | 8080 | API Gateway | Permitido |
 | 8001 | Companies | No permitido |
 | 8002 | Materials | No permitido |
+<img width="1680" height="445" alt="image" src="https://github.com/user-attachments/assets/95f6d7e3-726b-49ea-a6ee-c4f324294515" />
+
 
 **Nota:** el puerto TCP/80 ya está configurado. No es necesario agregarlo nuevamente.
 
@@ -628,38 +633,7 @@ Para simplificar las pruebas académicas se utiliza `0.0.0.0/0`. En un entorno d
 
 No modifique la regla TCP/22 sin verificar previamente si otros recursos de la VCN utilizan SSH.
 
-#### 6.2. Agregar la ruta hacia el Service Gateway
-
-El Service Gateway `servicios-oracle` ya existe. Se debe agregar una ruta que permita utilizarlo para acceder a servicios regionales de Oracle, incluido OCIR.
-
-1. Ingrese a **Networking → Virtual Cloud Networks**.
-2. Seleccione `red-infraestructura`.
-3. Abra **Routing → Route Tables**.
-4. Seleccione `Default Route Table for red-infraestructura`.
-5. Haga clic en **Add Route Rules**.
-6. Configure:
-
-| Campo | Valor |
-|---|---|
-| Target Type | Service Gateway |
-| Destination Service | All GRU Services In Oracle Services Network |
-| Target Service Gateway | `servicios-oracle` |
-| Description | `Acceso a servicios OCI y OCIR` |
-
-7. Guarde los cambios.
-
-**Verificación:**
-
-La tabla de rutas debe contener:
-
-| Destino | Target Type | Target |
-|---|---|---|
-| `0.0.0.0/0` | Internet Gateway | `salida-internet` |
-| All GRU Services In Oracle Services Network | Service Gateway | `servicios-oracle` |
-
-**Importante:** conserve la ruta existente hacia Internet Gateway.
-
-#### 6.3. Verificar las reglas de salida
+#### 6.2. Verificar las reglas de salida
 
 1. Abra **Security → Security Lists**.
 2. Seleccione `Default Security List for red-infraestructura`.
@@ -673,6 +647,8 @@ La tabla de rutas debe contener:
 | IP Protocol | All Protocols |
 | Source Port Range | All |
 | Destination Port Range | All |
+
+<img width="1656" height="681" alt="image" src="https://github.com/user-attachments/assets/a8ce26c3-1979-4c0d-a306-42ce8d4ca0e5" />
 
 Esta regla ya existe en la infraestructura actual, por lo que no es necesario modificarla.
 
@@ -694,6 +670,7 @@ Permite establecer conexiones salientes hacia servicios como Firebase y MongoDB 
 | Subnet Access | Public Subnet |
 | IPv4 CIDR | `10.0.0.0/24` |
 | Route Table | `Default Route Table for red-infraestructura` |
+<img width="1162" height="301" alt="image" src="https://github.com/user-attachments/assets/2774e429-6e9b-46b7-a957-d3abd74cbeef" />
 
 No es necesario modificar la subred.
 
