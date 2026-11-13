@@ -765,6 +765,10 @@ En la sección de variables de entorno de **cada contenedor** configure lo sigui
 
 ### 2.5.2. Ejecutar comprobaciones públicas de conectividad
 
+<img width="1557" height="700" alt="image" src="https://github.com/user-attachments/assets/acf49e7f-2863-41a7-8255-fa29f3378224" />
+
+<img width="1325" height="835" alt="image" src="https://github.com/user-attachments/assets/f3e387f7-86c6-4198-bc29-fdf77b2ebe05" />
+
 **Opción A. PowerShell con `$IP_PUBLICA` (definida al comienzo de la fase 2):**
 
 ```powershell
