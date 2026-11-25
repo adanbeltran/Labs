@@ -69,8 +69,9 @@ ADMIN se utiliza solamente para preparar el usuario y sus permisos. ECORED será
 
 Sin cerrar la sesión de ADMIN, abre **Administration > Database Users** en Database Actions. Localiza ECORED, edita el usuario, activa **Web Access** y guarda. Verifica que aparezca **REST Enabled** y copia la URL de acceso que aparece en la tarjeta del usuario.
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://www.loom.com/embed/16ef5cffeeca45c69ffe7c5264e20389" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+> 🎥 **Video de apoyo: Configuración del usuario ECORED**
 
+[![Ver video del procedimiento](https://cdn.loom.com/sessions/thumbnails/16ef5cffeeca45c69ffe7c5264e20389-with-play.gif)](https://www.loom.com/share/16ef5cffeeca45c69ffe7c5264e20389)
 ### Paso 1.5. Conectarse como ECORED
 
 Cierra la sesión de ADMIN. Abre la URL copiada e ingresa con el usuario ECORED y su contraseña. Selecciona **SQL** y ejecuta:
