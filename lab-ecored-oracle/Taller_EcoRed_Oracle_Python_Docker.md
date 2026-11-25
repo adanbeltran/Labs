@@ -50,8 +50,7 @@ Si Always Free no está disponible en la región principal de la cuenta, utiliza
 Durante la creación, o posteriormente desde **Network / Edit** o **More actions / Update network access**:
 
 1. Selecciona **Secure access from allowed IPs and VCNs only**.
-2. Agrega la dirección IPv4 pública de salida de tu red (no la IP privada de tu computador). Puedes consultarla con el navegador en https://api.ipify.org/. Si solicitan CIDR, escribe la IP seguida de `/32`.
-3. Desactiva **Require mutual TLS (mTLS) authentication**, o habilita TLS sin wallet. Conserva activada la restricción por IP.
+2. Desactiva **Require mutual TLS (mTLS) authentication**, o habilita TLS sin wallet.
 4. Crea la instancia o guarda los cambios. Cuando el estado sea **Available**, verifica que el acceso por TLS esté habilitado y que la lista de acceso esté activa.
 
 ### Paso 1.3. Crear el usuario de la aplicación
@@ -69,6 +68,8 @@ ADMIN se utiliza solamente para preparar el usuario y sus permisos. ECORED será
 ### Paso 1.4. Habilitar el acceso web de ECORED
 
 Sin cerrar la sesión de ADMIN, abre **Administration > Database Users** en Database Actions. Localiza ECORED, edita el usuario, activa **Web Access** y guarda. Verifica que aparezca **REST Enabled** y copia la URL de acceso que aparece en la tarjeta del usuario.
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://www.loom.com/embed/16ef5cffeeca45c69ffe7c5264e20389" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
 ### Paso 1.5. Conectarse como ECORED
 
