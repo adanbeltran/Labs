@@ -152,6 +152,10 @@ SELECT table_name FROM user_tables
 WHERE table_name IN ('EMPRESAS', 'MATERIALES');
 ```
 
+> 🎥 **Video de apoyo:** Login con usuario ECORED y Creación de tablas.
+>
+> [Ver video del procedimiento (5 minutos)](https://www.loom.com/share/4d4c8fd35ecb4fa19491d29dca44240f)
+
 ## Fase 2. Clonar el código fuente
 
 ### Paso 2.1. Clonar el repositorio
