@@ -53,6 +53,11 @@ Durante la creación, o posteriormente desde **Network / Edit** o **More actions
 2. Desactiva **Require mutual TLS (mTLS) authentication**, o habilita TLS sin wallet.
 4. Crea la instancia o guarda los cambios. Cuando el estado sea **Available**, verifica que el acceso por TLS esté habilitado y que la lista de acceso esté activa.
 
+> 🎥 **Video de apoyo:** Creación Oracle Autonomous Database.
+>
+> [Ver video del procedimiento (5 minutos)](https://www.loom.com/share/aa692b26fb5541aa9f5384c66d478923)
+
+
 ### Paso 1.3. Crear el usuario de la aplicación
 
 En la instancia selecciona **Database Actions > SQL**. Ingresa como ADMIN. Ejecuta las siguientes sentencias con **Run Script** (reemplaza la contraseña de ejemplo por una propia, robusta, sin espacios, comillas, # ni $ para facilitar la configuración del taller):
@@ -69,9 +74,7 @@ ADMIN se utiliza solamente para preparar el usuario y sus permisos. ECORED será
 
 Sin cerrar la sesión de ADMIN, abre **Administration > Database Users** en Database Actions. Localiza ECORED, edita el usuario, activa **Web Access** y guarda. Verifica que aparezca **REST Enabled** y copia la URL de acceso que aparece en la tarjeta del usuario.
 
-> 🎥 **Video de apoyo:** Creación y configuración del usuario ECORED en Oracle Autonomous Database.
->
-> [Ver video del procedimiento (5 minutos)](https://www.loom.com/share/16ef5cffeeca45c69ffe7c5264e20389)
+
 
 ### Paso 1.5. Conectarse como ECORED
 
