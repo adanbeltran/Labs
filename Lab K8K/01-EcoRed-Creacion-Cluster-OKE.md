@@ -77,8 +77,9 @@ En la figura aparecen seis Pods de EcoRed como referencia del Taller 2. **En el 
 <a id="1-3"></a>
 
 ### 1.3. Red del clúster en OCI
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/4ba488d9-1a72-4281-a9e7-8cc299c3b1f3" />
 
-<img width="1600" height="900" alt="03-red-oke" src="https://github.com/user-attachments/assets/567fa0f4-0e47-43ac-a93c-4d61725be6f8" />
+
 
 | Recurso | Función |
 |---|---|
