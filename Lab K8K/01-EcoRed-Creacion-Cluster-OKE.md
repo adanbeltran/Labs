@@ -46,7 +46,9 @@
 
 ### 1.1. De OCI Container Instances a Kubernetes
 
-![Comparación entre la ejecución anterior de EcoRed en Container Instances y la ejecución distribuida en OKE](recursos/01-evolucion-contenedores-oke.png)
+
+<img width="1600" height="900" alt="01-evolucion-contenedores-oke" src="https://github.com/user-attachments/assets/7e1ad5b4-6ef5-4cb4-b503-9a5dd2a4b46d" />
+
 
 **Kubernetes** administra aplicaciones contenerizadas sobre uno o varios servidores. **Oracle Kubernetes Engine (OKE)** es el servicio de OCI que permite crear y operar clústeres Kubernetes con el plano de control administrado por Oracle.
 
@@ -56,7 +58,9 @@ En EcoRed se conservarán las imágenes Docker de Frontend, Companies y Material
 
 ### 1.2. Componentes de un clúster Kubernetes
 
-![Clúster, plano de control, nodos, Pods y contenedores](recursos/02-componentes-kubernetes.png)
+<img width="1600" height="900" alt="02-componentes-kubernetes" src="https://github.com/user-attachments/assets/4579b286-dabe-48e4-83b9-f044c898f3a7" />
+
+
 
 | Concepto | Qué representa en EcoRed |
 |---|---|
@@ -74,7 +78,7 @@ En la figura aparecen seis Pods de EcoRed como referencia del Taller 2. **En el 
 
 ### 1.3. Red del clúster en OCI
 
-![Red de OKE: acceso administrativo, nodos privados, subred de balanceadores y salida a servicios externos](recursos/03-red-oke.png)
+<img width="1600" height="900" alt="03-red-oke" src="https://github.com/user-attachments/assets/567fa0f4-0e47-43ac-a93c-4d61725be6f8" />
 
 | Recurso | Función |
 |---|---|
@@ -92,15 +96,16 @@ Quick Create aprovisionará una VCN nueva dedicada al clúster. Esta decisión s
 
 ### 1.4. Arquitectura objetivo de EcoRed
 
-![Arquitectura final de EcoRed en OCI con dos nodos, tres componentes de aplicación, OCI API Gateway y dos bases de datos externas](recursos/05-arquitectura-final.png)
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/a0876c00-69ac-46fd-b0be-73c4ab5eb877" />
+
 
 El objetivo de la ruta completa es alcanzar una arquitectura con dos Worker Nodes, un frontend público, dos microservicios privados, tres balanceadores, OCI API Gateway y Firebase. Las bases de datos continuarán fuera de Kubernetes. El escalamiento horizontal se incorporará en el Taller 3.
 
 <a id="1-5"></a>
 
 ### 1.5. Ruta de los tres talleres
+<img width="1600" height="900" alt="04-ruta-tres-talleres" src="https://github.com/user-attachments/assets/a196ec13-b4e0-49d5-a790-f1f18d924107" />
 
-![Secuencia de los tres talleres: infraestructura, despliegue y operación](recursos/04-ruta-tres-talleres.png)
 
 | Taller | Qué se construirá | Resultado |
 |---|---|---|
