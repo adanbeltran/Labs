@@ -31,16 +31,19 @@
 ---
 
 **Caso de estudio:** EcoRed Circular.  
-**Duración sugerida:** 2 horas de trabajo académico, sin contar demoras de aprovisionamiento de OCI.  
+
 **Objetivo:** crear un clúster OKE con dos Worker Nodes privados y administrarlo desde Cloud Shell mediante `kubectl`, preparando la infraestructura para desplegar EcoRed en el siguiente taller.
 
 **Pregunta detonante:** ¿qué cambia cuando pasamos de ejecutar cuatro contenedores en una Container Instance a disponer de un clúster que administra los contenedores sobre dos servidores?
 
-**Punto de partida:** ya se han realizado los talleres de Docker, OCIR, microservicios y servicios externos. Este grupo aún no ha creado el clúster OKE. Se conservarán las imágenes publicadas en OCIR, la configuración de Firebase, MongoDB Atlas y Oracle Autonomous Database. No se requiere reconstruir las imágenes ni crear nuevamente las bases de datos.
+**Punto de partida:** ya se han realizado los talleres de Docker, OCIR, microservicios y servicios externos. Se conservarán las imágenes publicadas en OCIR, la configuración de Firebase, MongoDB Atlas y Oracle Autonomous Database. No se requiere reconstruir las imágenes ni crear nuevamente las bases de datos.
 
 <a id="fase-1"></a>
 
 ## Fase 1. Fundamentos de Kubernetes y arquitectura EcoRed
+
+<img width="1672" height="941" alt="image" src="https://github.com/user-attachments/assets/041c45d0-57d0-417b-9942-c8b563e4b513" />
+
 
 <a id="1-1"></a>
 
